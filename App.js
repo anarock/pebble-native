@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, {Component} from 'react';
+import * as React from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
 const instructions = Platform.select({
@@ -17,7 +17,7 @@ const instructions = Platform.select({
 });
 
 type Props = {};
-export default class App extends Component<Props> {
+export default class App extends React.Component<Props> {
   render() {
     return (
       <View style={styles.container}>
