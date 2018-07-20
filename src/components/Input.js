@@ -115,7 +115,8 @@ export default class extends React.PureComponent<InputProps, InputState> {
           style={[
             styles.placeholder,
             {
-              top: this.state.placeholderTop
+              top: this.state.placeholderTop,
+              ...(value ? {top: 0} : {})
             }
           ]}
         >
