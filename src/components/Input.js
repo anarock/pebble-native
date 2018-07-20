@@ -94,7 +94,8 @@ export default class extends React.PureComponent<InputProps, InputState> {
       placeholder,
       errorMessage,
       successMessage,
-      message
+      message,
+      onChange
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
@@ -122,6 +123,7 @@ export default class extends React.PureComponent<InputProps, InputState> {
         </Text>
         <TextInput
           style={styles.textStyle}
+          onChangeText={onChange}
           underlineColorAndroid={"transparent"}
           value={value}
           onFocus={this.handleFocus}

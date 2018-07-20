@@ -6,7 +6,7 @@ export type InputProps = {
   type?: "text" | "date" | "password";
   required?: boolean;
   placeholder: string;
-  onPress: (text: string) => void;
+  onChange: (text: string) => void;
   className?: string;
   inputProps?: any;
   fixLabelAtTop?: boolean;
