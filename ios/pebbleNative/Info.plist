@@ -57,6 +57,13 @@
 		<string>anarock-regular.ttf</string>
 		<string>Graphik-Medium.ttf</string>
 		<string>Graphik-Regular.ttf</string>
+		<string>anarock-medium.woff</string>
+		<string>anarock-medium.woff2</string>
+		<string>anarock-regular.woff</string>
+		<string>anarock-regular.woff2</string>
+		<string>AnarockIcons.ttf</string>
+		<string>AnarockIcons.woff</string>
+		<string>AnarockIcons.woff2</string>
 	</array>
 </dict>
 </plist>

@@ -41,6 +41,18 @@
 		13ED5E74A1864FE7B840F623 /* anarock-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 973851BA060C4AC2BC43B4A4 /* anarock-regular.ttf */; };
 		18BE22D431B947A696E8B574 /* Graphik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4512FC5C75D440AA8BAEA3D5 /* Graphik-Medium.ttf */; };
 		E724D9190AC64315B2BD36B6 /* Graphik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 795E875FD333489EB1306B27 /* Graphik-Regular.ttf */; };
+		43B458C823824015B8050965 /* anarock-medium.svg in Resources */ = {isa = PBXBuildFile; fileRef = A71D1B0CBCF14272B22559EA /* anarock-medium.svg */; };
+		E2AD961CAA0E4E01BE5CC7EF /* anarock-regular.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7C0E9972A4D5452DBD9F9A40 /* anarock-regular.svg */; };
+		05A5AD3229A249CEAC95511E /* AnarockIcons.svg in Resources */ = {isa = PBXBuildFile; fileRef = 5EB591DD0E75434884DBC80D /* AnarockIcons.svg */; };
+		DCBADFD126EC402EAAAD9AA3 /* anarock-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 392F7DA6721840EAA5EAD946 /* anarock-medium.ttf */; };
+		D31E042056D4466282E9C6FF /* anarock-medium.woff in Resources */ = {isa = PBXBuildFile; fileRef = D461DDCA5EBB4A05BC64DCAD /* anarock-medium.woff */; };
+		B6585097341F49788EE2A227 /* anarock-medium.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = D65949DAE0DF4F669FCE2C2A /* anarock-medium.woff2 */; };
+		6E58B69B8D234DCE9A5A8FD2 /* anarock-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33AB548EEE35426BB54AA3F5 /* anarock-regular.ttf */; };
+		7C10DA982B16497FAD7EB87A /* anarock-regular.woff in Resources */ = {isa = PBXBuildFile; fileRef = 063314625E364D48BABFC222 /* anarock-regular.woff */; };
+		95A7092181D84FE6803CB174 /* anarock-regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 869C324049444E1AAB3FFA82 /* anarock-regular.woff2 */; };
+		13544AB5007B4B708591ACBC /* AnarockIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A2DD66945D24575861093C4 /* AnarockIcons.ttf */; };
+		51D83E7F4ED84E399FE3E947 /* AnarockIcons.woff in Resources */ = {isa = PBXBuildFile; fileRef = E8103E087041473F9285513C /* AnarockIcons.woff */; };
+		B44F8B0FF7D549959827DDF0 /* AnarockIcons.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 9E99EB7C487842C698A7D9D6 /* AnarockIcons.woff2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,6 +362,18 @@
 		973851BA060C4AC2BC43B4A4 /* anarock-regular.ttf */ = {isa = PBXFileReference; name = "anarock-regular.ttf"; path = "../assets/fonts/anarock-regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		4512FC5C75D440AA8BAEA3D5 /* Graphik-Medium.ttf */ = {isa = PBXFileReference; name = "Graphik-Medium.ttf"; path = "../assets/fonts/Graphik-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		795E875FD333489EB1306B27 /* Graphik-Regular.ttf */ = {isa = PBXFileReference; name = "Graphik-Regular.ttf"; path = "../assets/fonts/Graphik-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A71D1B0CBCF14272B22559EA /* anarock-medium.svg */ = {isa = PBXFileReference; name = "anarock-medium.svg"; path = "../node_modules/@anarock/pebble/dist/fonts/anarock-medium.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7C0E9972A4D5452DBD9F9A40 /* anarock-regular.svg */ = {isa = PBXFileReference; name = "anarock-regular.svg"; path = "../node_modules/@anarock/pebble/dist/fonts/anarock-regular.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5EB591DD0E75434884DBC80D /* AnarockIcons.svg */ = {isa = PBXFileReference; name = "AnarockIcons.svg"; path = "../node_modules/@anarock/pebble/dist/fonts/AnarockIcons.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		392F7DA6721840EAA5EAD946 /* anarock-medium.ttf */ = {isa = PBXFileReference; name = "anarock-medium.ttf"; path = "../node_modules/@anarock/pebble/dist/fonts/anarock-medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D461DDCA5EBB4A05BC64DCAD /* anarock-medium.woff */ = {isa = PBXFileReference; name = "anarock-medium.woff"; path = "../node_modules/@anarock/pebble/dist/fonts/anarock-medium.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D65949DAE0DF4F669FCE2C2A /* anarock-medium.woff2 */ = {isa = PBXFileReference; name = "anarock-medium.woff2"; path = "../node_modules/@anarock/pebble/dist/fonts/anarock-medium.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		33AB548EEE35426BB54AA3F5 /* anarock-regular.ttf */ = {isa = PBXFileReference; name = "anarock-regular.ttf"; path = "../node_modules/@anarock/pebble/dist/fonts/anarock-regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		063314625E364D48BABFC222 /* anarock-regular.woff */ = {isa = PBXFileReference; name = "anarock-regular.woff"; path = "../node_modules/@anarock/pebble/dist/fonts/anarock-regular.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		869C324049444E1AAB3FFA82 /* anarock-regular.woff2 */ = {isa = PBXFileReference; name = "anarock-regular.woff2"; path = "../node_modules/@anarock/pebble/dist/fonts/anarock-regular.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5A2DD66945D24575861093C4 /* AnarockIcons.ttf */ = {isa = PBXFileReference; name = "AnarockIcons.ttf"; path = "../node_modules/@anarock/pebble/dist/fonts/AnarockIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E8103E087041473F9285513C /* AnarockIcons.woff */ = {isa = PBXFileReference; name = "AnarockIcons.woff"; path = "../node_modules/@anarock/pebble/dist/fonts/AnarockIcons.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9E99EB7C487842C698A7D9D6 /* AnarockIcons.woff2 */ = {isa = PBXFileReference; name = "AnarockIcons.woff2"; path = "../node_modules/@anarock/pebble/dist/fonts/AnarockIcons.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -619,6 +643,18 @@
 				973851BA060C4AC2BC43B4A4 /* anarock-regular.ttf */,
 				4512FC5C75D440AA8BAEA3D5 /* Graphik-Medium.ttf */,
 				795E875FD333489EB1306B27 /* Graphik-Regular.ttf */,
+				A71D1B0CBCF14272B22559EA /* anarock-medium.svg */,
+				7C0E9972A4D5452DBD9F9A40 /* anarock-regular.svg */,
+				5EB591DD0E75434884DBC80D /* AnarockIcons.svg */,
+				392F7DA6721840EAA5EAD946 /* anarock-medium.ttf */,
+				D461DDCA5EBB4A05BC64DCAD /* anarock-medium.woff */,
+				D65949DAE0DF4F669FCE2C2A /* anarock-medium.woff2 */,
+				33AB548EEE35426BB54AA3F5 /* anarock-regular.ttf */,
+				063314625E364D48BABFC222 /* anarock-regular.woff */,
+				869C324049444E1AAB3FFA82 /* anarock-regular.woff2 */,
+				5A2DD66945D24575861093C4 /* AnarockIcons.ttf */,
+				E8103E087041473F9285513C /* AnarockIcons.woff */,
+				9E99EB7C487842C698A7D9D6 /* AnarockIcons.woff2 */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1074,6 +1110,18 @@
 				13ED5E74A1864FE7B840F623 /* anarock-regular.ttf in Resources */,
 				18BE22D431B947A696E8B574 /* Graphik-Medium.ttf in Resources */,
 				E724D9190AC64315B2BD36B6 /* Graphik-Regular.ttf in Resources */,
+				43B458C823824015B8050965 /* anarock-medium.svg in Resources */,
+				E2AD961CAA0E4E01BE5CC7EF /* anarock-regular.svg in Resources */,
+				05A5AD3229A249CEAC95511E /* AnarockIcons.svg in Resources */,
+				DCBADFD126EC402EAAAD9AA3 /* anarock-medium.ttf in Resources */,
+				D31E042056D4466282E9C6FF /* anarock-medium.woff in Resources */,
+				B6585097341F49788EE2A227 /* anarock-medium.woff2 in Resources */,
+				6E58B69B8D234DCE9A5A8FD2 /* anarock-regular.ttf in Resources */,
+				7C10DA982B16497FAD7EB87A /* anarock-regular.woff in Resources */,
+				95A7092181D84FE6803CB174 /* anarock-regular.woff2 in Resources */,
+				13544AB5007B4B708591ACBC /* AnarockIcons.ttf in Resources */,
+				51D83E7F4ED84E399FE3E947 /* AnarockIcons.woff in Resources */,
+				B44F8B0FF7D549959827DDF0 /* AnarockIcons.woff2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
