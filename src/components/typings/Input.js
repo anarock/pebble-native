@@ -17,6 +17,7 @@ export type InputProps = {
   errorMessage?: string;
   successMessage?: string;
   textArea?: boolean;
+  style?: any;
 }
 
 export type InputState = {

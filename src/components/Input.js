@@ -95,13 +95,16 @@ export default class extends React.PureComponent<InputProps, InputState> {
       errorMessage,
       successMessage,
       message,
-      onChange
+      onChange,
+      style,
+      readOnly,
+      required
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
 
     return (
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper, style]}>
         <Text
           animated
           color={this.state.placeholderTop.interpolate({
@@ -120,7 +123,7 @@ export default class extends React.PureComponent<InputProps, InputState> {
             }
           ]}
         >
-          {placeholder}
+          {placeholder} {required && <Text color={colors.red.base}>*</Text>}
         </Text>
         <TextInput
           style={styles.textStyle}
@@ -131,6 +134,7 @@ export default class extends React.PureComponent<InputProps, InputState> {
           onBlur={this.handleBlur}
           autoCorrect={false}
           selectionColor={colors.violet.base}
+          editable={!readOnly}
         />
         <View
           style={[
