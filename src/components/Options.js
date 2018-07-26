@@ -16,10 +16,12 @@ const styles = StyleSheet.create({
 });
 
 export default function Options(props: OptionsProps) {
-  const {options, keyExtractor, rowRenderElement} = props;
+  const {options, keyExtractor, rowRenderElement, dropdownStyle, width} = props;
 
   return (
-    <View style={options.wrapper}>
+    <View style={[styles.optionWrapper, dropdownStyle, {
+      width
+    }]}>
       {options.map((option, i) => {
         const key = keyExtractor(option);
 

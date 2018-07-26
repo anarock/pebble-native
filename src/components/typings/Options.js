@@ -10,5 +10,4 @@ export type OptionsProps = {
 	width?: number | string;
 	selected?: any;
 	keyExtractor?: (item) => number | string;
-	hideBorder?: boolean;
 }
