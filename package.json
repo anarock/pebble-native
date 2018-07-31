@@ -4,6 +4,7 @@
   "private": true,
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
