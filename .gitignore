@@ -63,3 +63,5 @@ haul-debug.log
 dist
 compiled
 
+android/app/src/main/assets/fonts
+
