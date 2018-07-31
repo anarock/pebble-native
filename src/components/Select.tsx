@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Input from "./Input";
 import Options from "./Options";
-import type { SelectProps } from "./typings/Select";
+import { SelectProps } from "./typings/Select";
 import Text from "./Text";
 import colors from "../theme/colors";
 import Icon from "@anarock/pebble/native/Icon";
@@ -68,13 +68,16 @@ export default class Select extends PureComponent<SelectProps> {
       errorMessage,
       keyExtractor,
       title,
-      onSelect,
       ...rest
     } = this.props;
 
-    const selectedLabel: string = selected
+    // @ts-ignore
+		const selectedLabel: string = selected
       ? rowRenderElement(options.find(x => keyExtractor(x) === selected))
       : placeholder;
+
+		// @ts-ignore
+		const inputStyle = styles.input;
 
     return (
       <View>
@@ -87,7 +90,7 @@ export default class Select extends PureComponent<SelectProps> {
         >
           <View>
             <Input
-              style={styles.input}
+              style={inputStyle}
               fixLabelAtTop
               placeholder="Choose your Option"
               value={selectedLabel}
@@ -137,7 +140,7 @@ export default class Select extends PureComponent<SelectProps> {
                     selected={selected}
                     keyExtractor={keyExtractor}
                     onSelect={this.onSelect}
-                    rowRenderElement={(item, i, selected) => (
+                    rowRenderElement={(item, _i, selected) => (
                       <View style={styles.optionSection}>
                         <Text
                           size={15}

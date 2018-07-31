@@ -4,7 +4,7 @@ export interface TextProps {
 	bold?: boolean;
 	size?: number;
 	color?: string;
-	style?: RN.StyleSheetProperties;
+	style?: RN.StyleProp<RN.TextStyle>;
 	animated?: boolean;
-	children: React.ReactChild;
+	children: JSX.Element | string | (string | boolean | JSX.Element | undefined)[];
 }
