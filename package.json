@@ -48,14 +48,14 @@
     "react-native-vector-icons": "^5.0.0",
     "react-test-renderer": "16.4.1",
     "ts-loader": "^4.4.2",
-    "typescript": "2"
+    "typescript": "^3.0.1"
   },
   "jest": {
     "preset": "react-native"
   },
   "rnpm": {
     "assets": [
-      "./node_modules/@anarock/pebble/dist/fonts/"
+      "./node_modules/@anarock/pebble/native/icon-fonts/"
     ]
   }
 }
