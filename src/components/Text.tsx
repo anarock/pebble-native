@@ -1,7 +1,15 @@
 import * as React from "react";
 import { Text, Animated } from "react-native";
+import { TextProps } from "./typings/Text";
 
-export default function({ bold, size, color, style, children, animated }) {
+const GText: React.SFC<TextProps> = ({
+  bold,
+  size,
+  color,
+  style,
+  children,
+  animated
+}) => {
   const Text_ = animated ? Animated.Text : Text;
 
   return (
@@ -18,4 +26,6 @@ export default function({ bold, size, color, style, children, animated }) {
       {children}
     </Text_>
   );
-}
+};
+
+export default GText;

@@ -1,9 +1,7 @@
-// @flow
-
 import React from "react";
 import {StyleSheet, TouchableNativeFeedback, View} from "react-native";
 import {OptionsProps} from "./typings/Options";
-import colors from "../../src/theme/colors";
+import colors from "../theme/colors";
 
 const styles = StyleSheet.create({
   optionWrapper: {

@@ -1,7 +1,6 @@
-// @flow
 import * as React from "react";
 import { View, StyleSheet, TextInput, Animated } from "react-native";
-import type { InputProps, InputState } from "./typings/Input";
+import { InputProps, InputState } from "./typings/Input";
 import colors from "../theme/colors";
 import Text from "./Text";
 
@@ -51,7 +50,7 @@ function getColor(
   return color;
 }
 
-export default class extends React.PureComponent<InputProps, InputState> {
+class Input extends React.PureComponent<InputProps, InputState> {
   state: InputState = {
     isFocused: false,
     placeholderTop: new Animated.Value(20)
@@ -129,7 +128,7 @@ export default class extends React.PureComponent<InputProps, InputState> {
           style={styles.textStyle}
           onChangeText={onChange}
           underlineColorAndroid={"transparent"}
-          value={value}
+          value={value ? value.toString() : undefined}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           autoCorrect={false}
@@ -162,3 +161,5 @@ export default class extends React.PureComponent<InputProps, InputState> {
     );
   }
 }
+
+export default Input;

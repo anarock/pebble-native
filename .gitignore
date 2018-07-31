@@ -59,4 +59,7 @@ buck-out/
 #
 haul-debug.log
 
-idea
+.idea
+dist
+compiled
+

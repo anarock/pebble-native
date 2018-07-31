@@ -1,4 +1,4 @@
-export type OptionsProps = {
+export interface OptionsProps {
 	options: any[];
 	onSelect: (suggestion: any) => void;
 	rowRenderElement: (

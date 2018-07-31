@@ -1,8 +1,4 @@
-// @flow
-
-import * as RN from "react-native";
-
-export type InputProps = {
+export interface InputProps {
   type?: "text" | "date" | "password";
   required?: boolean;
   placeholder: string;
@@ -20,7 +16,7 @@ export type InputProps = {
   style?: any;
 }
 
-export type InputState = {
+export interface InputState {
   placeholderTop: any;
   isFocused: boolean;
 }

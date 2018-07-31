@@ -1,6 +1,6 @@
 import {OptionsProps} from "./Options";
 
-export type SelectProps = OptionsProps & {
+export interface SelectProps extends OptionsProps {
   title: string;
   placeholder: string;
   required?: boolean;
