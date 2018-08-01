@@ -7,7 +7,7 @@
     "declarationDir": "dist",
     "target": "esnext",
     "module": "esnext",
-    "jsx": "preserve",
+    "jsx": "react",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": true,
