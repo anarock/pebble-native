@@ -6,3 +6,7 @@ export interface SelectProps extends OptionsProps {
   required?: boolean;
   errorMessage?: string;
 }
+
+export interface SelectState {
+	showOptions: boolean;
+}

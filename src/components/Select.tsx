@@ -2,13 +2,13 @@ import React, { PureComponent } from "react";
 import {
   View,
   StyleSheet,
-  TouchableNativeFeedback,
+	TouchableWithoutFeedback,
   ScrollView,
   Modal
 } from "react-native";
 import Input from "./Input";
 import Options from "./Options";
-import { SelectProps } from "./typings/Select";
+import { SelectProps, SelectState } from "./typings/Select";
 import Text from "./Text";
 import colors from "../theme/colors";
 import Icon from "@anarock/pebble/native/Icon";
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 
   optionContainer: {
-    maxHeight: 300
+    maxHeight: 220
   },
   modalWrapper: {
     backgroundColor: "rgba(0,0,0,0.3)",
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 
 function noop() {}
 
-export default class Select extends PureComponent<SelectProps> {
+export default class Select extends PureComponent<SelectProps, SelectState> {
   state = {
     showOptions: false
   };
@@ -81,7 +81,7 @@ export default class Select extends PureComponent<SelectProps> {
 
     return (
       <View>
-        <TouchableNativeFeedback
+        <TouchableWithoutFeedback
           onPress={() =>
             this.setState({
               showOptions: true
@@ -100,7 +100,7 @@ export default class Select extends PureComponent<SelectProps> {
               readOnly
             />
           </View>
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
 
         <Modal
           animationType="fade"
@@ -123,7 +123,7 @@ export default class Select extends PureComponent<SelectProps> {
                 <Text size={15} color={colors.gray.darker} bold>
                   {title}
                 </Text>
-                <TouchableNativeFeedback onPress={this.closeOptions}>
+                <TouchableWithoutFeedback onPress={this.closeOptions}>
                   <View style={styles.icon}>
                     <Icon
                       name="arrow-down"
@@ -131,7 +131,7 @@ export default class Select extends PureComponent<SelectProps> {
                       color={colors.gray.base}
                     />
                   </View>
-                </TouchableNativeFeedback>
+                </TouchableWithoutFeedback>
               </View>
               <View style={styles.optionContainer}>
                 <ScrollView showsVerticalScrollIndicator={false}>
