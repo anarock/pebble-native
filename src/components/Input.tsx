@@ -56,36 +56,42 @@ class Input extends React.PureComponent<InputProps, InputState> {
     placeholderTop: new Animated.Value(20)
   };
 
-  static getDerivedStateFromProps (newProps: InputProps) {
+  static getDerivedStateFromProps(newProps: InputProps) {
     if (newProps.value) {
       return {
         placeholderTop: new Animated.Value(0)
-      }
+      };
     }
 
     return null;
   }
 
   handleFocus = () => {
-    this.setState({
-      isFocused: true
-    }, () => {
-      Animated.timing(this.state.placeholderTop, {
-        toValue: 0,
-        duration: 200
-      }).start();
-    })
+    this.setState(
+      {
+        isFocused: true
+      },
+      () => {
+        Animated.timing(this.state.placeholderTop, {
+          toValue: 0,
+          duration: 200
+        }).start();
+      }
+    );
   };
 
   handleBlur = () =>
-    this.setState({
-      isFocused: false
-    }, () => {
-      Animated.timing(this.state.placeholderTop, {
-        toValue: 20,
-        duration: 200
-      }).start();
-    });
+    this.setState(
+      {
+        isFocused: false
+      },
+      () => {
+        Animated.timing(this.state.placeholderTop, {
+          toValue: 20,
+          duration: 200
+        }).start();
+      }
+    );
 
   render() {
     const {
@@ -97,7 +103,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
       onChange,
       style,
       readOnly,
-      required
+      required,
+      keyboardType
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
@@ -118,7 +125,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
             styles.placeholder,
             {
               top: this.state.placeholderTop,
-              ...(value ? {top: 0} : {})
+              ...(value ? { top: 0 } : {})
             }
           ]}
         >
@@ -134,15 +141,18 @@ class Input extends React.PureComponent<InputProps, InputState> {
           autoCorrect={false}
           selectionColor={colors.violet.base}
           editable={!readOnly}
+          keyboardType={keyboardType}
         />
         <View
           style={[
             styles.highlight,
-            this.state.isFocused ? {
-              height: 2,
-              backgroundColor: getColor(errorMessage, successMessage, true),
-              marginTop: -1
-            } : {}
+            this.state.isFocused
+              ? {
+                  height: 2,
+                  backgroundColor: getColor(errorMessage, successMessage, true),
+                  marginTop: -1
+                }
+              : {}
           ]}
         />
 

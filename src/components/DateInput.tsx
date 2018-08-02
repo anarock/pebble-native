@@ -10,12 +10,12 @@ import format from "date-fns/format";
 
 export default class DateInput extends React.PureComponent<DateInputProps> {
   private open = async () => {
-  	const { minDate, maxDate, value } = this.props;
+    const { minDate, maxDate, value } = this.props;
 
     const _value = await DatePickerAndroid.open({
       date: value && new Date(value),
-			minDate: minDate && new Date(minDate),
-			maxDate: maxDate && new Date(maxDate)
+      minDate: minDate && new Date(minDate),
+      maxDate: maxDate && new Date(maxDate)
     });
 
     this.props.onChange(_value);

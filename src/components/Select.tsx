@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import {
   View,
   StyleSheet,
-	TouchableWithoutFeedback,
+  TouchableWithoutFeedback,
   ScrollView,
   Modal
 } from "react-native";
@@ -52,7 +52,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       showOptions: false
     });
 
-  onSelect = (option) => {
+  onSelect = option => {
     const { onSelect } = this.props;
     onSelect(option);
     this.closeOptions();
@@ -72,12 +72,12 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     } = this.props;
 
     // @ts-ignore
-		const selectedLabel: string = selected
+    const selectedLabel: string = selected
       ? rowRenderElement(options.find(x => keyExtractor(x) === selected))
       : placeholder;
 
-		// @ts-ignore
-		const inputStyle = styles.input;
+    // @ts-ignore
+    const inputStyle = styles.input;
 
     return (
       <View>
