@@ -14,7 +14,8 @@
     "storybook": "storybook start -p 7007",
     "build-storybook": "build-storybook",
     "build:dist": "rimraf dist && tsc -p tsconfig.json",
-    "prepublish": "yarn build:dist"
+    "prepublish": "yarn build:dist",
+    "precommit": "pretty-quick --staged"
   },
   "dependencies": {
     "@anarock/pebble": "^0.12.2",

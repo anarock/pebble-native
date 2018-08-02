@@ -1,6 +1,6 @@
 import React from "react";
-import {StyleSheet, TouchableNativeFeedback, View} from "react-native";
-import {OptionsProps} from "./typings/Options";
+import { StyleSheet, TouchableNativeFeedback, View } from "react-native";
+import { OptionsProps } from "./typings/Options";
 import colors from "../theme/colors";
 
 const styles = StyleSheet.create({
@@ -14,12 +14,24 @@ const styles = StyleSheet.create({
 });
 
 export default function Options(props: OptionsProps) {
-  const {options, keyExtractor, rowRenderElement, dropdownStyle, width} = props;
+  const {
+    options,
+    keyExtractor,
+    rowRenderElement,
+    dropdownStyle,
+    width
+  } = props;
 
   return (
-    <View style={[styles.optionWrapper, dropdownStyle, {
-      width
-    }]}>
+    <View
+      style={[
+        styles.optionWrapper,
+        dropdownStyle,
+        {
+          width
+        }
+      ]}
+    >
       {options.map((option, i) => {
         const key = keyExtractor(option);
 
