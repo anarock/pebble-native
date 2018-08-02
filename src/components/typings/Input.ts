@@ -1,10 +1,12 @@
+import * as RN from "react-native";
+
 export interface InputProps {
-  type?: "text" | "date" | "password";
+  keyboardType?: RN.KeyboardTypeAndroid;
   required?: boolean;
   placeholder: string;
   onChange: (text: string) => void;
   className?: string;
-  inputProps?: any;
+  inputProps?: RN.TextInputAndroidProps;
   fixLabelAtTop?: boolean;
   value?: string | number;
   readOnly?: boolean;
