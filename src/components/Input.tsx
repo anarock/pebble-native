@@ -53,13 +53,13 @@ function getColor(
 class Input extends React.PureComponent<InputProps, InputState> {
   state: InputState = {
     isFocused: false,
-    placeholderTop: new Animated.Value(20)
+    placeholderMarginTop: new Animated.Value(20)
   };
 
-  static getDerivedStateFromProps(newProps: InputProps) {
+  static getDerivedStateFromProps(newProps: InputProps): Partial<InputState> {
     if (newProps.value) {
       return {
-        placeholderTop: new Animated.Value(0)
+        placeholderMarginTop: new Animated.Value(0)
       };
     }
 
@@ -72,7 +72,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
         isFocused: true
       },
       () => {
-        Animated.timing(this.state.placeholderTop, {
+        Animated.timing(this.state.placeholderMarginTop, {
           toValue: 0,
           duration: 200
         }).start();
@@ -86,10 +86,11 @@ class Input extends React.PureComponent<InputProps, InputState> {
         isFocused: false
       },
       () => {
-        Animated.timing(this.state.placeholderTop, {
-          toValue: 20,
-          duration: 200
-        }).start();
+        if (!this.props.value)
+          Animated.timing(this.state.placeholderMarginTop, {
+            toValue: 20,
+            duration: 200
+          }).start();
       }
     );
 
@@ -113,19 +114,18 @@ class Input extends React.PureComponent<InputProps, InputState> {
       <View style={[styles.wrapper, style]}>
         <Text
           animated
-          color={this.state.placeholderTop.interpolate({
+          color={this.state.placeholderMarginTop.interpolate({
             inputRange: [0, 20],
             outputRange: [colors.gray.dark, colors.gray.base]
           })}
-          size={this.state.placeholderTop.interpolate({
+          size={this.state.placeholderMarginTop.interpolate({
             inputRange: [0, 20],
             outputRange: [13, 15]
           })}
           style={[
             styles.placeholder,
             {
-              top: this.state.placeholderTop,
-              ...(value ? { top: 0 } : {})
+              top: this.state.placeholderMarginTop
             }
           ]}
         >
