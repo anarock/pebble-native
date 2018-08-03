@@ -92,7 +92,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
             <Input
               style={inputStyle}
               fixLabelAtTop
-              placeholder="Choose your Option"
+              placeholder={placeholder}
               value={selectedLabel}
               onChange={noop}
               required={required}

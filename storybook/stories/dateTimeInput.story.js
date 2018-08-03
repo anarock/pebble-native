@@ -1,10 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
-import { TimeInput } from "../../src/components";
+import DateTimeInput from "src/components/DateTimeInput";
 
-storiesOf("TimeInput", module).add("Default", () => (
-  <TimeInput
-    onChange={() => {}}
+storiesOf("DateTimeInput", module).add("Default", () => (
+  <DateTimeInput
+    onChange={alert}
+    type="datetime"
     label="Enter Time"
     required
     placeholder="Type Something"
