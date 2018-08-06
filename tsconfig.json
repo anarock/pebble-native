@@ -26,10 +26,5 @@
     "lib": ["dom", "es2015", "es2016"]
   },
   "includes": ["src"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "storybook",
-    "src/**/__tests__"
-  ]
+  "exclude": ["node_modules", "dist", "src/**/__tests__"]
 }

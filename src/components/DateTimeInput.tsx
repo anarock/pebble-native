@@ -58,7 +58,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
       _value =
         type === "datetime"
           ? format(value, "ddd, Do MMM YYYY, hh:mm A")
-          : format(value, "hh:mm A");
+          : format(value, "ddd, Do MMM YYYY");
     }
 
     return (

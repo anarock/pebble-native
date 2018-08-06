@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
-import DateTimeInput from "src/components/DateTimeInput";
+import DateTimeInput from "../../src/components/DateTimeInput";
 
 storiesOf("DateTimeInput", module).add("Default", () => (
   <DateTimeInput
