@@ -133,7 +133,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                   }
                 ]}
               >
-                <Text size={15} color={colors.gray.dark} bold>
+                <Text size={15} color={colors.gray.dark}>
                   {title}
                 </Text>
               </View>
