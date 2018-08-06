@@ -1,8 +1,8 @@
 type Selected = string | number | (string | number)[];
 
 export interface ControlsProps {
-  type: "radio" | "checkbox";
-  selected: Selected;
+  type?: "radio" | "checkbox";
+  selected?: Selected;
   data: any[];
   keyExtractor?: (item: any) => string | number;
   renderElement?: (
@@ -18,5 +18,6 @@ export interface ControlsProps {
       selected: Selected;
     }
   ) => void;
-  style: any;
+  style?: any;
+  ripple?: boolean;
 }

@@ -16,8 +16,6 @@ const options = new Array(7)
 storiesOf("Select", module).add("basic", () => (
   <Select
     options={options}
-    keyExtractor={item => item.id}
-    rowRenderElement={item => item.label}
     placeholder="Choose your option"
     onSelect={noop}
     selected={1}
