@@ -1,5 +1,10 @@
 import * as React from "react";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  TouchableNativeFeedback
+} from "react-native";
 import { ControlsProps } from "./typings/Controls";
 import Text from "./Text";
 import Icon from "@anarock/pebble/native/Icon";
@@ -78,17 +83,17 @@ export default class extends React.PureComponent<ControlsProps> {
   };
 
   render() {
-    const { data, renderElement, keyExtractor, style } = this.props;
+    const { data, renderElement, keyExtractor, style, ripple } = this.props;
 
+    const Touchable = ripple
+      ? TouchableNativeFeedback
+      : TouchableWithoutFeedback;
     return (
       <View style={[styles.wrapper, style.wrapper]}>
         {data.map(item => {
           const key = keyExtractor(item);
           return (
-            <TouchableWithoutFeedback
-              key={key}
-              onPress={() => this.handlePress(key)}
-            >
+            <Touchable key={key} onPress={() => this.handlePress(key)}>
               <View style={[styles.itemWrapper, style.itemWrapper]}>
                 {renderElement(
                   {
@@ -98,7 +103,7 @@ export default class extends React.PureComponent<ControlsProps> {
                   this.props
                 )}
               </View>
-            </TouchableWithoutFeedback>
+            </Touchable>
           );
         })}
       </View>

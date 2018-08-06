@@ -11,7 +11,6 @@ import Options from "./Options";
 import { SelectProps, SelectState } from "./typings/Select";
 import Text from "./Text";
 import colors from "../theme/colors";
-import Icon from "@anarock/pebble/native/Icon";
 
 const styles = StyleSheet.create({
   optionSection: {
@@ -22,7 +21,10 @@ const styles = StyleSheet.create({
   optionsWrapper: {
     position: "absolute",
     width: "100%",
-    bottom: 0
+    bottom: 0,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    overflow: "hidden"
   },
 
   optionContainer: {
@@ -37,12 +39,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 30,
     paddingVertical: 25
+  },
+  overlay: {
+    flex: 1
   }
 });
 
 function noop() {}
 
 export default class Select extends PureComponent<SelectProps, SelectState> {
+  static defaultProps: Partial<SelectProps> = {
+    valueExtractor: item => item.label || item.name,
+    keyExtractor: item => item.id
+  };
+
   state = {
     showOptions: false
   };
@@ -68,12 +78,12 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       errorMessage,
       keyExtractor,
       title,
+      valueExtractor,
       ...rest
     } = this.props;
 
-    // @ts-ignore
     const selectedLabel: string = selected
-      ? rowRenderElement(options.find(x => keyExtractor(x) === selected))
+      ? valueExtractor(options.find(x => selected === keyExtractor(x)))
       : placeholder;
 
     // @ts-ignore
@@ -109,29 +119,23 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
           onRequestClose={this.closeOptions}
         >
           <View style={styles.modalWrapper}>
+            <TouchableWithoutFeedback onPress={this.closeOptions}>
+              <View style={styles.overlay} />
+            </TouchableWithoutFeedback>
             <View style={styles.optionsWrapper}>
               <View
                 style={[
                   styles.optionSection,
                   {
-                    backgroundColor: colors.gray.lightest,
+                    backgroundColor: colors.white.base,
                     height: 62,
                     paddingLeft: 30
                   }
                 ]}
               >
-                <Text size={15} color={colors.gray.darker} bold>
+                <Text size={15} color={colors.gray.dark}>
                   {title}
                 </Text>
-                <TouchableWithoutFeedback onPress={this.closeOptions}>
-                  <View style={styles.icon}>
-                    <Icon
-                      name="arrow-down"
-                      size={14}
-                      color={colors.gray.base}
-                    />
-                  </View>
-                </TouchableWithoutFeedback>
               </View>
               <View style={styles.optionContainer}>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -140,26 +144,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                     selected={selected}
                     keyExtractor={keyExtractor}
                     onSelect={this.onSelect}
-                    rowRenderElement={(item, _i, selected) => (
-                      <View style={styles.optionSection}>
-                        <Text
-                          size={15}
-                          color={
-                            selected ? colors.violet.base : colors.gray.darker
-                          }
-                        >
-                          {rowRenderElement(item)}
-                        </Text>
-
-                        {selected && (
-                          <Icon
-                            name="check"
-                            size={20}
-                            color={colors.violet.base}
-                          />
-                        )}
-                      </View>
-                    )}
+                    rowRenderElement={rowRenderElement}
                     {...rest}
                   />
                 </ScrollView>
