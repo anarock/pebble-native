@@ -1,7 +1,7 @@
 export interface OptionsProps {
   options: any[];
   onSelect: (suggestion: any) => void;
-  rowRenderElement: (
+  rowRenderElement?: (
     args: {
       item: any;
       isSelected: boolean;

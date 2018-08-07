@@ -59,6 +59,11 @@ export default class Options extends Component<OptionsProps> {
     }
   };
 
+  onSelect = ({ selected }) => {
+    const { onSelect, options, keyExtractor } = this.props;
+    onSelect(options.find(option => keyExtractor(option) === selected));
+  };
+
   render() {
     const { options, keyExtractor, rowRenderElement, width, type } = this.props;
     return (
@@ -73,7 +78,7 @@ export default class Options extends Component<OptionsProps> {
         <Controls
           style={controlStyle}
           renderElement={args => rowRenderElement(args, this.props)}
-          onChange={this.props.onSelect}
+          onChange={this.onSelect}
           data={options}
           keyExtractor={keyExtractor}
           ripple
