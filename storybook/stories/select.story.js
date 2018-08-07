@@ -12,13 +12,25 @@ const options = new Array(7)
   })
   .map((x, i) => ({ ...x, id: i + 1 }));
 
-storiesOf("Select", module).add("basic", () => (
-  <Select
-    options={options}
-    placeholder="Choose your option"
-    onSelect={noop}
-    selected={1}
-    title="Travel Type"
-    required
-  />
-));
+storiesOf("Select", module)
+  .add("basic", () => (
+    <Select
+      options={options}
+      placeholder="Choose your option"
+      onSelect={noop}
+      selected={1}
+      title="Travel Type"
+      required
+    />
+  ))
+  .add("Checkbox", () => (
+    <Select
+      options={options}
+      placeholder="Choose your option"
+      onSelect={noop}
+      selected={[1]}
+      type="checkbox"
+      title="Travel Type"
+      required
+    />
+  ));

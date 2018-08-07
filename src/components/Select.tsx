@@ -4,13 +4,16 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   ScrollView,
-  Modal
+  Modal,
+  Dimensions
 } from "react-native";
 import Input from "./Input";
 import Options from "./Options";
 import { SelectProps, SelectState } from "./typings/Select";
 import Text from "./Text";
 import colors from "../theme/colors";
+import Icon from "@anarock/pebble/native/Icon";
+import Button from "./Button";
 
 const styles = StyleSheet.create({
   optionSection: {
@@ -28,20 +31,26 @@ const styles = StyleSheet.create({
   },
 
   optionContainer: {
-    maxHeight: 220
+    maxHeight: Dimensions.get("window").height * 0.6
   },
   modalWrapper: {
     backgroundColor: "rgba(0,0,0,0.3)",
     flex: 1
   },
-  icon: {
-    height: 62,
-    justifyContent: "center",
-    paddingHorizontal: 30,
-    paddingVertical: 25
-  },
   overlay: {
     flex: 1
+  },
+  dropdownIcon: {
+    position: "absolute",
+    top: 20,
+    right: 10
+  },
+  buttonWrapper: {
+    paddingVertical: 20,
+    paddingHorizontal: 25,
+    backgroundColor: colors.white.base,
+    borderTopColor: colors.gray.lighter,
+    borderTopWidth: 1
   }
 });
 
@@ -49,12 +58,14 @@ function noop() {}
 
 export default class Select extends PureComponent<SelectProps, SelectState> {
   static defaultProps: Partial<SelectProps> = {
-    valueExtractor: item => item.label || item.name,
-    keyExtractor: item => item.id
+    valueExtractor: item => item && (item.label || item.name),
+    keyExtractor: item => item.id,
+    type: "radio"
   };
 
   state = {
-    showOptions: false
+    showOptions: false,
+    selectedCheckbox: this.props.selected || []
   };
 
   closeOptions = () =>
@@ -63,9 +74,16 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     });
 
   onSelect = option => {
-    const { onSelect } = this.props;
-    onSelect(option);
-    this.closeOptions();
+    const { onSelect, type } = this.props;
+
+    if (type === "radio") {
+      onSelect(option);
+      this.closeOptions();
+    } else {
+      this.setState({
+        selectedCheckbox: option
+      });
+    }
   };
 
   render() {
@@ -78,15 +96,13 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       keyExtractor,
       title,
       valueExtractor,
+      type,
       ...rest
     } = this.props;
 
     const selectedLabel: string = selected
       ? valueExtractor(options.find(x => selected === keyExtractor(x)))
       : placeholder;
-
-    // @ts-ignore
-    const inputStyle = styles.input;
 
     return (
       <View>
@@ -99,7 +115,6 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
         >
           <View>
             <Input
-              style={inputStyle}
               fixLabelAtTop
               placeholder={placeholder}
               value={selectedLabel}
@@ -108,6 +123,9 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
               errorMessage={errorMessage}
               readOnly
             />
+            <View style={styles.dropdownIcon}>
+              <Icon color={colors.gray.base} name="arrow-drop-down" />
+            </View>
           </View>
         </TouchableWithoutFeedback>
 
@@ -140,13 +158,30 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                 <ScrollView>
                   <Options
                     options={options}
-                    selected={selected}
+                    selected={
+                      type === "radio"
+                        ? selected
+                        : this.state.selectedCheckbox.map(x => keyExtractor(x))
+                    }
                     keyExtractor={keyExtractor}
+                    type={type}
                     {...rest}
                     onSelect={this.onSelect}
                   />
                 </ScrollView>
               </View>
+              {type === "checkbox" && (
+                <View style={styles.buttonWrapper}>
+                  <Button
+                    onPress={() => {
+                      this.onSelect(this.state.selectedCheckbox);
+                      this.closeOptions();
+                    }}
+                  >
+                    Done
+                  </Button>
+                </View>
+              )}
             </View>
           </View>
         </Modal>

@@ -42,10 +42,7 @@ export default class Options extends Component<OptionsProps> {
 
       return (
         <View style={styles.row}>
-          <Text
-            size={15}
-            color={isSelected ? colors.violet.base : colors.gray.darker}
-          >
+          <Text size={15} color={colors.gray.darker}>
             {props.rowLabelExtractor(item)}
           </Text>
 
@@ -60,8 +57,12 @@ export default class Options extends Component<OptionsProps> {
   };
 
   onSelect = ({ selected }) => {
-    const { onSelect, options, keyExtractor } = this.props;
-    onSelect(options.find(option => keyExtractor(option) === selected));
+    const { onSelect, options, keyExtractor, type } = this.props;
+    onSelect(
+      type === "radio"
+        ? options.find(option => keyExtractor(option) === selected)
+        : options.filter(option => selected.includes(keyExtractor(option)))
+    );
   };
 
   render() {
