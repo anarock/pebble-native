@@ -33,6 +33,7 @@ export default class Options extends Component<OptionsProps> {
   static defaultProps: Partial<OptionsProps> = {
     type: "radio",
     keyExtractor: item => item.id,
+    rowLabelExtractor: item => item.label || item.name,
     rowRenderElement: ({ item, isSelected }, props) => {
       const icon = {
         radio: isSelected ? "radio-selected" : "radio",
@@ -45,7 +46,7 @@ export default class Options extends Component<OptionsProps> {
             size={15}
             color={isSelected ? colors.violet.base : colors.gray.darker}
           >
-            {item.label}
+            {props.rowLabelExtractor(item)}
           </Text>
 
           <Icon

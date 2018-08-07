@@ -13,4 +13,5 @@ export interface OptionsProps {
   selected?: any;
   keyExtractor?: (item) => number | string;
   type?: "radio" | "checkbox";
+  rowLabelExtractor: (item: any) => string | number;
 }

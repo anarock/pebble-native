@@ -70,7 +70,6 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
 
   render() {
     const {
-      rowRenderElement,
       options,
       selected,
       placeholder,
@@ -144,7 +143,6 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                     selected={selected}
                     keyExtractor={keyExtractor}
                     onSelect={this.onSelect}
-                    rowRenderElement={rowRenderElement}
                     {...rest}
                   />
                 </ScrollView>
