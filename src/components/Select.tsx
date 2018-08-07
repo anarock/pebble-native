@@ -137,13 +137,13 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                 </Text>
               </View>
               <View style={styles.optionContainer}>
-                <ScrollView showsVerticalScrollIndicator={false}>
+                <ScrollView>
                   <Options
                     options={options}
                     selected={selected}
                     keyExtractor={keyExtractor}
-                    onSelect={this.onSelect}
                     {...rest}
+                    onSelect={this.onSelect}
                   />
                 </ScrollView>
               </View>

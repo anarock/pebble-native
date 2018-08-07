@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
 import { storiesOf } from "@storybook/react-native";
 import Select from "../../src/components/Select";
 

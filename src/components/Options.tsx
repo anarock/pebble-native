@@ -65,7 +65,14 @@ export default class Options extends Component<OptionsProps> {
   };
 
   render() {
-    const { options, keyExtractor, rowRenderElement, width, type } = this.props;
+    const {
+      options,
+      selected,
+      keyExtractor,
+      rowRenderElement,
+      width,
+      type
+    } = this.props;
     return (
       <View
         style={[
@@ -82,6 +89,7 @@ export default class Options extends Component<OptionsProps> {
           data={options}
           keyExtractor={keyExtractor}
           ripple
+          selected={selected}
           type={type}
         />
       </View>
