@@ -174,7 +174,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                 <View style={styles.buttonWrapper}>
                   <Button
                     onPress={() => {
-                      this.onSelect(this.state.selectedCheckbox);
+                      this.props.onSelect(this.state.selectedCheckbox);
                       this.closeOptions();
                     }}
                   >
