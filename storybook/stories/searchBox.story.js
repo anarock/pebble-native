@@ -8,5 +8,10 @@ const options = new Array(7)
   .map((x, i) => ({ ...x, id: i + 1 }));
 
 storiesOf("SearchBox", module).add("Default", () => (
-  <SearchBox results={options} placeholder="Search" onSelect={() => {}} />
+  <SearchBox
+    results={options}
+    placeholder="Search"
+    onQueryChange={() => {}}
+    onSelect={() => {}}
+  />
 ));
