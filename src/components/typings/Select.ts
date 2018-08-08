@@ -10,4 +10,5 @@ export interface SelectProps extends OptionsProps {
 
 export interface SelectState {
   showOptions: boolean;
+  selectedCheckbox: any[];
 }

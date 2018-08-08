@@ -1,3 +1,4 @@
+import "./button.story";
 import "./searchInput.story";
 import "./searchBox.story";
 import "./select.story";
