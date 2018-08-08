@@ -1,6 +1,6 @@
 {
   "name": "pebble-native",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -20,6 +20,7 @@
   "dependencies": {
     "@anarock/pebble": "^0.12.2",
     "date-fns": "^1.29.0",
+    "just-debounce-it": "^1.0.1",
     "react-spring": "^5.5.1"
   },
   "devDependencies": {
