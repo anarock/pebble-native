@@ -7,7 +7,7 @@ export interface SearchInputProps {
   searchBoxPlaceholder: string;
   onSelect: (item: any) => void;
   onQueryChange: (query: string) => void;
-  renderElement: (
+  renderElement?: (
     args: {
       item: any;
     },
@@ -15,4 +15,5 @@ export interface SearchInputProps {
   ) => JSX.Element | string | number;
   keyExtractor: (item: any) => number | string;
   value?: string;
+  rowLabelExtractor?: (item: any) => string | number;
 }

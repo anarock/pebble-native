@@ -48,7 +48,8 @@ export default class extends React.PureComponent<SearchInputProps> {
       keyExtractor,
       onQueryChange,
       renderElement,
-      value
+      value,
+      rowLabelExtractor
     } = this.props;
     return (
       <React.Fragment>
@@ -91,6 +92,7 @@ export default class extends React.PureComponent<SearchInputProps> {
             onSelect={this.onSelect}
             onQueryChange={onQueryChange}
             keyExtractor={keyExtractor}
+            rowLabelExtractor={rowLabelExtractor}
             renderElement={
               renderElement && (args => renderElement(args, this.props))
             }

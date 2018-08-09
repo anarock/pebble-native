@@ -147,7 +147,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
         <View
           style={[
             styles.highlight,
-            this.state.isFocused
+            this.state.isFocused || _message
               ? {
                   height: 2,
                   backgroundColor: getColor(errorMessage, successMessage, true),

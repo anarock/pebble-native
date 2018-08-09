@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   TouchableWithoutFeedback,
-  ScrollView,
   Modal,
   Dimensions
 } from "react-native";
@@ -14,6 +13,7 @@ import Text from "./Text";
 import colors from "../theme/colors";
 import Icon from "@anarock/pebble/native/Icon";
 import Button from "./Button";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const styles = StyleSheet.create({
   optionSection: {
@@ -159,7 +159,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                 </Text>
               </View>
               <View style={styles.optionContainer}>
-                <ScrollView>
+                <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
                   <Options
                     options={options}
                     selected={
@@ -172,7 +172,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                     {...rest}
                     onSelect={this.onSelect}
                   />
-                </ScrollView>
+                </KeyboardAwareScrollView>
               </View>
               {!this.isRadio() && (
                 <Button.FooterButton
