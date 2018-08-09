@@ -9,24 +9,68 @@ const styles = StyleSheet.create({
     height: 50,
     minWidth: 150,
     paddingHorizontal: 20,
-    backgroundColor: colors.violet.base,
     borderRadius: 3,
     justifyContent: "center",
     alignItems: "center",
     width: "100%"
+  },
+  buttonWrapper: {
+    paddingVertical: 20,
+    paddingHorizontal: 25,
+    backgroundColor: colors.white.base,
+    borderTopColor: colors.gray.lighter,
+    borderTopWidth: 1
   }
 });
 
-const Button: React.SFC<ButtonProps> = ({ children, onPress }) => {
+const buttonBackgroundColor = {
+  primary: colors.violet.base,
+  secondary: colors.gray.lighter,
+  link: "transparent"
+};
+
+const fontColor = {
+  primary: colors.white.base,
+  secondary: colors.gray.darker,
+  link: colors.violet.base
+};
+
+const FooterButton: React.SFC<Partial<ButtonProps>> = ({
+  onPress,
+  children,
+  ...rest
+}) => {
   return (
-    <TouchableNativeFeedback onPress={onPress}>
-      <View style={styles.buttonStyle}>
-        <Text size={15} bold color={colors.white.base}>
-          {children}
-        </Text>
-      </View>
-    </TouchableNativeFeedback>
+    <View style={styles.buttonWrapper}>
+      <Button onPress={onPress} {...rest}>
+        {children}
+      </Button>
+    </View>
   );
 };
+
+class Button extends React.Component<ButtonProps> {
+  static FooterButton = FooterButton;
+
+  render() {
+    let { children, onPress, type } = this.props;
+    return (
+      <TouchableNativeFeedback onPress={onPress}>
+        <View
+          style={[
+            styles.buttonStyle,
+            {
+              backgroundColor: buttonBackgroundColor[type]
+            }
+          ]}
+        >
+          <Text size={15} bold color={fontColor[type]}>
+            {children}
+          </Text>
+        </View>
+      </TouchableNativeFeedback>
+    );
+  }
+}
 
 export default Button;

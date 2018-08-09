@@ -3,12 +3,12 @@ import {
   View,
   StyleSheet,
   TextInput,
-  TouchableNativeFeedback,
-  ScrollView
+  TouchableNativeFeedback
 } from "react-native";
 import colors from "../theme/colors";
 import Icon from "@anarock/pebble/native/Icon";
 import debounce from "just-debounce-it";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Text from "./Text";
 import { SearchBoxProps, SearchBoxState } from "./typings/SearchBox";
 
@@ -47,10 +47,11 @@ export default class extends React.PureComponent<
 
   static defaultProps: Partial<SearchBoxProps> = {
     keyExtractor: item => item.id,
-    renderElement: ({ item }) => (
+    rowLabelExtractor: item => item.label || item.name,
+    renderElement: ({ item }, props) => (
       <View style={styles.row}>
         <Text color={colors.gray.darker} size={15}>
-          {item.label || item.name}
+          {props.rowLabelExtractor(item)}
         </Text>
       </View>
     )
@@ -84,6 +85,7 @@ export default class extends React.PureComponent<
       keyExtractor
     } = this.props;
 
+    // TODO: keyboard aware scroll view
     return (
       <View style={styles.wrapper}>
         <View>
@@ -111,7 +113,7 @@ export default class extends React.PureComponent<
           )}
         </View>
 
-        <ScrollView>
+        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           {results.map(result => {
             return (
               <TouchableNativeFeedback
@@ -122,7 +124,7 @@ export default class extends React.PureComponent<
               </TouchableNativeFeedback>
             );
           })}
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </View>
     );
   }
