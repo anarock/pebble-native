@@ -74,7 +74,11 @@ export default class extends React.PureComponent<SearchInputProps> {
           </View>
         </TouchableWithoutFeedback>
 
-        <Modal onRequestClose={this.closeModal} visible={this.state.showModal}>
+        <Modal
+          onRequestClose={this.closeModal}
+          visible={this.state.showModal}
+          animationType="slide"
+        >
           <View style={styles.modalHeader}>
             <TouchableWithoutFeedback onPress={this.closeModal}>
               <Icon name="back" color={colors.violet.base} size={22} />

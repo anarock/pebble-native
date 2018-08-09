@@ -52,6 +52,10 @@ const FooterButton: React.SFC<Partial<ButtonProps>> = ({
 class Button extends React.Component<ButtonProps> {
   static FooterButton = FooterButton;
 
+  static defaultProps: Partial<ButtonProps> = {
+    type: "primary"
+  };
+
   render() {
     let { children, onPress, type } = this.props;
     return (

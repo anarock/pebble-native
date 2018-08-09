@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   dropdownIcon: {
     position: "absolute",
-    top: 25,
+    top: 26,
     right: 10
   }
 });
@@ -83,26 +83,6 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     }
   };
 
-  private getValue = () => {
-    const {
-      selected,
-      options,
-      keyExtractor,
-      title,
-      valueExtractor
-    } = this.props;
-    let selectedLabel = title;
-    if (selected) {
-      selectedLabel = this.isRadio()
-        ? valueExtractor(options.find(x => selected === keyExtractor(x)))
-        : valueExtractor(
-            options.filter(x => selected.includes(keyExtractor(x)))
-          );
-    }
-
-    return selectedLabel;
-  };
-
   render() {
     const {
       options,
@@ -111,7 +91,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       required,
       errorMessage,
       keyExtractor,
-      title,
+      value,
       type,
       ...rest
     } = this.props;
@@ -129,14 +109,14 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
             <Input
               fixLabelAtTop
               placeholder={placeholder}
-              value={this.getValue()}
+              value={value}
               onChange={noop}
               required={required}
               errorMessage={errorMessage}
               readOnly
             />
             <View style={styles.dropdownIcon}>
-              <Icon color={colors.gray.base} name="arrow-drop-down" />
+              <Icon color={colors.gray.base} name="arrow-drop-down" size={10} />
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -163,7 +143,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                 ]}
               >
                 <Text size={15} color={colors.gray.dark}>
-                  {title}
+                  {placeholder}
                 </Text>
               </View>
               <View style={styles.optionContainer}>

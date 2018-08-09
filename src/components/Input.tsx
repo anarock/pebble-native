@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   placeholder: {
-    position: "absolute"
+    position: "absolute",
+    left: 1
   },
   messageStyle: {
     paddingTop: 12,
