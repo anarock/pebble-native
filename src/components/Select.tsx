@@ -84,14 +84,8 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
   };
 
   private getValue = () => {
-    const {
-      selected,
-      options,
-      keyExtractor,
-      valueExtractor,
-      placeholder
-    } = this.props;
-    let selectedLabel = placeholder;
+    const { selected, options, keyExtractor, valueExtractor } = this.props;
+    let selectedLabel;
     if (selected) {
       selectedLabel = this.isRadio()
         ? valueExtractor(options.find(x => selected === keyExtractor(x)))
@@ -110,7 +104,6 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       required,
       errorMessage,
       keyExtractor,
-      value,
       type,
       ...rest
     } = this.props;
