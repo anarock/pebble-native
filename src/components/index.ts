@@ -6,6 +6,7 @@ import DateTimeInput from "./DateTimeInput";
 import Controls from "./Controls";
 import SearchBox from "./SearchBox";
 import SearchInput from "./SearchInput";
+import Button from "./Button";
 
 export {
   Input,
@@ -15,5 +16,6 @@ export {
   DateTimeInput,
   Controls,
   SearchBox,
-  SearchInput
+  SearchInput,
+  Button
 };

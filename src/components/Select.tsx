@@ -42,17 +42,12 @@ const styles = StyleSheet.create({
   },
   dropdownIcon: {
     position: "absolute",
-    top: 20,
+    top: 25,
     right: 10
-  },
-  buttonWrapper: {
-    paddingVertical: 20,
-    paddingHorizontal: 25,
-    backgroundColor: colors.white.base,
-    borderTopColor: colors.gray.lighter,
-    borderTopWidth: 1
   }
 });
+
+// Manage state
 
 function noop() {}
 
@@ -68,15 +63,17 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     selectedCheckbox: this.props.selected || []
   };
 
-  closeOptions = () =>
+  private isRadio = () => this.props.type === "radio";
+
+  private closeOptions = () =>
     this.setState({
       showOptions: false
     });
 
-  onSelect = option => {
-    const { onSelect, type } = this.props;
+  private onSelect = option => {
+    const { onSelect } = this.props;
 
-    if (type === "radio") {
+    if (this.isRadio()) {
       onSelect(option);
       this.closeOptions();
     } else {
@@ -84,6 +81,26 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
         selectedCheckbox: option
       });
     }
+  };
+
+  private getValue = () => {
+    const {
+      selected,
+      options,
+      keyExtractor,
+      title,
+      valueExtractor
+    } = this.props;
+    let selectedLabel = title;
+    if (selected) {
+      selectedLabel = this.isRadio()
+        ? valueExtractor(options.find(x => selected === keyExtractor(x)))
+        : valueExtractor(
+            options.filter(x => selected.includes(keyExtractor(x)))
+          );
+    }
+
+    return selectedLabel;
   };
 
   render() {
@@ -95,14 +112,9 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       errorMessage,
       keyExtractor,
       title,
-      valueExtractor,
       type,
       ...rest
     } = this.props;
-
-    const selectedLabel: string = selected
-      ? valueExtractor(options.find(x => selected === keyExtractor(x)))
-      : placeholder;
 
     return (
       <View>
@@ -117,7 +129,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
             <Input
               fixLabelAtTop
               placeholder={placeholder}
-              value={selectedLabel}
+              value={this.getValue()}
               onChange={noop}
               required={required}
               errorMessage={errorMessage}
@@ -159,7 +171,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                   <Options
                     options={options}
                     selected={
-                      type === "radio"
+                      this.isRadio()
                         ? selected
                         : this.state.selectedCheckbox.map(x => keyExtractor(x))
                     }
@@ -170,17 +182,15 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                   />
                 </ScrollView>
               </View>
-              {type === "checkbox" && (
-                <View style={styles.buttonWrapper}>
-                  <Button
-                    onPress={() => {
-                      this.props.onSelect(this.state.selectedCheckbox);
-                      this.closeOptions();
-                    }}
-                  >
-                    Done
-                  </Button>
-                </View>
+              {!this.isRadio() && (
+                <Button.FooterButton
+                  onPress={() => {
+                    this.props.onSelect(this.state.selectedCheckbox);
+                    this.closeOptions();
+                  }}
+                >
+                  Done
+                </Button.FooterButton>
               )}
             </View>
           </View>

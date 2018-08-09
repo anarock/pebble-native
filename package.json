@@ -21,6 +21,7 @@
     "@anarock/pebble": "^0.12.2",
     "date-fns": "^1.29.0",
     "just-debounce-it": "^1.0.1",
+    "react-native-keyboard-aware-scroll-view": "^0.6.0",
     "react-spring": "^5.5.1"
   },
   "devDependencies": {
