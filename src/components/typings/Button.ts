@@ -3,4 +3,5 @@ export interface ButtonProps {
   disabled?: boolean;
   children: string | number;
   type?: "primary" | "secondary" | "link";
+  loading?: boolean;
 }

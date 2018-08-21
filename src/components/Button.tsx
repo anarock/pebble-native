@@ -1,5 +1,10 @@
 import * as React from "react";
-import { View, TouchableNativeFeedback, StyleSheet } from "react-native";
+import {
+  View,
+  TouchableNativeFeedback,
+  StyleSheet,
+  ActivityIndicator
+} from "react-native";
 import Text from "./Text";
 import colors from "../theme/colors";
 import { ButtonProps } from "./typings/Button";
@@ -57,9 +62,11 @@ class Button extends React.Component<ButtonProps> {
   };
 
   render() {
-    let { children, onPress, type } = this.props;
+    let { children, onPress, type, loading, disabled } = this.props;
     return (
-      <TouchableNativeFeedback onPress={onPress}>
+      <TouchableNativeFeedback
+        onPress={disabled || loading ? undefined : onPress}
+      >
         <View
           style={[
             styles.buttonStyle,
@@ -68,9 +75,13 @@ class Button extends React.Component<ButtonProps> {
             }
           ]}
         >
-          <Text size={15} bold color={fontColor[type]}>
-            {children}
-          </Text>
+          {loading ? (
+            <ActivityIndicator color={colors.white.base} />
+          ) : (
+            <Text size={15} bold color={fontColor[type]}>
+              {children}
+            </Text>
+          )}
         </View>
       </TouchableNativeFeedback>
     );
