@@ -71,6 +71,7 @@ export default class extends React.PureComponent<SearchInputProps> {
               onChange={() => {}}
               readOnly
               value={value}
+              disabled={disabled}
             />
           </View>
         </TouchableWithoutFeedback>
