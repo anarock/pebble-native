@@ -118,10 +118,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
           animated
           color={this.state.placeholderMarginTop.interpolate({
             inputRange: [0, 20],
-            outputRange: [
-              disabled ? colors.gray.base : colors.gray.dark,
-              colors.gray.base
-            ]
+            outputRange: [colors.gray.dark, colors.gray.base]
           })}
           size={this.state.placeholderMarginTop.interpolate({
             inputRange: [0, 20],
@@ -137,7 +134,12 @@ class Input extends React.PureComponent<InputProps, InputState> {
           {placeholder} {required && <Text color={colors.red.base}>*</Text>}
         </Text>
         <TextInput
-          style={styles.textStyle}
+          style={[
+            styles.textStyle,
+            {
+              color: disabled ? colors.gray.base : colors.gray.darker
+            }
+          ]}
           onChangeText={onChange}
           underlineColorAndroid={"transparent"}
           value={value ? value.toString() : undefined}
@@ -145,7 +147,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
           onBlur={this.handleBlur}
           autoCorrect={false}
           selectionColor={colors.violet.base}
-          editable={!readOnly}
+          editable={!(readOnly && disabled)}
           keyboardType={keyboardType}
         />
         <View
