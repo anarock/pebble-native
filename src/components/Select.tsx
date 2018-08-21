@@ -47,8 +47,6 @@ const styles = StyleSheet.create({
   }
 });
 
-// Manage state
-
 function noop() {}
 
 export default class Select extends PureComponent<SelectProps, SelectState> {
@@ -105,16 +103,20 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       errorMessage,
       keyExtractor,
       type,
+      disabled,
       ...rest
     } = this.props;
 
     return (
       <View>
         <TouchableWithoutFeedback
-          onPress={() =>
-            this.setState({
-              showOptions: true
-            })
+          onPress={
+            disabled
+              ? undefined
+              : () =>
+                  this.setState({
+                    showOptions: true
+                  })
           }
         >
           <View>
@@ -126,6 +128,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
               required={required}
               errorMessage={errorMessage}
               readOnly
+              disabled={disabled}
             />
             <View style={styles.dropdownIcon}>
               <Icon color={colors.gray.base} name="arrow-drop-down" size={10} />

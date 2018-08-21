@@ -25,11 +25,11 @@
     "react-spring": "^5.5.1"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^v4.0.0-alpha.12",
-    "@storybook/addon-links": "^v4.0.0-alpha.12",
-    "@storybook/addons": "^v4.0.0-alpha.12",
-    "@storybook/react": "^v4.0.0-alpha.12",
-    "@storybook/react-native": "^v4.0.0-alpha.12",
+    "@storybook/addon-actions": "^v4.0.0-alpha.16",
+    "@storybook/addon-links": "^v4.0.0-alpha.16",
+    "@storybook/addons": "^v4.0.0-alpha.16",
+    "@storybook/react": "^v4.0.0-alpha.16",
+    "@storybook/react-native": "^v4.0.0-alpha.16",
     "@types/react": "^16.4.7",
     "@types/react-native": "^0.56.4",
     "babel-core": "7.0.0-bridge.0",

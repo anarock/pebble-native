@@ -106,7 +106,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
       style,
       readOnly,
       required,
-      keyboardType
+      keyboardType,
+      disabled
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
@@ -117,7 +118,10 @@ class Input extends React.PureComponent<InputProps, InputState> {
           animated
           color={this.state.placeholderMarginTop.interpolate({
             inputRange: [0, 20],
-            outputRange: [colors.gray.dark, colors.gray.base]
+            outputRange: [
+              disabled ? colors.gray.base : colors.gray.dark,
+              colors.gray.base
+            ]
           })}
           size={this.state.placeholderMarginTop.interpolate({
             inputRange: [0, 20],
