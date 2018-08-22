@@ -147,7 +147,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
           onBlur={this.handleBlur}
           autoCorrect={false}
           selectionColor={colors.violet.base}
-          editable={!(readOnly && disabled)}
+          editable={!(readOnly || disabled)}
           keyboardType={keyboardType}
         />
         <View
