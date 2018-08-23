@@ -34,6 +34,12 @@ const buttonBackgroundColor = {
   link: "transparent"
 };
 
+const buttonBackgroundDisabledColor = {
+  primary: colors.violet.lighter,
+  secondary: colors.gray.lightest,
+  link: "transparent"
+};
+
 const fontColor = {
   primary: colors.white.base,
   secondary: colors.gray.darker,
@@ -71,7 +77,9 @@ class Button extends React.Component<ButtonProps> {
           style={[
             styles.buttonStyle,
             {
-              backgroundColor: buttonBackgroundColor[type]
+              backgroundColor: disabled
+                ? buttonBackgroundDisabledColor[type]
+                : buttonBackgroundColor[type]
             }
           ]}
         >
