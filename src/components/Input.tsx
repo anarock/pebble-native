@@ -156,12 +156,11 @@ class Input extends React.PureComponent<InputProps, InputState> {
             this.state.isFocused || _message
               ? {
                   height: 2,
-                  backgroundColor: disabled
-                    ? "transparent"
-                    : getColor(errorMessage, successMessage, true),
+                  backgroundColor: getColor(errorMessage, successMessage, true),
                   marginTop: -1
                 }
-              : {}
+              : {},
+            disabled && { backgroundColor: "transparent" }
           ]}
         />
 
