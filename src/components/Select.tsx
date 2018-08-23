@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 
   optionContainer: {
-    maxHeight: Dimensions.get("window").height * 0.6
+    maxHeight: Dimensions.get("window").height * 0.4
   },
   modalWrapper: {
     backgroundColor: "rgba(0,0,0,0.3)",

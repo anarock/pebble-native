@@ -96,6 +96,8 @@ export default class extends React.PureComponent<
             value={this.state.queryValue}
             placeholder={placeholder}
             placeholderTextColor={colors.gray.light}
+            autoFocus
+            underlineColorAndroid={colors.white.base}
           />
 
           {!!this.state.queryValue && (
