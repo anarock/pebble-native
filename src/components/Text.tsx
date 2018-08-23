@@ -16,7 +16,7 @@ const GText: React.SFC<TextProps> = ({
     <Text_
       style={[
         {
-          fontFamily: bold ? "Graphik-Medium" : "Graphik-Regular",
+          fontFamily: bold ? "anarockMedium" : "anarockRegular",
           fontSize: size,
           color
         },
