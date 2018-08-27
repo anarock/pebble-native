@@ -72,6 +72,7 @@ class Button extends React.Component<ButtonProps> {
     return (
       <TouchableNativeFeedback
         onPress={disabled || loading ? undefined : onPress}
+        disabled={disabled || loading}
       >
         <View
           style={[
