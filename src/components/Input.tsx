@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     color: colors.gray.darker,
     fontSize: 15,
     marginTop: 8,
-    paddingHorizontal: 0
+    paddingHorizontal: 0,
+    fontFamily: "anarock_regular"
   },
   highlight: {
     height: 1,
