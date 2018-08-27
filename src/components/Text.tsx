@@ -8,7 +8,8 @@ const GText: React.SFC<TextProps> = ({
   color,
   style,
   children,
-  animated
+  animated,
+  ...props
 }) => {
   const Text_ = animated ? Animated.Text : Text;
 
@@ -16,12 +17,13 @@ const GText: React.SFC<TextProps> = ({
     <Text_
       style={[
         {
-          fontFamily: bold ? "anarockMedium" : "anarockRegular",
+          fontFamily: bold ? "anarock_medium" : "anarock_regular",
           fontSize: size,
           color
         },
         style
       ]}
+      {...props}
     >
       {children}
     </Text_>

@@ -4,7 +4,8 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Modal,
-  Dimensions
+  Dimensions,
+  InteractionManager
 } from "react-native";
 import Input from "./Input";
 import Options from "./Options";
@@ -25,16 +26,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     bottom: 0,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
     overflow: "hidden"
   },
 
   optionContainer: {
-    maxHeight: Dimensions.get("window").height * 0.4
+    maxHeight: Math.min(472, Dimensions.get("window").height * 0.4)
   },
   modalWrapper: {
-    backgroundColor: "rgba(0,0,0,0.3)",
+    backgroundColor: "rgba(0,0,0,0.4)",
     flex: 1
   },
   overlay: {
@@ -71,14 +72,16 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
   private onSelect = option => {
     const { onSelect } = this.props;
 
-    if (this.isRadio()) {
-      onSelect(option);
-      this.closeOptions();
-    } else {
-      this.setState({
-        selectedCheckbox: option
-      });
-    }
+    InteractionManager.runAfterInteractions(() => {
+      if (this.isRadio()) {
+        onSelect(option);
+        this.closeOptions();
+      } else {
+        this.setState({
+          selectedCheckbox: option
+        });
+      }
+    });
   };
 
   private getValue = () => {
@@ -158,8 +161,9 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                   styles.optionSection,
                   {
                     backgroundColor: colors.white.base,
-                    height: 62,
-                    paddingLeft: 30
+                    paddingTop: 30,
+                    paddingBottom: 15,
+                    paddingLeft: 25
                   }
                 ]}
               >

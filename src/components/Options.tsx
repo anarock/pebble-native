@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 30,
-    paddingVertical: 25,
+    paddingHorizontal: 25,
+    paddingVertical: 20,
     width: "100%"
   }
 });
@@ -42,7 +42,13 @@ export default class Options extends Component<OptionsProps> {
 
       return (
         <View style={styles.row}>
-          <Text size={15} color={colors.gray.darker}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={{ flex: 1, paddingRight: 20 }}
+            size={15}
+            color={colors.gray.darker}
+          >
             {props.rowLabelExtractor(item)}
           </Text>
 

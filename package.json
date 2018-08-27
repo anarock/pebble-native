@@ -60,7 +60,7 @@
   },
   "rnpm": {
     "assets": [
-      "./node_modules/@anarock/pebble/native/icon-fonts/"
+      "./node_modules/@anarock/pebble/native/icons/"
     ]
   }
 }

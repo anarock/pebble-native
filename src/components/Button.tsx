@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   buttonWrapper: {
-    paddingVertical: 20,
-    paddingHorizontal: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     backgroundColor: colors.white.base,
     borderTopColor: colors.gray.lighter,
     borderTopWidth: 1

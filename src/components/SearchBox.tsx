@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderBottomWidth: 1,
     borderBottomColor: colors.gray.lighter
+  },
+  optionContainer: {
+    flex: 1,
+    backgroundColor: colors.white.base
   }
 });
 
@@ -115,7 +119,10 @@ export default class extends React.PureComponent<
           )}
         </View>
 
-        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+        <KeyboardAwareScrollView
+          keyboardShouldPersistTaps="always"
+          contentContainerStyle={styles.optionContainer}
+        >
           {results.map(result => {
             return (
               <TouchableNativeFeedback
