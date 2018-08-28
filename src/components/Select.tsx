@@ -91,7 +91,11 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       selectedLabel = this.isRadio()
         ? valueExtractor(options.find(x => selected === keyExtractor(x)))
         : valueExtractor(
-            options.filter(x => selected.includes(keyExtractor(x)))
+            options.filter(
+              x =>
+                Array.isArray(selected) &&
+                selected.indexOf(keyExtractor(x)) >= 0
+            )
           );
     }
     return selectedLabel;

@@ -67,7 +67,11 @@ export default class Options extends Component<OptionsProps> {
     onSelect(
       type === "radio"
         ? options.find(option => keyExtractor(option) === selected)
-        : options.filter(option => selected.includes(keyExtractor(option)))
+        : options.filter(
+            option =>
+              Array.isArray(selected) &&
+              selected.indexOf(keyExtractor(option)) >= 0
+          )
     );
   };
 
