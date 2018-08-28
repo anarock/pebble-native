@@ -59,7 +59,10 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
 
   state = {
     showOptions: false,
-    selectedCheckbox: this.props.selected || []
+    selectedCheckbox:
+      this.props.selected && Array.isArray(this.props.selected)
+        ? this.props.selected
+        : []
   };
 
   private isRadio = () => this.props.type === "radio";
