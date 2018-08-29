@@ -132,7 +132,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
             }
           ]}
         >
-          {placeholder} {required && <Text color={colors.red.base}>*</Text>}
+          {placeholder}{" "}
+          {required && !disabled && <Text color={colors.red.base}>*</Text>}
         </Text>
         <TextInput
           style={[
