@@ -68,7 +68,7 @@ class Button extends React.Component<ButtonProps> {
   };
 
   render() {
-    let { children, onPress, type, loading, disabled } = this.props;
+    let { children, onPress, type, loading, disabled, style } = this.props;
     return (
       <TouchableNativeFeedback
         onPress={disabled || loading ? undefined : onPress}
@@ -81,7 +81,11 @@ class Button extends React.Component<ButtonProps> {
               backgroundColor: disabled
                 ? buttonBackgroundDisabledColor[type]
                 : buttonBackgroundColor[type]
-            }
+            },
+            type === "link" && {
+              justifyContent: "flex-start"
+            },
+            style
           ]}
         >
           {loading ? (
