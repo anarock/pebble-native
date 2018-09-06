@@ -18,28 +18,28 @@
     "precommit": "pretty-quick --staged"
   },
   "dependencies": {
-    "@anarock/pebble": "^0.16.2",
+    "@anarock/pebble": "^0.17.0",
     "date-fns": "^1.29.0",
     "just-debounce-it": "^1.1.0",
     "react-native-keyboard-aware-scroll-view": "^0.7.2",
-    "react-spring": "^5.6.10"
+    "react-spring": "^5.6.14"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^v4.0.0-alpha.16",
-    "@storybook/addon-links": "^v4.0.0-alpha.16",
-    "@storybook/addons": "^v4.0.0-alpha.16",
-    "@storybook/react": "^v4.0.0-alpha.16",
-    "@storybook/react-native": "^v4.0.0-alpha.16",
-    "@types/react": "^16.4.12",
-    "@types/react-native": "^0.56.15",
+    "@storybook/addon-actions": "^v4.0.0-alpha.20",
+    "@storybook/addon-links": "^v4.0.0-alpha.20",
+    "@storybook/addons": "^v4.0.0-alpha.20",
+    "@storybook/react": "^v4.0.0-alpha.20",
+    "@storybook/react-native": "^v4.0.0-alpha.20",
+    "@types/react": "^16.4.13",
+    "@types/react-native": "^0.56.17",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "23.4.2",
-    "babel-loader": "^7.1.5",
+    "babel-loader": "^8.0.2",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react-native": "5.x.x",
     "babel-preset-stage-0": "^6.24.1",
     "babel-runtime": "^6.26.0",
-    "flow-bin": "^0.77.0",
+    "flow-bin": "^0.80.0",
     "haul": "^1.0.0-rc.7",
     "husky": "^0.14.3",
     "jest": "23.5.0",
@@ -52,8 +52,8 @@
     "react-native-typescript-transformer": "^1.2.10",
     "react-native-vector-icons": "^5.0.0",
     "react-test-renderer": "16.4.2",
-    "ts-loader": "^4.5.0",
-    "typescript": "^3.0.1"
+    "ts-loader": "^5.0.0",
+    "typescript": "^3.0.3"
   },
   "jest": {
     "preset": "react-native"
