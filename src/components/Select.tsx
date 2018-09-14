@@ -3,18 +3,16 @@ import {
   View,
   StyleSheet,
   TouchableWithoutFeedback,
-  Modal,
   Dimensions,
   InteractionManager
 } from "react-native";
 import Input from "./Input";
 import Options from "./Options";
 import { SelectProps, SelectState } from "./typings/Select";
-import Text from "./Text";
 import colors from "../theme/colors";
 import Icon from "@anarock/pebble/native/Icon";
-import Button from "./Button";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import ActionModal from "./ActionModal";
 
 const styles = StyleSheet.create({
   optionSection: {
@@ -114,6 +112,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       keyExtractor,
       type,
       disabled,
+      label,
       ...rest
     } = this.props;
 
@@ -130,16 +129,24 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
           }
         >
           <View>
-            <Input
-              fixLabelAtTop
-              placeholder={placeholder}
-              value={this.getValue()}
-              onChange={noop}
-              required={required}
-              errorMessage={errorMessage}
-              readOnly
-              disabled={disabled}
-            />
+            {label ? (
+              label({
+                value: this.getValue(),
+                props: this.props
+              })
+            ) : (
+              <Input
+                fixLabelAtTop
+                placeholder={placeholder}
+                value={this.getValue()}
+                onChange={noop}
+                required={required}
+                errorMessage={errorMessage}
+                readOnly
+                disabled={disabled}
+              />
+            )}
+
             {!disabled && (
               <View style={styles.dropdownIcon}>
                 <Icon
@@ -152,61 +159,32 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
           </View>
         </TouchableWithoutFeedback>
 
-        <Modal
-          animationType="fade"
+        <ActionModal
+          title={placeholder}
+          buttonLabel={"Done"}
+          onButtonClick={() => {
+            this.props.onSelect(this.state.selectedCheckbox);
+            this.closeOptions();
+          }}
           visible={this.state.showOptions}
-          transparent
-          onRequestClose={this.closeOptions}
+          showFooterButton={!this.isRadio()}
+          onClose={this.closeOptions}
         >
-          <View style={styles.modalWrapper}>
-            <TouchableWithoutFeedback onPress={this.closeOptions}>
-              <View style={styles.overlay} />
-            </TouchableWithoutFeedback>
-            <View style={styles.optionsWrapper}>
-              <View
-                style={[
-                  styles.optionSection,
-                  {
-                    backgroundColor: colors.white.base,
-                    paddingTop: 30,
-                    paddingBottom: 15,
-                    paddingLeft: 25
-                  }
-                ]}
-              >
-                <Text size={15} color={colors.gray.dark}>
-                  {placeholder}
-                </Text>
-              </View>
-              <View style={styles.optionContainer}>
-                <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
-                  <Options
-                    options={options}
-                    selected={
-                      this.isRadio()
-                        ? selected
-                        : this.state.selectedCheckbox.map(x => keyExtractor(x))
-                    }
-                    keyExtractor={keyExtractor}
-                    type={type}
-                    {...rest}
-                    onSelect={this.onSelect}
-                  />
-                </KeyboardAwareScrollView>
-              </View>
-              {!this.isRadio() && (
-                <Button.FooterButton
-                  onPress={() => {
-                    this.props.onSelect(this.state.selectedCheckbox);
-                    this.closeOptions();
-                  }}
-                >
-                  Done
-                </Button.FooterButton>
-              )}
-            </View>
-          </View>
-        </Modal>
+          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+            <Options
+              options={options}
+              selected={
+                this.isRadio()
+                  ? selected
+                  : this.state.selectedCheckbox.map(x => keyExtractor(x))
+              }
+              keyExtractor={keyExtractor}
+              type={type}
+              {...rest}
+              onSelect={this.onSelect}
+            />
+          </KeyboardAwareScrollView>
+        </ActionModal>
       </View>
     );
   }
