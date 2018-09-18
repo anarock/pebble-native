@@ -92,8 +92,13 @@ export default class extends React.PureComponent<ControlsProps> {
       <View style={[styles.wrapper, style.wrapper]}>
         {data.map(item => {
           const key = keyExtractor(item);
+          const disableCurrent=false;
+          if (Array.isArray(disabled) && disabled.includes(key))
+            disableCurrent = true;  
+          if(typeof(disabled) === "boolean")  
+            disableCurrent = disabled;  
           return (
-            <Touchable key={key} onPress={() => this.handlePress(key)} disabled={disabled} >
+            <Touchable key={key} onPress={() => this.handlePress(key)} disabled={disableCurrent} >
               <View style={[styles.itemWrapper, style.itemWrapper]}>
                 {renderElement(
                   {
