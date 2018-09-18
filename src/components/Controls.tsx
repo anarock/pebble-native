@@ -83,7 +83,7 @@ export default class extends React.PureComponent<ControlsProps> {
   };
 
   render() {
-    const { data, renderElement, keyExtractor, style, ripple } = this.props;
+    const { data, renderElement, keyExtractor, style, ripple, disabled } = this.props;
 
     const Touchable = ripple
       ? TouchableNativeFeedback
@@ -93,7 +93,7 @@ export default class extends React.PureComponent<ControlsProps> {
         {data.map(item => {
           const key = keyExtractor(item);
           return (
-            <Touchable key={key} onPress={() => this.handlePress(key)}>
+            <Touchable key={key} onPress={() => this.handlePress(key)} disabled={disabled} >
               <View style={[styles.itemWrapper, style.itemWrapper]}>
                 {renderElement(
                   {
