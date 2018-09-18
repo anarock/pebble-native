@@ -20,4 +20,5 @@ export interface ControlsProps {
   ) => void;
   style?: any;
   ripple?: boolean;
+  disabled?: boolean | (string | number ) [];
 }
