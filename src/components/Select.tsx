@@ -147,15 +147,16 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
               />
             )}
 
-            {!disabled && (
-              <View style={styles.dropdownIcon}>
-                <Icon
-                  color={colors.gray.base}
-                  name="arrow-drop-down"
-                  size={10}
-                />
-              </View>
-            )}
+            {!disabled &&
+              !label && (
+                <View style={styles.dropdownIcon}>
+                  <Icon
+                    color={colors.gray.base}
+                    name="arrow-drop-down"
+                    size={10}
+                  />
+                </View>
+              )}
           </View>
         </TouchableWithoutFeedback>
 
