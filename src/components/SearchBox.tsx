@@ -86,7 +86,8 @@ export default class extends React.PureComponent<
       results,
       onSelect,
       renderElement,
-      keyExtractor
+      keyExtractor,
+      noResultsElement
     } = this.props;
 
     return (
@@ -132,6 +133,10 @@ export default class extends React.PureComponent<
               </TouchableNativeFeedback>
             );
           })}
+
+          {!(results && results.length) &&
+            noResultsElement &&
+            noResultsElement(this.state.queryValue)}
         </KeyboardAwareScrollView>
       </View>
     );
