@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.gray.lighter
   },
   optionContainer: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: colors.white.base
   }
 });
@@ -89,7 +89,6 @@ export default class extends React.PureComponent<
       keyExtractor
     } = this.props;
 
-    // TODO: keyboard aware scroll view
     return (
       <View style={styles.wrapper}>
         <View>
