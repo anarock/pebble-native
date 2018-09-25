@@ -49,7 +49,8 @@ export default class extends React.PureComponent<SearchInputProps> {
       onQueryChange,
       renderElement,
       value,
-      rowLabelExtractor
+      rowLabelExtractor,
+      noResultsElement
     } = this.props;
     return (
       <React.Fragment>
@@ -97,6 +98,7 @@ export default class extends React.PureComponent<SearchInputProps> {
             renderElement={
               renderElement && (args => renderElement(args, this.props))
             }
+            noResultsElement={noResultsElement}
           />
         </Modal>
       </React.Fragment>
