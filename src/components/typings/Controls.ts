@@ -1,3 +1,5 @@
+import * as React from "react";
+
 type Selected = string | number | (string | number)[];
 
 export interface ControlsProps {
@@ -16,9 +18,11 @@ export interface ControlsProps {
   onChange: (
     args: {
       selected: Selected;
-    }
+    },
+    props: ControlsProps
   ) => void;
   style?: any;
   ripple?: boolean;
-  disabled?: boolean | (string | number ) [];
+  disabled?: boolean | (string | number)[];
+  name?: React.ReactText;
 }

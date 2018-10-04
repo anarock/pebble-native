@@ -59,7 +59,10 @@ export default class extends React.PureComponent<ControlsProps> {
   private handlePress = id => {
     const { type, onChange, selected, allowToggle } = this.props;
     if (type === "radio") {
-      onChange({ selected: allowToggle && selected === id ? undefined : id });
+      onChange(
+        { selected: allowToggle && selected === id ? undefined : id },
+        this.props
+      );
     } else {
       if (selected && !Array.isArray(selected)) return;
       // @ts-ignore
@@ -70,7 +73,7 @@ export default class extends React.PureComponent<ControlsProps> {
         set.add(id);
       }
 
-      onChange({ selected: [...set] });
+      onChange({ selected: [...set] }, this.props);
     }
   };
 
@@ -83,7 +86,14 @@ export default class extends React.PureComponent<ControlsProps> {
   };
 
   render() {
-    const { data, renderElement, keyExtractor, style, ripple, disabled } = this.props;
+    const {
+      data,
+      renderElement,
+      keyExtractor,
+      style,
+      ripple,
+      disabled
+    } = this.props;
 
     const Touchable = ripple
       ? TouchableNativeFeedback
@@ -92,9 +102,15 @@ export default class extends React.PureComponent<ControlsProps> {
       <View style={[styles.wrapper, style.wrapper]}>
         {data.map(item => {
           const key = keyExtractor(item);
-          const _disabled = Array.isArray(disabled) ? disabled.includes(key) : disabled
+          const _disabled = Array.isArray(disabled)
+            ? disabled.includes(key)
+            : disabled;
           return (
-            <Touchable key={key} onPress={() => this.handlePress(key)} disabled={_disabled} >
+            <Touchable
+              key={key}
+              onPress={() => this.handlePress(key)}
+              disabled={_disabled}
+            >
               <View style={[styles.itemWrapper, style.itemWrapper]}>
                 {renderElement(
                   {
