@@ -23,13 +23,18 @@ const styles = StyleSheet.create({
   }
 });
 
-const defaultLabelRenderer = (item) => (
+const defaultLabelRenderer = item => (
   <Text color={colors.gray.darker} size={15}>
     {item.label || item.name}
   </Text>
-)
+);
 
-const ControlView = ({ item, isSelected, type, renderLabel = defaultLabelRenderer }) => {
+const ControlView = ({
+  item,
+  isSelected,
+  type,
+  renderLabel = defaultLabelRenderer
+}) => {
   const icon = {
     radio: isSelected ? "radio-selected" : "radio",
     checkbox: isSelected ? "checkbox-selected" : "checkbox-unselected"
@@ -53,8 +58,13 @@ export default class extends React.PureComponent<ControlsProps> {
   static defaultProps: Partial<ControlsProps> = {
     keyExtractor: item => item.id,
     type: "radio",
-    renderElement: ({ item, isSelected }, props) => (
-      <ControlView item={item} isSelected={isSelected} type={props.type} />
+    renderElement: ({ item, isSelected, renderLabel }, props) => (
+      <ControlView
+        item={item}
+        isSelected={isSelected}
+        type={props.type}
+        renderLabel={renderLabel}
+      />
     ),
     style: {}
   };
@@ -86,7 +96,15 @@ export default class extends React.PureComponent<ControlsProps> {
   };
 
   render() {
-    const { data, renderElement, keyExtractor, style, ripple, disabled,renderLabel } = this.props;
+    const {
+      data,
+      renderElement,
+      keyExtractor,
+      style,
+      ripple,
+      disabled,
+      renderLabel
+    } = this.props;
 
     const Touchable = ripple
       ? TouchableNativeFeedback
@@ -95,14 +113,21 @@ export default class extends React.PureComponent<ControlsProps> {
       <View style={[styles.wrapper, style.wrapper]}>
         {data.map(item => {
           const key = keyExtractor(item);
-          const _disabled = Array.isArray(disabled) ? disabled.includes(key) : disabled
+          const _disabled = Array.isArray(disabled)
+            ? disabled.includes(key)
+            : disabled;
           return (
-            <Touchable key={key} onPress={() => this.handlePress(key)} disabled={_disabled} >
+            <Touchable
+              key={key}
+              onPress={() => this.handlePress(key)}
+              disabled={_disabled}
+            >
               <View style={[styles.itemWrapper, style.itemWrapper]}>
                 {renderElement(
                   {
                     item,
-                    isSelected: this.isSelected(item)
+                    isSelected: this.isSelected(item),
+                    renderLabel
                   },
                   this.props
                 )}
