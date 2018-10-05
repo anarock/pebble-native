@@ -21,4 +21,9 @@ export interface ControlsProps {
   style?: any;
   ripple?: boolean;
   disabled?: boolean | (string | number ) [];
+  renderLabel?: (
+    args: {
+      item: any
+    }
+  ) => JSX.Element;
 }
