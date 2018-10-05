@@ -1,5 +1,10 @@
 import * as React from "react";
-import { View, TouchableNativeFeedback, StyleSheet } from "react-native";
+import {
+  View,
+  TouchableNativeFeedback,
+  StyleSheet,
+  ActivityIndicator
+} from "react-native";
 import Text from "./Text";
 import colors from "../theme/colors";
 import { ButtonProps } from "./typings/Button";
@@ -15,8 +20,8 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   buttonWrapper: {
-    paddingVertical: 20,
-    paddingHorizontal: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     backgroundColor: colors.white.base,
     borderTopColor: colors.gray.lighter,
     borderTopWidth: 1
@@ -26,6 +31,12 @@ const styles = StyleSheet.create({
 const buttonBackgroundColor = {
   primary: colors.violet.base,
   secondary: colors.gray.lighter,
+  link: "transparent"
+};
+
+const buttonBackgroundDisabledColor = {
+  primary: colors.violet.lighter,
+  secondary: colors.gray.lightest,
   link: "transparent"
 };
 
@@ -57,20 +68,33 @@ class Button extends React.Component<ButtonProps> {
   };
 
   render() {
-    let { children, onPress, type } = this.props;
+    let { children, onPress, type, loading, disabled, style } = this.props;
     return (
-      <TouchableNativeFeedback onPress={onPress}>
+      <TouchableNativeFeedback
+        onPress={disabled || loading ? undefined : onPress}
+        disabled={disabled || loading}
+      >
         <View
           style={[
             styles.buttonStyle,
             {
-              backgroundColor: buttonBackgroundColor[type]
-            }
+              backgroundColor: disabled
+                ? buttonBackgroundDisabledColor[type]
+                : buttonBackgroundColor[type]
+            },
+            type === "link" && {
+              justifyContent: "flex-start"
+            },
+            style
           ]}
         >
-          <Text size={15} bold color={fontColor[type]}>
-            {children}
-          </Text>
+          {loading ? (
+            <ActivityIndicator color={colors.white.base} />
+          ) : (
+            <Text size={15} bold color={fontColor[type]}>
+              {children}
+            </Text>
+          )}
         </View>
       </TouchableNativeFeedback>
     );

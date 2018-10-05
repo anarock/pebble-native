@@ -1,6 +1,6 @@
 import * as RN from "react-native";
 
-export interface TextProps {
+export interface TextProps extends RN.TextProps {
   bold?: boolean;
   size?: number;
   color?: string;

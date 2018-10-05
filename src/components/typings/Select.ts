@@ -5,6 +5,13 @@ export interface SelectProps extends OptionsProps {
   required?: boolean;
   errorMessage?: string;
   valueExtractor?: (item: any) => string;
+  disabled?: boolean;
+  label: (
+    args: {
+      value: string;
+      props: SelectProps;
+    }
+  ) => JSX.Element;
 }
 
 export interface SelectState {
