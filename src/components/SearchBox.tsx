@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderBottomWidth: 1,
     borderBottomColor: colors.gray.lighter
+  },
+  optionContainer: {
+    flexGrow: 1,
+    backgroundColor: colors.white.base
   }
 });
 
@@ -82,10 +86,10 @@ export default class extends React.PureComponent<
       results,
       onSelect,
       renderElement,
-      keyExtractor
+      keyExtractor,
+      noResultsElement
     } = this.props;
 
-    // TODO: keyboard aware scroll view
     return (
       <View style={styles.wrapper}>
         <View>
@@ -96,6 +100,8 @@ export default class extends React.PureComponent<
             value={this.state.queryValue}
             placeholder={placeholder}
             placeholderTextColor={colors.gray.light}
+            autoFocus
+            underlineColorAndroid={colors.white.base}
           />
 
           {!!this.state.queryValue && (
@@ -113,7 +119,10 @@ export default class extends React.PureComponent<
           )}
         </View>
 
-        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+        <KeyboardAwareScrollView
+          keyboardShouldPersistTaps="always"
+          contentContainerStyle={styles.optionContainer}
+        >
           {results.map(result => {
             return (
               <TouchableNativeFeedback
@@ -124,6 +133,10 @@ export default class extends React.PureComponent<
               </TouchableNativeFeedback>
             );
           })}
+
+          {!(results && results.length) &&
+            noResultsElement &&
+            noResultsElement(this.state.queryValue)}
         </KeyboardAwareScrollView>
       </View>
     );

@@ -22,6 +22,26 @@ const styles = StyleSheet.create({
 });
 
 export default class extends React.PureComponent<SearchInputProps> {
+  static defaultProps = {
+    inputElement: ({
+      required,
+      errorMessage,
+      placeholder,
+      value,
+      disabled
+    }: SearchInputProps) => (
+      <Input
+        required={required}
+        errorMessage={errorMessage}
+        placeholder={placeholder}
+        onChange={() => {}}
+        readOnly
+        value={value}
+        disabled={disabled}
+      />
+    )
+  };
+
   state = {
     showModal: false
   };
@@ -39,17 +59,15 @@ export default class extends React.PureComponent<SearchInputProps> {
 
   render() {
     const {
-      placeholder,
-      required,
-      errorMessage,
       disabled,
       results,
       searchBoxPlaceholder,
       keyExtractor,
       onQueryChange,
       renderElement,
-      value,
-      rowLabelExtractor
+      rowLabelExtractor,
+      noResultsElement,
+      inputElement
     } = this.props;
     return (
       <React.Fragment>
@@ -63,16 +81,7 @@ export default class extends React.PureComponent<SearchInputProps> {
               : undefined
           }
         >
-          <View>
-            <Input
-              required={required}
-              errorMessage={errorMessage}
-              placeholder={placeholder}
-              onChange={() => {}}
-              readOnly
-              value={value}
-            />
-          </View>
+          <View>{inputElement(this.props)}</View>
         </TouchableWithoutFeedback>
 
         <Modal
@@ -96,6 +105,7 @@ export default class extends React.PureComponent<SearchInputProps> {
             renderElement={
               renderElement && (args => renderElement(args, this.props))
             }
+            noResultsElement={noResultsElement}
           />
         </Modal>
       </React.Fragment>

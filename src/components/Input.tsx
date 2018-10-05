@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     color: colors.gray.darker,
     fontSize: 15,
     marginTop: 8,
-    paddingHorizontal: 0
+    paddingHorizontal: 0,
+    fontFamily: "anarock_regular"
   },
   highlight: {
     height: 1,
@@ -106,7 +107,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
       style,
       readOnly,
       required,
-      keyboardType
+      keyboardType,
+      disabled
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
@@ -130,10 +132,16 @@ class Input extends React.PureComponent<InputProps, InputState> {
             }
           ]}
         >
-          {placeholder} {required && <Text color={colors.red.base}>*</Text>}
+          {placeholder}{" "}
+          {required && !disabled && <Text color={colors.red.base}>*</Text>}
         </Text>
         <TextInput
-          style={styles.textStyle}
+          style={[
+            styles.textStyle,
+            {
+              color: disabled ? colors.gray.base : colors.gray.darker
+            }
+          ]}
           onChangeText={onChange}
           underlineColorAndroid={"transparent"}
           value={value ? value.toString() : undefined}
@@ -141,7 +149,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
           onBlur={this.handleBlur}
           autoCorrect={false}
           selectionColor={colors.violet.base}
-          editable={!readOnly}
+          editable={!(readOnly || disabled)}
           keyboardType={keyboardType}
         />
         <View
@@ -153,7 +161,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
                   backgroundColor: getColor(errorMessage, successMessage, true),
                   marginTop: -1
                 }
-              : {}
+              : {},
+            disabled && { backgroundColor: "transparent" }
           ]}
         />
 

@@ -72,7 +72,10 @@ export default class extends React.PureComponent<ControlsProps> {
   private handlePress = id => {
     const { type, onChange, selected, allowToggle } = this.props;
     if (type === "radio") {
-      onChange({ selected: allowToggle && selected === id ? undefined : id });
+      onChange(
+        { selected: allowToggle && selected === id ? undefined : id },
+        this.props
+      );
     } else {
       if (selected && !Array.isArray(selected)) return;
       // @ts-ignore
@@ -83,7 +86,7 @@ export default class extends React.PureComponent<ControlsProps> {
         set.add(id);
       }
 
-      onChange({ selected: [...set] });
+      onChange({ selected: [...set] }, this.props);
     }
   };
 

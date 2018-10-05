@@ -55,6 +55,7 @@
 		B44F8B0FF7D549959827DDF0 /* AnarockIcons.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 9E99EB7C487842C698A7D9D6 /* AnarockIcons.woff2 */; };
 		3666BB5670FD46558BEA1E70 /* AnarockIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97B10159FEBF4128B93E2BA7 /* AnarockIcons.ttf */; };
 		DA13CBFD73B04DC1B3EDECFA /* PebbleIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEA204E31F2947479D2866E6 /* PebbleIcons.ttf */; };
+		2FF2005EC5654169B677F26D /* pebble.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62B91A3E669B49C28F4380CC /* pebble.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -378,6 +379,7 @@
 		9E99EB7C487842C698A7D9D6 /* AnarockIcons.woff2 */ = {isa = PBXFileReference; name = "AnarockIcons.woff2"; path = "../node_modules/@anarock/pebble/dist/fonts/AnarockIcons.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		97B10159FEBF4128B93E2BA7 /* AnarockIcons.ttf */ = {isa = PBXFileReference; name = "AnarockIcons.ttf"; path = "../node_modules/@anarock/pebble/native/icon-fonts/AnarockIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		CEA204E31F2947479D2866E6 /* PebbleIcons.ttf */ = {isa = PBXFileReference; name = "PebbleIcons.ttf"; path = "../node_modules/@anarock/pebble/native/icon-fonts/PebbleIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		62B91A3E669B49C28F4380CC /* pebble.ttf */ = {isa = PBXFileReference; name = "pebble.ttf"; path = "../node_modules/@anarock/pebble/native/icons/pebble.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -661,6 +663,7 @@
 				9E99EB7C487842C698A7D9D6 /* AnarockIcons.woff2 */,
 				97B10159FEBF4128B93E2BA7 /* AnarockIcons.ttf */,
 				CEA204E31F2947479D2866E6 /* PebbleIcons.ttf */,
+				62B91A3E669B49C28F4380CC /* pebble.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1130,6 +1133,7 @@
 				B44F8B0FF7D549959827DDF0 /* AnarockIcons.woff2 in Resources */,
 				3666BB5670FD46558BEA1E70 /* AnarockIcons.ttf in Resources */,
 				DA13CBFD73B04DC1B3EDECFA /* PebbleIcons.ttf in Resources */,
+				2FF2005EC5654169B677F26D /* pebble.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
