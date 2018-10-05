@@ -23,7 +23,13 @@ const styles = StyleSheet.create({
   }
 });
 
-const ControlView = ({ item, isSelected, type }) => {
+const defaultLabelRenderer = (item) => (
+  <Text color={colors.gray.darker} size={15}>
+    {item.label || item.name}
+  </Text>
+)
+
+const ControlView = ({ item, isSelected, type, renderLabel = defaultLabelRenderer }) => {
   const icon = {
     radio: isSelected ? "radio-selected" : "radio",
     checkbox: isSelected ? "checkbox-selected" : "checkbox-unselected"
@@ -36,10 +42,7 @@ const ControlView = ({ item, isSelected, type }) => {
         size={18}
         name={icon[type]}
       />
-
-      <Text color={colors.gray.darker} size={15}>
-        {"  "} {item.label || item.name}
-      </Text>
+      {renderLabel && renderLabel(item)}
     </React.Fragment>
   );
 };
@@ -83,7 +86,7 @@ export default class extends React.PureComponent<ControlsProps> {
   };
 
   render() {
-    const { data, renderElement, keyExtractor, style, ripple, disabled } = this.props;
+    const { data, renderElement, keyExtractor, style, ripple, disabled,renderLabel } = this.props;
 
     const Touchable = ripple
       ? TouchableNativeFeedback
