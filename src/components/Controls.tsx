@@ -47,7 +47,7 @@ const ControlView = ({
         size={18}
         name={icon[type]}
       />
-      {renderLabel && renderLabel(item)}
+      {renderLabel(item)}
     </React.Fragment>
   );
 };
