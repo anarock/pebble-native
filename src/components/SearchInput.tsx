@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 
 export default class extends React.PureComponent<SearchInputProps> {
   static defaultProps = {
-    inputElement: ({
+    renderLabel: ({
       required,
       errorMessage,
       placeholder,
@@ -67,7 +67,6 @@ export default class extends React.PureComponent<SearchInputProps> {
       renderElement,
       rowLabelExtractor,
       noResultsElement,
-      inputElement,
       renderLabel
     } = this.props;
     return (
@@ -82,7 +81,7 @@ export default class extends React.PureComponent<SearchInputProps> {
               : undefined
           }
         >
-          <View>{renderLabel ? renderLabel() : inputElement(this.props)}</View>
+          <View>{renderLabel(this.props)}</View>
         </TouchableWithoutFeedback>
 
         <Modal
