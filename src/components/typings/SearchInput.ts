@@ -18,4 +18,9 @@ export interface SearchInputProps {
   rowLabelExtractor?: (item: any) => string | number;
   noResultsElement: (queryValue: string) => JSX.Element;
   inputElement?: (props: SearchInputProps) => JSX.Element;
+  renderLabel?: (
+    args: {
+      item: any;
+    }
+  ) => JSX.Element;
 }

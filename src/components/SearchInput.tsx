@@ -67,7 +67,8 @@ export default class extends React.PureComponent<SearchInputProps> {
       renderElement,
       rowLabelExtractor,
       noResultsElement,
-      inputElement
+      inputElement,
+      renderLabel
     } = this.props;
     return (
       <React.Fragment>
@@ -81,7 +82,7 @@ export default class extends React.PureComponent<SearchInputProps> {
               : undefined
           }
         >
-          <View>{inputElement(this.props)}</View>
+          <View>{renderLabel ? renderLabel : inputElement(this.props)}</View>
         </TouchableWithoutFeedback>
 
         <Modal
