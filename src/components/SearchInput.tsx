@@ -82,7 +82,7 @@ export default class extends React.PureComponent<SearchInputProps> {
               : undefined
           }
         >
-          <View>{renderLabel ? renderLabel : inputElement(this.props)}</View>
+          <View>{renderLabel ? renderLabel() : inputElement(this.props)}</View>
         </TouchableWithoutFeedback>
 
         <Modal
