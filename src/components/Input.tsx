@@ -32,6 +32,10 @@ const styles = StyleSheet.create({
   messageStyle: {
     paddingTop: 12,
     lineHeight: 10
+  },
+  readOnly: {
+    marginTop: 20,
+    marginBottom: 4
   }
 });
 
@@ -112,7 +116,6 @@ class Input extends React.PureComponent<InputProps, InputState> {
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
-
     return (
       <View style={[styles.wrapper, style]}>
         <Text
@@ -135,23 +138,35 @@ class Input extends React.PureComponent<InputProps, InputState> {
           {placeholder}{" "}
           {required && !disabled && <Text color={colors.red.base}>*</Text>}
         </Text>
-        <TextInput
-          style={[
-            styles.textStyle,
-            {
-              color: disabled ? colors.gray.base : colors.gray.darker
-            }
-          ]}
-          onChangeText={onChange}
-          underlineColorAndroid={"transparent"}
-          value={value ? value.toString() : undefined}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          autoCorrect={false}
-          selectionColor={colors.violet.base}
-          editable={!(readOnly || disabled)}
-          keyboardType={keyboardType}
-        />
+        {readOnly ? (
+          <Text
+            color={colors.gray.darker}
+            size={15}
+            style={[styles.readOnly, !value && { marginBottom: 15 }]}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {value}
+          </Text>
+        ) : (
+          <TextInput
+            style={[
+              styles.textStyle,
+              {
+                color: disabled ? colors.gray.base : colors.gray.darker
+              }
+            ]}
+            onChangeText={onChange}
+            underlineColorAndroid={"transparent"}
+            value={value ? value.toString() : undefined}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            autoCorrect={false}
+            selectionColor={colors.violet.base}
+            editable={!(readOnly || disabled)}
+            keyboardType={keyboardType}
+          />
+        )}
         <View
           style={[
             styles.highlight,
