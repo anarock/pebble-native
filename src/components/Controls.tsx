@@ -23,7 +23,18 @@ const styles = StyleSheet.create({
   }
 });
 
-const ControlView = ({ item, isSelected, type }) => {
+const defaultLabelRenderer = item => (
+  <Text color={colors.gray.darker} size={15}>
+    {item.label || item.name}
+  </Text>
+);
+
+const ControlView = ({
+  item,
+  isSelected,
+  type,
+  renderLabel = defaultLabelRenderer
+}) => {
   const icon = {
     radio: isSelected ? "radio-selected" : "radio",
     checkbox: isSelected ? "checkbox-selected" : "checkbox-unselected"
@@ -36,10 +47,7 @@ const ControlView = ({ item, isSelected, type }) => {
         size={18}
         name={icon[type]}
       />
-
-      <Text color={colors.gray.darker} size={15}>
-        {"  "} {item.label || item.name}
-      </Text>
+      {renderLabel(item)}
     </React.Fragment>
   );
 };
@@ -50,8 +58,13 @@ export default class extends React.PureComponent<ControlsProps> {
   static defaultProps: Partial<ControlsProps> = {
     keyExtractor: item => item.id,
     type: "radio",
-    renderElement: ({ item, isSelected }, props) => (
-      <ControlView item={item} isSelected={isSelected} type={props.type} />
+    renderElement: ({ item, isSelected, renderLabel }, props) => (
+      <ControlView
+        item={item}
+        isSelected={isSelected}
+        type={props.type}
+        renderLabel={renderLabel}
+      />
     ),
     style: {}
   };
@@ -92,7 +105,8 @@ export default class extends React.PureComponent<ControlsProps> {
       keyExtractor,
       style,
       ripple,
-      disabled
+      disabled,
+      renderLabel
     } = this.props;
 
     const Touchable = ripple
@@ -115,7 +129,8 @@ export default class extends React.PureComponent<ControlsProps> {
                 {renderElement(
                   {
                     item,
-                    isSelected: this.isSelected(item)
+                    isSelected: this.isSelected(item),
+                    renderLabel
                   },
                   this.props
                 )}

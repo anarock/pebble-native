@@ -11,6 +11,11 @@ export interface ControlsProps {
     args: {
       item: any;
       isSelected: boolean;
+      renderLabel: (
+        args: {
+          item: any;
+        }
+      ) => JSX.Element;
     },
     props: ControlsProps
   ) => JSX.Element | number | string;
@@ -24,5 +29,10 @@ export interface ControlsProps {
   style?: any;
   ripple?: boolean;
   disabled?: boolean | (string | number)[];
+  renderLabel?: (
+    args: {
+      item: any;
+    }
+  ) => JSX.Element;
   name?: React.ReactText;
 }
