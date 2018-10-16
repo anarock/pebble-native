@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     lineHeight: 10
   },
   readOnly: {
-    marginTop: 20
+    marginTop: 20,
+    marginBottom: 4
   }
 });
 
@@ -115,7 +116,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
-
+    console.warn(value);
     return (
       <View style={[styles.wrapper, style]}>
         <Text
@@ -142,7 +143,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
           <Text
             color={colors.gray.darker}
             size={15}
-            style={styles.readOnly}
+            style={[styles.readOnly, !value && { marginBottom: 15 }]}
             numberOfLines={1}
             ellipsizeMode="tail"
           >
