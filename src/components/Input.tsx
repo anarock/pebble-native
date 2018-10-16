@@ -116,7 +116,6 @@ class Input extends React.PureComponent<InputProps, InputState> {
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
-    console.warn(value);
     return (
       <View style={[styles.wrapper, style]}>
         <Text
