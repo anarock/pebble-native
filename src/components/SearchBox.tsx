@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   row: {
     backgroundColor: colors.white.base,
-    height: 52,
+    paddingVertical: 20,
     justifyContent: "center",
     paddingHorizontal: 30,
     borderBottomWidth: 1,
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
   optionContainer: {
     flexGrow: 1,
     backgroundColor: colors.white.base
+  },
+  result: {
+    lineHeight: 21
   }
 });
 
@@ -54,7 +57,13 @@ export default class extends React.PureComponent<
     rowLabelExtractor: item => item.label || item.name,
     renderElement: ({ item }, props) => (
       <View style={styles.row}>
-        <Text color={colors.gray.darker} size={15}>
+        <Text
+          color={colors.gray.darker}
+          size={15}
+          style={styles.result}
+          numberOfLines={3}
+          ellipsizeMode="tail"
+        >
           {props.rowLabelExtractor(item)}
         </Text>
       </View>
