@@ -31,7 +31,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
     if (type === "datetime") {
       const { action, minute, hour } = await TimePickerAndroid.open({
         ...timing,
-        is24Hour: false
+        is24Hour: true
       });
 
       if (action === TimePickerAndroid.dismissedAction) return;
