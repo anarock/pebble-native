@@ -20,11 +20,14 @@ const styles = StyleSheet.create({
     width: "48%",
     flexDirection: "row",
     alignItems: "center"
+  },
+  defaulLabel: {
+    marginLeft: 10
   }
 });
 
 const defaultLabelRenderer = item => (
-  <Text color={colors.gray.darker} size={15}>
+  <Text color={colors.gray.darker} size={15} style={styles.defaulLabel}>
     {item.label || item.name}
   </Text>
 );
