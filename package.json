@@ -1,6 +1,6 @@
 {
   "name": "pebble-native",
-  "version": "0.13.4",
+  "version": "0.13.5",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
