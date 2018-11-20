@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 15,
     paddingLeft: 25
-    // borderWidth:1
   },
   header: {
     height: 54,
@@ -47,7 +46,6 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     alignItems: "center",
     flexDirection: "row"
-    // borderWidth:1
   }
 });
 const headerTypeToColor = {
