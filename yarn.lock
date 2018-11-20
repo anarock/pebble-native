@@ -2,12 +2,10 @@
 # yarn lockfile v1
 
 
-"@anarock/pebble@^0.26.0":
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/@anarock/pebble/-/pebble-0.26.0.tgz#3d9daae713dfbdacfbbf4b7aed0b2eea84cfa6fc"
+"@anarock/pebble@^0.27.3":
+  version "0.27.3"
+  resolved "https://registry.yarnpkg.com/@anarock/pebble/-/pebble-0.27.3.tgz#95b7d162dc6fea04304015a96b64e5fff8b4136b"
   dependencies:
-    "@types/react" "^16.4.18"
-    "@types/rheostat" "^2.1.3"
     date-fns "^1.29.0"
     emotion "^9.2.12"
     is-in-browser "^1.1.3"
@@ -1625,12 +1623,6 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
-
-"@types/rheostat@^2.1.3":
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/@types/rheostat/-/rheostat-2.1.3.tgz#74a5fdc18a5c3bcc162c97f4c380e8ab96f67171"
-  dependencies:
-    "@types/react" "*"
 
 "@webassemblyjs/ast@1.5.13":
   version "1.5.13"

@@ -16,19 +16,27 @@ const colors = {
     light: "#FDF2DA"
   },
   blue: {
-    base: "#6161FF",
+    base: "#1F69FF",
     light: "#DDE8FF"
   },
   white: {
     base: "#ffffff"
   },
   emerald: {
+    darker: "#088649",
+    dark: "#0E9A56",
     base: "#10AC60",
-    light: "#DBF3E7"
+    light: "#40BD80",
+    lighter: "#9DDCBE",
+    lightest: "#DBF3E7"
   },
   red: {
+    darker: "#A91D00",
+    dark: "#BD2900",
     base: "#D32F02",
-    light: "#F9E0D9"
+    light: "#D94C26",
+    lighter: "#EFBBAD",
+    lightest: "#F9E0D9"
   },
   purple: {
     base: "#9254E3",
@@ -43,7 +51,7 @@ const colors = {
     light: "#E4F6F6"
   },
   coral: {
-    base: "#E4F6F6",
+    base: "#ED754B",
     light: "#FDEBE4"
   },
   jade: {
