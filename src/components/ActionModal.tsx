@@ -10,6 +10,7 @@ import colors from "../theme/colors";
 import Text from "./Text";
 import Button from "./Button";
 import { ActionModalProps } from "./typings/ActionModal";
+import Icon from "@anarock/pebble/native/Icon";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -38,8 +39,34 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 15,
     paddingLeft: 25
+    // borderWidth:1
+  },
+  header: {
+    height: 54,
+    paddingVertical: 20,
+    paddingLeft: 25,
+    alignItems: "center",
+    flexDirection: "row"
+    // borderWidth:1
   }
 });
+const headerTypeToColor = {
+  success: {
+    light: colors.emerald.lightest,
+    dark: colors.emerald.base,
+    icon: "radio-check-filled"
+  },
+  error: {
+    light: colors.red.lightest,
+    dark: colors.red.base,
+    icon: "warning"
+  },
+  warning: {
+    light: colors.yellow.light,
+    dark: colors.yellow.base,
+    icon: "warning"
+  }
+};
 
 const ActionModal: React.SFC<ActionModalProps> = function({
   onClose,
@@ -48,7 +75,9 @@ const ActionModal: React.SFC<ActionModalProps> = function({
   onButtonClick,
   buttonLabel,
   showFooterButton,
-  visible
+  visible,
+  header,
+  headerType
 }) {
   return (
     <Modal
@@ -65,6 +94,23 @@ const ActionModal: React.SFC<ActionModalProps> = function({
         <View />
 
         <View style={styles.contentWrapper}>
+          {header && (
+            <View
+              style={[
+                styles.header,
+                { backgroundColor: headerTypeToColor[headerType].light }
+              ]}
+            >
+              <Icon
+                name={headerTypeToColor[headerType].icon}
+                color={headerTypeToColor[headerType].dark}
+                size={14}
+              />
+              <Text color={headerTypeToColor[headerType].dark} size={15}>
+                {" " + header}
+              </Text>
+            </View>
+          )}
           <View style={styles.titleWrapper}>
             <Text size={15} color={colors.gray.dark}>
               {title}

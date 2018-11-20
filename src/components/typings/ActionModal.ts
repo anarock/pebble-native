@@ -7,4 +7,6 @@ export interface ActionModalProps {
   onButtonClick?: (e: GestureResponderEvent) => void;
   showFooterButton?: boolean;
   visible: boolean;
+  header?: string;
+  headerType?: "success" | "error" | "warning";
 }
