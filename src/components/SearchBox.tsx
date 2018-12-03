@@ -18,6 +18,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray.lighter,
     flex: 1
   },
+  textWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 25,
+    backgroundColor: colors.white.base,
+    marginBottom: 1
+  },
   textInput: {
     backgroundColor: colors.white.base,
     fontSize: 15,
@@ -27,6 +35,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray.light,
     borderRadius: 32,
     padding: 5
+  },
+  icon: {
+    marginRight: 10
   },
   row: {
     backgroundColor: colors.white.base,
@@ -106,22 +117,13 @@ export default class extends React.PureComponent<
 
     return (
       <View style={styles.wrapper}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            paddingVertical: 10,
-            paddingHorizontal: 25,
-            backgroundColor: colors.white.base,
-            marginBottom: 1
-          }}
-        >
+        <View style={styles.textWrapper}>
           <TouchableWithoutFeedback onPress={onClose}>
             <Icon
               name="back"
               color={colors.gray.darker}
               size={22}
-              style={{ marginRight: 10 }}
+              style={styles.icon}
             />
           </TouchableWithoutFeedback>
           <TextInput
