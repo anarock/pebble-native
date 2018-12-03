@@ -10,6 +10,8 @@ export interface SearchBoxProps {
   onSelect: (item: any) => void;
   rowLabelExtractor?: (item: any) => string | number;
   noResultsElement: (queryValue: string) => JSX.Element;
+  onClose?: () => void;
+  zerothState: () => JSX.Element;
 }
 
 export interface SearchBoxState {
