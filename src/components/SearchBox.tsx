@@ -3,7 +3,8 @@ import {
   View,
   StyleSheet,
   TextInput,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  TouchableWithoutFeedback
 } from "react-native";
 import colors from "../theme/colors";
 import Icon from "@anarock/pebble/native/Icon";
@@ -17,17 +18,26 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray.lighter,
     flex: 1
   },
+  textWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 25,
+    backgroundColor: colors.white.base,
+    marginBottom: 1
+  },
   textInput: {
     backgroundColor: colors.white.base,
-    fontSize: 23,
-    fontFamily: "Graphik-Medium",
-    padding: 30,
-    marginBottom: 10
+    fontSize: 15,
+    flexGrow: 1
   },
   clearIcon: {
-    position: "absolute",
-    right: 30,
-    top: 38
+    backgroundColor: colors.gray.light,
+    borderRadius: 32,
+    padding: 5
+  },
+  icon: {
+    marginRight: 10
   },
   row: {
     backgroundColor: colors.white.base,
@@ -45,6 +55,8 @@ const styles = StyleSheet.create({
     lineHeight: 21
   }
 });
+
+function noop() {}
 
 export default class extends React.PureComponent<
   SearchBoxProps,
@@ -89,6 +101,13 @@ export default class extends React.PureComponent<
     );
   };
 
+  renderNoResultState = query => {
+    const {
+      noResultsElement = noop,
+      bottomSectionPlaceholder = noop
+    } = this.props;
+    return !query ? bottomSectionPlaceholder() : noResultsElement(query);
+  };
   render() {
     const {
       placeholder,
@@ -96,12 +115,20 @@ export default class extends React.PureComponent<
       onSelect,
       renderElement,
       keyExtractor,
-      noResultsElement
+      onClose
     } = this.props;
 
     return (
       <View style={styles.wrapper}>
-        <View>
+        <View style={styles.textWrapper}>
+          <TouchableWithoutFeedback onPress={onClose}>
+            <Icon
+              name="back"
+              color={colors.gray.darker}
+              size={22}
+              style={styles.icon}
+            />
+          </TouchableWithoutFeedback>
           <TextInput
             style={styles.textInput}
             selectionColor={colors.violet.base}
@@ -122,7 +149,7 @@ export default class extends React.PureComponent<
               }
             >
               <View style={styles.clearIcon}>
-                <Icon name="close" color={colors.violet.base} size={20} />
+                <Icon name="close" color={colors.gray.darker} size={8} />
               </View>
             </TouchableNativeFeedback>
           )}
@@ -144,8 +171,7 @@ export default class extends React.PureComponent<
           })}
 
           {!(results && results.length) &&
-            noResultsElement &&
-            noResultsElement(this.state.queryValue)}
+            this.renderNoResultState(this.state.queryValue)}
         </KeyboardAwareScrollView>
       </View>
     );

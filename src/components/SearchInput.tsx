@@ -67,7 +67,8 @@ export default class extends React.PureComponent<SearchInputProps> {
       renderElement,
       rowLabelExtractor,
       noResultsElement,
-      renderLabel
+      renderLabel,
+      bottomSectionPlaceholder
     } = this.props;
     return (
       <React.Fragment>
@@ -89,12 +90,6 @@ export default class extends React.PureComponent<SearchInputProps> {
           visible={this.state.showModal}
           animationType="slide"
         >
-          <View style={styles.modalHeader}>
-            <TouchableWithoutFeedback onPress={this.closeModal}>
-              <Icon name="back" color={colors.violet.base} size={22} />
-            </TouchableWithoutFeedback>
-          </View>
-
           <SearchBox
             results={results}
             placeholder={searchBoxPlaceholder}
@@ -106,6 +101,8 @@ export default class extends React.PureComponent<SearchInputProps> {
               renderElement && (args => renderElement(args, this.props))
             }
             noResultsElement={noResultsElement}
+            bottomSectionPlaceholder={bottomSectionPlaceholder}
+            onClose={this.closeModal}
           />
         </Modal>
       </React.Fragment>

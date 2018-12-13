@@ -9,7 +9,9 @@ export interface SearchBoxProps {
   keyExtractor?: (item: any) => string | number;
   onSelect: (item: any) => void;
   rowLabelExtractor?: (item: any) => string | number;
-  noResultsElement: (queryValue: string) => JSX.Element;
+  noResultsElement?: (queryValue: string) => JSX.Element;
+  onClose?: () => void;
+  bottomSectionPlaceholder?: () => JSX.Element;
 }
 
 export interface SearchBoxState {
