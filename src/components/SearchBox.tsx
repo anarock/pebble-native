@@ -102,8 +102,8 @@ export default class extends React.PureComponent<
   };
 
   renderNoResultState = query => {
-    const { noResultsElement = noop, zerothState = noop } = this.props;
-    return !query ? zerothState() : noResultsElement(query);
+    const { noResultsElement = noop, defaultState = noop } = this.props;
+    return !query ? defaultState() : noResultsElement(query);
   };
   render() {
     const {
@@ -146,7 +146,7 @@ export default class extends React.PureComponent<
               }
             >
               <View style={styles.clearIcon}>
-                <Icon name="close" color={colors.gray.darker} size={8} bold />
+                <Icon name="close" color={colors.gray.darker} size={8} />
               </View>
             </TouchableNativeFeedback>
           )}

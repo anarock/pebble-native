@@ -68,7 +68,7 @@ export default class extends React.PureComponent<SearchInputProps> {
       rowLabelExtractor,
       noResultsElement,
       renderLabel,
-      zerothState
+      defaultState
     } = this.props;
     return (
       <React.Fragment>
@@ -101,7 +101,7 @@ export default class extends React.PureComponent<SearchInputProps> {
               renderElement && (args => renderElement(args, this.props))
             }
             noResultsElement={noResultsElement}
-            zerothState={zerothState}
+            defaultState={defaultState}
             onClose={this.closeModal}
           />
         </Modal>
