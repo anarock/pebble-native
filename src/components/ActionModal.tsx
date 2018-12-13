@@ -109,11 +109,13 @@ const ActionModal: React.SFC<ActionModalProps> = function({
               </Text>
             </View>
           )}
-          <View style={styles.titleWrapper}>
-            <Text size={15} color={colors.gray.dark}>
-              {title}
-            </Text>
-          </View>
+          {title && (
+            <View style={styles.titleWrapper}>
+              <Text size={15} color={colors.gray.dark}>
+                {title}
+              </Text>
+            </View>
+          )}
 
           <View style={styles.contentContainer}>{children}</View>
 
