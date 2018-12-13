@@ -68,7 +68,7 @@ export default class extends React.PureComponent<SearchInputProps> {
       rowLabelExtractor,
       noResultsElement,
       renderLabel,
-      defaultState
+      bottomSectionPlaceholder
     } = this.props;
     return (
       <React.Fragment>
@@ -101,7 +101,7 @@ export default class extends React.PureComponent<SearchInputProps> {
               renderElement && (args => renderElement(args, this.props))
             }
             noResultsElement={noResultsElement}
-            defaultState={defaultState}
+            bottomSectionPlaceholder={bottomSectionPlaceholder}
             onClose={this.closeModal}
           />
         </Modal>

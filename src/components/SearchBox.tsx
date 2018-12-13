@@ -102,8 +102,11 @@ export default class extends React.PureComponent<
   };
 
   renderNoResultState = query => {
-    const { noResultsElement = noop, defaultState = noop } = this.props;
-    return !query ? defaultState() : noResultsElement(query);
+    const {
+      noResultsElement = noop,
+      bottomSectionPlaceholder = noop
+    } = this.props;
+    return !query ? bottomSectionPlaceholder() : noResultsElement(query);
   };
   render() {
     const {

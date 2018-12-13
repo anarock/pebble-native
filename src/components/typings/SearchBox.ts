@@ -11,7 +11,7 @@ export interface SearchBoxProps {
   rowLabelExtractor?: (item: any) => string | number;
   noResultsElement?: (queryValue: string) => JSX.Element;
   onClose?: () => void;
-  defaultState?: () => JSX.Element;
+  bottomSectionPlaceholder?: () => JSX.Element;
 }
 
 export interface SearchBoxState {
