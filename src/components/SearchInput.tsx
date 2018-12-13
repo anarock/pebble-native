@@ -1,25 +1,8 @@
 import * as React from "react";
-import {
-  View,
-  StyleSheet,
-  Modal,
-  TouchableWithoutFeedback
-} from "react-native";
+import { View, Modal, TouchableWithoutFeedback } from "react-native";
 import Input from "./Input";
 import { SearchInputProps } from "./typings/SearchInput";
-import Icon from "@anarock/pebble/native/Icon";
-import colors from "../theme/colors";
 import SearchBox from "./SearchBox";
-
-const styles = StyleSheet.create({
-  wrapper: {},
-  modalHeader: {
-    height: 50,
-    backgroundColor: colors.white.base,
-    paddingHorizontal: 30,
-    justifyContent: "center"
-  }
-});
 
 export default class extends React.PureComponent<SearchInputProps> {
   static defaultProps = {
