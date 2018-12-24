@@ -11,4 +11,5 @@ export interface TextProps extends RN.TextProps {
     | string
     | number
     | (string | boolean | JSX.Element | undefined)[];
+  lineHeight?: number | string;
 }
