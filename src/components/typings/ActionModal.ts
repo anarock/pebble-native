@@ -9,4 +9,5 @@ export interface ActionModalProps {
   visible: boolean;
   header?: string;
   headerType?: "success" | "error" | "warning";
+  style?: any;
 }
