@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
     padding: 5
   },
   icon: {
-    marginRight: 10
+    marginRight: 10,
+    padding: 10
   },
   row: {
     backgroundColor: colors.white.base,
@@ -53,6 +54,9 @@ const styles = StyleSheet.create({
   },
   result: {
     lineHeight: 21
+  },
+  close: {
+    padding: 15
   }
 });
 
@@ -148,8 +152,13 @@ export default class extends React.PureComponent<
                 })
               }
             >
-              <View style={styles.clearIcon}>
-                <Icon name="close" color={colors.gray.darker} size={8} />
+              <View style={styles.close}>
+                <Icon
+                  name="close"
+                  color={colors.gray.darker}
+                  size={8}
+                  style={styles.clearIcon}
+                />
               </View>
             </TouchableNativeFeedback>
           )}
