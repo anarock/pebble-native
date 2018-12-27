@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
   },
   container: {
     maxHeight: Math.min(472, Dimensions.get("window").height * 0.6),
-    paddingHorizontal: 25
+    paddingHorizontal: 25,
+    backgroundColor: colors.white.base
   },
   titleWrapper: {
     flexDirection: "row",
