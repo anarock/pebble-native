@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
   content: {
     maxHeight: 200,
     overflow: "hidden"
-  }
+  },
+  row: { flexDirection: "row", justifyContent: "space-between" }
 });
 
 class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
@@ -93,9 +94,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
     return (
       <View style={styles.container}>
         <View style={styles.topSection}>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
+          <View style={styles.row}>
             <Text size={13} color={colors.gray.dark}>
               {title}
             </Text>

@@ -4,7 +4,7 @@ import { colors } from "../theme";
 import Text from "./Text";
 import { CardProps } from "./typings/Card";
 
-const cardStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 25,
     paddingVertical: 15,
@@ -13,7 +13,8 @@ const cardStyles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10
-  }
+  },
+  title: { marginBottom: 6 }
 });
 
 const Card: React.FunctionComponent<CardProps> = ({
@@ -24,9 +25,9 @@ const Card: React.FunctionComponent<CardProps> = ({
 }) => {
   return (
     <TouchableNativeFeedback onPress={onPress} disabled={!onPress}>
-      <View style={cardStyles.container}>
+      <View style={styles.container}>
         <View>
-          <Text style={{ marginBottom: 6 }} size={13} color={colors.gray.dark}>
+          <Text style={styles.title} size={13} color={colors.gray.dark}>
             {title}
           </Text>
           {typeof description === "string" ? (
