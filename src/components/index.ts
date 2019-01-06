@@ -8,6 +8,11 @@ import SearchBox from "./SearchBox";
 import SearchInput from "./SearchInput";
 import Button from "./Button";
 import ActionModal from "./ActionModal";
+import Card from "./Card";
+import CircularButton from "./CircularButton";
+import IconText from "./IconText";
+import InfoCard from "./InfoCard";
+import List from "./List";
 
 export {
   Input,
@@ -19,5 +24,10 @@ export {
   SearchBox,
   SearchInput,
   Button,
-  ActionModal
+  ActionModal,
+  Card,
+  CircularButton,
+  IconText,
+  InfoCard,
+  List
 };
