@@ -82,7 +82,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
   };
 
   render() {
-    let {
+    const {
       title,
       description,
       image,
@@ -113,7 +113,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
             <View>
               {!!image && (
                 <Image
-                  style={styles.imageWrapper}
+                  style={styles.imageWrapper as any}
                   source={image}
                   resizeMode="contain"
                 />
