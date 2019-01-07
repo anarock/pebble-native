@@ -7,11 +7,13 @@ const options = new Array(7)
   })
   .map((x, i) => ({ ...x, id: i + 1 }));
 
+function noop() {}
+
 storiesOf("SearchBox", module).add("Default", () => (
   <SearchBox
     results={options}
     placeholder="Search"
-    onQueryChange={() => {}}
-    onSelect={() => {}}
+    onQueryChange={noop}
+    onSelect={noop}
   />
 ));
