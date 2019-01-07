@@ -3,8 +3,10 @@ import { storiesOf } from "@storybook/react-native";
 import Input from "../../src/components/Input";
 import CenterView from "./CenterView";
 
+function noop() {}
+
 storiesOf("Input", module).add("Default", () => (
   <CenterView>
-    <Input onChange={() => {}} placeholder="Type Something" />
+    <Input onChange={noop} placeholder="Type Something" />
   </CenterView>
 ));
