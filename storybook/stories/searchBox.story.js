@@ -3,6 +3,8 @@ import { storiesOf } from "@storybook/react-native";
 import SearchBox from "../../src/components/SearchBox";
 import CenterView from "./CenterView";
 
+function noop() {}
+
 const options = new Array(7)
   .fill({
     label: "Lorem ipsum dolor"
@@ -14,8 +16,8 @@ storiesOf("SearchBox", module).add("Default", () => (
     <SearchBox
       results={options}
       placeholder="Search"
-      onQueryChange={() => {}}
-      onSelect={() => {}}
+      onQueryChange={noop}
+      onSelect={noop}
     />
   </CenterView>
 ));
