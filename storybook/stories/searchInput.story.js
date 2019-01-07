@@ -1,6 +1,10 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import SearchInput from "../../src/components/SearchInput";
+import CenterView from "./CenterView";
+
+function noop() {}
+
 const options = new Array(7)
   .fill({
     label: "Lorem ipsum dolor"
@@ -8,11 +12,13 @@ const options = new Array(7)
   .map((x, i) => ({ ...x, id: i + 1 }));
 
 storiesOf("SearchInput", module).add("Default", () => (
-  <SearchInput
-    results={options}
-    placeholder="Search"
-    onSelect={() => {}}
-    searchBoxPlaceholder="Type your query"
-    value="Hello"
-  />
+  <CenterView>
+    <SearchInput
+      results={options}
+      placeholder="Search"
+      onSelect={noop}
+      searchBoxPlaceholder="Type your query"
+      value="Hello"
+    />
+  </CenterView>
 ));
