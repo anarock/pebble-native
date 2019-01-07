@@ -63,5 +63,5 @@ haul-debug.log
 dist
 compiled
 
-demo/assets/fonts
+assets/fonts
 build
