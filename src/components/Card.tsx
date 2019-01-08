@@ -3,6 +3,7 @@ import * as React from "react";
 import { colors } from "../theme";
 import Text from "./Text";
 import { CardProps } from "./typings/Card";
+import ConditionalComponent from "./shared/ConditionalComponent";
 
 const styles = StyleSheet.create({
   container: {
@@ -17,30 +18,38 @@ const styles = StyleSheet.create({
   title: { marginBottom: 6 }
 });
 
+// @ts-ignore
 const Card: React.FunctionComponent<CardProps> = ({
   title,
-  linkText,
+  rightElement,
   description,
-  onPress
+  onPress,
+  style = {}
 }) => {
   return (
     <TouchableNativeFeedback onPress={onPress} disabled={!onPress}>
-      <View style={styles.container}>
+      <View style={[styles.container, style]}>
         <View>
-          <Text style={styles.title} size={13} color={colors.gray.dark}>
-            {title}
-          </Text>
-          {typeof description === "string" ? (
-            <Text>{description}</Text>
-          ) : (
-            description
-          )}
+          <ConditionalComponent conditional={title}>
+            {_title => (
+              <Text style={styles.title} size={13} color={colors.gray.dark}>
+                {_title}
+              </Text>
+            )}
+          </ConditionalComponent>
+
+          <ConditionalComponent conditional={description}>
+            {_description => <Text>{_description}</Text>}
+          </ConditionalComponent>
         </View>
-        {!!linkText && (
-          <Text color={colors.violet.base} size={13}>
-            {linkText}
-          </Text>
-        )}
+
+        <ConditionalComponent conditional={rightElement}>
+          {_rightElement => (
+            <Text color={colors.violet.base} size={13}>
+              {_rightElement}
+            </Text>
+          )}
+        </ConditionalComponent>
       </View>
     </TouchableNativeFeedback>
   );
