@@ -1,6 +1,9 @@
+import * as React from "react";
+
 export interface CardProps {
-  title: string;
-  linkText?: string;
-  description: string | number | JSX.Element;
+  title: React.ReactText | JSX.Element;
+  rightElement?: React.ReactText | JSX.Element;
+  description: React.ReactText | JSX.Element;
   onPress?: () => void;
+  style?: any;
 }
