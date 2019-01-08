@@ -69,7 +69,8 @@ const headerTypeToColor = {
   }
 };
 
-const ActionModal: React.SFC<ActionModalProps> = function({
+// @ts-ignore
+const ActionModal: React.FunctionComponent<ActionModalProps> = function({
   onClose,
   title,
   children,
