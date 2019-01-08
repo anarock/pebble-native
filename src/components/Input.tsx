@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     color: colors.gray.darker,
     fontSize: 15,
-    marginTop: 8,
+    marginTop: 15,
     paddingHorizontal: 0,
     fontFamily: "anarock_regular"
   },
@@ -62,7 +62,9 @@ class Input extends React.PureComponent<InputProps, InputState> {
     placeholderMarginTop: new Animated.Value(20)
   };
 
-  static getDerivedStateFromProps(newProps: InputProps): Partial<InputState> {
+  static getDerivedStateFromProps(
+    newProps: InputProps
+  ): Partial<InputState> | null {
     if (newProps.value) {
       return {
         placeholderMarginTop: new Animated.Value(0)
@@ -142,11 +144,11 @@ class Input extends React.PureComponent<InputProps, InputState> {
           <Text
             color={colors.gray.darker}
             size={15}
-            style={[styles.readOnly, !value && { marginBottom: 20 }]}
+            style={[styles.readOnly, !value ? { marginBottom: 20 } : undefined]}
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            {value}
+            <>{value}</>
           </Text>
         ) : (
           <TextInput
@@ -174,7 +176,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
               ? {
                   height: 2,
                   backgroundColor: getColor(errorMessage, successMessage, true),
-                  marginTop: -1
+                  marginTop: -2
                 }
               : {},
             disabled && { backgroundColor: "transparent" }

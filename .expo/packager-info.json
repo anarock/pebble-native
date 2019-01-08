@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19003,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 28200,
   "expoServerNgrokUrl": "https://se-c6e.ritz078.pebblenative.exp.direct",
   "packagerNgrokUrl": "https://packager.se-c6e.ritz078.pebblenative.exp.direct",
-  "ngrokPid": 23661
+  "ngrokPid": 28221
 }
