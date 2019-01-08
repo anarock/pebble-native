@@ -46,7 +46,7 @@ const fontColor = {
   link: colors.violet.base
 };
 
-const FooterButton: React.SFC<Partial<ButtonProps>> = ({
+const FooterButton: React.FunctionComponent<Partial<ButtonProps>> = ({
   onPress,
   children,
   ...rest
@@ -63,7 +63,7 @@ const FooterButton: React.SFC<Partial<ButtonProps>> = ({
 class Button extends React.Component<ButtonProps> {
   static FooterButton = FooterButton;
 
-  static defaultProps: Partial<ButtonProps> = {
+  static defaultProps = {
     type: "primary"
   };
 
