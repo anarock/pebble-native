@@ -5,7 +5,7 @@ export interface ButtonProps {
   onPress: (e: GestureResponderEvent) => void;
   disabled?: boolean;
   children: React.ReactChild;
-  type?: "primary" | "secondary" | "link";
+  type: "primary" | "secondary" | "link";
   loading?: boolean;
   style?: any;
 }
