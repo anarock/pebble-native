@@ -11,7 +11,7 @@ export interface OptionsProps {
   dropdownStyle?: any;
   width?: number | string;
   selected?: any;
-  keyExtractor?: (item) => number | string;
+  keyExtractor?: (item: any) => number | string;
   type?: "radio" | "checkbox";
-  rowLabelExtractor?: (item: any) => string | number;
+  rowLabelExtractor: (item: any) => string | number;
 }

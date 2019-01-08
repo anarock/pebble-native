@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Anarock Team Lead",
-    "description": "This project is really great.",
+    "name": "pebble-native",
+    "description": "A set of components developed for React Native.",
     "slug": "typescript",
     "privacy": "public",
     "sdkVersion": "32.0.0",

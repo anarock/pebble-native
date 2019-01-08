@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { StyleSheet, View } from "react-native";
 import { OptionsProps } from "./typings/Options";
 import colors from "../theme/colors";
@@ -29,7 +29,7 @@ const controlStyle = StyleSheet.create({
   }
 });
 
-export default class Options extends Component<OptionsProps> {
+export default class Options extends React.Component<OptionsProps> {
   static defaultProps: Partial<OptionsProps> = {
     type: "radio",
     keyExtractor: item => item.id,
