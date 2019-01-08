@@ -46,6 +46,7 @@ const fontColor = {
   link: colors.violet.base
 };
 
+// @ts-ignore
 const FooterButton: React.FunctionComponent<Partial<ButtonProps>> = ({
   onPress,
   children,
@@ -68,11 +69,27 @@ class Button extends React.Component<ButtonProps> {
   };
 
   render() {
-    let { children, onPress, type, loading, disabled, style } = this.props;
+    let {
+      children,
+      onPress,
+      type,
+      loading,
+      disabled,
+      style,
+      onLongPress,
+      transparent,
+      radius
+    } = this.props;
+
+    const _disabled = disabled || loading;
+    const textColor = transparent
+      ? buttonBackgroundColor[type]
+      : fontColor[type];
     return (
       <TouchableNativeFeedback
-        onPress={disabled || loading ? undefined : onPress}
-        disabled={disabled || loading}
+        onPress={_disabled ? undefined : onPress}
+        disabled={_disabled}
+        onLongPress={_disabled ? undefined : onLongPress}
       >
         <View
           style={[
@@ -82,16 +99,33 @@ class Button extends React.Component<ButtonProps> {
                 ? buttonBackgroundDisabledColor[type]
                 : buttonBackgroundColor[type]
             },
-            type === "link" && {
-              justifyContent: "flex-start"
-            },
+            type === "link"
+              ? {
+                  justifyContent: "flex-start"
+                }
+              : undefined,
+            transparent
+              ? {
+                  backgroundColor: "transparent",
+                  borderColor: buttonBackgroundColor[type],
+                  borderWidth: 1,
+                  ...(disabled && {
+                    borderColor: buttonBackgroundDisabledColor[type]
+                  })
+                }
+              : undefined,
+            radius
+              ? {
+                  borderRadius: 25
+                }
+              : undefined,
             style
           ]}
         >
           {loading ? (
-            <ActivityIndicator color={colors.white.base} />
+            <ActivityIndicator color={textColor} />
           ) : (
-            <Text size={15} bold color={fontColor[type]}>
+            <Text size={15} bold color={textColor}>
               {children}
             </Text>
           )}

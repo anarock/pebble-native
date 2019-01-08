@@ -11,7 +11,7 @@
     "test": "jest",
     "build": "react-native link && react-native run-android",
     "build:dist": "rimraf dist && tsc -p tsconfig.json",
-    "prepublish": "yarn build:dist",
+    "prepublishOnly": "yarn build:dist",
     "precommit": "pretty-quick --staged"
   },
   "dependencies": {
@@ -23,13 +23,16 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "4.1.4",
-    "@storybook/addon-links": "4.1.4",
+    "@storybook/addon-knobs": "^4.1.4",
+    "@storybook/addon-ondevice-knobs": "^4.1.4",
+    "@storybook/addon-ondevice-notes": "^4.1.4",
     "@storybook/addons": "4.1.4",
     "@storybook/react-native": "4.1.4",
     "@types/expo": "^31.0.7",
     "@types/node": "^10.12.18",
     "@types/react": "^16.7.18",
     "@types/react-native": "^0.57.6",
+    "@types/storybook__addon-knobs": "^4.0.0",
     "@types/storybook__react-native": "^3.0.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "23.6.0",
