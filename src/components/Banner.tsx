@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     width: "100%",
     position: "relative"
   },
+  innerContainer: { padding: 25 },
   title: {
     marginBottom: 10
   },
@@ -52,7 +53,7 @@ const Banner: React.FunctionComponent<BannerProps> = ({
 }) => {
   return (
     <View style={[styles.container, style]}>
-      <View style={{ padding: 25 }}>
+      <View style={styles.innerContainer}>
         <Text style={styles.title} size={13} color={colors.gray.dark}>
           {title}
         </Text>
