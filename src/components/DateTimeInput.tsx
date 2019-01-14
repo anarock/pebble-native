@@ -20,6 +20,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
     };
 
     let selected;
+    // @ts-ignore
     const { action, day, month, year } = await DatePickerAndroid.open({
       date
     });
@@ -29,6 +30,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
     selected = new Date(year, month, day);
 
     if (type === "datetime") {
+      // @ts-ignore
       const { action, minute, hour } = await TimePickerAndroid.open({
         ...timing,
         is24Hour: true

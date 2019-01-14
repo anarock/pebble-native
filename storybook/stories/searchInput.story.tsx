@@ -19,6 +19,8 @@ storiesOf("SearchInput", module).add("Default", () => (
       onSelect={noop}
       searchBoxPlaceholder="Type your query"
       value="Hello"
+      keyExtractor={item => item.id}
+      onQueryChange={() => {}}
     />
   </CenterView>
 ));

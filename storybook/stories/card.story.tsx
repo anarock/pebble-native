@@ -39,7 +39,7 @@ storiesOf("Card", module)
           rightElement={
             <CircularButton
               backgroundColor={colors.red.lighter}
-              iconColor={colors.red.base}
+              color={colors.red.base}
               iconName="phone"
               style={{
                 marginTop: 6

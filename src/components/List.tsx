@@ -29,8 +29,8 @@ const List: React.FunctionComponent<ListProps> = ({
         {!!iconName && (
           <CircularButton
             iconName={iconName}
-            iconColor={iconColor}
-            iconBackgroundColor={iconBackgroundColor}
+            color={iconColor}
+            backgroundColor={iconBackgroundColor}
             style={styles.icon}
           />
         )}

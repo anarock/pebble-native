@@ -14,7 +14,7 @@ storiesOf("CircularButton", module)
     <CenterView>
       <CircularButton
         iconName="add"
-        iconColor={colors.blue.base}
+        color={colors.blue.base}
         backgroundColor={colors.blue.light}
       />
     </CenterView>
