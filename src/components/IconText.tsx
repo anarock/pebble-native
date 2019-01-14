@@ -23,7 +23,7 @@ const iconTextStyles = StyleSheet.create({
 
 const IconText: React.FunctionComponent<IconTextProps> = ({
   iconName,
-  iconColor,
+  color,
   backgroundColor,
   label,
   onPress
@@ -32,7 +32,7 @@ const IconText: React.FunctionComponent<IconTextProps> = ({
     <TouchableNativeFeedback onPress={onPress}>
       <View style={iconTextStyles.container}>
         <CircularButton
-          iconColor={iconColor}
+          iconColor={color}
           iconBackgroundColor={backgroundColor}
           iconName={iconName}
         />

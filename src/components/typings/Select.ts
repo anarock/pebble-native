@@ -12,6 +12,7 @@ export interface SelectProps extends OptionsProps {
       props: SelectProps;
     }
   ) => JSX.Element;
+  title?: string;
 }
 
 export interface SelectState {

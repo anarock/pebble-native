@@ -5,6 +5,7 @@ declare module "@anarock/pebble/native/Icon" {
     size?: number;
     name: string;
     color?: string;
+    style?: any;
   }> {}
 
   export default Icon;

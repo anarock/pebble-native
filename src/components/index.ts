@@ -16,6 +16,7 @@ import List from "./List";
 import Banner from "./Banner";
 import ImageThumbnail from "./ImageThumbnail";
 import Rating from "./Rating";
+import Avatar from "./Avatar";
 
 export {
   Input,
@@ -35,5 +36,6 @@ export {
   List,
   Banner,
   ImageThumbnail,
-  Rating
+  Rating,
+  Avatar
 };

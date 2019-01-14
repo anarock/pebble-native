@@ -38,7 +38,7 @@ storiesOf("Card", module)
           description="Was this event Done?"
           rightElement={
             <CircularButton
-              iconBackgroundColor={colors.red.lighter}
+              backgroundColor={colors.red.lighter}
               iconColor={colors.red.base}
               iconName="phone"
               style={{

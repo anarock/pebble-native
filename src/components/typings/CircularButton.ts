@@ -1,6 +1,8 @@
 export interface CircularButtonProps {
   backgroundColor?: string;
-  iconName: string;
-  iconColor?: string;
+  iconName?: string;
+  color?: string;
   style?: any;
+  label?: string;
+  small?: boolean;
 }

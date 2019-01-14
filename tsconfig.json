@@ -1,14 +1,30 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es2017",
-    "module": "es2015",
-    "outDir": "build/dist",
-    "sourceMap": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "declaration": true,
+    "declarationDir": "dist",
+    "target": "esnext",
+    "module": "esnext",
     "jsx": "react",
-    "lib": ["dom", "es2017"],
     "moduleResolution": "node",
-    "strict": true,
-    "typeRoots": ["./node_modules/@types", "./typings"]
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "isolatedModules": false,
+    "pretty": true,
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["dom", "es2015", "es2016"]
   },
-  "include": ["src", "storybook"]
+  "includes": ["src", "storybook"],
+  "exclude": ["node_modules", "dist", "src/**/__tests__"]
 }
