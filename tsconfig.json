@@ -25,6 +25,6 @@
     "typeRoots": ["./node_modules/@types"],
     "lib": ["dom", "es2015", "es2016"]
   },
-  "includes": ["src", "storybook"],
-  "exclude": ["node_modules", "dist", "src/**/__tests__"]
+  "files": ["src/index.ts"],
+  "exclude": ["node_modules", "dist", "src/**/__tests__", "storybook"]
 }
