@@ -13,6 +13,9 @@ import CircularButton from "./CircularButton";
 import IconText from "./IconText";
 import InfoCard from "./InfoCard";
 import List from "./List";
+import Banner from "./Banner";
+import ImageThumbnail from "./ImageThumbnail";
+import Rating from "./Rating";
 
 export {
   Input,
@@ -29,5 +32,8 @@ export {
   CircularButton,
   IconText,
   InfoCard,
-  List
+  List,
+  Banner,
+  ImageThumbnail,
+  Rating
 };
