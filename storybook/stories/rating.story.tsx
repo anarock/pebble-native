@@ -1,12 +1,12 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react-native";
-import Input from "../../src/components/Input";
 import CenterView from "./CenterView";
+import { Rating } from "../../src/components";
 
 function noop() {}
 
-storiesOf("Input", module).add("Default", () => (
+storiesOf("Rating", module).add("Default", () => (
   <CenterView>
-    <Input onChange={noop} placeholder="Type Something" />
+    <Rating value={2} label="Warm" />
   </CenterView>
 ));

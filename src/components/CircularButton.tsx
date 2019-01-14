@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 });
 
 const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
-  iconBackgroundColor = colors.white.base,
+  backgroundColor = colors.white.base,
   iconName,
   iconColor = colors.gray.base,
   style = {}
@@ -26,11 +26,11 @@ const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
       styles.iconWrapper,
       style,
       {
-        backgroundColor: iconBackgroundColor
+        backgroundColor
       }
     ]}
   >
-    <Icon size={20} name={iconName} color={iconColor} />
+    {!!iconName && <Icon size={18} name={iconName} color={iconColor} />}
   </View>
 );
 

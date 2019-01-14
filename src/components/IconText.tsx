@@ -24,7 +24,7 @@ const iconTextStyles = StyleSheet.create({
 const IconText: React.FunctionComponent<IconTextProps> = ({
   iconName,
   iconColor,
-  iconBackgroundColor,
+  backgroundColor,
   label,
   onPress
 }) => {
@@ -33,7 +33,7 @@ const IconText: React.FunctionComponent<IconTextProps> = ({
       <View style={iconTextStyles.container}>
         <CircularButton
           iconColor={iconColor}
-          iconBackgroundColor={iconBackgroundColor}
+          iconBackgroundColor={backgroundColor}
           iconName={iconName}
         />
 
