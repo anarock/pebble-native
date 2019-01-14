@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
   },
   label: {
     marginLeft: 3
+  },
+  icon: {
+    paddingHorizontal: 2
   }
 });
 
@@ -33,7 +36,7 @@ const Rating: React.FunctionComponent<RatingProps> = ({
           <Icon
             key={i}
             color={i + 1 <= value ? colors.red.base : colors.gray.light}
-            style={{ paddingHorizontal: 2 }}
+            style={styles.icon}
             name="fire"
             size={15}
           />
