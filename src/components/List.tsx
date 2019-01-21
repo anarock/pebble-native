@@ -47,7 +47,7 @@ const List: React.FunctionComponent<ListProps> = ({
             </Text>
             {topRightElement}
           </View>
-          <Text lineHeight={22} size={13}>
+          <Text color={colors.gray.darker} lineHeight={22} size={13}>
             {description}
           </Text>
         </View>
