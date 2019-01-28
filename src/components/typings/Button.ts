@@ -6,7 +6,7 @@ export interface ButtonProps {
   onLongPress?: (e: GestureResponderEvent) => void;
   disabled?: boolean;
   children: React.ReactText | JSX.Element;
-  type: "primary" | "secondary" | "link";
+  type?: "primary" | "secondary" | "link";
   loading?: boolean;
   style?: any;
   transparent?: boolean;
