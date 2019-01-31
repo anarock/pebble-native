@@ -1,5 +1,4 @@
 import * as React from "react";
-import { ViewStyle } from "react-native";
 
 export interface ListProps {
   iconName?: string;
@@ -8,5 +7,5 @@ export interface ListProps {
   title: string;
   description: JSX.Element | React.ReactText;
   topRightElement?: JSX.Element | React.ReactText;
-  style?: ViewStyle;
+  style?: any;
 }
