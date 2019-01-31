@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   },
   content: {
     maxHeight: 200,
-    overflow: "hidden"
+    overflow: "hidden",
+    zIndex: 1
   },
   row: { flexDirection: "row", justifyContent: "space-between" }
 });

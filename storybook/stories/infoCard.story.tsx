@@ -31,6 +31,21 @@ storiesOf("InfoCard", module)
                 title="Age"
                 description="Below 25"
               />
+              <List
+                style={{ paddingVertical: 8 }}
+                title="Age"
+                description="Below 25"
+              />
+              <List
+                style={{ paddingVertical: 8 }}
+                title="Age"
+                description="Below 25"
+              />
+              <List
+                style={{ paddingVertical: 8 }}
+                title="Age"
+                description="Below 25"
+              />
             </View>
           }
           linkText="Hellllooooo"

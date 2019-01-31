@@ -109,9 +109,11 @@ class Button extends React.Component<ButtonProps> {
                   backgroundColor: "transparent",
                   borderColor: buttonBackgroundColor[type],
                   borderWidth: 1,
-                  ...(disabled && {
-                    borderColor: buttonBackgroundDisabledColor[type]
-                  })
+                  ...(disabled
+                    ? {
+                        borderColor: buttonBackgroundDisabledColor[type]
+                      }
+                    : {})
                 }
               : undefined,
             radius
