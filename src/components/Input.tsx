@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, TextInput, Animated } from "react-native";
+import { View, StyleSheet, TextInput, Animated, Platform } from "react-native";
 import { InputProps, InputState } from "./typings/Input";
 import colors from "../theme/colors";
 import Text from "./Text";
@@ -13,12 +13,16 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     marginBottom: 0,
-    paddingBottom: 0,
     color: colors.gray.darker,
     fontSize: 15,
     marginTop: 15,
     paddingHorizontal: 0,
-    fontFamily: "anarock_regular"
+    fontFamily: "anarock_regular",
+    ...Platform.select({
+      ios: {
+        paddingVertical: 5
+      }
+    })
   },
   highlight: {
     height: 1,
