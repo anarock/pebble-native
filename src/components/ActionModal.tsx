@@ -1,16 +1,11 @@
 import * as React from "react";
-import {
-  Dimensions,
-  StyleSheet,
-  TouchableNativeFeedback,
-  View,
-  Modal
-} from "react-native";
+import { Dimensions, StyleSheet, View, Modal } from "react-native";
 import colors from "../theme/colors";
 import Text from "./Text";
 import Button from "./Button";
 import { ActionModalProps } from "./typings/ActionModal";
 import Icon from "@anarock/pebble/native/Icon";
+import Touchable from "./shared/Touchable";
 
 const styles = StyleSheet.create({
   modalContent: {
@@ -90,9 +85,9 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
       onRequestClose={onClose}
     >
       <View style={styles.modalContent}>
-        <TouchableNativeFeedback onPress={onClose}>
+        <Touchable onPress={onClose}>
           <View style={styles.overlay} />
-        </TouchableNativeFeedback>
+        </Touchable>
 
         <View />
 

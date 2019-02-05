@@ -1,9 +1,10 @@
-import { Image, StyleSheet, TouchableNativeFeedback, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import * as React from "react";
 import { colors } from "../theme";
 import Text from "./Text";
 import Icon from "@anarock/pebble/native/Icon";
 import { InfoCardProps, InfoCardState } from "./typings/InfoCard";
+import Touchable from "./shared/Touchable";
 
 const styles = StyleSheet.create({
   container: {
@@ -54,7 +55,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
 
     if (expandable) {
       return (
-        <TouchableNativeFeedback
+        <Touchable
           onPress={() =>
             this.setState({
               isOpen: !isOpen
@@ -67,17 +68,17 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
             </Text>
             <Icon name={isOpen ? "arrow-up" : "arrow-down"} />
           </View>
-        </TouchableNativeFeedback>
+        </Touchable>
       );
     }
 
     return (
       !!linkText && (
-        <TouchableNativeFeedback onPress={onPress}>
+        <Touchable onPress={onPress}>
           <View style={styles.bottomSection}>
             <Text color={colors.violet.base}>{linkText}</Text>
           </View>
-        </TouchableNativeFeedback>
+        </Touchable>
       )
     );
   };
