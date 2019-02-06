@@ -1,12 +1,15 @@
 import * as React from "react";
 import {
-  TouchableWithoutFeedbackProps,
+  TouchableNativeFeedbackProps,
+  TouchableHighlightProps,
   Platform,
   TouchableNativeFeedback,
   TouchableHighlight
 } from "react-native";
 
-const Touchable: React.FunctionComponent<TouchableWithoutFeedbackProps> = ({
+type TouchableProps = TouchableNativeFeedbackProps | TouchableHighlightProps;
+
+const Touchable: React.FunctionComponent<TouchableProps> = ({
   children,
   ...props
 }) => {
