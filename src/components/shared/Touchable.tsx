@@ -15,7 +15,11 @@ const Touchable: React.FunctionComponent<TouchableWithoutFeedbackProps> = ({
       <TouchableNativeFeedback {...props}>{children}</TouchableNativeFeedback>
     );
   }
-  return <TouchableHighlight {...props}>{children}</TouchableHighlight>;
+  return (
+    <TouchableHighlight underlayColor="transparent" {...props}>
+      {children}
+    </TouchableHighlight>
+  );
 };
 
 export default Touchable;
