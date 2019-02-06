@@ -1,9 +1,10 @@
-import { StyleSheet, TouchableNativeFeedback, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as React from "react";
 import CircularButton from "./CircularButton";
 import { colors } from "../theme";
 import Text from "./Text";
 import { IconTextProps } from "./typings/IconText";
+import Touchable from "./shared/Touchable";
 
 const iconTextStyles = StyleSheet.create({
   container: {
@@ -29,7 +30,7 @@ const IconText: React.FunctionComponent<IconTextProps> = ({
   onPress
 }) => {
   return (
-    <TouchableNativeFeedback onPress={onPress}>
+    <Touchable onPress={onPress}>
       <View style={iconTextStyles.container}>
         <CircularButton
           color={color}
@@ -39,7 +40,7 @@ const IconText: React.FunctionComponent<IconTextProps> = ({
 
         <Text color={colors.gray.darker}>{label}</Text>
       </View>
-    </TouchableNativeFeedback>
+    </Touchable>
   );
 };
 

@@ -1,9 +1,10 @@
-import { StyleSheet, TouchableNativeFeedback, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as React from "react";
 import { colors } from "../theme";
 import Text from "./Text";
 import { CardProps } from "./typings/Card";
 import ConditionalComponent from "./shared/ConditionalComponent";
+import Touchable from "./shared/Touchable";
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +28,7 @@ const Card: React.FunctionComponent<CardProps> = ({
   style = {}
 }) => {
   return (
-    <TouchableNativeFeedback onPress={onPress} disabled={!onPress}>
+    <Touchable onPress={onPress} disabled={!onPress}>
       <View style={[styles.container, style]}>
         <View>
           <ConditionalComponent conditional={title}>
@@ -51,7 +52,7 @@ const Card: React.FunctionComponent<CardProps> = ({
           )}
         </ConditionalComponent>
       </View>
-    </TouchableNativeFeedback>
+    </Touchable>
   );
 };
 

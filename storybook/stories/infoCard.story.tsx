@@ -2,8 +2,9 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react-native";
 import CenterView from "./CenterView";
 import { InfoCard, List, Text } from "../../src/components";
-import { TouchableNativeFeedback, View } from "react-native";
+import { View } from "react-native";
 import { colors } from "../../src/theme";
+import Touchable from "../../src/components/shared/Touchable";
 
 storiesOf("InfoCard", module)
   .add("Default", () => (
@@ -50,11 +51,11 @@ storiesOf("InfoCard", module)
           }
           linkText="Hellllooooo"
           topRightElement={
-            <TouchableNativeFeedback>
+            <Touchable>
               <Text color={colors.violet.base} size={13}>
                 Edit
               </Text>
-            </TouchableNativeFeedback>
+            </Touchable>
           }
         />
       </View>
@@ -92,11 +93,11 @@ storiesOf("InfoCard", module)
           }
           linkText="View More"
           topRightElement={
-            <TouchableNativeFeedback>
+            <Touchable>
               <Text color={colors.violet.base} size={13}>
                 Edit
               </Text>
-            </TouchableNativeFeedback>
+            </Touchable>
           }
           expandable
         />

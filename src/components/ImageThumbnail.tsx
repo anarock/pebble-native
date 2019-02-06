@@ -1,13 +1,8 @@
 import * as React from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  ImageURISource,
-  TouchableNativeFeedback
-} from "react-native";
+import { View, StyleSheet, Image, ImageURISource } from "react-native";
 import { colors } from "../theme";
 import Text from "./Text";
+import Touchable from "./shared/Touchable";
 
 const styles = StyleSheet.create({
   container: {
@@ -48,7 +43,7 @@ const ImageThumbnail: React.FunctionComponent<ImageThumbnailProps> = ({
   style = {}
 }) => {
   return (
-    <TouchableNativeFeedback onPress={onPress}>
+    <Touchable onPress={onPress}>
       <View style={[styles.container, style]}>
         <Image resizeMode="cover" source={image} style={styles.image} />
         <Text
@@ -73,7 +68,7 @@ const ImageThumbnail: React.FunctionComponent<ImageThumbnailProps> = ({
           {subText}
         </Text>
       </View>
-    </TouchableNativeFeedback>
+    </Touchable>
   );
 };
 

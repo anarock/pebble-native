@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   TextInput,
-  TouchableNativeFeedback,
   TouchableWithoutFeedback
 } from "react-native";
 import colors from "../theme/colors";
@@ -12,6 +11,7 @@ import debounce from "just-debounce-it";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Text from "./Text";
 import { SearchBoxProps, SearchBoxState } from "./typings/SearchBox";
+import Touchable from "./shared/Touchable";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -145,7 +145,7 @@ export default class extends React.PureComponent<
           />
 
           {!!this.state.queryValue && (
-            <TouchableNativeFeedback
+            <Touchable
               onPress={() =>
                 this.setState({
                   queryValue: ""
@@ -160,7 +160,7 @@ export default class extends React.PureComponent<
                   style={styles.clearIcon}
                 />
               </View>
-            </TouchableNativeFeedback>
+            </Touchable>
           )}
         </View>
 
@@ -170,12 +170,12 @@ export default class extends React.PureComponent<
         >
           {results.map(result => {
             return (
-              <TouchableNativeFeedback
+              <Touchable
                 key={keyExtractor(result)}
                 onPress={() => onSelect(result)}
               >
                 <View>{renderElement({ item: result }, this.props)}</View>
-              </TouchableNativeFeedback>
+              </Touchable>
             );
           })}
 

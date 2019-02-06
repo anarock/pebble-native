@@ -1,13 +1,9 @@
 import * as React from "react";
-import {
-  View,
-  TouchableNativeFeedback,
-  StyleSheet,
-  ActivityIndicator
-} from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import Text from "./Text";
 import colors from "../theme/colors";
 import { ButtonProps } from "./typings/Button";
+import Touchable from "./shared/Touchable";
 
 const styles = StyleSheet.create({
   buttonStyle: {
@@ -86,7 +82,7 @@ class Button extends React.Component<ButtonProps> {
       ? buttonBackgroundColor[type]
       : fontColor[type];
     return (
-      <TouchableNativeFeedback
+      <Touchable
         onPress={_disabled ? undefined : onPress}
         disabled={_disabled}
         onLongPress={_disabled ? undefined : onLongPress}
@@ -132,7 +128,7 @@ class Button extends React.Component<ButtonProps> {
             </Text>
           )}
         </View>
-      </TouchableNativeFeedback>
+      </Touchable>
     );
   }
 }
