@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   children: {
-    paddingTop: 30
+    paddingTop: 30,
+    paddingBottom: 50
   }
 });
 const headerTypeToColor = {
