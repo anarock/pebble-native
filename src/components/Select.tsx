@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   TouchableWithoutFeedback,
-  Dimensions,
   InteractionManager
 } from "react-native";
 import Input from "./Input";
@@ -27,10 +26,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
     overflow: "hidden"
-  },
-
-  optionContainer: {
-    maxHeight: Math.min(472, Dimensions.get("window").height * 0.6)
   },
   modalWrapper: {
     backgroundColor: "rgba(0,0,0,0.4)",
@@ -147,16 +142,15 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
               />
             )}
 
-            {!disabled &&
-              !label && (
-                <View style={styles.dropdownIcon}>
-                  <Icon
-                    color={colors.gray.base}
-                    name="arrow-drop-down"
-                    size={10}
-                  />
-                </View>
-              )}
+            {!disabled && !label && (
+              <View style={styles.dropdownIcon}>
+                <Icon
+                  color={colors.gray.base}
+                  name="arrow-drop-down"
+                  size={10}
+                />
+              </View>
+            )}
           </View>
         </TouchableWithoutFeedback>
 
