@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         paddingVertical: 5
+      },
+      android: {
+        paddingBottom: 0
       }
     })
   },
