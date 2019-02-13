@@ -86,7 +86,7 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
       onRequestClose={onClose}
     >
       <View style={styles.modalContent}>
-        <Touchable onPress={onClose}>
+        <Touchable style={{ flex: 1 }} onPress={onClose}>
           <View style={styles.overlay} />
         </Touchable>
 
