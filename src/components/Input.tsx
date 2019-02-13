@@ -118,8 +118,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
       readOnly,
       required,
       keyboardType,
-      disabled,
-      ...otherProps
+      disabled
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
@@ -141,7 +140,6 @@ class Input extends React.PureComponent<InputProps, InputState> {
               top: this.state.placeholderMarginTop
             }
           ]}
-          {...otherProps}
         >
           {placeholder}{" "}
           {required && !disabled && <Text color={colors.red.base}>*</Text>}
@@ -173,7 +171,6 @@ class Input extends React.PureComponent<InputProps, InputState> {
             selectionColor={colors.violet.base}
             editable={!(readOnly || disabled)}
             keyboardType={keyboardType}
-            {...otherProps}
           />
         )}
         <View
@@ -197,7 +194,6 @@ class Input extends React.PureComponent<InputProps, InputState> {
               styles.messageStyle,
               { color: getColor(errorMessage, successMessage) }
             ]}
-            {...otherProps}
           >
             {_message}
           </Text>
