@@ -5326,9 +5326,9 @@ expo-constants-interface@~2.0.0:
     expo-core "~2.0.0"
 
 expo-constants@~2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-2.0.0.tgz#8619d163432b4451a4a8cb50b864210deaa7b753"
-  integrity sha512-bHNaq5mUh0kwSW6z40uAy3SAUp9Ua+kNm3/6KaknIOm/tdFKR/PcXnHPEp71jwm5KpKKfhhLk9LXPT27d6r8mA==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-2.0.1.tgz#f3090e206da7c580c8dbb16178f918a8110644c2"
+  integrity sha512-OIT1afOYYSpDxnnTp5jNXNB2nfnbmykLT+fLaKTu60VdtrO0sr20eB30YwuALU7n/xSYM/xKPsP8jDCzq40YLw==
   dependencies:
     ua-parser-js "^0.7.19"
     uuid "^3.3.2"
@@ -5447,10 +5447,10 @@ expo-localization@~2.0.0:
     moment-timezone "^0.5.23"
     rtl-detect "^1.0.2"
 
-expo-location@~2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/expo-location/-/expo-location-2.0.0.tgz#8ce2502960abffaffa87e07939668f2bb03874d3"
-  integrity sha512-kVo07OWLSoSZPRxaocOyMtEuGPjRJ2hBFBd8/sHNaLTmdnFQMrG6lanwemORZSgYAUgSwGX1yrsn0I5trWofyQ==
+expo-location@~2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/expo-location/-/expo-location-2.0.1.tgz#44d5865640ce28a1683dec8ff9269e786b86aa2e"
+  integrity sha512-hd1lZ1yPh+q50AihNqdeAumr3R64fp7qKlJ/5Ry1ap519Gy3uA1y+XOw5HHNXDw+/fbO9O1xBLpAuJUbZxVk8w==
   dependencies:
     invariant "^2.2.4"
 
@@ -5545,9 +5545,9 @@ expo-task-manager@~1.0.0:
     expo-task-manager-interface "~1.0.0"
 
 expo@^32.0.0:
-  version "32.0.0"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-32.0.0.tgz#c5b0120fdbd76ab9b14476482d525fde23effdbf"
-  integrity sha512-y8qB9LF3rKvwMJjS4WdKW+skBcalPua0GqrjsKQVRjjntNuCMdmtXzCnI7ukcXMnV9Awa0txKtH/2pfsE08e5Q==
+  version "32.0.5"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-32.0.5.tgz#ebfa6a12d6f11938264392ec7300ccc4368678fd"
+  integrity sha512-xo8wZ9/4F3P1xN9nKFSJM3Gb2m0p05aRncjgFF+jxM5XfvKkUrzW0a6FYOY/h/r2r1wyQI7OTBPTiTH/GxuwgA==
   dependencies:
     "@babel/runtime" "^7.1.2"
     "@expo/vector-icons" "github:expo/vector-icons#expo-font-fix"
@@ -5587,7 +5587,7 @@ expo@^32.0.0:
     expo-image-loader-interface "~2.0.0"
     expo-local-authentication "~2.0.0"
     expo-localization "~2.0.0"
-    expo-location "~2.0.0"
+    expo-location "~2.0.1"
     expo-media-library "~2.0.0"
     expo-payments-stripe "~2.0.0"
     expo-permissions "~2.0.0"
@@ -5611,10 +5611,10 @@ expo@^32.0.0:
     prop-types "^15.6.0"
     qs "^6.5.0"
     react-native-branch "2.2.5"
-    react-native-gesture-handler "1.0.12"
+    react-native-gesture-handler "~1.0.14"
     react-native-maps expo/react-native-maps#v0.22.1-exp.0
     react-native-reanimated "1.0.0-alpha.11"
-    react-native-screens "1.0.0-alpha.19"
+    react-native-screens "1.0.0-alpha.22"
     react-native-svg "8.0.10"
     react-native-view-shot "2.5.0"
     serialize-error "^2.1.0"
@@ -8496,9 +8496,9 @@ moment-timezone@^0.5.23:
     moment ">= 2.9.0"
 
 "moment@>= 2.9.0", moment@^2.22.2:
-  version "2.23.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
-  integrity sha512-3IE39bHVqFbWWaPOMHZF98Q9c3LDKGTmypMiTM2QygGXXElkFWIH7GxfmlwmY2vwa+wmNsoYZmG2iusf1ZjJoA==
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 morgan@^1.9.0:
   version "1.9.1"
@@ -9855,10 +9855,10 @@ react-native-color-picker@^0.4.0:
     prop-types "^15.5.10"
     tinycolor2 "^1.4.1"
 
-react-native-gesture-handler@1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.12.tgz#99a22f90212df299245357dbd3a9a01c788f310b"
-  integrity sha512-Qp5FjRmqUFeCevSu2IYQG1Xw+YXZ9YOzqze/ZxaIvWzYAoKsRchlgHhNoxvCqElp/befrnVFIjAEQyUxcmBKJw==
+react-native-gesture-handler@~1.0.14:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.15.tgz#7e0d0a457820a3c9325a3d492daaed14400508a6"
+  integrity sha512-BePn+YOKcspHb1xPkUdJs+H6jiaECrT2c98txADBYWHwuUeundE+uUJG0r3FQLFvM2MoGeiJeD96sePzk+WSvQ==
   dependencies:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.2"
@@ -9917,10 +9917,10 @@ react-native-safe-module@^1.1.0:
   dependencies:
     dedent "^0.6.0"
 
-react-native-screens@1.0.0-alpha.19:
-  version "1.0.0-alpha.19"
-  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.19.tgz#ecf3c9023e169b7013266d40b9c5599f37667f6d"
-  integrity sha512-+a7GdwzLWYWYVUJMg+XuyBoRFGD8GdGyBfebuTNBY+xwUZpTXCaK/GlLGL6EE3h0iBHZu83do7zViEailWRNyA==
+react-native-screens@1.0.0-alpha.22:
+  version "1.0.0-alpha.22"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.22.tgz#7a120377b52aa9bbb94d0b8541a014026be9289b"
+  integrity sha512-kSyAt0AeVU6N7ZonfV6dP6iZF8B7Bce+tk3eujXhzBGsLg0VSLnU7uE9VqJF0xdQrHR91ZjGgVMieo/8df9KTA==
 
 react-native-simple-markdown@^1.1.0:
   version "1.1.0"
