@@ -6,6 +6,7 @@ import Button from "./Button";
 import { ActionModalProps } from "./typings/ActionModal";
 import Icon from "@anarock/pebble/native/Icon";
 import Touchable from "./shared/Touchable";
+import ConditionalComponent from "./shared/ConditionalComponent";
 
 const styles = StyleSheet.create({
   modalContent: {
@@ -21,7 +22,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
-    overflow: "hidden"
+    overflow: "hidden",
+    backgroundColor: colors.white.base
   },
   container: {
     maxHeight: Math.min(472, Dimensions.get("window").height * 0.6),
@@ -93,25 +95,27 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
         <View />
 
         <View style={styles.wrapper}>
-          {header && (
-            <View
-              style={[
-                styles.header,
-                { backgroundColor: headerTypeToColor[headerType].light }
-              ]}
-            >
-              <Icon
-                name={headerTypeToColor[headerType].icon}
-                color={headerTypeToColor[headerType].dark}
-                size={14}
-              />
-              <Text color={headerTypeToColor[headerType].dark} size={15}>
-                {" " + header}
-              </Text>
-            </View>
-          )}
+          <ConditionalComponent conditional={header}>
+            {_header => (
+              <View
+                style={[
+                  styles.header,
+                  { backgroundColor: headerTypeToColor[headerType].light }
+                ]}
+              >
+                <Icon
+                  name={headerTypeToColor[headerType].icon}
+                  color={headerTypeToColor[headerType].dark}
+                  size={14}
+                />
+                <Text color={headerTypeToColor[headerType].dark} size={15}>
+                  {" " + _header}
+                </Text>
+              </View>
+            )}
+          </ConditionalComponent>
           <View style={[styles.container, style.container]}>
-            {title && (
+            {!!title && (
               <View style={[styles.titleWrapper, style.container]}>
                 <Text size={15} color={colors.gray.dark}>
                   {title}
