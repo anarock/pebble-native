@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, TextInput, Animated, Platform } from "react-native";
+import { View, StyleSheet, TextInput, Animated } from "react-native";
 import { InputProps, InputState } from "./typings/Input";
 import colors from "../theme/colors";
 import Text from "./Text";
@@ -13,19 +13,12 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     marginBottom: 0,
+    paddingBottom: 0,
     color: colors.gray.darker,
     fontSize: 15,
-    marginTop: 15,
+    marginTop: 8,
     paddingHorizontal: 0,
-    fontFamily: "anarock_regular",
-    ...Platform.select({
-      ios: {
-        paddingVertical: 5
-      },
-      android: {
-        paddingBottom: 0
-      }
-    })
+    fontFamily: "anarock_regular"
   },
   highlight: {
     height: 1,
@@ -152,7 +145,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
           <Text
             color={colors.gray.darker}
             size={15}
-            style={[styles.readOnly, !value ? { marginBottom: 20 } : undefined]}
+            style={[styles.readOnly, !value ? { marginBottom: 15 } : undefined]}
             numberOfLines={1}
             ellipsizeMode="tail"
           >
@@ -185,7 +178,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
               ? {
                   height: 2,
                   backgroundColor: getColor(errorMessage, successMessage, true),
-                  marginTop: -2
+                  marginTop: -1
                 }
               : {},
             disabled && { backgroundColor: "transparent" }
