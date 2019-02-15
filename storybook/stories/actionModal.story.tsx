@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingVertical: 20,
     paddingHorizontal: 25
+  },
+  textInput: {
+    textAlignVertical: "top"
   }
 });
 
@@ -73,14 +76,12 @@ storiesOf("ActionModal", module)
               }
             }}
             header={
-              <View>
-                <View style={styles.container}>
-                  <Text>Add a note</Text>
+              <View style={styles.container}>
+                <Text>Add a note</Text>
 
-                  <Text color={colors.violet.base} onPress={() => {}}>
-                    Save
-                  </Text>
-                </View>
+                <Text color={colors.violet.base} onPress={() => {}}>
+                  Save
+                </Text>
               </View>
             }
           >
@@ -88,9 +89,7 @@ storiesOf("ActionModal", module)
               placeholder="Enter Note"
               multiline
               numberOfLines={6}
-              style={{
-                textAlignVertical: "top"
-              }}
+              style={styles.textInput}
             />
           </ActionModal>
         </>
