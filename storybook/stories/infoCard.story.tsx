@@ -25,30 +25,6 @@ storiesOf("InfoCard", module)
       <View style={{ width: "100%" }}>
         <InfoCard
           title="Additional Client Info"
-          content={
-            <View style={{ marginTop: 8 }}>
-              <List
-                style={{ paddingVertical: 8 }}
-                title="Age"
-                description="Below 25"
-              />
-              <List
-                style={{ paddingVertical: 8 }}
-                title="Age"
-                description="Below 25"
-              />
-              <List
-                style={{ paddingVertical: 8 }}
-                title="Age"
-                description="Below 25"
-              />
-              <List
-                style={{ paddingVertical: 8 }}
-                title="Age"
-                description="Below 25"
-              />
-            </View>
-          }
           linkText="Hellllooooo"
           topRightElement={
             <Touchable>
@@ -57,7 +33,30 @@ storiesOf("InfoCard", module)
               </Text>
             </Touchable>
           }
-        />
+        >
+          <View style={{ marginTop: 8 }}>
+            <List
+              style={{ paddingVertical: 8 }}
+              title="Age"
+              description="Below 25"
+            />
+            <List
+              style={{ paddingVertical: 8 }}
+              title="Age"
+              description="Below 25"
+            />
+            <List
+              style={{ paddingVertical: 8 }}
+              title="Age"
+              description="Below 25"
+            />
+            <List
+              style={{ paddingVertical: 8 }}
+              title="Age"
+              description="Below 25"
+            />
+          </View>
+        </InfoCard>
       </View>
     </CenterView>
   ))
@@ -67,30 +66,6 @@ storiesOf("InfoCard", module)
       <View style={{ width: "100%" }}>
         <InfoCard
           title="Additional Client Info"
-          content={
-            <View style={{ marginTop: 8 }}>
-              <List
-                style={{ paddingVertical: 8 }}
-                title="Age"
-                description="Below 25"
-              />
-              <List
-                style={{ paddingVertical: 8 }}
-                title="Ethnicity"
-                description="Marathi"
-              />
-              <List
-                style={{ paddingVertical: 8 }}
-                title="Residential Address"
-                description="B-303, Piramal Ananya, Ambedkar Road, Worli"
-              />
-              <List
-                style={{ paddingVertical: 8 }}
-                title="Residential Address"
-                description="B-303, Piramal Ananya, Ambedkar Road, Worli"
-              />
-            </View>
-          }
           linkText="View More"
           topRightElement={
             <Touchable>
@@ -100,7 +75,30 @@ storiesOf("InfoCard", module)
             </Touchable>
           }
           expandable
-        />
+        >
+          <View style={{ marginTop: 8 }}>
+            <List
+              style={{ paddingVertical: 8 }}
+              title="Age"
+              description="Below 25"
+            />
+            <List
+              style={{ paddingVertical: 8 }}
+              title="Ethnicity"
+              description="Marathi"
+            />
+            <List
+              style={{ paddingVertical: 8 }}
+              title="Residential Address"
+              description="B-303, Piramal Ananya, Ambedkar Road, Worli"
+            />
+            <List
+              style={{ paddingVertical: 8 }}
+              title="Residential Address"
+              description="B-303, Piramal Ananya, Ambedkar Road, Worli"
+            />
+          </View>
+        </InfoCard>
       </View>
     </CenterView>
   ));
