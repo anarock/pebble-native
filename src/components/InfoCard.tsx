@@ -91,7 +91,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
       topRightElement,
       expandable,
       children,
-      style,
+      style = {},
       content
     } = this.props;
 
