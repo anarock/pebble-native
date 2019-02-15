@@ -6,9 +6,15 @@ export interface InfoCardProps {
   linkText?: string;
   onPress?: () => void;
   image?: ImageSourcePropType;
+  /**
+   * @deprecated Use children instead of content.
+   */
   content?: JSX.Element;
   topRightElement?: JSX.Element;
   expandable?: boolean;
+  style?: {
+    container?: any;
+  };
 }
 
 export interface InfoCardState {
