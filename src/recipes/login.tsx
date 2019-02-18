@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text } from "react-native";
 import * as React from "react";
 import { Button, Icon, colors, Controls, Input } from "../";
+import Touchable from "../components/shared/Touchable";
 // import OtpPage from "./OtpPage";
 
 interface LoginProps {
@@ -69,6 +70,59 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     });
   };
 
+  getOtpPage = () => {
+    const { loginUserValue } = this.props;
+
+    return (
+      <View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center"
+          }}
+        >
+          <Text style={{ fontSize: 15, fontWeight: "bold", flexGrow: 1 }}>
+            {loginUserValue}
+          </Text>
+          <Touchable
+            onPress={() => this.setState({ loginPage: LOGIN_PAGE.USER_PAGE })}
+          >
+            <Text
+              style={{
+                padding: 10,
+                color: colors.violet.base,
+                fontWeight: "bold"
+              }}
+            >
+              Edit
+            </Text>
+          </Touchable>
+        </View>
+        <View style={{ display: "flex", flexDirection: "row", marginTop: 70 }}>
+          <Input
+            placeholder="Enter OTP"
+            onChange={() => {}}
+            style={{ marginRight: 20, flexShrink: 1 }}
+          />
+          <Touchable onPress={() => {}}>
+            <Text
+              style={{
+                padding: 10,
+                color: colors.violet.base,
+                fontWeight: "bold"
+              }}
+            >
+              Resend
+            </Text>
+          </Touchable>
+        </View>
+        <Button style={{ marginTop: 50 }} onPress={() => {}}>
+          Sign in
+        </Button>
+      </View>
+    );
+  };
+
   render() {
     const { loginMethod, loginPage, sendingOTP } = this.state;
     const { loginUserChange, loginUserValue } = this.props;
@@ -112,19 +166,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               </Button>
             </>
           )}
-          {loginPage === LOGIN_PAGE.OTP_PAGE && (
-            <Text
-              onPress={() => this.setState({ loginPage: LOGIN_PAGE.USER_PAGE })}
-            >
-              Something will come
-            </Text>
+          {loginPage === LOGIN_PAGE.OTP_PAGE &&
+            this.getOtpPage()
             // <OtpPage
             //   loginUser={loginUser}
             //   onEditUser={() =>
             //     this.setState({ loginPage: LOGIN_PAGE.USER_PAGE })
             //   }
             // />
-          )}
+          }
         </View>
       </View>
     );
