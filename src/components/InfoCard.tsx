@@ -88,13 +88,17 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
       title,
       description,
       image,
-      content,
       topRightElement,
-      expandable
+      expandable,
+      children,
+      style = {},
+      content
     } = this.props;
 
+    const _children = content || children;
+
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, style.container]}>
         <View style={styles.topSection}>
           <View style={styles.row}>
             <Text size={13} color={colors.gray.dark}>
@@ -103,13 +107,13 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
 
             {topRightElement}
           </View>
-          {content ? (
+          {_children ? (
             <View
               style={
                 expandable && !this.state.isOpen ? styles.content : undefined
               }
             >
-              {content}
+              {_children}
             </View>
           ) : (
             <View>
