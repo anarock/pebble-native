@@ -3,6 +3,18 @@ import * as React from "react";
 import { Button, Icon, colors, Controls, Input } from "../";
 // import OtpPage from "./OtpPage";
 
+interface LoginProps {
+  loginUserValue: string;
+  loginUserChange: (value: string) => void;
+  onSendOtp: () => void;
+}
+
+interface LoginState {
+  loginMethod: number;
+  loginPage: number;
+  sendingOTP: boolean;
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -27,8 +39,8 @@ const styles = StyleSheet.create({
 });
 
 enum LOGIN_OPTIONS {
-  EMAIL = 1,
-  PHONE
+  PHONE = 1,
+  EMAIL
 }
 
 enum LOGIN_PAGE {
@@ -41,16 +53,25 @@ const LOGIN_METHODS = [
   { id: LOGIN_OPTIONS.EMAIL, name: "Email Address" }
 ];
 
-export default class Login extends React.PureComponent {
+export default class Login extends React.PureComponent<LoginProps, LoginState> {
   state = {
     loginMethod: LOGIN_OPTIONS.PHONE,
-    loginUser: "",
     loginPage: LOGIN_PAGE.USER_PAGE,
     sendingOTP: false
   };
 
+  onSendOtp = async () => {
+    this.setState({ sendingOTP: true });
+    await this.props.onSendOtp();
+    this.setState({
+      sendingOTP: false,
+      loginPage: LOGIN_PAGE.OTP_PAGE
+    });
+  };
+
   render() {
-    const { loginMethod, loginUser, loginPage, sendingOTP } = this.state;
+    const { loginMethod, loginPage, sendingOTP } = this.state;
+    const { loginUserChange, loginUserValue } = this.props;
 
     return (
       <View style={styles.container}>
@@ -63,16 +84,17 @@ export default class Login extends React.PureComponent {
                 type="radio"
                 selected={loginMethod}
                 data={LOGIN_METHODS}
-                onChange={({ selected }) =>
-                  this.setState({ loginMethod: selected })
-                }
+                onChange={({ selected }) => {
+                  loginUserChange("");
+                  this.setState({ loginMethod: selected as number });
+                }}
               />
               <Input
                 placeholder={
                   LOGIN_METHODS.find(option => option.id === loginMethod)!.name
                 }
-                onChange={value => this.setState({ loginUser: value })}
-                value={loginUser}
+                onChange={loginUserChange}
+                value={loginUserValue}
                 style={styles.loginUserInput}
                 keyboardType={
                   loginMethod === LOGIN_OPTIONS.PHONE
@@ -82,18 +104,8 @@ export default class Login extends React.PureComponent {
               />
               <Button
                 type="primary"
-                onPress={() => {
-                  this.setState({ sendingOTP: true });
-                  setTimeout(
-                    () =>
-                      this.setState({
-                        sendingOTP: false,
-                        loginPage: LOGIN_PAGE.OTP_PAGE
-                      }),
-                    2000
-                  );
-                }}
-                disabled={!loginUser}
+                onPress={this.onSendOtp}
+                disabled={!loginUserValue}
                 loading={sendingOTP}
               >
                 Send OTP
