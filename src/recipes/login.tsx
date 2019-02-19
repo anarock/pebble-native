@@ -6,8 +6,12 @@ import Touchable from "../components/shared/Touchable";
 
 interface LoginProps {
   loginUserValue: string;
-  loginUserChange: (value: string) => void;
+  onLoginUserChange: (value: string) => void;
   onSendOtp: () => void;
+  otpValue: string;
+  onOtpChange: (value: string) => void;
+  onResendOtp: () => void;
+  onSignIn: () => void;
 }
 
 interface LoginState {
@@ -71,10 +75,16 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   };
 
   getOtpPage = () => {
-    const { loginUserValue } = this.props;
+    const {
+      loginUserValue,
+      otpValue,
+      onOtpChange,
+      onResendOtp,
+      onSignIn
+    } = this.props;
 
     return (
-      <View>
+      <>
         <View
           style={{
             flexDirection: "row",
@@ -85,7 +95,10 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             {loginUserValue}
           </Text>
           <Touchable
-            onPress={() => this.setState({ loginPage: LOGIN_PAGE.USER_PAGE })}
+            onPress={() => {
+              this.setState({ loginPage: LOGIN_PAGE.USER_PAGE });
+              onOtpChange("");
+            }}
           >
             <Text
               style={{
@@ -101,11 +114,12 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
         <View style={{ flexDirection: "row", marginTop: 70 }}>
           <Input
             placeholder="Enter OTP"
-            onChange={() => {}}
+            onChange={onOtpChange}
+            value={otpValue}
             style={{ marginRight: 20, flexShrink: 1, marginBottom: 0 }}
           />
           <View>
-            <Touchable onPress={() => {}}>
+            <Touchable onPress={onResendOtp}>
               <Text
                 style={{
                   color: colors.violet.base,
@@ -118,16 +132,16 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             </Touchable>
           </View>
         </View>
-        <Button style={{ marginTop: 50 }} onPress={() => {}}>
+        <Button style={{ marginTop: 50 }} onPress={onSignIn}>
           Sign in
         </Button>
-      </View>
+      </>
     );
   };
 
   render() {
     const { loginMethod, loginPage, sendingOTP } = this.state;
-    const { loginUserChange, loginUserValue } = this.props;
+    const { onLoginUserChange, loginUserValue } = this.props;
 
     return (
       <View style={styles.container}>
@@ -141,7 +155,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 selected={loginMethod}
                 data={LOGIN_METHODS}
                 onChange={({ selected }) => {
-                  loginUserChange("");
+                  onLoginUserChange("");
                   this.setState({ loginMethod: selected as number });
                 }}
               />
@@ -149,7 +163,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 placeholder={
                   LOGIN_METHODS.find(option => option.id === loginMethod)!.name
                 }
-                onChange={loginUserChange}
+                onChange={onLoginUserChange}
                 value={loginUserValue}
                 style={styles.loginUserInput}
                 keyboardType={
@@ -168,14 +182,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               </Button>
             </>
           )}
-          {loginPage === LOGIN_PAGE.OTP_PAGE && this.getOtpPage()
-          // <OtpPage
-          //   loginUser={loginUser}
-          //   onEditUser={() =>
-          //     this.setState({ loginPage: LOGIN_PAGE.USER_PAGE })
-          //   }
-          // />
-          }
+          {loginPage === LOGIN_PAGE.OTP_PAGE && this.getOtpPage()}
         </View>
       </View>
     );

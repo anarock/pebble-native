@@ -6,12 +6,16 @@ import { colors } from "../../src/theme";
 import Container from "../shared/Container";
 
 storiesOf("Login", module).add("Default", () => (
-  <Container initialState={{ username: "" }}>
+  <Container initialState={{ username: "", otp: "" }}>
     {({ setState, store }) => (
       <Login
         loginUserValue={store.username}
-        loginUserChange={username => setState({ username })}
+        onLoginUserChange={username => setState({ username })}
         onSendOtp={() => new Promise(resolve => setTimeout(resolve, 2000))}
+        otpValue={store.otp}
+        onOtpChange={otp => setState({ otp })}
+        onResendOtp={() => {}}
+        onSignIn={() => {}}
       />
     )}
   </Container>
