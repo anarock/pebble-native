@@ -1,8 +1,15 @@
 import { StyleSheet, View, Text } from "react-native";
 import * as React from "react";
-import { Button, Icon, colors, Controls, Input } from "../";
+import { Button, Icon, colors, Controls, Input, Select } from "../";
 import Touchable from "../components/shared/Touchable";
 // import OtpPage from "./OtpPage";
+
+interface OperationalCountry {
+  id: number;
+  name: string;
+  url_name: string;
+  country_code: string;
+}
 
 interface LoginProps {
   loginUserValue: string;
@@ -12,6 +19,9 @@ interface LoginProps {
   onOtpChange: (value: string) => void;
   onResendOtp: () => void;
   onSignIn: () => void;
+  countriesList: OperationalCountry[];
+  onCountryChange: (country: OperationalCountry) => void;
+  selectedCountry: number;
 }
 
 interface LoginState {
@@ -39,7 +49,8 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   loginUserInput: {
-    marginTop: 60
+    marginTop: 60,
+    flexDirection: "row"
   }
 });
 
@@ -141,7 +152,13 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   render() {
     const { loginMethod, loginPage, sendingOTP } = this.state;
-    const { onLoginUserChange, loginUserValue } = this.props;
+    const {
+      onLoginUserChange,
+      loginUserValue,
+      countriesList,
+      onCountryChange,
+      selectedCountry
+    } = this.props;
 
     return (
       <View style={styles.container}>
@@ -159,19 +176,41 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   this.setState({ loginMethod: selected as number });
                 }}
               />
-              <Input
-                placeholder={
-                  LOGIN_METHODS.find(option => option.id === loginMethod)!.name
-                }
-                onChange={onLoginUserChange}
-                value={loginUserValue}
-                style={styles.loginUserInput}
-                keyboardType={
-                  loginMethod === LOGIN_OPTIONS.PHONE
-                    ? "number-pad"
-                    : "email-address"
-                }
-              />
+              <View style={styles.loginUserInput}>
+                {loginMethod === LOGIN_OPTIONS.EMAIL ? (
+                  <Input
+                    placeholder="Email Address"
+                    onChange={onLoginUserChange}
+                    value={loginUserValue}
+                    keyboardType="email-address"
+                  />
+                ) : (
+                  <>
+                    <View style={{ width: 100, marginRight: 30 }}>
+                      <Select
+                        options={countriesList}
+                        valueExtractor={item => item && item.country_code}
+                        rowLabelExtractor={item =>
+                          `${item.name} (${item.country_code})`
+                        }
+                        keyExtractor={item => item.id}
+                        placeholder="ISD Code"
+                        onSelect={onCountryChange}
+                        selected={selectedCountry}
+                      />
+                    </View>
+                    <View style={{ flex: 1, marginTop: 6 }}>
+                      <Input
+                        placeholder="Phone"
+                        required
+                        value={loginUserValue}
+                        keyboardType="phone-pad"
+                        onChange={onLoginUserChange}
+                      />
+                    </View>
+                  </>
+                )}
+              </View>
               <Button
                 type="primary"
                 onPress={this.onSendOtp}
