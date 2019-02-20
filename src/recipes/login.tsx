@@ -51,7 +51,21 @@ const styles = StyleSheet.create({
   loginUserInput: {
     marginTop: 60,
     flexDirection: "row"
-  }
+  },
+  userInfoWrap: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  loginUserText: { fontSize: 15, fontWeight: "bold", flexGrow: 1 },
+  textButton: {
+    padding: 10,
+    color: colors.violet.base,
+    fontWeight: "bold"
+  },
+  otpInput: { marginRight: 20, flexShrink: 1, marginBottom: 0 },
+  countrySelect: { width: 100, marginRight: 30 },
+  phoneInput: { flex: 1, marginTop: 6 },
+  otpInputWrap: { flexDirection: "row", marginTop: 70 }
 });
 
 enum LOGIN_OPTIONS {
@@ -96,50 +110,27 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
     return (
       <>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center"
-          }}
-        >
-          <Text style={{ fontSize: 15, fontWeight: "bold", flexGrow: 1 }}>
-            {loginUserValue}
-          </Text>
+        <View style={styles.userInfoWrap}>
+          <Text style={styles.loginUserText}>{loginUserValue}</Text>
           <Touchable
             onPress={() => {
               this.setState({ loginPage: LOGIN_PAGE.USER_PAGE });
               onOtpChange("");
             }}
           >
-            <Text
-              style={{
-                padding: 10,
-                color: colors.violet.base,
-                fontWeight: "bold"
-              }}
-            >
-              Edit
-            </Text>
+            <Text style={styles.textButton}>Edit</Text>
           </Touchable>
         </View>
-        <View style={{ flexDirection: "row", marginTop: 70 }}>
+        <View style={styles.otpInputWrap}>
           <Input
             placeholder="Enter OTP"
             onChange={onOtpChange}
             value={otpValue}
-            style={{ marginRight: 20, flexShrink: 1, marginBottom: 0 }}
+            style={styles.otpInput}
           />
           <View>
             <Touchable onPress={onResendOtp}>
-              <Text
-                style={{
-                  color: colors.violet.base,
-                  fontWeight: "bold",
-                  padding: 10
-                }}
-              >
-                Resend
-              </Text>
+              <Text style={styles.textButton}>Resend</Text>
             </Touchable>
           </View>
         </View>
@@ -186,7 +177,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   />
                 ) : (
                   <>
-                    <View style={{ width: 100, marginRight: 30 }}>
+                    <View style={styles.countrySelect}>
                       <Select
                         options={countriesList}
                         valueExtractor={item => item && item.country_code}
@@ -199,7 +190,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                         selected={selectedCountry}
                       />
                     </View>
-                    <View style={{ flex: 1, marginTop: 6 }}>
+                    <View style={styles.phoneInput}>
                       <Input
                         placeholder="Phone"
                         required
