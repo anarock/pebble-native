@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
   otpInput: { marginRight: 20, flexShrink: 1, marginBottom: 0 },
   countrySelect: { width: 100, marginRight: 30 },
   phoneInput: { flex: 1, marginTop: 5 },
-  otpInputWrap: { flexDirection: "row", marginTop: 70 }
+  otpInputWrap: { flexDirection: "row", marginTop: 70 },
+  countdownStyles: { marginTop: 10, fontWeight: "bold" }
 });
 
 enum LOGIN_OPTIONS {
@@ -139,8 +140,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             )}
             {!otpTimeout && (
               <Countdown
-                style={{ marginTop: 10, fontWeight: "bold" }}
-                time={10}
+                style={styles.countdownStyles}
                 onFinish={() => this.setState({ otpTimeout: true })}
               />
             )}
