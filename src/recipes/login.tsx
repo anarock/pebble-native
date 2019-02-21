@@ -2,6 +2,7 @@ import { StyleSheet, View, Text } from "react-native";
 import * as React from "react";
 import { Button, colors, Controls, Input, Select } from "../";
 import Touchable from "../components/shared/Touchable";
+import Countdown from "../components/shared/Countdown";
 
 interface OperationalCountry {
   id: number;
@@ -27,6 +28,7 @@ interface LoginState {
   loginMethod: number;
   loginPage: number;
   sendingOTP: boolean;
+  otpTimeout: boolean;
 }
 
 const styles = StyleSheet.create({
@@ -86,7 +88,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   state = {
     loginMethod: LOGIN_OPTIONS.PHONE,
     loginPage: LOGIN_PAGE.USER_PAGE,
-    sendingOTP: false
+    sendingOTP: false,
+    otpTimeout: false
   };
 
   onSendOtp = async () => {
@@ -98,14 +101,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     });
   };
 
+  onResendOtp = () => {
+    this.setState({ otpTimeout: false });
+    this.props.onResendOtp();
+  };
+
   getOtpPage = () => {
-    const {
-      loginUserValue,
-      otpValue,
-      onOtpChange,
-      onResendOtp,
-      onSignIn
-    } = this.props;
+    const { loginUserValue, otpValue, onOtpChange, onSignIn } = this.props;
+
+    const { otpTimeout } = this.state;
 
     return (
       <>
@@ -128,9 +132,18 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             style={styles.otpInput}
           />
           <View>
-            <Touchable onPress={onResendOtp}>
-              <Text style={styles.textButton}>Resend</Text>
-            </Touchable>
+            {otpTimeout && (
+              <Touchable onPress={this.onResendOtp}>
+                <Text style={styles.textButton}>Resend</Text>
+              </Touchable>
+            )}
+            {!otpTimeout && (
+              <Countdown
+                style={{ marginTop: 10, fontWeight: "bold" }}
+                time={10}
+                onFinish={() => this.setState({ otpTimeout: true })}
+              />
+            )}
           </View>
         </View>
         <Button style={{ marginTop: 50 }} onPress={onSignIn}>
