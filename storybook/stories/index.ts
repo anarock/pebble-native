@@ -15,3 +15,4 @@ import "./rating.story";
 import "./avatar.story";
 import "./login.story";
 import "./actionModal.story";
+import "./countdown.story";

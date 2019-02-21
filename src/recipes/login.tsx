@@ -1,8 +1,7 @@
 import { StyleSheet, View, Text } from "react-native";
 import * as React from "react";
-import { Button, Icon, colors, Controls, Input, Select } from "../";
+import { Button, colors, Controls, Input, Select } from "../";
 import Touchable from "../components/shared/Touchable";
-// import OtpPage from "./OtpPage";
 
 interface OperationalCountry {
   id: number;
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
   },
   otpInput: { marginRight: 20, flexShrink: 1, marginBottom: 0 },
   countrySelect: { width: 100, marginRight: 30 },
-  phoneInput: { flex: 1, marginTop: 6 },
+  phoneInput: { flex: 1, marginTop: 5 },
   otpInputWrap: { flexDirection: "row", marginTop: 70 }
 });
 
