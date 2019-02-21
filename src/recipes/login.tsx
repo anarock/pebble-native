@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   countrySelect: { width: 100, marginRight: 30 },
   phoneInput: { flex: 1, marginTop: 5 },
   otpInputWrap: { flexDirection: "row", marginTop: 70 },
-  countdownStyles: { marginTop: 10, fontWeight: "bold" }
+  countdownStyles: { marginTop: 10, fontWeight: "bold", marginHorizontal: 10 }
 });
 
 enum LOGIN_OPTIONS {
@@ -205,7 +205,6 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     <View style={styles.phoneInput}>
                       <Input
                         placeholder="Phone"
-                        required
                         value={loginUserValue}
                         keyboardType="phone-pad"
                         onChange={onLoginUserChange}
