@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text } from "react-native";
 import * as React from "react";
-import { Button, colors, Controls, Input, Select } from "../";
+import { Button, Controls, Input, Select } from "../components";
+import { colors } from "../theme";
 import Touchable from "../components/shared/Touchable";
 import Countdown from "../components/shared/Countdown";
 
@@ -131,6 +132,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             onChange={onOtpChange}
             value={otpValue}
             style={styles.otpInput}
+            keyboardType="number-pad"
           />
           <View>
             {otpTimeout && (

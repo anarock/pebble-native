@@ -1,5 +1,7 @@
-import Icon from "@anarock/pebble/native/Icon"
+import Icon from "@anarock/pebble/native/Icon";
 
 export * from "./components";
 export * from "./theme";
-export { Icon }
+export * from "./recipes";
+
+export { Icon };

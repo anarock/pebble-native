@@ -1,6 +1,6 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react-native";
-import Login from "../../src/recipes/login";
+import { Login } from "../../src/recipes";
 import Container from "../shared/Container";
 
 const COUNTRIES = [
