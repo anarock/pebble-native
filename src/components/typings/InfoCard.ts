@@ -15,6 +15,7 @@ export interface InfoCardProps {
   style?: {
     container?: any;
     topSection?: any;
+    heading?: any;
   };
 }
 
