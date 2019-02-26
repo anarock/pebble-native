@@ -12,9 +12,9 @@ storiesOf("Card", module)
       <View style={{ width: "100%" }}>
         <Card
           onPress={() => {}}
-          title="Hello World"
-          description="Kiki Do you love me?"
-          rightElement="Result"
+          title="Status"
+          description="Claimed"
+          rightElement="Move to"
         />
       </View>
     </CenterView>
@@ -25,7 +25,7 @@ storiesOf("Card", module)
         <Card
           onPress={() => {}}
           title={
-            <Text style={{ marginBottom: 6 }}>
+            <Text style={{ marginBottom: 4 }}>
               <Icon name="warning" size={11} color={colors.red.base} />{" "}
               <Text color={colors.red.base} size={13}>
                 Site visit missed 1d ago.
@@ -42,7 +42,7 @@ storiesOf("Card", module)
               color={colors.red.base}
               iconName="phone"
               style={{
-                marginTop: 6
+                marginBottom: 0
               }}
             />
           }

@@ -9,7 +9,7 @@ import Touchable from "./shared/Touchable";
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 25,
-    paddingVertical: 15,
+    paddingVertical: 20,
     backgroundColor: colors.white.base,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -40,7 +40,7 @@ const Card: React.FunctionComponent<CardProps> = ({
           </ConditionalComponent>
 
           <ConditionalComponent conditional={description}>
-            {_description => <Text>{_description}</Text>}
+            {_description => <Text size={15}>{_description}</Text>}
           </ConditionalComponent>
         </View>
 

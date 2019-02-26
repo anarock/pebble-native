@@ -42,6 +42,9 @@ const List: React.FunctionComponent<ListProps> = ({
               lineHeight={22}
               size={13}
               color={colors.gray.dark}
+              style={{
+                marginBottom: 1
+              }}
             >
               {title}
             </Text>

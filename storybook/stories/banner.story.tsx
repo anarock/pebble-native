@@ -8,7 +8,7 @@ storiesOf("Banner", module).add("Default", () => (
     <Banner
       title="No Booking Info"
       description="Kasturi Maniratnam is recently moved in final negotiations."
-      buttonText="NO BOOKING INFO"
+      buttonText="ADD BOOKING INFO"
       image={require("../../assets/contact.png")}
     />
   </CenterView>

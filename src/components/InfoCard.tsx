@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   content: {
-    maxHeight: 200,
+    maxHeight: 190,
     overflow: "hidden",
     zIndex: 1
   },

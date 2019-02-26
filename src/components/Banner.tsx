@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.gray.darker,
-    marginTop: 25,
+    marginTop: 30,
     height: 40,
     width: "50%"
   },
@@ -69,7 +69,7 @@ const Banner: React.FunctionComponent<BannerProps> = ({
 
         {!!buttonText && (
           <Button type="primary" style={styles.button} onPress={onPress}>
-            <Text color={colors.white.base} size={11}>
+            <Text color={colors.white.base} bold size={11}>
               {buttonText}
             </Text>
           </Button>
