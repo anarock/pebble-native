@@ -17,6 +17,7 @@ import Banner from "./Banner";
 import ImageThumbnail from "./ImageThumbnail";
 import Rating from "./Rating";
 import Avatar from "./Avatar";
+import Touchable from "./shared/Touchable";
 
 export {
   Input,
@@ -37,5 +38,6 @@ export {
   Banner,
   ImageThumbnail,
   Rating,
-  Avatar
+  Avatar,
+  Touchable
 };
