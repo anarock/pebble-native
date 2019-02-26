@@ -14,6 +14,7 @@ export interface InfoCardProps {
   expandable?: boolean;
   style?: {
     container?: any;
+    topSection?: any;
   };
 }
 

@@ -99,7 +99,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
 
     return (
       <View style={[styles.container, style.container]}>
-        <View style={styles.topSection}>
+        <View style={[styles.topSection, style.topSection]}>
           <View style={styles.row}>
             <Text size={13} color={colors.gray.dark}>
               {title}
