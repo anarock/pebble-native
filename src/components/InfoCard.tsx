@@ -50,16 +50,19 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
   };
 
   private getFooter = () => {
-    const { linkText, onPress, expandable } = this.props;
+    const { linkText, onPress, expandable, disabled } = this.props;
     const { isOpen } = this.state;
 
     if (expandable) {
       return (
         <Touchable
-          onPress={() =>
-            this.setState({
-              isOpen: !isOpen
-            })
+          onPress={
+            !disabled
+              ? () =>
+                  this.setState({
+                    isOpen: !isOpen
+                  })
+              : undefined
           }
         >
           <View style={styles.bottomSection}>
@@ -74,9 +77,11 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
 
     return (
       !!linkText && (
-        <Touchable onPress={onPress}>
+        <Touchable disabled={disabled} onPress={onPress}>
           <View style={styles.bottomSection}>
-            <Text color={colors.violet.base}>{linkText}</Text>
+            <Text color={disabled ? colors.gray.base : colors.violet.base}>
+              {linkText}
+            </Text>
           </View>
         </Touchable>
       )

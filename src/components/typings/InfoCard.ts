@@ -17,6 +17,7 @@ export interface InfoCardProps {
     topSection?: any;
     heading?: any;
   };
+  disabled?: boolean;
 }
 
 export interface InfoCardState {
