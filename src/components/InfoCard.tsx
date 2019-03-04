@@ -25,21 +25,25 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   imageWrapper: {
-    width: 150,
-    height: 60,
-    marginTop: 10,
-    alignSelf: "flex-end"
+    width: 200,
+    height: 140,
+    position: "absolute",
+    bottom: -45,
+    right: -25
   },
   descriptionText: {
     width: "60%",
     height: 60,
     position: "absolute",
-    marginTop: 10
+    marginTop: 20
   },
   content: {
     maxHeight: 190,
     overflow: "hidden",
     zIndex: 1
+  },
+  defaultContent: {
+    height: 80
   },
   row: { flexDirection: "row", justifyContent: "space-between" }
 });
@@ -121,7 +125,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
               {_children}
             </View>
           ) : (
-            <View>
+            <View style={styles.defaultContent}>
               {!!image && (
                 <Image
                   style={styles.imageWrapper as any}

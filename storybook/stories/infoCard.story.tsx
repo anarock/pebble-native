@@ -15,7 +15,7 @@ storiesOf("InfoCard", module)
           title="Additional Details"
           description="Have more information about Kasturi to add?"
           linkText="Click here to add"
-          image={require("../../assets/contact.png")}
+          image={require("../../assets/dummy.png")}
         />
       </View>
     </CenterView>

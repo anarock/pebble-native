@@ -9,7 +9,7 @@ storiesOf("Banner", module).add("Default", () => (
       title="No Booking Info"
       description="Kasturi Maniratnam is recently moved in final negotiations."
       buttonText="ADD BOOKING INFO"
-      image={require("../../assets/contact.png")}
+      image={require("../../assets/dummy.png")}
     />
   </CenterView>
 ));

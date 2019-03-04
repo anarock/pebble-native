@@ -17,17 +17,20 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.gray.darker,
-    marginTop: 30,
+    marginTop: 24,
     height: 40,
     width: "50%"
   },
   image: {
     position: "absolute",
-    height: "50%",
+    height: 100,
     right: 0,
-    bottom: 0,
-    width: 100,
+    bottom: -6,
+    width: 220,
     resizeMode: "contain"
+  },
+  desc: {
+    marginTop: 4
   }
 });
 
@@ -63,6 +66,7 @@ const Banner: React.FunctionComponent<BannerProps> = ({
           lineHeight={21}
           bold
           color={colors.gray.darker}
+          style={styles.desc}
         >
           {description}
         </Text>
