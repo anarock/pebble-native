@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@anarock/pebble@0.39.1":
-  version "0.39.1"
-  resolved "https://registry.yarnpkg.com/@anarock/pebble/-/pebble-0.39.1.tgz#3c310e79f721baddd1841937b8996cbf2086993e"
+"@anarock/pebble@^0.39.3":
+  version "0.39.3"
+  resolved "https://registry.yarnpkg.com/@anarock/pebble/-/pebble-0.39.3.tgz#5498ed6f1ef6cb02996691fe6064b09638160b76"
   dependencies:
     date-fns "^1.29.0"
     emotion "^9.2.12"
