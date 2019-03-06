@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   otpInput: { marginRight: 20, flexShrink: 1, marginBottom: 0 },
   countrySelect: { width: 100, marginRight: 30 },
-  phoneInput: { flex: 1, marginTop: 5 },
+  phoneInput: { flex: 1 },
   otpInputWrap: { flexDirection: "row", marginTop: 70 },
   countdownStyles: { marginTop: 10, fontWeight: "bold", marginHorizontal: 10 }
 });
