@@ -7,13 +7,13 @@ storiesOf("Banner", module).add("Default", () => (
   <CenterView style={{ paddingHorizontal: 0 }}>
     <Banner
       title="No Booking Info"
-      description="Kasturi Maniratnam is recently moved in final negotiations."
+      description="Kasturi lkjkljljlkj lkjlkjlkjlj  Maniratnam is recently moved in final negotiations."
       buttonText="ADD BOOKING INFO"
       image={require("../../assets/dummy.png")}
       imageStyle={{
         height: 130,
         width: 130,
-        bottom: -13
+        bottom: -6
       }}
     />
   </CenterView>

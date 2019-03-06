@@ -6,7 +6,6 @@ import Button from "./Button";
 
 const styles = StyleSheet.create({
   container: {
-    height: 195,
     backgroundColor: "#fdf2da",
     width: "100%",
     position: "relative"
@@ -30,7 +29,8 @@ const styles = StyleSheet.create({
     resizeMode: "contain"
   },
   desc: {
-    marginTop: 4
+    marginTop: 4,
+    width: "60%"
   }
 });
 
@@ -63,8 +63,6 @@ const Banner: React.FunctionComponent<BannerProps> = ({
           {title}
         </Text>
         <Text
-          numberOfLines={2}
-          ellipsizeMode="tail"
           lineHeight={21}
           bold
           color={colors.gray.darker}
