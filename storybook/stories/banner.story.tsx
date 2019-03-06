@@ -10,6 +10,11 @@ storiesOf("Banner", module).add("Default", () => (
       description="Kasturi Maniratnam is recently moved in final negotiations."
       buttonText="ADD BOOKING INFO"
       image={require("../../assets/dummy.png")}
+      imageStyle={{
+        height: 130,
+        width: 130,
+        bottom: -13
+      }}
     />
   </CenterView>
 ));

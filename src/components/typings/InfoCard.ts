@@ -16,6 +16,7 @@ export interface InfoCardProps {
     container?: any;
     topSection?: any;
     heading?: any;
+    imageWrapper?: any;
   };
   disabled?: boolean;
 }

@@ -25,11 +25,10 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   imageWrapper: {
-    width: 200,
-    height: 140,
+    height: 100,
     position: "absolute",
-    bottom: -45,
-    right: -25
+    bottom: -20,
+    right: -30
   },
   descriptionText: {
     width: "60%",
@@ -128,7 +127,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
             <View style={styles.defaultContent}>
               {!!image && (
                 <Image
-                  style={styles.imageWrapper as any}
+                  style={[styles.imageWrapper as any, style.imageWrapper]}
                   source={image}
                   resizeMode="contain"
                 />

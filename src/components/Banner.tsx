@@ -57,6 +57,8 @@ const Banner: React.FunctionComponent<BannerProps> = ({
   return (
     <View style={[styles.container, style]}>
       <View style={styles.innerContainer}>
+        {!!image && <Image source={image} style={[styles.image, imageStyle]} />}
+
         <Text style={styles.title} size={13} color={colors.gray.dark}>
           {title}
         </Text>
@@ -78,7 +80,6 @@ const Banner: React.FunctionComponent<BannerProps> = ({
             </Text>
           </Button>
         )}
-        {!!image && <Image source={image} style={[styles.image, imageStyle]} />}
       </View>
     </View>
   );

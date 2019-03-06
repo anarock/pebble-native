@@ -16,6 +16,13 @@ storiesOf("InfoCard", module)
           description="Have more information about Kasturi to add?"
           linkText="Click here to add"
           image={require("../../assets/dummy.png")}
+          style={{
+            imageWrapper: {
+              width: 120,
+              height: 120,
+              bottom: -26
+            }
+          }}
         />
       </View>
     </CenterView>
