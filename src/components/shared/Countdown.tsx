@@ -1,14 +1,15 @@
-import { StyleSheet, View, Text, StyleProp, TextStyle } from "react-native";
+import { Text, StyleProp, TextStyle } from "react-native";
 import * as React from "react";
 
 interface CountdownProps {
-  time: number; // in seconds
+  timerInterval: number; // in seconds
   counter: number; // in seconds
   style?: StyleProp<TextStyle>;
   onFinish: () => void;
 }
 
 interface CountdownState {
+  initialTime: number;
   timeRemaining: number;
 }
 
@@ -17,15 +18,29 @@ export default class Countdown extends React.PureComponent<
   CountdownState
 > {
   static defaultProps = {
-    time: 30,
+    timerInterval: 30,
     counter: 1000
   };
 
+  static getDerivedStateFromProps(
+    props: CountdownProps,
+    state: CountdownState
+  ) {
+    if (props.timerInterval !== state.initialTime) {
+      return {
+        initialTime: props.timerInterval,
+        timeRemaining: props.timerInterval
+      };
+    }
+    return null;
+  }
+
   state = {
-    timeRemaining: this.props.time
+    initialTime: this.props.timerInterval,
+    timeRemaining: this.props.timerInterval
   };
 
-  timer: any; // should be a number but TS is giving an error
+  timer: any; // should be number but TS is giving an error
 
   componentDidMount() {
     this.startCountdown();
