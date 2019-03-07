@@ -12,10 +12,17 @@ storiesOf("InfoCard", module)
       <View style={{ width: "100%" }}>
         <InfoCard
           onPress={() => {}}
-          title="Hello Kiki"
-          description="Kiki Do you love me?"
-          linkText="Nopes. You are a loser."
-          image={require("../../assets/contact.png")}
+          title="Additional Details"
+          description="Have more information about Kasturi to add?"
+          linkText="Click here to add"
+          image={require("../../assets/dummy.png")}
+          style={{
+            imageWrapper: {
+              width: 120,
+              height: 120,
+              bottom: -26
+            }
+          }}
         />
       </View>
     </CenterView>
@@ -42,13 +49,13 @@ storiesOf("InfoCard", module)
             />
             <List
               style={{ paddingVertical: 8 }}
-              title="Age"
-              description="Below 25"
+              title="Ethnicity"
+              description="Marathi"
             />
             <List
               style={{ paddingVertical: 8 }}
-              title="Age"
-              description="Below 25"
+              title="Residential Address"
+              description="B-303, Piramal"
             />
             <List
               style={{ paddingVertical: 8 }}

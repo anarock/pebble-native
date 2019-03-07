@@ -14,7 +14,11 @@ export interface InfoCardProps {
   expandable?: boolean;
   style?: {
     container?: any;
+    topSection?: any;
+    heading?: any;
+    imageWrapper?: any;
   };
+  disabled?: boolean;
 }
 
 export interface InfoCardState {

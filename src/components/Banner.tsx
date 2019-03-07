@@ -6,7 +6,6 @@ import Button from "./Button";
 
 const styles = StyleSheet.create({
   container: {
-    height: 195,
     backgroundColor: "#fdf2da",
     width: "100%",
     position: "relative"
@@ -17,17 +16,21 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.gray.darker,
-    marginTop: 25,
+    marginTop: 24,
     height: 40,
     width: "50%"
   },
   image: {
     position: "absolute",
-    height: "50%",
+    height: 100,
     right: 0,
-    bottom: 0,
-    width: 100,
+    bottom: -6,
+    width: 220,
     resizeMode: "contain"
+  },
+  desc: {
+    marginTop: 4,
+    width: "60%"
   }
 });
 
@@ -54,27 +57,27 @@ const Banner: React.FunctionComponent<BannerProps> = ({
   return (
     <View style={[styles.container, style]}>
       <View style={styles.innerContainer}>
+        {!!image && <Image source={image} style={[styles.image, imageStyle]} />}
+
         <Text style={styles.title} size={13} color={colors.gray.dark}>
           {title}
         </Text>
         <Text
-          numberOfLines={2}
-          ellipsizeMode="tail"
           lineHeight={21}
           bold
           color={colors.gray.darker}
+          style={styles.desc}
         >
           {description}
         </Text>
 
         {!!buttonText && (
           <Button type="primary" style={styles.button} onPress={onPress}>
-            <Text color={colors.white.base} size={11}>
+            <Text color={colors.white.base} bold size={11}>
               {buttonText}
             </Text>
           </Button>
         )}
-        {!!image && <Image source={image} style={[styles.image, imageStyle]} />}
       </View>
     </View>
   );

@@ -42,6 +42,11 @@ const fontColor = {
   link: colors.violet.base
 };
 
+const disabledFontColor = {
+  ...fontColor,
+  secondary: colors.gray.light
+};
+
 // @ts-ignore
 const FooterButton: React.FunctionComponent<Partial<ButtonProps>> = ({
   onPress,
@@ -79,7 +84,11 @@ class Button extends React.Component<ButtonProps> {
 
     const _disabled = disabled || loading;
     const textColor = transparent
-      ? buttonBackgroundColor[type]
+      ? disabled
+        ? buttonBackgroundDisabledColor[type]
+        : buttonBackgroundColor[type]
+      : disabled
+      ? disabledFontColor[type]
       : fontColor[type];
     return (
       <Touchable
