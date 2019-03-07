@@ -40,7 +40,7 @@ export default class Countdown extends React.PureComponent<
     timeRemaining: this.props.timerInterval
   };
 
-  timer: any; // should be number but TS is giving an error
+  timer: NodeJS.Timeout;
 
   componentDidMount() {
     this.startCountdown();
