@@ -64,15 +64,18 @@ const styles = StyleSheet.create({
   otpInput: { marginRight: 20, flexShrink: 1, marginBottom: 0 },
   countrySelect: { width: 100, marginRight: 30 },
   phoneInput: { flex: 1 },
-  otpInputWrap: { flexDirection: "row", alignItems: "center" },
+  otpInputWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
   countdownStyles: { marginTop: 10, fontWeight: "bold", marginHorizontal: 10 },
   cellStyle: {
     borderWidth: 0,
     borderBottomWidth: 1,
     margin: 0,
     marginRight: 10
-  },
-  otpInputText: { flex: 1, alignItems: "flex-start" }
+  }
 });
 
 enum LOGIN_OPTIONS {
@@ -140,17 +143,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             Enter OTP
           </Text>
           <View style={styles.otpInputWrap}>
-            <View style={styles.otpInputText}>
-              <OTPInput
-                value={otpValue}
-                onChange={onOtpChange}
-                tintColor={colors.violet.base}
-                offTintColor={colors.gray.base}
-                otpLength={6}
-                cellStyle={styles.cellStyle}
-              />
-            </View>
-            <View style={{ flexShrink: 1 }}>
+            <OTPInput
+              value={otpValue}
+              onChange={onOtpChange}
+              tintColor={colors.violet.base}
+              offTintColor={colors.gray.base}
+              otpLength={6}
+              cellStyle={styles.cellStyle}
+            />
+            <View>
               {otpTimeout && (
                 <Touchable onPress={this.onResendOtp}>
                   <Text style={styles.textButton}>Resend</Text>
