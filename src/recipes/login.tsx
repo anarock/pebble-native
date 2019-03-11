@@ -1,9 +1,10 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as React from "react";
 import { Button, Controls, Input, Select } from "../components";
 import { colors } from "../theme";
 import Touchable from "../components/shared/Touchable";
 import Countdown from "../components/shared/Countdown";
+import Text from "../components/Text";
 import OTPInput from "react-native-otp";
 
 interface OperationalCountry {
@@ -39,14 +40,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 25
   },
-  loginHeader: {
-    fontSize: 27,
-    fontWeight: "bold"
-  },
   loginSubHeader: {
-    marginTop: 17,
-    fontSize: 15,
-    color: colors.gray.dark
+    marginTop: 17
   },
   formContainer: {
     marginTop: 30
@@ -59,7 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   },
-  loginUserText: { fontSize: 15, fontWeight: "bold", flexGrow: 1 },
+  loginUserText: { flexGrow: 1 },
   textButton: {
     padding: 10,
     color: colors.violet.base,
@@ -124,7 +119,9 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     return (
       <>
         <View style={styles.userInfoWrap}>
-          <Text style={styles.loginUserText}>{loginUserValue}</Text>
+          <Text size={15} bold style={styles.loginUserText}>
+            {loginUserValue}
+          </Text>
           <Touchable
             onPress={() => {
               this.setState({
@@ -138,7 +135,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           </Touchable>
         </View>
         <View style={{ marginTop: 70 }}>
-          <Text style={{ color: colors.gray.dark, fontSize: 12 }}>
+          <Text color={colors.gray.dark} size={12}>
             Enter OTP
           </Text>
           <View style={styles.otpInputWrap}>
@@ -148,7 +145,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 onChange={onOtpChange}
                 tintColor={colors.violet.base}
                 offTintColor={colors.gray.base}
-                otpLength={4}
+                otpLength={6}
                 cellStyle={styles.cellStyle}
               />
             </View>
@@ -186,8 +183,12 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.loginHeader}>Glad to see you!</Text>
-        <Text style={styles.loginSubHeader}>Sign in to continue</Text>
+        <Text bold size={27}>
+          Glad to see you!
+        </Text>
+        <Text size={15} color={colors.gray.dark} style={styles.loginSubHeader}>
+          Sign in to continue
+        </Text>
         <View style={styles.formContainer}>
           {loginPage === LOGIN_PAGE.USER_PAGE && (
             <>
