@@ -4,6 +4,7 @@ import { Button, Controls, Input, Select } from "../components";
 import { colors } from "../theme";
 import Touchable from "../components/shared/Touchable";
 import Countdown from "../components/shared/Countdown";
+import OTPInput from "react-native-otp";
 
 interface OperationalCountry {
   id: number;
@@ -67,8 +68,15 @@ const styles = StyleSheet.create({
   otpInput: { marginRight: 20, flexShrink: 1, marginBottom: 0 },
   countrySelect: { width: 100, marginRight: 30 },
   phoneInput: { flex: 1 },
-  otpInputWrap: { flexDirection: "row", marginTop: 70 },
-  countdownStyles: { marginTop: 10, fontWeight: "bold", marginHorizontal: 10 }
+  otpInputWrap: { flexDirection: "row", alignItems: "center" },
+  countdownStyles: { marginTop: 10, fontWeight: "bold", marginHorizontal: 10 },
+  cellStyle: {
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    margin: 0,
+    marginRight: 10
+  },
+  otpInputText: { flex: 1, alignItems: "flex-start" }
 });
 
 enum LOGIN_OPTIONS {
@@ -119,33 +127,44 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           <Text style={styles.loginUserText}>{loginUserValue}</Text>
           <Touchable
             onPress={() => {
-              this.setState({ loginPage: LOGIN_PAGE.USER_PAGE });
+              this.setState({
+                loginPage: LOGIN_PAGE.USER_PAGE,
+                otpTimeout: false
+              });
               onOtpChange("");
             }}
           >
             <Text style={styles.textButton}>Edit</Text>
           </Touchable>
         </View>
-        <View style={styles.otpInputWrap}>
-          <Input
-            placeholder="Enter OTP"
-            onChange={onOtpChange}
-            value={otpValue}
-            style={styles.otpInput}
-            keyboardType="number-pad"
-          />
-          <View>
-            {otpTimeout && (
-              <Touchable onPress={this.onResendOtp}>
-                <Text style={styles.textButton}>Resend</Text>
-              </Touchable>
-            )}
-            {!otpTimeout && (
-              <Countdown
-                style={styles.countdownStyles}
-                onFinish={() => this.setState({ otpTimeout: true })}
+        <View style={{ marginTop: 70 }}>
+          <Text style={{ color: colors.gray.dark, fontSize: 12 }}>
+            Enter OTP
+          </Text>
+          <View style={styles.otpInputWrap}>
+            <View style={styles.otpInputText}>
+              <OTPInput
+                value={otpValue}
+                onChange={onOtpChange}
+                tintColor={colors.violet.base}
+                offTintColor={colors.gray.base}
+                otpLength={4}
+                cellStyle={styles.cellStyle}
               />
-            )}
+            </View>
+            <View style={{ flexShrink: 1 }}>
+              {otpTimeout && (
+                <Touchable onPress={this.onResendOtp}>
+                  <Text style={styles.textButton}>Resend</Text>
+                </Touchable>
+              )}
+              {!otpTimeout && (
+                <Countdown
+                  style={styles.countdownStyles}
+                  onFinish={() => this.setState({ otpTimeout: true })}
+                />
+              )}
+            </View>
           </View>
         </View>
         <Button style={{ marginTop: 50 }} onPress={onSignIn}>
