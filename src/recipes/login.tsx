@@ -25,6 +25,7 @@ interface LoginProps {
   countriesList: OperationalCountry[];
   onCountryChange: (country: OperationalCountry) => void;
   selectedCountry: number;
+  footer?: React.ReactText | JSX.Element;
 }
 
 interface LoginState {
@@ -178,7 +179,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       loginUserValue,
       countriesList,
       onCountryChange,
-      selectedCountry
+      selectedCountry,
+      footer
     } = this.props;
 
     return (
@@ -247,6 +249,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           )}
           {loginPage === LOGIN_PAGE.OTP_PAGE && this.getOtpPage()}
         </View>
+        {!!footer && footer}
       </View>
     );
   }

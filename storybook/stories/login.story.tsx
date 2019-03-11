@@ -2,6 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { Login } from "../../src/recipes";
 import Container from "../shared/Container";
+import { View, Text } from "react-native";
 
 const COUNTRIES = [
   {
@@ -30,6 +31,15 @@ const COUNTRIES = [
   }
 ];
 
+const FOOTER = (
+  <View style={{ marginTop: 20 }}>
+    <Text>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor.
+    </Text>
+  </View>
+);
+
 storiesOf("Login", module).add("Default", () => (
   <Container
     initialState={{ username: "", otp: "", selectedCountry: COUNTRIES[0].id }}
@@ -46,6 +56,7 @@ storiesOf("Login", module).add("Default", () => (
         onOtpChange={otp => setState({ otp })}
         onResendOtp={() => {}}
         onSignIn={() => {}}
+        footer={FOOTER}
       />
     )}
   </Container>
