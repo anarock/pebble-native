@@ -17,10 +17,14 @@ interface OperationalCountry {
 interface LoginProps {
   loginUserValue: string;
   onLoginUserChange: (value: string) => void;
-  onSendOtp: () => void;
+  onSendOtp: (
+    val: "phone" | "email",
+    onSuccess: () => void,
+    onError: () => void
+  ) => void;
   otpValue: string;
   onOtpChange: (value: string) => void;
-  onResendOtp: () => void;
+  onResendOtp: (val: "phone" | "email") => void;
   onSignIn: () => void;
   countriesList: OperationalCountry[];
   onCountryChange: (country: OperationalCountry) => void;
@@ -103,18 +107,26 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     otpTimeout: false
   };
 
-  onSendOtp = async () => {
-    this.setState({ sendingOTP: true });
-    await this.props.onSendOtp();
+  onOtpSuccess = () =>
     this.setState({
       sendingOTP: false,
       loginPage: LOGIN_PAGE.OTP_PAGE
     });
+
+  onOtpError = () => this.setState({ sendingOTP: false });
+
+  onSendOtp = async () => {
+    this.setState({ sendingOTP: true });
+    const loginMethod =
+      this.state.loginMethod === LOGIN_OPTIONS.PHONE ? "phone" : "email";
+    await this.props.onSendOtp(loginMethod, this.onOtpSuccess, this.onOtpError);
   };
 
   onResendOtp = () => {
+    const loginMethod =
+      this.state.loginMethod === LOGIN_OPTIONS.PHONE ? "phone" : "email";
     this.setState({ otpTimeout: false });
-    this.props.onResendOtp();
+    this.props.onResendOtp(loginMethod);
   };
 
   getOtpPage = () => {
