@@ -51,12 +51,17 @@ storiesOf("Login", module).add("Default", () => (
         onCountryChange={country => setState({ selectedCountry: country.id })}
         loginUserValue={store.username}
         onLoginUserChange={username => setState({ username })}
-        onSendOtp={() => new Promise(resolve => setTimeout(resolve, 2000))}
+        onSendOtp={(type, onSuccess) =>
+          new Promise(resolve => {
+            if (onSuccess) onSuccess();
+          })
+        }
         otpValue={store.otp}
         onOtpChange={otp => setState({ otp })}
         onResendOtp={() => {}}
         onSignIn={() => {}}
         footer={FOOTER}
+        otpLength={4}
       />
     )}
   </Container>

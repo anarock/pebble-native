@@ -30,6 +30,7 @@ interface LoginProps {
   onCountryChange: (country: OperationalCountry) => void;
   selectedCountry: number;
   footer?: React.ReactText | JSX.Element;
+  otpLength: number;
 }
 
 interface LoginState {
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     padding: 25
   },
   loginSubHeader: {
-    marginTop: 17
+    marginTop: 15
   },
   formContainer: {
     marginTop: 30
@@ -78,9 +79,9 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderBottomWidth: 1,
     margin: 0,
-    marginRight: 10,
+    marginRight: 20,
     paddingVertical: 0,
-    paddingBottom: 11
+    paddingBottom: 5
   }
 });
 
@@ -130,15 +131,33 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   };
 
   getOtpPage = () => {
-    const { loginUserValue, otpValue, onOtpChange, onSignIn } = this.props;
+    const {
+      loginUserValue,
+      otpValue,
+      onOtpChange,
+      onSignIn,
+      otpLength,
+      countriesList,
+      selectedCountry
+    } = this.props;
+    const { otpTimeout, loginMethod } = this.state;
 
-    const { otpTimeout } = this.state;
+    const country = countriesList.find(
+      country => country.id === selectedCountry
+    );
 
     return (
       <>
         <View style={styles.userInfoWrap}>
-          <Text size={15} bold style={styles.loginUserText}>
-            {loginUserValue}
+          <Text
+            size={15}
+            bold
+            color={colors.gray.darker}
+            style={styles.loginUserText}
+          >
+            {loginMethod === LOGIN_OPTIONS.PHONE
+              ? `${country.country_code}-${loginUserValue}`
+              : loginUserValue}
           </Text>
           <Touchable
             onPress={() => {
@@ -152,8 +171,12 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             <Text style={styles.textButton}>Edit</Text>
           </Touchable>
         </View>
-        <View style={{ marginTop: 70 }}>
-          <Text color={colors.gray.dark} size={12}>
+        <View style={{ marginTop: 60, position: "relative" }}>
+          <Text
+            color={colors.gray.dark}
+            size={12}
+            style={{ position: "absolute", top: -5, left: 0 }}
+          >
             Enter OTP
           </Text>
           <View style={styles.otpInputWrap}>
@@ -162,7 +185,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               onChange={onOtpChange}
               tintColor={colors.violet.base}
               offTintColor={colors.gray.base}
-              otpLength={6}
+              otpLength={otpLength}
               cellStyle={styles.cellStyle}
             />
             <View>
@@ -200,7 +223,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
     return (
       <View style={styles.container}>
-        <Text bold size={27}>
+        <Text bold size={27} color={colors.gray.darker}>
           Glad to see you!
         </Text>
         <Text size={15} color={colors.gray.dark} style={styles.loginSubHeader}>
