@@ -203,7 +203,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             </View>
           </View>
         </View>
-        <Button style={{ marginTop: 50 }} onPress={onSignIn}>
+        <Button
+          style={{ marginTop: 50 }}
+          onPress={onSignIn}
+          disabled={otpLength !== otpValue.length}
+        >
           Sign in
         </Button>
       </>
