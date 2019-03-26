@@ -60,21 +60,30 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   },
-  loginUserText: { flexGrow: 1 },
+  loginUserText: {
+    flexGrow: 1
+  },
   textButton: {
     padding: 10,
     color: colors.violet.base,
     fontWeight: "bold"
   },
-  otpInput: { marginRight: 20, flexShrink: 1, marginBottom: 0 },
-  countrySelect: { width: 100, marginRight: 30 },
-  phoneInput: { flex: 1 },
+  countrySelect: {
+    width: 100,
+    marginRight: 30
+  },
+  phoneInput: {
+    flex: 1
+  },
   otpInputWrap: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    position: "relative"
   },
-  countdownStyles: { marginTop: 10, fontWeight: "bold", marginHorizontal: 10 },
+  countdownStyles: {
+    fontWeight: "bold"
+  },
   cellStyle: {
     borderWidth: 0,
     borderBottomWidth: 1,
@@ -82,6 +91,18 @@ const styles = StyleSheet.create({
     marginRight: 20,
     paddingVertical: 0,
     paddingBottom: 5
+  },
+  otpInput: {
+    top: 0,
+    position: "absolute",
+    width: "100%",
+    height: 50,
+    zIndex: 2,
+    fontSize: 0
+  },
+  resend: {
+    color: colors.violet.base,
+    fontWeight: "bold"
   }
 });
 
@@ -171,12 +192,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             <Text style={styles.textButton}>Edit</Text>
           </Touchable>
         </View>
-        <View style={{ marginTop: 60, position: "relative" }}>
-          <Text
-            color={colors.gray.dark}
-            size={12}
-            style={{ position: "absolute", top: -5, left: 0 }}
-          >
+        <View style={{ marginTop: 60 }}>
+          <Text color={colors.gray.dark} size={12}>
             Enter OTP
           </Text>
           <View style={styles.otpInputWrap}>
@@ -187,11 +204,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               offTintColor={colors.gray.base}
               otpLength={otpLength}
               cellStyle={styles.cellStyle}
+              style={styles.otpInput}
+              selectionColor="transparent"
+              secureTextEntry={true}
+              keyboardType="number-pad"
             />
-            <View>
+            <View style={{ padding: 10 }}>
               {otpTimeout && (
                 <Touchable onPress={this.onResendOtp}>
-                  <Text style={styles.textButton}>Resend</Text>
+                  <Text style={styles.resend}>Resend</Text>
                 </Touchable>
               )}
               {!otpTimeout && (
