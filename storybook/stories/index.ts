@@ -14,3 +14,4 @@ import "./imageThumbnail.story";
 import "./rating.story";
 import "./avatar.story";
 import "./actionModal.story";
+import "./confirmationPopup.story";
