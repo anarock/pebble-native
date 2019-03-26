@@ -2,22 +2,33 @@ import React, { PureComponent } from "react";
 import ActionModal from "./ActionModal";
 import Touchable from "./shared/Touchable";
 import Text from "./Text";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Button from "./Button";
+import {
+  ConfirmationPopUpProps,
+  ConfirmationPopUpState
+} from "./typings/ConfirmationPopUp";
 
-interface ConfirmationPopUpProps {
-  children: (args: { isOpen: boolean }) => JSX.Element;
-  disabled?: boolean;
-  onConfirmPress: () => void;
-  onRejectPress: () => void;
-  confirmButtonText: string;
-  rejectButtonText: string;
-  title: string;
-  description: string;
-}
+const styles = StyleSheet.create({
+  buttonWrapper: {
+    flexDirection: "row",
+    marginTop: 30,
+    justifyContent: "space-between"
+  },
+  button: {
+    width: "49%"
+  }
+});
+
+const actionModalStyle = StyleSheet.create({
+  children: {
+    paddingBottom: 30
+  }
+});
 
 export default class ConfirmationPopUp extends PureComponent<
-  ConfirmationPopUpProps
+  ConfirmationPopUpProps,
+  ConfirmationPopUpState
 > {
   state = {
     isOpen: false
@@ -57,11 +68,7 @@ export default class ConfirmationPopUp extends PureComponent<
           })}
         </Touchable>
         <ActionModal
-          style={{
-            children: {
-              paddingBottom: 30
-            }
-          }}
+          style={actionModalStyle}
           title={title}
           visible={isOpen}
           onClose={this.toggle}
@@ -71,28 +78,15 @@ export default class ConfirmationPopUp extends PureComponent<
               {description}
             </Text>
 
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 30,
-                justifyContent: "space-between"
-              }}
-            >
+            <View style={styles.buttonWrapper}>
               <Button
-                style={{
-                  width: "49%"
-                }}
+                style={styles.button}
                 type="secondary"
                 onPress={onRejectPress}
               >
                 {rejectButtonText}
               </Button>
-              <Button
-                style={{
-                  width: "49%"
-                }}
-                onPress={onConfirmPress}
-              >
+              <Button style={styles.button} onPress={onConfirmPress}>
                 {confirmButtonText}
               </Button>
             </View>
