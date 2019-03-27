@@ -1,5 +1,6 @@
-import { Text, StyleProp, TextStyle } from "react-native";
+import { StyleProp, TextStyle } from "react-native";
 import * as React from "react";
+import Text from "../Text";
 
 interface CountdownProps {
   timerInterval: number; // in seconds
@@ -70,7 +71,7 @@ export default class Countdown extends React.PureComponent<
     const seconds = timeRemaining - minutes * 60 || 0;
 
     return (
-      <Text style={style}>{`${minutes}:${
+      <Text bold style={style}>{`${minutes}:${
         seconds < 10 ? `0${seconds}` : seconds
       }`}</Text>
     );

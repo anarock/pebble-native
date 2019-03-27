@@ -30,6 +30,7 @@ interface LoginProps {
   onCountryChange: (country: OperationalCountry) => void;
   selectedCountry: number;
   footer?: React.ReactText | JSX.Element;
+  onLoginHelp: () => void;
   otpLength: number;
 }
 
@@ -64,9 +65,7 @@ const styles = StyleSheet.create({
     flexGrow: 1
   },
   textButton: {
-    padding: 10,
-    color: colors.violet.base,
-    fontWeight: "bold"
+    padding: 10
   },
   countrySelect: {
     width: 100,
@@ -98,11 +97,18 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 50,
     zIndex: 2,
-    fontSize: 0
+    fontSize: 1,
+    fontFamily: "anarock_medium",
+    color: "transparent"
   },
   resend: {
     color: colors.violet.base,
     fontWeight: "bold"
+  },
+  loginHelp: {
+    marginBottom: 22,
+    padding: 3,
+    alignSelf: "flex-end"
   }
 });
 
@@ -159,7 +165,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       onSignIn,
       otpLength,
       countriesList,
-      selectedCountry
+      selectedCountry,
+      onLoginHelp
     } = this.props;
     const { otpTimeout, loginMethod } = this.state;
 
@@ -189,7 +196,9 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               onOtpChange("");
             }}
           >
-            <Text style={styles.textButton}>Edit</Text>
+            <Text style={styles.textButton} color={colors.violet.base} bold>
+              Edit
+            </Text>
           </Touchable>
         </View>
         <View style={{ marginTop: 60 }}>
@@ -208,6 +217,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               selectionColor="transparent"
               secureTextEntry={true}
               keyboardType="number-pad"
+              caretHidden={!!otpValue}
             />
             <View style={{ padding: 10 }}>
               {otpTimeout && (
@@ -224,11 +234,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             </View>
           </View>
         </View>
-        <Button
-          style={{ marginTop: 50 }}
-          onPress={onSignIn}
-          disabled={otpLength !== otpValue.length}
+        <Text
+          bold
+          color={colors.violet.base}
+          style={[{ marginTop: 35 }, styles.loginHelp]}
+          onPress={onLoginHelp}
         >
+          Unable to login?
+        </Text>
+        <Button onPress={onSignIn} disabled={otpLength !== otpValue.length}>
           Sign in
         </Button>
       </>
@@ -243,7 +257,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       countriesList,
       onCountryChange,
       selectedCountry,
-      footer
+      footer,
+      onLoginHelp
     } = this.props;
 
     return (
@@ -300,8 +315,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   </>
                 )}
               </View>
+              <Text
+                color={colors.violet.base}
+                bold
+                style={[{ marginTop: -15 }, styles.loginHelp]}
+                onPress={onLoginHelp}
+              >
+                Unable to login?
+              </Text>
               <Button
-                type="primary"
                 onPress={this.onSendOtp}
                 disabled={!loginUserValue}
                 loading={sendingOTP}
