@@ -3,7 +3,7 @@ import * as React from "react";
 import Text from "../Text";
 
 interface CountdownProps {
-  timerInterval: number; // in seconds
+  totalTime: number; // in seconds
   counter: number; // in seconds
   style?: StyleProp<TextStyle>;
   onFinish: () => void;
@@ -19,7 +19,7 @@ export default class Countdown extends React.PureComponent<
   CountdownState
 > {
   static defaultProps = {
-    timerInterval: 30,
+    totalTime: 30,
     counter: 1000
   };
 
@@ -27,18 +27,18 @@ export default class Countdown extends React.PureComponent<
     props: CountdownProps,
     state: CountdownState
   ) {
-    if (props.timerInterval !== state.initialTime) {
+    if (props.totalTime !== state.initialTime) {
       return {
-        initialTime: props.timerInterval,
-        timeRemaining: props.timerInterval
+        initialTime: props.totalTime,
+        timeRemaining: props.totalTime
       };
     }
     return null;
   }
 
   state = {
-    initialTime: this.props.timerInterval,
-    timeRemaining: this.props.timerInterval
+    initialTime: this.props.totalTime,
+    timeRemaining: this.props.totalTime
   };
 
   timer: NodeJS.Timeout;

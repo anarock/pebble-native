@@ -11,6 +11,6 @@ const styles = StyleSheet.create({
 
 storiesOf("Countdown", module).add("basic", () => (
   <CenterView>
-    <Countdown onFinish={() => console.log("Time over!")} style={styles.base} />
+    <Countdown onFinish={() => alert("Time over!")} style={styles.base} />
   </CenterView>
 ));
