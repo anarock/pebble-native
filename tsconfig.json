@@ -26,5 +26,6 @@
     "lib": ["dom", "es2015", "es2016"]
   },
   "files": ["src/index.ts"],
+  "include": ["src", "typings"],
   "exclude": ["node_modules", "dist", "src/**/__tests__", "storybook"]
 }

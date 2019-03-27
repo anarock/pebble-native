@@ -5,41 +5,8 @@ import { colors } from "../theme";
 import Touchable from "../components/shared/Touchable";
 import Countdown from "../components/shared/Countdown";
 import Text from "../components/Text";
+import { LoginProps, LoginState } from "./typings/Login";
 import OTPInput from "react-native-otp";
-
-interface OperationalCountry {
-  id: number;
-  name: string;
-  url_name: string;
-  country_code: string;
-}
-
-interface LoginProps {
-  loginUserValue: string;
-  onLoginUserChange: (value: string) => void;
-  onSendOtp: (
-    val: "phone" | "email",
-    onSuccess: () => void,
-    onError: () => void
-  ) => void;
-  otpValue: string;
-  onOtpChange: (value: string) => void;
-  onResendOtp: (val: "phone" | "email") => void;
-  onSignIn: () => void;
-  countriesList: OperationalCountry[];
-  onCountryChange: (country: OperationalCountry) => void;
-  selectedCountry: number;
-  footer?: React.ReactText | JSX.Element;
-  onLoginHelp: () => void;
-  otpLength: number;
-}
-
-interface LoginState {
-  loginMethod: number;
-  loginPage: number;
-  sendingOTP: boolean;
-  otpTimeout: boolean;
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -145,16 +112,20 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onSendOtp = async () => {
     this.setState({ sendingOTP: true });
-    const loginMethod =
+    const selectedLoginOption =
       this.state.loginMethod === LOGIN_OPTIONS.PHONE ? "phone" : "email";
-    await this.props.onSendOtp(loginMethod, this.onOtpSuccess, this.onOtpError);
+    await this.props.onSendOtp(
+      selectedLoginOption,
+      this.onOtpSuccess,
+      this.onOtpError
+    );
   };
 
   onResendOtp = () => {
-    const loginMethod =
+    const selectedLoginOption =
       this.state.loginMethod === LOGIN_OPTIONS.PHONE ? "phone" : "email";
     this.setState({ otpTimeout: false });
-    this.props.onResendOtp(loginMethod);
+    this.props.onResendOtp(selectedLoginOption);
   };
 
   onEdit = () => {

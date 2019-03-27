@@ -1,0 +1,33 @@
+interface OperationalCountry {
+  id: number;
+  name: string;
+  url_name: string;
+  country_code: string;
+}
+
+export interface LoginProps {
+  loginUserValue: string;
+  onLoginUserChange: (value: string) => void;
+  onSendOtp: (
+    val: "phone" | "email",
+    onSuccess: () => void,
+    onError: () => void
+  ) => void;
+  otpValue: string;
+  onOtpChange: (value: string) => void;
+  onResendOtp: (val: "phone" | "email") => void;
+  onSignIn: () => void;
+  countriesList: OperationalCountry[];
+  onCountryChange: (country: OperationalCountry) => void;
+  selectedCountry: number;
+  footer?: React.ReactText | JSX.Element;
+  onLoginHelp: () => void;
+  otpLength: number;
+}
+
+export interface LoginState {
+  loginMethod: number;
+  loginPage: number;
+  sendingOTP: boolean;
+  otpTimeout: boolean;
+}
