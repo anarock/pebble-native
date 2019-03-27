@@ -157,6 +157,16 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     this.props.onResendOtp(loginMethod);
   };
 
+  onEdit = () => {
+    this.setState({
+      loginPage: LOGIN_PAGE.USER_PAGE,
+      otpTimeout: false
+    });
+    this.props.onOtpChange("");
+  };
+
+  onCountdownTimeUp = () => this.setState({ otpTimeout: true });
+
   getOtpPage = () => {
     const {
       loginUserValue,
@@ -187,15 +197,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               ? `${country.country_code}-${loginUserValue}`
               : loginUserValue}
           </Text>
-          <Touchable
-            onPress={() => {
-              this.setState({
-                loginPage: LOGIN_PAGE.USER_PAGE,
-                otpTimeout: false
-              });
-              onOtpChange("");
-            }}
-          >
+          <Touchable onPress={this.onEdit}>
             <Text style={styles.textButton} color={colors.violet.base} bold>
               Edit
             </Text>
@@ -228,7 +230,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               {!otpTimeout && (
                 <Countdown
                   style={styles.countdownStyles}
-                  onFinish={() => this.setState({ otpTimeout: true })}
+                  onFinish={this.onCountdownTimeUp}
                 />
               )}
             </View>
@@ -334,7 +336,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           )}
           {loginPage === LOGIN_PAGE.OTP_PAGE && this.getOtpPage()}
         </View>
-        {!!footer && footer}
+        {footer}
       </View>
     );
   }

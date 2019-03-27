@@ -62,6 +62,7 @@ storiesOf("Login", module).add("Default", () => (
         onSignIn={() => {}}
         footer={FOOTER}
         otpLength={4}
+        onLoginHelp={() => {}}
       />
     )}
   </Container>
