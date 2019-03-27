@@ -8,4 +8,7 @@ export interface ListProps {
   description: JSX.Element | React.ReactText;
   topRightElement?: JSX.Element | React.ReactText;
   style?: any;
+  subLabel?: string;
+  subBackgroundColor?: string;
+  subLabelColor?: string;
 }

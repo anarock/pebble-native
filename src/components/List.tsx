@@ -21,7 +21,10 @@ const List: React.FunctionComponent<ListProps> = ({
   iconColor = colors.gray.base,
   iconBackgroundColor,
   style = {},
-  topRightElement
+  topRightElement,
+  subBackgroundColor = colors.yellow.base,
+  subLabel,
+  subLabelColor = colors.white.base
 }) => {
   return (
     <View style={style}>
@@ -32,6 +35,9 @@ const List: React.FunctionComponent<ListProps> = ({
             color={iconColor}
             backgroundColor={iconBackgroundColor}
             style={styles.icon}
+            subBackgroundColor={subBackgroundColor}
+            subLabel={subLabel}
+            subLabelColor={subLabelColor}
           />
         )}
         <View>
