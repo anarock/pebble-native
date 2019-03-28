@@ -18,6 +18,7 @@ import ImageThumbnail from "./ImageThumbnail";
 import Rating from "./Rating";
 import Avatar from "./Avatar";
 import Touchable from "./shared/Touchable";
+import ConfirmationPopUp from "./ConfirmationPopUp";
 
 export {
   Input,
@@ -39,5 +40,6 @@ export {
   ImageThumbnail,
   Rating,
   Avatar,
-  Touchable
+  Touchable,
+  ConfirmationPopUp
 };
