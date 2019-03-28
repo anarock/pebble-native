@@ -14,6 +14,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10
+  },
+  subLabel: {
+    height: 22,
+    width: 22,
+    position: "absolute",
+    borderRadius: 11,
+    justifyContent: "center",
+    alignItems: "center",
+    right: -6,
+    bottom: -6
   }
 });
 
@@ -23,7 +33,10 @@ const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
   color = colors.gray.base,
   style = {},
   label,
-  small
+  small,
+  subBackgroundColor = colors.yellow.base,
+  subLabel,
+  subLabelColor = colors.white.base
 }) => (
   <View
     style={[
@@ -48,6 +61,21 @@ const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
         </Text>
       )}
     </ConditionalComponent>
+
+    {!!subLabel && (
+      <View
+        style={[
+          styles.subLabel,
+          {
+            backgroundColor: subBackgroundColor
+          }
+        ]}
+      >
+        <Text bold size={10} lineHeight={12} color={subLabelColor}>
+          {subLabel}
+        </Text>
+      </View>
+    )}
   </View>
 );
 
