@@ -1,16 +1,15 @@
-import { StyleProp, TextStyle } from "react-native";
 import * as React from "react";
 import Text from "../Text";
+import { TextProps } from "../typings/Text";
+import { Omit } from "utility-types";
 
-interface CountdownProps {
-  totalTime: number; // in seconds
+interface CountdownProps extends Omit<TextProps, "children"> {
+  beginTime: number; // in seconds
   counter: number; // in seconds
-  style?: StyleProp<TextStyle>;
   onFinish: () => void;
 }
 
 interface CountdownState {
-  initialTime: number;
   timeRemaining: number;
 }
 
@@ -19,26 +18,12 @@ export default class Countdown extends React.PureComponent<
   CountdownState
 > {
   static defaultProps = {
-    totalTime: 30,
+    beginTime: 30,
     counter: 1000
   };
 
-  static getDerivedStateFromProps(
-    props: CountdownProps,
-    state: CountdownState
-  ) {
-    if (props.totalTime !== state.initialTime) {
-      return {
-        initialTime: props.totalTime,
-        timeRemaining: props.totalTime
-      };
-    }
-    return null;
-  }
-
   state = {
-    initialTime: this.props.totalTime,
-    timeRemaining: this.props.totalTime
+    timeRemaining: this.props.beginTime
   };
 
   timer: NodeJS.Timeout;
@@ -48,11 +33,14 @@ export default class Countdown extends React.PureComponent<
   }
 
   startCountdown() {
-    const { counter, onFinish } = this.props;
+    const { counter, onFinish, beginTime } = this.props;
 
+    const startTime = Date.now();
     this.timer = setInterval(() => {
-      this.setState({ timeRemaining: this.state.timeRemaining - 1 });
-      if (this.state.timeRemaining <= 0) {
+      const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+      const timeRemaining = Math.max(beginTime - elapsedSeconds, 0);
+      this.setState({ timeRemaining });
+      if (!timeRemaining) {
         clearInterval(this.timer);
         onFinish();
       }
@@ -65,13 +53,13 @@ export default class Countdown extends React.PureComponent<
 
   render() {
     const { timeRemaining } = this.state;
-    const { style } = this.props;
+    const { beginTime, counter, onFinish, ...otherProps } = this.props;
 
-    const minutes = Math.floor(timeRemaining / 60) || 0;
-    const seconds = timeRemaining - minutes * 60 || 0;
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
 
     return (
-      <Text bold style={style}>{`${minutes}:${
+      <Text bold {...otherProps}>{`${minutes}:${
         seconds < 10 ? `0${seconds}` : seconds
       }`}</Text>
     );

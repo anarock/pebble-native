@@ -20,7 +20,8 @@
     "just-debounce-it": "^1.1.0",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-otp": "^1.0.0",
-    "react-spring": "^5.9.2"
+    "react-spring": "^5.9.2",
+    "utility-types": "^3.4.1"
   },
   "devDependencies": {
     "@storybook/addon-actions": "4.1.11",
