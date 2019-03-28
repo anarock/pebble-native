@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import * as React from "react";
-import { Button, Controls, Input, Select } from "../components";
+import { Button, Input, Select } from "../components";
 import { colors } from "../theme";
 import Touchable from "../components/shared/Touchable";
 import Countdown from "../components/shared/Countdown";
@@ -47,16 +47,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     position: "relative"
   },
-  countdownStyles: {
-    fontWeight: "bold"
-  },
   cellStyle: {
     borderWidth: 0,
     borderBottomWidth: 1,
     margin: 0,
     marginRight: 20,
     paddingVertical: 0,
-    paddingBottom: 5
+    paddingBottom: 5,
+    fontFamily: "anarock_medium"
   },
   otpInput: {
     top: 0,
@@ -65,7 +63,6 @@ const styles = StyleSheet.create({
     height: 50,
     zIndex: 2,
     fontSize: 1,
-    fontFamily: "anarock_medium",
     color: "transparent"
   },
   resend: {
@@ -79,24 +76,13 @@ const styles = StyleSheet.create({
   }
 });
 
-enum LOGIN_OPTIONS {
-  PHONE = 1,
-  EMAIL
-}
-
 enum LOGIN_PAGE {
   USER_PAGE = 1,
   OTP_PAGE
 }
 
-const LOGIN_METHODS = [
-  { id: LOGIN_OPTIONS.PHONE, name: "Phone Number" },
-  { id: LOGIN_OPTIONS.EMAIL, name: "Email Address" }
-];
-
 export default class Login extends React.PureComponent<LoginProps, LoginState> {
   state = {
-    loginMethod: LOGIN_OPTIONS.PHONE,
     loginPage: LOGIN_PAGE.USER_PAGE,
     sendingOTP: false,
     otpTimeout: false
@@ -112,20 +98,12 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onSendOtp = async () => {
     this.setState({ sendingOTP: true });
-    const selectedLoginOption =
-      this.state.loginMethod === LOGIN_OPTIONS.PHONE ? "phone" : "email";
-    await this.props.onSendOtp(
-      selectedLoginOption,
-      this.onOtpSuccess,
-      this.onOtpError
-    );
+    await this.props.onSendOtp(this.onOtpSuccess, this.onOtpError);
   };
 
   onResendOtp = () => {
-    const selectedLoginOption =
-      this.state.loginMethod === LOGIN_OPTIONS.PHONE ? "phone" : "email";
     this.setState({ otpTimeout: false });
-    this.props.onResendOtp(selectedLoginOption);
+    this.props.onResendOtp();
   };
 
   onEdit = () => {
@@ -149,7 +127,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       selectedCountry,
       onLoginHelp
     } = this.props;
-    const { otpTimeout, loginMethod } = this.state;
+    const { otpTimeout } = this.state;
 
     const country = countriesList.find(
       country => country.id === selectedCountry
@@ -164,9 +142,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             color={colors.gray.darker}
             style={styles.loginUserText}
           >
-            {loginMethod === LOGIN_OPTIONS.PHONE
-              ? `${country.country_code}-${loginUserValue}`
-              : loginUserValue}
+            {`${country.country_code}-${loginUserValue}`}
           </Text>
           <Touchable onPress={this.onEdit}>
             <Text style={styles.textButton} color={colors.violet.base} bold>
@@ -198,12 +174,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   <Text style={styles.resend}>Resend</Text>
                 </Touchable>
               )}
-              {!otpTimeout && (
-                <Countdown
-                  style={styles.countdownStyles}
-                  onFinish={this.onCountdownTimeUp}
-                />
-              )}
+              {!otpTimeout && <Countdown onFinish={this.onCountdownTimeUp} />}
             </View>
           </View>
         </View>
@@ -223,7 +194,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   };
 
   render() {
-    const { loginMethod, loginPage, sendingOTP } = this.state;
+    const { loginPage, sendingOTP } = this.state;
     const {
       onLoginUserChange,
       loginUserValue,
@@ -245,53 +216,33 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
         <View style={styles.formContainer}>
           {loginPage === LOGIN_PAGE.USER_PAGE && (
             <>
-              <Controls
-                type="radio"
-                selected={loginMethod}
-                data={LOGIN_METHODS}
-                onChange={({ selected }) => {
-                  onLoginUserChange("");
-                  this.setState({ loginMethod: selected as number });
-                }}
-              />
               <View style={styles.loginUserInput}>
-                {loginMethod === LOGIN_OPTIONS.EMAIL ? (
-                  <Input
-                    placeholder="Email Address"
-                    onChange={onLoginUserChange}
-                    value={loginUserValue}
-                    keyboardType="email-address"
+                <View style={styles.countrySelect}>
+                  <Select
+                    options={countriesList}
+                    valueExtractor={item => item && item.country_code}
+                    rowLabelExtractor={item =>
+                      `${item.name} (${item.country_code})`
+                    }
+                    keyExtractor={item => item.id}
+                    placeholder="ISD Code"
+                    onSelect={onCountryChange}
+                    selected={selectedCountry}
                   />
-                ) : (
-                  <>
-                    <View style={styles.countrySelect}>
-                      <Select
-                        options={countriesList}
-                        valueExtractor={item => item && item.country_code}
-                        rowLabelExtractor={item =>
-                          `${item.name} (${item.country_code})`
-                        }
-                        keyExtractor={item => item.id}
-                        placeholder="ISD Code"
-                        onSelect={onCountryChange}
-                        selected={selectedCountry}
-                      />
-                    </View>
-                    <View style={styles.phoneInput}>
-                      <Input
-                        placeholder="Phone"
-                        value={loginUserValue}
-                        keyboardType="phone-pad"
-                        onChange={onLoginUserChange}
-                      />
-                    </View>
-                  </>
-                )}
+                </View>
+                <View style={styles.phoneInput}>
+                  <Input
+                    placeholder="Phone"
+                    value={loginUserValue}
+                    keyboardType="phone-pad"
+                    onChange={onLoginUserChange}
+                  />
+                </View>
               </View>
               <Text
                 color={colors.violet.base}
                 bold
-                style={[{ marginTop: -15 }, styles.loginHelp]}
+                style={styles.loginHelp}
                 onPress={onLoginHelp}
               >
                 Unable to login?

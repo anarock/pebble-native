@@ -51,7 +51,7 @@ storiesOf("Login", module).add("Default", () => (
         onCountryChange={country => setState({ selectedCountry: country.id })}
         loginUserValue={store.username}
         onLoginUserChange={username => setState({ username })}
-        onSendOtp={(type, onSuccess) =>
+        onSendOtp={onSuccess =>
           new Promise(resolve => {
             if (onSuccess) onSuccess();
           })

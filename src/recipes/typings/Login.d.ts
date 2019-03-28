@@ -8,14 +8,10 @@ interface OperationalCountry {
 export interface LoginProps {
   loginUserValue: string;
   onLoginUserChange: (value: string) => void;
-  onSendOtp: (
-    val: "phone" | "email",
-    onSuccess: () => void,
-    onError: () => void
-  ) => void;
+  onSendOtp: (onSuccess: () => void, onError: () => void) => void;
   otpValue: string;
   onOtpChange: (value: string) => void;
-  onResendOtp: (val: "phone" | "email") => void;
+  onResendOtp: () => void;
   onSignIn: () => void;
   countriesList: OperationalCountry[];
   onCountryChange: (country: OperationalCountry) => void;
@@ -26,7 +22,6 @@ export interface LoginProps {
 }
 
 export interface LoginState {
-  loginMethod: number;
   loginPage: number;
   sendingOTP: boolean;
   otpTimeout: boolean;
