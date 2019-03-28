@@ -1,3 +1,5 @@
+import { InputProps } from "../../components/typings/Input";
+
 interface OperationalCountry {
   id: number;
   name: string;
@@ -19,6 +21,7 @@ export interface LoginProps {
   footer?: React.ReactText | JSX.Element;
   onLoginHelp: () => void;
   otpLength: number;
+  phoneInputProps?: InputProps;
 }
 
 export interface LoginState {

@@ -202,7 +202,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       onCountryChange,
       selectedCountry,
       footer,
-      onLoginHelp
+      onLoginHelp,
+      phoneInputProps
     } = this.props;
 
     return (
@@ -236,6 +237,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     value={loginUserValue}
                     keyboardType="phone-pad"
                     onChange={onLoginUserChange}
+                    {...phoneInputProps}
                   />
                 </View>
               </View>
