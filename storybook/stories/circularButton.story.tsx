@@ -18,4 +18,14 @@ storiesOf("CircularButton", module)
         backgroundColor={colors.blue.light}
       />
     </CenterView>
+  ))
+  .add("With SubLabel", () => (
+    <CenterView>
+      <CircularButton
+        iconName="add"
+        color={colors.blue.base}
+        backgroundColor={colors.blue.light}
+        subLabel="AS"
+      />
+    </CenterView>
   ));

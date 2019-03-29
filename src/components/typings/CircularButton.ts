@@ -5,4 +5,7 @@ export interface CircularButtonProps {
   style?: any;
   label?: string;
   small?: boolean;
+  subLabel?: string;
+  subBackgroundColor?: string;
+  subLabelColor?: string;
 }
