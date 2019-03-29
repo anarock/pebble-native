@@ -4,7 +4,7 @@ import { TextProps } from "../typings/Text";
 import { Omit } from "utility-types";
 
 interface CountdownProps extends Omit<TextProps, "children"> {
-  beginTime: number; // in seconds
+  time: number; // in seconds
   counter: number; // in seconds
   onFinish: () => void;
 }
@@ -18,12 +18,12 @@ export default class Countdown extends React.PureComponent<
   CountdownState
 > {
   static defaultProps = {
-    beginTime: 30,
+    time: 30,
     counter: 1000
   };
 
   state = {
-    timeRemaining: this.props.beginTime
+    timeRemaining: this.props.time
   };
 
   timer: NodeJS.Timeout;
@@ -33,12 +33,12 @@ export default class Countdown extends React.PureComponent<
   }
 
   startCountdown() {
-    const { counter, onFinish, beginTime } = this.props;
+    const { counter, onFinish, time } = this.props;
 
     const startTime = Date.now();
     this.timer = setInterval(() => {
       const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
-      const timeRemaining = Math.max(beginTime - elapsedSeconds, 0);
+      const timeRemaining = Math.max(time - elapsedSeconds, 0);
       this.setState({ timeRemaining });
       if (!timeRemaining) {
         clearInterval(this.timer);
@@ -53,7 +53,7 @@ export default class Countdown extends React.PureComponent<
 
   render() {
     const { timeRemaining } = this.state;
-    const { beginTime, counter, onFinish, ...otherProps } = this.props;
+    const { time, counter, onFinish, ...otherProps } = this.props;
 
     const minutes = Math.floor(timeRemaining / 60);
     const seconds = timeRemaining % 60;

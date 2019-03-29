@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react-native";
 import { Login } from "../../src/recipes";
 import Container from "../shared/Container";
 import { View, Text } from "react-native";
+import { boolean } from "@storybook/addon-knobs";
 
 const COUNTRIES = [
   {
@@ -63,6 +64,7 @@ storiesOf("Login", module).add("Default", () => (
         footer={FOOTER}
         otpLength={4}
         onLoginHelp={() => {}}
+        isPhoneValid={boolean("isPhoneValid", true)}
       />
     )}
   </Container>

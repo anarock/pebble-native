@@ -13,7 +13,7 @@ storiesOf("Countdown", module).add("basic", () => (
   <CenterView>
     <Countdown
       onFinish={() => alert("Time over!")}
-      beginTime={90}
+      time={90}
       style={styles.base}
     />
   </CenterView>

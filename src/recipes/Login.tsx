@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
     marginBottom: 22,
     padding: 3,
     alignSelf: "flex-end"
-  }
+  },
+  otpPageLoginHelp: { marginTop: 35 }
 });
 
 enum LOGIN_PAGE {
@@ -181,7 +182,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
         <Text
           bold
           color={colors.violet.base}
-          style={[{ marginTop: 35 }, styles.loginHelp]}
+          style={[styles.otpPageLoginHelp, styles.loginHelp]}
           onPress={onLoginHelp}
         >
           Get support for login
@@ -208,6 +209,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     } = this.props;
 
     const isButtonDisabled = !loginUserValue || !isPhoneValid;
+    const extraProps = { autoFocus: true };
 
     return (
       <View style={styles.container}>
@@ -241,9 +243,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     keyboardType="phone-pad"
                     onChange={onLoginUserChange}
                     errorMessage={isPhoneValid ? "" : "Invalid Phone"}
-                    inputProps={{
-                      autoFocus: true
-                    }}
+                    inputProps={extraProps}
                     {...phoneInputProps}
                   />
                 </View>
