@@ -22,6 +22,7 @@ export interface LoginProps {
   onLoginHelp: () => void;
   otpLength: number;
   phoneInputProps?: InputProps;
+  isPhoneValid: boolean;
 }
 
 export interface LoginState {

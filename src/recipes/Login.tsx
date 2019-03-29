@@ -184,7 +184,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           style={[{ marginTop: 35 }, styles.loginHelp]}
           onPress={onLoginHelp}
         >
-          Unable to login?
+          Get support for login
         </Text>
         <Button onPress={onSignIn} disabled={otpLength !== otpValue.length}>
           Sign in
@@ -203,8 +203,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       selectedCountry,
       footer,
       onLoginHelp,
-      phoneInputProps
+      phoneInputProps,
+      isPhoneValid
     } = this.props;
+
+    const isButtonDisabled = !loginUserValue || !isPhoneValid;
 
     return (
       <View style={styles.container}>
@@ -237,6 +240,10 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     value={loginUserValue}
                     keyboardType="phone-pad"
                     onChange={onLoginUserChange}
+                    errorMessage={isPhoneValid ? "" : "Invalid Phone"}
+                    inputProps={{
+                      autoFocus: true
+                    }}
                     {...phoneInputProps}
                   />
                 </View>
@@ -247,11 +254,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 style={styles.loginHelp}
                 onPress={onLoginHelp}
               >
-                Unable to login?
+                Get support for login
               </Text>
               <Button
                 onPress={this.onSendOtp}
-                disabled={!loginUserValue}
+                disabled={isButtonDisabled}
                 loading={sendingOTP}
               >
                 Send OTP
