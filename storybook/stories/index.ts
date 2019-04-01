@@ -17,3 +17,4 @@ import "./login.story";
 import "./actionModal.story";
 import "./countdown.story";
 import "./confirmationPopup.story";
+import "./viewer.story";

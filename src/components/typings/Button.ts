@@ -12,3 +12,14 @@ export interface ButtonProps {
   transparent?: boolean;
   radius?: boolean;
 }
+
+export interface DoubleFooterButtonProps {
+  leftButtonLabel: string;
+  rightButtonLabel: string;
+  leftButtonType?: ButtonProps["type"];
+  rightButtonType?: ButtonProps["type"];
+  onLeftButtonPress: () => void;
+  onRightButtonPress: () => void;
+  leftDisabled?: boolean;
+  rightDisabled?: boolean;
+}

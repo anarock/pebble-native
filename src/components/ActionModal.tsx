@@ -78,7 +78,8 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
   visible,
   header,
   headerType,
-  style = {}
+  style = {},
+  footer
 }) {
   return (
     <Modal
@@ -124,11 +125,12 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
             )}
             <View style={[styles.children, style.children]}>{children}</View>
           </View>
-          {showFooterButton && (
-            <Button.FooterButton onPress={onButtonClick}>
-              {buttonLabel}
-            </Button.FooterButton>
-          )}
+          {showFooterButton &&
+            (footer || (
+              <Button.FooterButton onPress={onButtonClick}>
+                {buttonLabel}
+              </Button.FooterButton>
+            ))}
         </View>
       </View>
     </Modal>

@@ -10,4 +10,5 @@ export interface ActionModalProps {
   header?: string | JSX.Element;
   headerType?: "success" | "error" | "warning";
   style?: any;
+  footer?: JSX.Element;
 }
