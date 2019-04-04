@@ -86,10 +86,10 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
     const {
       onTranferRequest,
       onUnfollowRequest,
-      agents,
       viewers,
       owner,
-      onCall
+      onCall,
+      disabled
     } = this.props;
 
     const {
@@ -119,10 +119,17 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
 
               {this.isUser(owner.id) ? (
                 <Select
-                  options={agents}
+                  options={viewers}
+                  disabled={disabled}
                   ref={this.selectRef}
                   label={() => (
-                    <Text color={colors.violet.base}>Transfer Ownership</Text>
+                    <Text
+                      color={
+                        disabled ? colors.violet.light : colors.violet.base
+                      }
+                    >
+                      Transfer Ownership
+                    </Text>
                   )}
                   onSelect={({ id }) =>
                     this.setState({
@@ -168,50 +175,58 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
             </View>
           </View>
 
-          <InfoCard style={viewerInfoCard} title="Viewers">
-            {viewers.map(viewer => (
-              <View
-                key={viewer.id}
-                style={[
-                  styles.container,
-                  {
-                    paddingVertical: 15
-                  }
-                ]}
-              >
-                <View style={styles.rowLeft}>
-                  <CircularButton
-                    style={styles.circButton}
-                    label={nI(viewer.name)}
-                    color={colors.white.base}
-                    backgroundColor={colors.blue.base}
-                  />
-                  <View style={{ flex: 1 }}>
-                    <Text color={colors.gray.darker} size={15}>
-                      {this.isUser(viewer.id) ? "You" : viewer.name}
-                    </Text>
-                    {viewer.subText}
-                  </View>
-
-                  {this.isUser(viewer.id) ? (
-                    <Text
-                      color={colors.violet.base}
-                      onPress={this.openUnfollowConfirmationModal}
-                    >
-                      Unfollow
-                    </Text>
-                  ) : (
-                    <Icon
-                      name="phone-filled"
-                      color={colors.violet.base}
-                      size={18}
-                      onPress={() => onCall(viewer.phone)}
+          {viewers && (
+            <InfoCard style={viewerInfoCard} title="Viewers">
+              {viewers.map(viewer => (
+                <View
+                  key={viewer.id}
+                  style={[
+                    styles.container,
+                    {
+                      paddingVertical: 15
+                    }
+                  ]}
+                >
+                  <View style={styles.rowLeft}>
+                    <CircularButton
+                      style={styles.circButton}
+                      label={nI(viewer.name)}
+                      color={colors.white.base}
+                      backgroundColor={colors.blue.base}
                     />
-                  )}
+                    <View style={{ flex: 1 }}>
+                      <Text color={colors.gray.darker} size={15}>
+                        {this.isUser(viewer.id) ? "You" : viewer.name}
+                      </Text>
+                      {viewer.subText}
+                    </View>
+
+                    {this.isUser(viewer.id) ? (
+                      <Text
+                        color={
+                          disabled ? colors.violet.light : colors.violet.base
+                        }
+                        onPress={
+                          !disabled
+                            ? this.openUnfollowConfirmationModal
+                            : undefined
+                        }
+                      >
+                        Unfollow
+                      </Text>
+                    ) : (
+                      <Icon
+                        name="phone-filled"
+                        color={colors.violet.base}
+                        size={18}
+                        onPress={() => onCall(viewer.phone)}
+                      />
+                    )}
+                  </View>
                 </View>
-              </View>
-            ))}
-          </InfoCard>
+              ))}
+            </InfoCard>
+          )}
         </InfoCard>
 
         <ConfirmationPopUp

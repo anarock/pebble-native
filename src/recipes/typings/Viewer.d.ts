@@ -8,14 +8,11 @@ interface Agent {
 export interface ViewerProps {
   onTranferRequest: (args: { agentId: number; follow: boolean }) => void;
   onUnfollowRequest: () => void;
-  agents: {
-    id: boolean;
-    label: string;
-  }[];
   viewers: Agent[];
   owner: Agent;
   userId: number;
   onCall: (phone: string) => void;
+  disabled?: boolean;
 }
 
 export interface ViewerState {
