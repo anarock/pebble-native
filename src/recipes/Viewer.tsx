@@ -234,8 +234,8 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
           onConfirmPress={onUnfollowRequest}
           confirmButtonText={"Confirm"}
           rejectButtonText={"Cancel"}
-          title="Transfer & Unfollow lead"
-          description="Now since you have saved the contact, proceed by clicking on already saved. If you were unable to save the contact."
+          title="Unfollow Lead"
+          description="you would no longer have access to view or edit this lead."
           onClose={this.closeUnfollowConfirmationModal}
           visible={showUnfollowConfirmation}
         />
@@ -252,7 +252,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
           confirmButtonText={"Confirm"}
           rejectButtonText={"Cancel"}
           title="Transfer"
-          description="Now since you have saved the contact, proceed by clicking on already saved. If you were unable to save the contact."
+          description="On transfer of this lead to another agent,  you would no longer have access to view or edit this lead."
           onClose={this.closeTransferConfirmationModal}
           visible={showTransferConfirmation}
         />
@@ -269,7 +269,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
           confirmButtonText={"Confirm"}
           rejectButtonText={"Cancel"}
           title="Transfer & follow lead"
-          description="Now since you have saved the contact, proceed by clicking on already saved. If you were unable to save the contact."
+          description="You will no longer be able to edit this lead and your access would be limited view only. You will still get status change updates about of this lead."
           onClose={this.closeTransferAndFollowConfigurationModal}
           visible={showTransferAndFollowConfiguration}
         />
