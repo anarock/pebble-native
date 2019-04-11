@@ -3,12 +3,12 @@ import { Dimensions, StyleSheet, View, Modal } from "react-native";
 import colors from "../theme/colors";
 import Text from "./Text";
 import Button from "./Button";
-import { ActionModalProps } from "./typings/ActionModal";
+import { ActionModalProps, ActionModalStyles } from "./typings/ActionModal";
 import Icon from "@anarock/pebble/native/Icon";
 import Touchable from "./shared/Touchable";
 import ConditionalComponent from "./shared/ConditionalComponent";
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<ActionModalStyles>({
   modalContent: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.4)"
@@ -87,20 +87,21 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
       transparent
       onRequestClose={onClose}
     >
-      <View style={styles.modalContent}>
-        <Touchable style={styles.overlay} onPress={onClose}>
-          <View style={styles.overlay} />
+      <View style={[styles.modalContent, style.modalContent]}>
+        <Touchable style={[styles.overlay, style.overlay]} onPress={onClose}>
+          <View style={[styles.overlay, style.overlay]} />
         </Touchable>
 
         <View />
 
-        <View style={styles.wrapper}>
+        <View style={[styles.wrapper, style.wrapper]}>
           <ConditionalComponent conditional={header}>
             {_header => (
               <View
                 style={[
                   styles.header,
-                  { backgroundColor: headerTypeToColor[headerType].light }
+                  { backgroundColor: headerTypeToColor[headerType].light },
+                  style.header
                 ]}
               >
                 <Icon
