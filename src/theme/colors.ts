@@ -48,7 +48,8 @@ const colors = {
   },
   teal: {
     base: "#47C1BF",
-    light: "#E4F6F6"
+    light: "#C7ECEB",
+    lighter: "#E4F6F6"
   },
   coral: {
     base: "#ED754B",
