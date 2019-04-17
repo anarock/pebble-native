@@ -23,7 +23,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 20
   },
-  rowLeft: { flex: 1, flexDirection: "row", alignItems: "center" }
+  textPadding: {
+    paddingVertical: 10,
+    paddingLeft: 10
+  },
+  rowLeft: { flex: 1, flexDirection: "row", alignItems: "center" },
+  fixPad: {
+    paddingHorizontal: 25,
+    paddingBottom: 25
+  }
 });
 
 const viewerInfoCard = StyleSheet.create({
@@ -127,6 +135,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                       color={
                         disabled ? colors.violet.light : colors.violet.base
                       }
+                      style={styles.textPadding}
                     >
                       Transfer Ownership
                     </Text>
@@ -141,12 +150,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                   showFooterButton
                   autoClose={false}
                   footer={
-                    <View
-                      style={{
-                        paddingHorizontal: 25,
-                        paddingBottom: 25
-                      }}
-                    >
+                    <View style={styles.fixPad}>
                       <Button.DoubleFooterButton
                         leftButtonLabel={"Transfer & Follow"}
                         rightButtonLabel={"Transfer"}
@@ -211,6 +215,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                             ? this.openUnfollowConfirmationModal
                             : undefined
                         }
+                        style={styles.textPadding}
                       >
                         Unfollow
                       </Text>
