@@ -15,7 +15,7 @@
     "precommit": "pretty-quick --staged"
   },
   "dependencies": {
-    "@anarock/pebble": "^0.41.0",
+    "@anarock/pebble": "^0.44.0",
     "date-fns": "^1.30.1",
     "just-debounce-it": "^1.1.0",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
