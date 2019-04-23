@@ -6,13 +6,9 @@ export interface SelectProps extends OptionsProps {
   errorMessage?: string;
   valueExtractor?: (item: any) => string;
   disabled?: boolean;
-  label: (
-    args: {
-      value: string;
-      props: SelectProps;
-    }
-  ) => JSX.Element;
+  label: (args: { value: string; props: SelectProps }) => JSX.Element;
   title?: string;
+  onClose: (e?: GestureResponderEvent) => void;
 }
 
 export interface SelectState {
