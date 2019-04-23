@@ -19,7 +19,7 @@ export default class Countdown extends React.PureComponent<
 > {
   static defaultProps = {
     time: 30,
-    counter: 1000
+    counter: 1
   };
 
   state = {
@@ -44,7 +44,7 @@ export default class Countdown extends React.PureComponent<
         clearInterval(this.timer);
         onFinish();
       }
-    }, counter);
+    }, counter * 1000);
   }
 
   componentWillUnmount() {
