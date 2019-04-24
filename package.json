@@ -11,8 +11,7 @@
     "test": "jest",
     "build": "expo build:android",
     "build:dist": "rimraf dist && tsc -p tsconfig.json",
-    "prepublishOnly": "yarn build:dist",
-    "precommit": "pretty-quick --staged"
+    "prepublishOnly": "yarn build:dist"
   },
   "dependencies": {
     "@anarock/pebble": "^0.41.0",
@@ -62,5 +61,10 @@
     "assets": [
       "./node_modules/@anarock/pebble/native/icons/"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
