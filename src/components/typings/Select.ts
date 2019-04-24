@@ -1,3 +1,4 @@
+import { GestureResponderEvent } from "react-native";
 import { OptionsProps } from "./Options";
 
 export interface SelectProps extends OptionsProps {
