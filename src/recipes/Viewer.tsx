@@ -73,12 +73,12 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
       showTransferAndFollowConfiguration: true
     });
 
-  private closeTransferAndFollowConfigurationModal = () =>
+  public closeTransferAndFollowConfigurationModal = () =>
     this.setState({
       showTransferAndFollowConfiguration: false
     });
 
-  private openUnfollowConfirmationModal = () =>
+  public openUnfollowConfirmationModal = () =>
     this.setState({
       showUnfollowConfirmation: true
     });
