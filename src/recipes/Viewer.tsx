@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
   fixPad: {
     paddingHorizontal: 25,
     paddingBottom: 25
+  },
+  flexOne: {
+    flex: 1
   }
 });
 
@@ -58,34 +61,20 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
     showTransferAndFollowConfiguration: false
   };
 
-  private openTransferConfirmationModal = () =>
+  private toggleTransferConfirmationModal = () =>
     this.setState({
-      showTransferConfirmation: true
+      showTransferConfirmation: !this.state.showTransferConfirmation
     });
 
-  private closeTransferConfirmationModal = () =>
+  public toggleTransferAndFollowConfigurationModal = () =>
     this.setState({
-      showTransferConfirmation: false
+      showTransferAndFollowConfiguration: !this.state
+        .showTransferAndFollowConfiguration
     });
 
-  private openTransferAndFollowConfigurationModal = () =>
+  public toggleUnfollowConfirmationModal = () =>
     this.setState({
-      showTransferAndFollowConfiguration: true
-    });
-
-  public closeTransferAndFollowConfigurationModal = () =>
-    this.setState({
-      showTransferAndFollowConfiguration: false
-    });
-
-  public openUnfollowConfirmationModal = () =>
-    this.setState({
-      showUnfollowConfirmation: true
-    });
-
-  private closeUnfollowConfirmationModal = () =>
-    this.setState({
-      showUnfollowConfirmation: false
+      showUnfollowConfirmation: !this.state.showUnfollowConfirmation
     });
 
   private isUser = (id: number) => id === this.props.userId;
@@ -118,7 +107,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                 color={colors.white.base}
                 backgroundColor={colors.blue.base}
               />
-              <View style={{ flex: 1 }}>
+              <View style={styles.flexOne}>
                 <Text color={colors.gray.darker} size={15}>
                   {this.isUser(owner.id) ? "You" : owner.name}
                 </Text>
@@ -156,11 +145,11 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                         rightButtonLabel={"Transfer"}
                         onLeftButtonPress={() => {
                           this.selectRef.current.toggle();
-                          this.openTransferAndFollowConfigurationModal();
+                          this.toggleTransferAndFollowConfigurationModal();
                         }}
                         onRightButtonPress={() => {
                           this.selectRef.current.toggle();
-                          this.openTransferConfirmationModal();
+                          this.toggleTransferConfirmationModal();
                         }}
                         leftDisabled={!selectedAgentId}
                         rightDisabled={!selectedAgentId}
@@ -198,7 +187,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                       color={colors.white.base}
                       backgroundColor={colors.blue.base}
                     />
-                    <View style={{ flex: 1 }}>
+                    <View style={styles.flexOne}>
                       <Text color={colors.gray.darker} size={15}>
                         {this.isUser(viewer.id) ? "You" : viewer.name}
                       </Text>
@@ -212,7 +201,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                         }
                         onPress={
                           !disabled
-                            ? this.openUnfollowConfirmationModal
+                            ? this.toggleUnfollowConfirmationModal
                             : undefined
                         }
                         style={styles.textPadding}
@@ -235,20 +224,20 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
         </InfoCard>
 
         <ConfirmationPopUp
-          onRejectPress={this.closeUnfollowConfirmationModal}
+          onRejectPress={this.toggleUnfollowConfirmationModal}
           onConfirmPress={onUnfollowRequest}
           confirmButtonText={"Confirm"}
           rejectButtonText={"Cancel"}
           title="Unfollow Lead"
           description="you would no longer have access to view or edit this lead."
-          onClose={this.closeUnfollowConfirmationModal}
+          onClose={this.toggleUnfollowConfirmationModal}
           visible={showUnfollowConfirmation}
         />
 
         <ConfirmationPopUp
-          onRejectPress={this.closeTransferConfirmationModal}
+          onRejectPress={this.toggleTransferConfirmationModal}
           onConfirmPress={() => {
-            this.closeTransferAndFollowConfigurationModal();
+            this.toggleTransferAndFollowConfigurationModal();
             return onTranferRequest({
               agentId: selectedAgentId,
               follow: false
@@ -258,14 +247,14 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
           rejectButtonText={"Cancel"}
           title="Transfer"
           description="On transfer of this lead to another agent,  you would no longer have access to view or edit this lead."
-          onClose={this.closeTransferConfirmationModal}
+          onClose={this.toggleTransferConfirmationModal}
           visible={showTransferConfirmation}
         />
 
         <ConfirmationPopUp
-          onRejectPress={this.closeTransferAndFollowConfigurationModal}
+          onRejectPress={this.toggleTransferAndFollowConfigurationModal}
           onConfirmPress={() => {
-            this.closeTransferAndFollowConfigurationModal();
+            this.toggleTransferAndFollowConfigurationModal();
             return onTranferRequest({
               agentId: selectedAgentId,
               follow: true
@@ -275,7 +264,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
           rejectButtonText={"Cancel"}
           title="Transfer & follow lead"
           description="You will no longer be able to edit this lead and your access would be limited view only. You will still get status change updates about of this lead."
-          onClose={this.closeTransferAndFollowConfigurationModal}
+          onClose={this.toggleTransferAndFollowConfigurationModal}
           visible={showTransferAndFollowConfiguration}
         />
       </View>
