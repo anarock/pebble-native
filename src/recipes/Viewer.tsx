@@ -122,7 +122,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                   label={() => (
                     <Text
                       color={
-                        disabled ? colors.violet.light : colors.violet.base
+                        disabled ? colors.violet.lighter : colors.violet.base
                       }
                       style={styles.textPadding}
                     >
@@ -197,7 +197,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                     {this.isUser(viewer.id) ? (
                       <Text
                         color={
-                          disabled ? colors.violet.light : colors.violet.base
+                          disabled ? colors.violet.lighter : colors.violet.base
                         }
                         onPress={
                           !disabled
@@ -237,7 +237,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
         <ConfirmationPopUp
           onRejectPress={this.toggleTransferConfirmationModal}
           onConfirmPress={() => {
-            this.toggleTransferAndFollowConfigurationModal();
+            this.toggleTransferConfirmationModal();
             return onTranferRequest({
               agentId: selectedAgentId,
               follow: false
