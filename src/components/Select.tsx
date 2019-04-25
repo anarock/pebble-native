@@ -47,7 +47,8 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
   static defaultProps: Partial<SelectProps> = {
     valueExtractor: item => item && (item.label || item.name),
     keyExtractor: item => item.id,
-    type: "radio"
+    type: "radio",
+    onClose: noop
   };
 
   state = {
