@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
   },
   flexOne: {
     flex: 1
+  },
+  phone: {
+    paddingVertical: 10,
+    paddingLeft: 20
   }
 });
 
@@ -162,6 +166,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                   name="phone-filled"
                   color={colors.violet.base}
                   size={18}
+                  style={styles.phone}
                   onPress={() => onCall(owner.phone)}
                 />
               )}
@@ -214,6 +219,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                         color={colors.violet.base}
                         size={18}
                         onPress={() => onCall(viewer.phone)}
+                        style={styles.phone}
                       />
                     )}
                   </View>
