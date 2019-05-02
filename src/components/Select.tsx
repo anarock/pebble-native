@@ -47,7 +47,8 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
   static defaultProps: Partial<SelectProps> = {
     valueExtractor: item => item && (item.label || item.name),
     keyExtractor: item => item.id,
-    type: "radio"
+    type: "radio",
+    autoClose: true
   };
 
   state = {
@@ -71,12 +72,12 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
   };
 
   private onSelect = option => {
-    const { onSelect } = this.props;
+    const { onSelect, autoClose } = this.props;
 
     InteractionManager.runAfterInteractions(() => {
       if (this.isRadio()) {
         onSelect(option);
-        this.closeOptions();
+        if (autoClose) this.closeOptions();
       } else {
         this.setState({
           selectedCheckbox: option
@@ -102,6 +103,11 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     return selectedLabel;
   };
 
+  public toggle = () =>
+    this.setState({
+      showOptions: !this.state.showOptions
+    });
+
   render() {
     const {
       options,
@@ -113,6 +119,9 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       type,
       disabled,
       label,
+      footer,
+      showFooterButton,
+      autoClose,
       ...rest
     } = this.props;
 
@@ -132,7 +141,8 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
             {label ? (
               label({
                 value: this.getValue(),
-                props: this.props
+                props: this.props,
+                toggle: this.toggle
               })
             ) : (
               <Input
@@ -167,8 +177,9 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
             this.closeOptions();
           }}
           visible={this.state.showOptions}
-          showFooterButton={!this.isRadio()}
+          showFooterButton={!this.isRadio() || showFooterButton}
           onClose={this.onClose}
+          footer={footer}
         >
           <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
             <Options

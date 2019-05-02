@@ -20,4 +20,5 @@ export interface ActionModalProps {
   header?: string | JSX.Element;
   headerType?: "success" | "error" | "warning";
   style?: Partial<ActionModalStyles>;
+  footer?: JSX.Element;
 }

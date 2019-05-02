@@ -6,6 +6,7 @@ declare module "@anarock/pebble/native/Icon" {
     name: string;
     color?: string;
     style?: any;
+    onPress?: () => void;
   }> {}
 
   export default Icon;
