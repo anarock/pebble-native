@@ -108,4 +108,7 @@ storiesOf("InfoCard", module)
         </InfoCard>
       </View>
     </CenterView>
-  ));
+  ))
+  .add("A", () => {
+    return <CenterView style={{ paddingHorizontal: 0 }} />;
+  });

@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import Text from "./Text";
 import colors from "../theme/colors";
-import { ButtonProps } from "./typings/Button";
+import { ButtonProps, DoubleFooterButtonProps } from "./typings/Button";
 import Touchable from "./shared/Touchable";
 
 const styles = StyleSheet.create({
@@ -21,6 +21,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white.base,
     borderTopColor: colors.gray.lighter,
     borderTopWidth: 1
+  },
+  doubleFooterBtnWrapper: {
+    flexDirection: "row",
+    marginTop: 30,
+    justifyContent: "space-between"
+  },
+  dfButton: {
+    width: "49%"
   }
 });
 
@@ -62,8 +70,42 @@ const FooterButton: React.FunctionComponent<Partial<ButtonProps>> = ({
   );
 };
 
+const DoubleFooterButton: React.FunctionComponent<DoubleFooterButtonProps> = ({
+  leftButtonLabel,
+  rightButtonLabel,
+  leftButtonType = "secondary",
+  rightButtonType,
+  onLeftButtonPress,
+  onRightButtonPress,
+  leftDisabled,
+  rightDisabled
+}) => {
+  return (
+    <View style={styles.doubleFooterBtnWrapper}>
+      <Button
+        disabled={leftDisabled}
+        style={styles.dfButton}
+        type={leftButtonType}
+        onPress={onLeftButtonPress}
+      >
+        {leftButtonLabel}
+      </Button>
+      <Button
+        disabled={rightDisabled}
+        type={rightButtonType}
+        style={styles.dfButton}
+        onPress={onRightButtonPress}
+      >
+        {rightButtonLabel}
+      </Button>
+    </View>
+  );
+};
+
 class Button extends React.Component<ButtonProps> {
   static FooterButton = FooterButton;
+
+  static DoubleFooterButton = DoubleFooterButton;
 
   static defaultProps = {
     type: "primary"
