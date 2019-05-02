@@ -13,7 +13,7 @@ export interface SelectProps extends OptionsProps {
     toggle: () => void;
   }) => JSX.Element;
   title?: string;
-  onClose: (e?: GestureResponderEvent) => void;
+  onClose?: (e?: GestureResponderEvent) => void;
   showFooterButton?: boolean;
   autoClose?: boolean;
   footer?: JSX.Element;

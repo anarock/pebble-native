@@ -48,6 +48,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     valueExtractor: item => item && (item.label || item.name),
     keyExtractor: item => item.id,
     type: "radio",
+    onClose: noop,
     autoClose: true
   };
 
