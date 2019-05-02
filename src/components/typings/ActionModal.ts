@@ -1,4 +1,14 @@
-import { GestureResponderEvent } from "react-native";
+import { GestureResponderEvent, ViewStyle } from "react-native";
+
+export interface ActionModalStyles {
+  children: ViewStyle;
+  container: ViewStyle;
+  header: ViewStyle;
+  modalContent: ViewStyle;
+  overlay: ViewStyle;
+  titleWrapper: ViewStyle;
+  wrapper: ViewStyle;
+}
 
 export interface ActionModalProps {
   onClose: (e?: GestureResponderEvent) => void;
@@ -9,6 +19,6 @@ export interface ActionModalProps {
   visible: boolean;
   header?: string | JSX.Element;
   headerType?: "success" | "error" | "warning";
-  style?: any;
+  style?: Partial<ActionModalStyles>;
   footer?: JSX.Element;
 }

@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@anarock/pebble@^0.41.0":
-  version "0.41.0"
-  resolved "https://registry.yarnpkg.com/@anarock/pebble/-/pebble-0.41.0.tgz#bf534ebfe70dba86c1a0a41fb2fe59d8056df041"
-  integrity sha512-YLFglWb/8r/qA2pmKzF1boJUbFCObjPzJfWZ4uS5RNH/GUud/46YfdvPh32LwdXy/0L+F/Sy8jbjPDQT6LKlGg==
+"@anarock/pebble@^0.44.0":
+  version "0.44.1"
+  resolved "https://registry.yarnpkg.com/@anarock/pebble/-/pebble-0.44.1.tgz#b344668966b6859cd72e72fd06d55c62f3fd3a1e"
+  integrity sha512-zdeL8X4Ex1lCYj7f/GBZucjYcOnBgS6LpgxE1Gfw9zAqdoEK8Uyw9JAdofHqj04/b2EuxnQxHIEslEE5tbHFfQ==
   dependencies:
     date-fns "^1.29.0"
     emotion "^9.2.12"

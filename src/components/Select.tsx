@@ -66,6 +66,11 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       showOptions: false
     });
 
+  private onClose = e => {
+    this.closeOptions();
+    this.props.onClose(e);
+  };
+
   private onSelect = option => {
     const { onSelect, autoClose } = this.props;
 
@@ -173,7 +178,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
           }}
           visible={this.state.showOptions}
           showFooterButton={!this.isRadio() || showFooterButton}
-          onClose={this.closeOptions}
+          onClose={this.onClose}
           footer={footer}
         >
           <KeyboardAwareScrollView keyboardShouldPersistTaps="always">

@@ -1,3 +1,4 @@
+import { GestureResponderEvent } from "react-native";
 import { OptionsProps } from "./Options";
 
 export interface SelectProps extends OptionsProps {
@@ -6,12 +7,13 @@ export interface SelectProps extends OptionsProps {
   errorMessage?: string;
   valueExtractor?: (item: any) => string;
   disabled?: boolean;
-  label?: (args: {
+  label: (args: {
     value: string;
     props: SelectProps;
     toggle: () => void;
   }) => JSX.Element;
   title?: string;
+  onClose: (e?: GestureResponderEvent) => void;
   showFooterButton?: boolean;
   autoClose?: boolean;
   footer?: JSX.Element;
