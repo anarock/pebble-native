@@ -8,8 +8,6 @@ import ConditionalComponent from "./shared/ConditionalComponent";
 
 const styles = StyleSheet.create({
   iconWrapper: {
-    height: 44,
-    width: 44,
     borderRadius: 22,
     justifyContent: "center",
     alignItems: "center",
@@ -37,46 +35,47 @@ const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
   subBackgroundColor = colors.yellow.base,
   subLabel,
   subLabelColor = colors.white.base
-}) => (
-  <View
-    style={[
-      styles.iconWrapper,
-      style,
-      {
-        backgroundColor,
-        transform: [
-          {
-            scale: small ? 0.77 : 1
-          }
-        ]
-      }
-    ]}
-  >
-    {!!iconName && <Icon size={18} name={iconName} color={color} />}
+}) => {
+  const dimension = small ? 34 : 44;
+  const textSize = small ? 13 : 16;
+  return (
+    <View
+      style={[
+        styles.iconWrapper,
+        style,
+        {
+          width: dimension,
+          height: dimension,
+          backgroundColor
+        }
+      ]}
+    >
+      {!!iconName && <Icon size={textSize + 2} name={iconName} color={color} />}
 
-    <ConditionalComponent conditional={label}>
-      {_label => (
-        <Text size={16} lineHeight={20} bold color={color}>
-          {_label}
-        </Text>
+      <ConditionalComponent conditional={label}>
+        {_label => (
+          <Text size={textSize} lineHeight={20} bold color={color}>
+            {_label}
+          </Text>
+        )}
+      </ConditionalComponent>
+
+      {!!subLabel && (
+        <View
+          style={[
+            styles.subLabel,
+            {
+              backgroundColor: subBackgroundColor
+            }
+          ]}
+        >
+          <Text bold size={10} lineHeight={12} color={subLabelColor}>
+            {subLabel}
+          </Text>
+        </View>
       )}
-    </ConditionalComponent>
-
-    {!!subLabel && (
-      <View
-        style={[
-          styles.subLabel,
-          {
-            backgroundColor: subBackgroundColor
-          }
-        ]}
-      >
-        <Text bold size={10} lineHeight={12} color={subLabelColor}>
-          {subLabel}
-        </Text>
-      </View>
-    )}
-  </View>
-);
+    </View>
+  );
+};
 
 export default CircularButton;
