@@ -24,15 +24,17 @@ const DotSeparator: React.FunctionComponent<DotSeparatorProps> = ({
   textProps,
   color = colors.gray.dark
 }) => {
+  const _texts = texts.filter(Boolean);
+
   return (
     <View style={styles.container}>
       <>
-        {texts.filter(Boolean).map((text, i) => (
+        {_texts.map((text, i) => (
           <Fragment key={i}>
             <Text color={color} {...textProps}>
               {text}
             </Text>
-            {i < texts.length - 1 && (
+            {i < _texts.length - 1 && (
               <View style={styles.dotContainer}>
                 <Icon size={dotSize} color={dotColor} name="dot" />
               </View>
