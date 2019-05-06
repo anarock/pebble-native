@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableNativeFeedback } from "react-native";
 import colors from "../theme/colors";
 import Text from "./Text";
 import ConditionalComponent from "./shared/ConditionalComponent";
+import { MessageProps } from "./typings/Message";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,14 +17,6 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline"
   }
 });
-
-interface MessageProps {
-  backgroundColor: string;
-  title?: string | JSX.Element;
-  description: string | JSX.Element;
-  linkText?: string;
-  onPress?: () => void;
-}
 
 const Message: React.FunctionComponent<MessageProps> = ({
   backgroundColor,
