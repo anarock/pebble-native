@@ -27,7 +27,7 @@ const DotSeparator: React.FunctionComponent<DotSeparatorProps> = ({
   return (
     <View style={styles.container}>
       <>
-        {texts.map((text, i) => (
+        {texts.filter(Boolean).map((text, i) => (
           <Fragment key={i}>
             <Text color={color} {...textProps}>
               {text}

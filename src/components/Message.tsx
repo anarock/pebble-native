@@ -56,7 +56,7 @@ const Message: React.FunctionComponent<MessageProps> = ({
             <ConditionalComponent conditional={description}>
               {_description => (
                 <Text size={13} lineHeight={18} color={colors.gray.darker}>
-                  {_description}
+                  <>{_description} </>
                 </Text>
               )}
             </ConditionalComponent>
@@ -67,7 +67,6 @@ const Message: React.FunctionComponent<MessageProps> = ({
             lineHeight={18}
             color={colors.gray.darker}
           >
-            {" "}
             {linkText}
           </Text>
         </Text>
