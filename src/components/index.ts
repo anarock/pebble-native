@@ -19,6 +19,8 @@ import Rating from "./Rating";
 import Avatar from "./Avatar";
 import Touchable from "./shared/Touchable";
 import ConfirmationPopUp from "./ConfirmationPopUp";
+import Message from "./Message";
+import DotSeparator from "./DotSeparator";
 
 export {
   Input,
@@ -41,5 +43,7 @@ export {
   Rating,
   Avatar,
   Touchable,
-  ConfirmationPopUp
+  ConfirmationPopUp,
+  Message,
+  DotSeparator
 };
