@@ -28,7 +28,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   dfButton: {
-    width: "49%"
+    flex: 1
+  },
+  separator: {
+    width: 10
   }
 });
 
@@ -90,6 +93,7 @@ const DoubleFooterButton: React.FunctionComponent<DoubleFooterButtonProps> = ({
       >
         {leftButtonLabel}
       </Button>
+      <View style={styles.separator} />
       <Button
         disabled={rightDisabled}
         type={rightButtonType}
