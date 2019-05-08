@@ -30,8 +30,15 @@ const IconText: React.FunctionComponent<IconTextProps> = ({
   onPress
 }) => {
   return (
-    <Touchable onPress={onPress}>
-      <View style={iconTextStyles.container}>
+    <Touchable onPress={onPress} disabled={!onPress}>
+      <View
+        style={[
+          iconTextStyles.container,
+          {
+            opacity: !onPress ? 0.3 : 1
+          }
+        ]}
+      >
         <CircularButton
           color={color}
           backgroundColor={backgroundColor}

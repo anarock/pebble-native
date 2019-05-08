@@ -3,6 +3,7 @@ interface Agent {
   name: string;
   subText: JSX.Element;
   phone: string;
+  color: string;
 }
 
 export interface ViewerProps {

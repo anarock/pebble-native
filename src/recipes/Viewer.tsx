@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 20
+    paddingVertical: 20,
+    marginBottom: 10
   },
   textPadding: {
     paddingVertical: 10,
@@ -109,7 +110,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                 style={styles.circButton}
                 label={nI(owner.name)}
                 color={colors.white.base}
-                backgroundColor={colors.blue.base}
+                backgroundColor={owner.color}
               />
               <View style={styles.flexOne}>
                 <Text color={colors.gray.darker} size={15}>
@@ -190,7 +191,7 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                       style={styles.circButton}
                       label={nI(viewer.name)}
                       color={colors.white.base}
-                      backgroundColor={colors.blue.base}
+                      backgroundColor={viewer.color}
                     />
                     <View style={styles.flexOne}>
                       <Text color={colors.gray.darker} size={15}>

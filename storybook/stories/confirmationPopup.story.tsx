@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react-native";
 import CenterView from "./CenterView";
-import { ConfirmationPopUp, Text } from "../../src/components";
+import { ConfirmationPopUp } from "../../src/components";
 
 storiesOf("ConfirmationPopUp", module).add("Default", () => (
   <CenterView>
@@ -12,8 +12,8 @@ storiesOf("ConfirmationPopUp", module).add("Default", () => (
       rejectButtonText="Transfer & Follow"
       onConfirmPress={() => {}}
       onRejectPress={() => {}}
-    >
-      {() => <Text>Hello</Text>}
-    </ConfirmationPopUp>
+      visible={false}
+      onClose={() => {}}
+    />
   </CenterView>
 ));
