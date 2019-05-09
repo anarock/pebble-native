@@ -37,7 +37,6 @@ const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
   subLabelColor = colors.white.base
 }) => {
   const dimension = small ? 34 : 44;
-  const textSize = small ? 13 : 16;
   return (
     <View
       style={[
@@ -50,11 +49,11 @@ const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
         }
       ]}
     >
-      {!!iconName && <Icon size={textSize + 2} name={iconName} color={color} />}
+      {!!iconName && <Icon size={15} name={iconName} color={color} />}
 
       <ConditionalComponent conditional={label}>
         {_label => (
-          <Text size={textSize} lineHeight={20} bold color={color}>
+          <Text size={13} lineHeight={20} bold color={color}>
             {_label}
           </Text>
         )}
