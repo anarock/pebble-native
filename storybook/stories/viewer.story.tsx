@@ -24,7 +24,8 @@ const owner = {
       <Text>3 days ago</Text>
     </Text>
   ),
-  phone: "+91-7417489999"
+  phone: "+91-7417489999",
+  color: "green"
 };
 
 const viewers = [
@@ -37,7 +38,8 @@ const viewers = [
         <Text>3 days ago</Text>
       </Text>
     ),
-    phone: "+91-7417489999"
+    phone: "+91-7417489999",
+    color: "green"
   },
   {
     id: 14,
@@ -48,7 +50,8 @@ const viewers = [
         <Text>3 days ago</Text>
       </Text>
     ),
-    phone: "+91-7417489999"
+    phone: "+91-7417489999",
+    color: "green"
   }
 ];
 

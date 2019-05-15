@@ -20,3 +20,4 @@ import "./confirmationPopup.story";
 import "./viewer.story";
 import "./dotSeparator.story";
 import "./message.story";
+import "./timeline.story";

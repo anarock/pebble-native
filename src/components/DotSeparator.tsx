@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import { View, StyleSheet } from "react-native";
 import Text from "./Text";
-import { Icon } from "../index";
 import colors from "../theme/colors";
 import { DotSeparatorProps } from "./typings/DotSeparator";
+import Icon from "@anarock/pebble/native/Icon";
 
 const styles = StyleSheet.create({
   container: {
