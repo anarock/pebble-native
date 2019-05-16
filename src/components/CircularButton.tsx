@@ -34,7 +34,8 @@ const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
   small,
   subBackgroundColor = colors.yellow.base,
   subLabel,
-  subLabelColor = colors.white.base
+  subLabelColor = colors.white.base,
+  iconSize = 15
 }) => {
   const dimension = small ? 34 : 44;
   return (
@@ -49,7 +50,7 @@ const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
         }
       ]}
     >
-      {!!iconName && <Icon size={15} name={iconName} color={color} />}
+      {!!iconName && <Icon size={iconSize} name={iconName} color={color} />}
 
       <ConditionalComponent conditional={label}>
         {_label => (

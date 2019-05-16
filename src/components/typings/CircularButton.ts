@@ -8,4 +8,5 @@ export interface CircularButtonProps {
   subLabel?: string;
   subBackgroundColor?: string;
   subLabelColor?: string;
+  iconSize?: number;
 }
