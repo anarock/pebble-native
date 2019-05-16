@@ -5,7 +5,7 @@ import { SearchInputProps } from "./typings/SearchInput";
 import SearchBox from "./SearchBox";
 
 export default class extends React.PureComponent<SearchInputProps> {
-  static defaultProps = {
+  static defaultProps: Partial<SearchInputProps> = {
     renderLabel: ({
       required,
       errorMessage,
@@ -22,7 +22,8 @@ export default class extends React.PureComponent<SearchInputProps> {
         value={value}
         disabled={disabled}
       />
-    )
+    ),
+    beforeSelect: () => Promise.resolve()
   };
 
   state = {
@@ -36,8 +37,10 @@ export default class extends React.PureComponent<SearchInputProps> {
   };
 
   private onSelect = item => {
-    this.closeModal();
-    this.props.onSelect(item);
+    this.props.beforeSelect(item).then(() => {
+      this.closeModal();
+      this.props.onSelect(item);
+    });
   };
 
   render() {
