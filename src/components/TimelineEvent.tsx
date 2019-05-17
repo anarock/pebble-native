@@ -10,7 +10,7 @@ const PADDING_HORIZONTAL = 25;
 const PADDING_VERTICAL = 20;
 const ICON_HEIGHT = 44;
 
-const top = PADDING_VERTICAL + ICON_HEIGHT / 2 - 1;
+const top = PADDING_VERTICAL + ICON_HEIGHT / 2;
 
 const styles = StyleSheet.create({
   container: {
@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   line: {
-    width: 2,
+    width: 0.5,
     position: "absolute",
     backgroundColor: colors.gray.light,
-    marginLeft: PADDING_HORIZONTAL + ICON_HEIGHT / 2 - 1,
+    marginLeft: PADDING_HORIZONTAL + ICON_HEIGHT / 2,
     top: 0,
     bottom: 0
   },
