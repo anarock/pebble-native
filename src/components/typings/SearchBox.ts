@@ -12,6 +12,7 @@ export interface SearchBoxProps {
   noResultsElement?: (queryValue: string) => any;
   onClose?: () => void;
   bottomSectionPlaceholder?: () => JSX.Element;
+  loading?: boolean;
 }
 
 export interface SearchBoxState {

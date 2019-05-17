@@ -19,5 +19,6 @@ export interface SearchInputProps {
   noResultsElement?: (queryValue: string) => JSX.Element;
   renderLabel?: (props: SearchInputProps) => JSX.Element;
   bottomSectionPlaceholder?: () => JSX.Element;
+  loading?: boolean;
   beforeSelect: (item: any) => Promise<any>;
 }

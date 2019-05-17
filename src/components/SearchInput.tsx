@@ -54,7 +54,8 @@ export default class extends React.PureComponent<SearchInputProps> {
       rowLabelExtractor,
       noResultsElement,
       renderLabel,
-      bottomSectionPlaceholder
+      bottomSectionPlaceholder,
+      loading
     } = this.props;
     return (
       <React.Fragment>
@@ -77,6 +78,7 @@ export default class extends React.PureComponent<SearchInputProps> {
           animationType="slide"
         >
           <SearchBox
+            loading={loading}
             results={results}
             placeholder={searchBoxPlaceholder}
             onSelect={this.onSelect}

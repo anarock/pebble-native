@@ -7,17 +7,18 @@ function noop() {}
 
 const options = new Array(7)
   .fill({
-    label: "Lorem ipsum dolor"
+    label: "Lorem ipsum dolor ;lklk ;l;lk;k;lkl;k jhgjhgjhg jhghgjhg"
   })
   .map((x, i) => ({ ...x, id: i + 1 }));
 
 storiesOf("SearchBox", module).add("Default", () => (
-  <CenterView>
+  <CenterView style={{ paddingHorizontal: 0, paddingTop: 50 }}>
     <SearchBox
       results={options}
       placeholder="Search"
       onQueryChange={noop}
       onSelect={noop}
+      loading
     />
   </CenterView>
 ));
