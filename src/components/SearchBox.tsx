@@ -3,7 +3,8 @@ import {
   View,
   StyleSheet,
   TextInput,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  ActivityIndicator
 } from "react-native";
 import colors from "../theme/colors";
 import Icon from "@anarock/pebble/native/Icon";
@@ -119,7 +120,8 @@ export default class extends React.PureComponent<
       onSelect,
       renderElement,
       keyExtractor,
-      onClose
+      onClose,
+      loading
     } = this.props;
 
     return (
@@ -143,6 +145,10 @@ export default class extends React.PureComponent<
             autoFocus
             underlineColorAndroid={colors.white.base}
           />
+
+          {loading && (
+            <ActivityIndicator color={colors.violet.base} size={"small"} />
+          )}
 
           {!!this.state.queryValue && (
             <Touchable
