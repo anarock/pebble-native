@@ -10,9 +10,11 @@ const PADDING_HORIZONTAL = 25;
 const PADDING_VERTICAL = 20;
 const ICON_HEIGHT = 44;
 
+const top = PADDING_VERTICAL + ICON_HEIGHT / 2 - 1;
+
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 25,
+    paddingHorizontal: PADDING_HORIZONTAL,
     paddingVertical: PADDING_VERTICAL,
     flexDirection: "row"
   },
@@ -30,7 +32,11 @@ const styles = StyleSheet.create({
   one: {
     flex: 1
   },
-  circularButton: { marginRight: 15, marginBottom: 0 }
+  circularButton: { marginRight: 15, marginBottom: 0 },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  }
 });
 
 const Header: React.FunctionComponent<HeaderProps> = ({
@@ -40,12 +46,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   headerRight
 }) => {
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-between"
-      }}
-    >
+    <View style={styles.row}>
       <View style={styles.one}>
         <Text color={titleColor} size={15} style={{ marginBottom: 8 }}>
           {title}
@@ -63,8 +64,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
     </View>
   );
 };
-
-const top = PADDING_VERTICAL + ICON_HEIGHT / 2 - 1;
 
 const TimelineEvent: React.FunctionComponent<TimeLineEventProps> = ({
   description,
@@ -95,7 +94,7 @@ const TimelineEvent: React.FunctionComponent<TimeLineEventProps> = ({
             }
           ]}
         />
-        <View style={[styles.container]}>
+        <View style={styles.container}>
           <CircularButton
             iconName={iconName}
             backgroundColor={iconBackgroundColor}
