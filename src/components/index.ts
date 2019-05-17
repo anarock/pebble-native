@@ -21,6 +21,7 @@ import Touchable from "./shared/Touchable";
 import ConfirmationPopUp from "./ConfirmationPopUp";
 import Message from "./Message";
 import DotSeparator from "./DotSeparator";
+import TimelineEvent from "./TimelineEvent";
 
 export {
   Input,
@@ -45,5 +46,6 @@ export {
   Touchable,
   ConfirmationPopUp,
   Message,
-  DotSeparator
+  DotSeparator,
+  TimelineEvent
 };
