@@ -4,8 +4,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   TouchableNativeFeedback,
-  Platform,
-  TouchableHighlight
+  Platform
 } from "react-native";
 import { ControlsProps } from "./typings/Controls";
 import Text from "./Text";
@@ -114,11 +113,10 @@ export default class extends React.PureComponent<ControlsProps> {
       renderLabel
     } = this.props;
 
-    const Touchable = ripple
-      ? Platform.OS === "android"
+    const Touchable =
+      ripple && Platform.OS === "android"
         ? TouchableNativeFeedback
-        : TouchableHighlight
-      : TouchableWithoutFeedback;
+        : TouchableWithoutFeedback;
     return (
       <View style={[styles.wrapper, style.wrapper]}>
         {data.map(item => {
