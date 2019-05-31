@@ -60,7 +60,6 @@ buck-out/
 haul-debug.log
 
 .idea
-dist
 compiled
 
 assets/fonts
