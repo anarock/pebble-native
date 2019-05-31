@@ -23,6 +23,9 @@ export interface LoginProps {
   otpLength: number;
   phoneInputProps?: InputProps;
   isPhoneValid: boolean;
+  onTenantChange: (value: string) => void;
+  isTenantInvalid: boolean;
+  tenantInputProps?: InputProps;
 }
 
 export interface LoginState {
