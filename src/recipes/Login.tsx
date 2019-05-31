@@ -28,6 +28,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   },
+  companyInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20
+  },
   loginUserText: {
     flexGrow: 1
   },
@@ -86,7 +92,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   state = {
     loginPage: LOGIN_PAGE.USER_PAGE,
     sendingOTP: false,
-    otpTimeout: false
+    otpTimeout: false,
+    tenant: "",
+    isTenantValid: true,
+    fetchingTenantConfig: false,
+    tenantConfigFetched: false
   };
 
   onOtpSuccess = () =>
@@ -97,9 +107,9 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onOtpError = () => this.setState({ sendingOTP: false });
 
-  onSendOtp = async () => {
+  onSendOtp = () => {
     this.setState({ sendingOTP: true });
-    await this.props.onSendOtp(this.onOtpSuccess, this.onOtpError);
+    this.props.onSendOtp(this.onOtpSuccess, this.onOtpError);
   };
 
   onResendOtp = () => {
@@ -194,8 +204,41 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     );
   };
 
+  onTenantChange = value => {
+    this.setState({
+      isTenantValid: true,
+      tenant: value
+    });
+  };
+
+  onTenantSubmit = async () => {
+    this.setState({ fetchingTenantConfig: true });
+    try {
+      await this.props.onTenantSubmit(this.state.tenant);
+      this.setState({ tenantConfigFetched: true, fetchingTenantConfig: false });
+    } catch {
+      this.setState({
+        isTenantValid: false,
+        fetchingTenantConfig: true
+      });
+    }
+  };
+
+  onTenantEdit = () => {
+    this.setState({
+      tenantConfigFetched: false
+    });
+  };
+
   render() {
-    const { loginPage, sendingOTP } = this.state;
+    const {
+      loginPage,
+      sendingOTP,
+      tenant,
+      isTenantValid,
+      fetchingTenantConfig,
+      tenantConfigFetched
+    } = this.state;
     const {
       onLoginUserChange,
       loginUserValue,
@@ -206,13 +249,10 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       onLoginHelp,
       phoneInputProps,
       isPhoneValid,
-      onTenantChange,
-      isTenantInvalid,
       tenantInputProps
     } = this.props;
 
-    const isButtonDisabled =
-      !loginUserValue || !isPhoneValid || isTenantInvalid;
+    const isButtonDisabled = !loginUserValue || !isPhoneValid;
     const extraProps = { autoFocus: true };
 
     return (
@@ -226,41 +266,70 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
         <View style={styles.formContainer}>
           {loginPage === LOGIN_PAGE.USER_PAGE && (
             <>
-              <Input
-                placeholder="Company code"
-                onChange={onTenantChange}
-                errorMessage={
-                  isTenantInvalid ? "Please check the company code" : ""
-                }
-                inputProps={extraProps}
-                {...tenantInputProps}
-              />
-              <View style={styles.loginUserInput}>
-                <View style={styles.countrySelect}>
-                  <Select
-                    options={countriesList}
-                    valueExtractor={item => item && item.country_code}
-                    rowLabelExtractor={item =>
-                      `${item.name} (${item.country_code})`
-                    }
-                    keyExtractor={item => item.id}
-                    placeholder="ISD Code"
-                    onSelect={onCountryChange}
-                    selected={selectedCountry}
-                  />
-                </View>
-                <View style={styles.phoneInput}>
-                  <Input
-                    placeholder="Phone"
-                    value={loginUserValue}
-                    keyboardType="phone-pad"
-                    onChange={onLoginUserChange}
-                    errorMessage={isPhoneValid ? "" : "Invalid Phone"}
-                    inputProps={extraProps}
-                    {...phoneInputProps}
-                  />
-                </View>
-              </View>
+              {!tenantConfigFetched && (
+                <Input
+                  readOnly={tenantConfigFetched}
+                  value={tenant}
+                  placeholder="Company code"
+                  onChange={this.onTenantChange}
+                  errorMessage={
+                    !isTenantValid ? "Please check the company code" : ""
+                  }
+                  inputProps={extraProps}
+                  {...tenantInputProps}
+                />
+              )}
+              {tenantConfigFetched && (
+                <>
+                  <View style={styles.companyInfo}>
+                    <Text size={15}>
+                      <Text color={colors.gray.dark}>Company Code: </Text>
+                      <Text
+                        bold
+                        color={colors.gray.darker}
+                        style={styles.loginUserText}
+                      >
+                        {tenant.toUpperCase()}
+                      </Text>
+                    </Text>
+                    <Touchable onPress={this.onTenantEdit}>
+                      <Text
+                        style={styles.textButton}
+                        color={colors.violet.base}
+                        bold
+                      >
+                        Edit
+                      </Text>
+                    </Touchable>
+                  </View>
+                  <View style={styles.loginUserInput}>
+                    <View style={styles.countrySelect}>
+                      <Select
+                        options={countriesList}
+                        valueExtractor={item => item && item.country_code}
+                        rowLabelExtractor={item =>
+                          `${item.name} (${item.country_code})`
+                        }
+                        keyExtractor={item => item.id}
+                        placeholder="ISD Code"
+                        onSelect={onCountryChange}
+                        selected={selectedCountry}
+                      />
+                    </View>
+                    <View style={styles.phoneInput}>
+                      <Input
+                        placeholder="Phone"
+                        value={loginUserValue}
+                        keyboardType="phone-pad"
+                        onChange={onLoginUserChange}
+                        errorMessage={isPhoneValid ? "" : "Invalid Phone"}
+                        inputProps={extraProps}
+                        {...phoneInputProps}
+                      />
+                    </View>
+                  </View>
+                </>
+              )}
               <Text
                 color={colors.violet.base}
                 bold
@@ -270,11 +339,17 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 Get support for login
               </Text>
               <Button
-                onPress={this.onSendOtp}
-                disabled={isButtonDisabled}
-                loading={sendingOTP}
+                onPress={
+                  tenantConfigFetched ? this.onSendOtp : this.onTenantSubmit
+                }
+                disabled={
+                  tenantConfigFetched ? isButtonDisabled : !isTenantValid
+                }
+                loading={
+                  tenantConfigFetched ? sendingOTP : fetchingTenantConfig
+                }
               >
-                Send OTP
+                {tenantConfigFetched ? "Send OTP" : "Submit"}
               </Button>
             </>
           )}

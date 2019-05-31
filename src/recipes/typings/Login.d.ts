@@ -23,13 +23,16 @@ export interface LoginProps {
   otpLength: number;
   phoneInputProps?: InputProps;
   isPhoneValid: boolean;
-  onTenantChange: (value: string) => void;
-  isTenantInvalid: boolean;
   tenantInputProps?: InputProps;
+  onTenantSubmit: (string) => Promise<void>;
 }
 
 export interface LoginState {
   loginPage: number;
   sendingOTP: boolean;
   otpTimeout: boolean;
+  tenant: string;
+  isTenantValid: boolean;
+  fetchingTenantConfig: boolean;
+  tenantConfigFetched: boolean;
 }
