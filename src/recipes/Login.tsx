@@ -18,10 +18,10 @@ const styles = StyleSheet.create({
     marginTop: 15
   },
   formContainer: {
-    marginTop: 30
+    marginTop: 30,
+    paddingTop: 30
   },
   loginUserInput: {
-    marginTop: 60,
     flexDirection: "row"
   },
   userInfoWrap: {
@@ -205,10 +205,14 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       footer,
       onLoginHelp,
       phoneInputProps,
-      isPhoneValid
+      isPhoneValid,
+      onTenantChange,
+      isTenantInvalid,
+      tenantInputProps
     } = this.props;
 
-    const isButtonDisabled = !loginUserValue || !isPhoneValid;
+    const isButtonDisabled =
+      !loginUserValue || !isPhoneValid || isTenantInvalid;
     const extraProps = { autoFocus: true };
 
     return (
@@ -222,6 +226,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
         <View style={styles.formContainer}>
           {loginPage === LOGIN_PAGE.USER_PAGE && (
             <>
+              <Input
+                placeholder="Company code"
+                onChange={onTenantChange}
+                errorMessage={
+                  isTenantInvalid ? "Please check the company code" : ""
+                }
+                inputProps={extraProps}
+                {...tenantInputProps}
+              />
               <View style={styles.loginUserInput}>
                 <View style={styles.countrySelect}>
                   <Select
