@@ -128,24 +128,24 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
 
     return (
       <View>
-        <TouchableWithoutFeedback
-          onPress={
-            disabled
-              ? undefined
-              : () =>
-                  this.setState({
-                    showOptions: true
-                  })
-          }
-        >
-          <View>
-            {label ? (
-              label({
-                value: this.getValue(),
-                props: this.props,
-                toggle: this.toggle
-              })
-            ) : (
+        {label ? (
+          label({
+            value: this.getValue(),
+            props: this.props,
+            toggle: this.toggle
+          })
+        ) : (
+          <TouchableWithoutFeedback
+            onPress={
+              disabled
+                ? undefined
+                : () =>
+                    this.setState({
+                      showOptions: true
+                    })
+            }
+          >
+            <View>
               <Input
                 fixLabelAtTop
                 placeholder={placeholder}
@@ -156,19 +156,15 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
                 readOnly
                 disabled={disabled}
               />
-            )}
+            </View>
+          </TouchableWithoutFeedback>
+        )}
 
-            {!disabled && !label && (
-              <View style={styles.dropdownIcon}>
-                <Icon
-                  color={colors.gray.base}
-                  name="arrow-drop-down"
-                  size={10}
-                />
-              </View>
-            )}
+        {!disabled && !label && (
+          <View style={styles.dropdownIcon}>
+            <Icon color={colors.gray.base} name="arrow-drop-down" size={10} />
           </View>
-        </TouchableWithoutFeedback>
+        )}
 
         <ActionModal
           title={placeholder}
