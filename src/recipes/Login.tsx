@@ -211,7 +211,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       tenantInputProps
     } = this.props;
 
-    const isButtonDisabled = !loginUserValue || !isPhoneValid;
+    const isButtonDisabled =
+      !loginUserValue || !isPhoneValid || isTenantInvalid;
     const extraProps = { autoFocus: true };
 
     return (
