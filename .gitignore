@@ -65,3 +65,4 @@ compiled
 assets/fonts
 build
 .expo
+dist
