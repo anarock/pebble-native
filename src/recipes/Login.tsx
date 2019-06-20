@@ -178,6 +178,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               secureTextEntry={true}
               keyboardType="number-pad"
               caretHidden={!!otpValue}
+              textContentType="oneTimeCode"
             />
             <View style={{ padding: 10 }}>
               {otpTimeout && (
