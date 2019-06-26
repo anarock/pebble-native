@@ -220,7 +220,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     } catch {
       this.setState({
         isTenantValid: false,
-        fetchingTenantConfig: true
+        fetchingTenantConfig: false
       });
     }
   };
