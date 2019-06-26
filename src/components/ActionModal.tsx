@@ -81,6 +81,14 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
   style = {},
   footer
 }) {
+  const { light, icon, dark } = headerType
+    ? headerTypeToColor[headerType]
+    : {
+        light: undefined,
+        icon: undefined,
+        dark: undefined
+      };
+
   return (
     <Modal
       animationType="fade"
@@ -101,16 +109,12 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
               <View
                 style={[
                   styles.header,
-                  { backgroundColor: headerTypeToColor[headerType].light },
+                  { backgroundColor: light },
                   style.header
                 ]}
               >
-                <Icon
-                  name={headerTypeToColor[headerType].icon}
-                  color={headerTypeToColor[headerType].dark}
-                  size={14}
-                />
-                <Text color={headerTypeToColor[headerType].dark} size={15}>
+                {icon && <Icon name={icon} color={dark} size={14} />}
+                <Text color={dark} size={15}>
                   {" " + _header}
                 </Text>
               </View>
