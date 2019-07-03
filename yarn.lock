@@ -9169,10 +9169,9 @@ react-native-modal@^9.0.0:
     prop-types "^15.6.2"
     react-native-animatable "^1.2.4"
 
-react-native-otp@^1.0.0:
+"react-native-otp@github:l3satwik/react-native-otp#cell-parent":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-otp/-/react-native-otp-1.0.0.tgz#0f206b4506cf1b76793677b7ced793130a9e5eee"
-  integrity sha512-9MPXwn6+3vORBgPzKXKf6kcYnEHcseHs7I/nbpxGxvGislJpUqhShiDLARuILJr3+JUn6RVw9pKo9vrMJWkENA==
+  resolved "https://codeload.github.com/l3satwik/react-native-otp/tar.gz/307fd709a01d41499cbee246399432c1069cfa81"
   dependencies:
     prop-types "^15.6.2"
 

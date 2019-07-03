@@ -47,6 +47,7 @@ storiesOf("Login", module).add("Default", () => (
   >
     {({ setState, store }) => (
       <Login
+        onTenantSubmit={value => Promise.resolve(value)}
         countriesList={COUNTRIES}
         selectedCountry={store.selectedCountry}
         onCountryChange={country => setState({ selectedCountry: country.id })}
