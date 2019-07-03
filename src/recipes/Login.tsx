@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import * as React from "react";
 import { Button, Input, Select } from "../components";
 import { colors } from "../theme";
@@ -55,12 +55,14 @@ const styles = StyleSheet.create({
   },
   cellStyle: {
     borderWidth: 0,
-    borderBottomWidth: 1,
     margin: 0,
-    marginRight: 20,
     paddingVertical: 0,
-    paddingBottom: 5,
     fontFamily: "anarock_medium"
+  },
+  cellParentStyle: {
+    borderBottomWidth: 1,
+    marginRight: 20,
+    paddingBottom: 5
   },
   otpInput: {
     top: 0,
@@ -173,6 +175,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               offTintColor={colors.gray.base}
               otpLength={otpLength}
               cellStyle={styles.cellStyle}
+              cellParentStyle={styles.cellParentStyle}
+              showCellParentBorderColor={true}
               style={styles.otpInput}
               selectionColor="transparent"
               secureTextEntry={true}
