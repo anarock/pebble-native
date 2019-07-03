@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, TextInput, Animated } from "react-native";
+import { View, StyleSheet, TextInput, Animated, Platform } from "react-native";
 import { InputProps, InputState } from "./typings/Input";
 import colors from "../theme/colors";
 import Text from "./Text";
@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
   readOnly: {
     marginTop: 20,
     marginBottom: 4
+  },
+  iosStyles: {
+    paddingTop: 10,
+    paddingBottom: 5
   }
 });
 
@@ -157,7 +161,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
               styles.textStyle,
               {
                 color: disabled ? colors.gray.base : colors.gray.darker
-              }
+              },
+              Platform.OS === "ios" && styles.iosStyles
             ]}
             onChangeText={onChange}
             underlineColorAndroid={"transparent"}
