@@ -1,4 +1,4 @@
-import { StyleSheet, View, Platform } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as React from "react";
 import { Button, Input, Select } from "../components";
 import { colors } from "../theme";
