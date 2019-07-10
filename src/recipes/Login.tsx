@@ -80,7 +80,14 @@ const styles = StyleSheet.create({
   loginHelp: {
     marginBottom: 22,
     padding: 3,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  loginSupport: {
     alignSelf: "flex-end"
+  },
+  loginHelpText: {
+    alignSelf: "flex-start"
   },
   otpPageLoginHelp: { marginTop: 35 }
 });
@@ -254,7 +261,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       onLoginHelp,
       phoneInputProps,
       isPhoneValid,
-      tenantInputProps
+      tenantInputProps,
+      helpText
     } = this.props;
 
     const isButtonDisabled = !loginUserValue || !isPhoneValid;
@@ -335,14 +343,26 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   </View>
                 </>
               )}
-              <Text
-                color={colors.violet.base}
-                bold
-                style={styles.loginHelp}
-                onPress={onLoginHelp}
-              >
-                Get support for login
-              </Text>
+              <View style={styles.loginHelp}>
+                {helpText && (
+                  <Text
+                    color={colors.gray.base}
+                    bold
+                    style={styles.loginHelpText}
+                    onPress={onLoginHelp}
+                  >
+                    {helpText}
+                  </Text>
+                )}
+                <Text
+                  color={colors.violet.base}
+                  bold
+                  style={styles.loginSupport}
+                  onPress={onLoginHelp}
+                >
+                  Get support for login
+                </Text>
+              </View>
               <Button
                 onPress={
                   tenantConfigFetched ? this.onSendOtp : this.onTenantSubmit
