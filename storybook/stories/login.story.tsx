@@ -66,6 +66,16 @@ storiesOf("Login", module).add("Default", () => (
         otpLength={4}
         onLoginHelp={() => {}}
         isPhoneValid={boolean("isPhoneValid", true)}
+        phoneInputProps={{
+          textInputStyles: {
+            paddingTop: 7
+          }
+        }}
+        tenantInputProps={{
+          textInputStyles: {
+            paddingTop: 7
+          }
+        }}
       />
     )}
   </Container>
