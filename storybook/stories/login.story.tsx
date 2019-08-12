@@ -60,7 +60,9 @@ storiesOf("Login", module).add("Default", () => (
         }
         otpValue={store.otp}
         onOtpChange={otp => setState({ otp })}
-        onResendOtp={() => {}}
+        onResendOtp={() => {
+          setState({ otp: "" });
+        }}
         onSignIn={() => {}}
         footer={FOOTER}
         otpLength={4}
