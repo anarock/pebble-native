@@ -60,12 +60,24 @@ storiesOf("Login", module).add("Default", () => (
         }
         otpValue={store.otp}
         onOtpChange={otp => setState({ otp })}
-        onResendOtp={() => {}}
+        onResendOtp={() => {
+          setState({ otp: "" });
+        }}
         onSignIn={() => {}}
         footer={FOOTER}
         otpLength={4}
         onLoginHelp={() => {}}
         isPhoneValid={boolean("isPhoneValid", true)}
+        phoneInputProps={{
+          textInputStyles: {
+            paddingTop: 7
+          }
+        }}
+        tenantInputProps={{
+          textInputStyles: {
+            paddingTop: 7
+          }
+        }}
       />
     )}
   </Container>

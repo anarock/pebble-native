@@ -119,7 +119,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
       required,
       keyboardType,
       disabled,
-      inputProps
+      inputProps,
+      textInputStyles
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
@@ -162,7 +163,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
               {
                 color: disabled ? colors.gray.base : colors.gray.darker
               },
-              Platform.OS === "ios" && styles.iosStyles
+              Platform.OS === "ios" && styles.iosStyles,
+              textInputStyles
             ]}
             onChangeText={onChange}
             underlineColorAndroid={"transparent"}

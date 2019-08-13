@@ -21,11 +21,11 @@ export interface LoginProps {
   footer?: React.ReactText | JSX.Element;
   onLoginHelp: () => void;
   otpLength: number;
-  phoneInputProps?: InputProps;
+  phoneInputProps?: Partial<InputProps>;
   isPhoneValid: boolean;
-  tenantInputProps?: InputProps;
+  tenantInputProps?: Partial<InputProps>;
   onTenantSubmit: (string) => Promise<void>;
-  helpText: React.ReactText | JSX.Element;
+  helpText?: React.ReactText | JSX.Element;
 }
 
 export interface LoginState {
