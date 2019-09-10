@@ -42,12 +42,12 @@ const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
     <View
       style={[
         styles.iconWrapper,
-        style,
         {
           width: dimension,
           height: dimension,
           backgroundColor
-        }
+        },
+        style
       ]}
     >
       {!!iconName && <Icon size={iconSize} name={iconName} color={color} />}
