@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray.light,
     marginLeft: PADDING_HORIZONTAL + ICON_HEIGHT / 2,
     top: 0,
-    bottom: 0,
+    bottom: 0
   },
   description: {
     marginTop: 15
