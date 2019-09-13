@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     marginLeft: PADDING_HORIZONTAL + ICON_HEIGHT / 2,
     top: 0,
     bottom: 0,
-    borderStyle: "dashed"
   },
   description: {
     marginTop: 15
