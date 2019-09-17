@@ -1,4 +1,5 @@
 import { ReactText } from "react";
+import { ViewStyle } from "react-native";
 
 export interface HeaderProps {
   title: string;
@@ -8,6 +9,7 @@ export interface HeaderProps {
 }
 
 export interface TimeLineEventProps extends HeaderProps {
+  style: ViewStyle;
   backgroundColor?: string;
   iconName?: string;
   iconBackgroundColor?: string;

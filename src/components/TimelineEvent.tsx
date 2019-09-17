@@ -8,7 +8,7 @@ import { HeaderProps, TimeLineEventProps } from "./typings/TimelineEvent";
 
 const PADDING_HORIZONTAL = 25;
 const PADDING_VERTICAL = 20;
-const ICON_HEIGHT = 44;
+const ICON_HEIGHT = 34;
 
 const top = PADDING_VERTICAL + ICON_HEIGHT / 2;
 
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   one: {
     flex: 1
   },
-  circularButton: { marginRight: 15, marginBottom: 0 },
+  circularButton: { marginRight: 15, marginBottom: 0, marginTop: 4 },
   row: {
     flexDirection: "row",
     justifyContent: "space-between"
@@ -51,7 +51,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         <Text color={titleColor} size={15} style={{ marginBottom: 8 }}>
           {title}
         </Text>
-        <Text size={11} color={colors.gray.dark} lineHeight={10}>
+        <Text size={11} color={colors.gray.dark} lineHeight={11}>
           {subText}
         </Text>
       </View>
@@ -78,11 +78,12 @@ const TimelineEvent: React.FunctionComponent<TimeLineEventProps> = ({
   position = "between",
   iconColor,
   circularButtonStyle = {},
+  style = {},
   descriptionColor = colors.gray.dark
 }) => {
   return (
     <TouchableNativeFeedback onPress={onPress} disabled={!onPress}>
-      <View style={{ position: "relative", backgroundColor }}>
+      <View style={[{ position: "relative", backgroundColor }, style]}>
         <View
           style={[
             styles.line,
@@ -96,11 +97,16 @@ const TimelineEvent: React.FunctionComponent<TimeLineEventProps> = ({
         />
         <View style={styles.container}>
           <CircularButton
+            small
             iconName={iconName}
             backgroundColor={iconBackgroundColor}
-            style={[styles.circularButton, circularButtonStyle]}
+            style={[
+              styles.circularButton,
+              circularButtonStyle,
+              iconName === "dot" && { marginTop: 0 }
+            ]}
             color={iconColor}
-            iconSize={iconName === "dot" ? 10 : undefined}
+            iconSize={iconName === "dot" ? 8 : 18}
           />
 
           <View style={styles.one}>
