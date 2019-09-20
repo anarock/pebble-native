@@ -1,4 +1,4 @@
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 
 export * from "./components";
 export * from "./theme";

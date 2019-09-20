@@ -4,7 +4,7 @@ import colors from "../theme/colors";
 import Text from "./Text";
 import Button from "./Button";
 import { ActionModalProps, ActionModalStyles } from "./typings/ActionModal";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import Touchable from "./shared/Touchable";
 import ConditionalComponent from "./shared/ConditionalComponent";
 
