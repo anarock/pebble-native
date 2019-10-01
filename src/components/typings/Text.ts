@@ -6,10 +6,5 @@ export interface TextProps extends RN.TextProps {
   color?: string;
   style?: RN.StyleProp<RN.TextStyle>;
   animated?: boolean;
-  children:
-    | JSX.Element
-    | string
-    | number
-    | (string | boolean | JSX.Element | undefined)[];
   lineHeight?: number | string;
 }
