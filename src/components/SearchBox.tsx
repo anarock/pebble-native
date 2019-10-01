@@ -7,7 +7,7 @@ import {
   ActivityIndicator
 } from "react-native";
 import colors from "../theme/colors";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import debounce from "just-debounce-it";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Text from "./Text";

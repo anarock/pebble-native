@@ -9,7 +9,7 @@ import Input from "./Input";
 import Options from "./Options";
 import { SelectProps, SelectState } from "./typings/Select";
 import colors from "../theme/colors";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ActionModal from "./ActionModal";
 

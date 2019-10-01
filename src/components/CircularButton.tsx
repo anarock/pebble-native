@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { colors } from "../theme";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import { CircularButtonProps } from "./typings/CircularButton";
 import Text from "./Text";
 import ConditionalComponent from "./shared/ConditionalComponent";

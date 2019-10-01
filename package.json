@@ -1,6 +1,6 @@
 {
   "name": "pebble-native",
-  "version": "0.39.1",
+  "version": "0.39.3",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -58,7 +58,7 @@
   },
   "rnpm": {
     "assets": [
-      "./node_modules/@anarock/pebble/native/icons/"
+      "./node_modules/pebble-shared/native/icons/"
     ]
   },
   "husky": {
@@ -67,6 +67,6 @@
     }
   },
   "peerDependencies": {
-    "@anarock/pebble": "^0.46.1"
+    "pebble-shared": "^1.0.4"
   }
 }

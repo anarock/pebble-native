@@ -4,7 +4,7 @@ import { OptionsProps } from "./typings/Options";
 import colors from "../theme/colors";
 import Controls from "./Controls";
 import Text from "./Text";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 
 const styles = StyleSheet.create({
   optionWrapper: {

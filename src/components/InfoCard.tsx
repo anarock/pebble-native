@@ -2,7 +2,7 @@ import { Image, StyleSheet, View } from "react-native";
 import * as React from "react";
 import { colors } from "../theme";
 import Text from "./Text";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import { InfoCardProps, InfoCardState } from "./typings/InfoCard";
 import Touchable from "./shared/Touchable";
 

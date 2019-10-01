@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { ControlsProps } from "./typings/Controls";
 import Text from "./Text";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import colors from "../theme/colors";
 
 const styles = StyleSheet.create({

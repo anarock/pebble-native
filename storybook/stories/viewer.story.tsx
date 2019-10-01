@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react-native";
 import CenterView from "./CenterView";
 import { colors } from "../../src/theme";
 import { Text } from "../../src/components";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 
 const owner = {
   id: 11,

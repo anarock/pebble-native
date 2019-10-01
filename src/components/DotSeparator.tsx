@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import Text from "./Text";
 import colors from "../theme/colors";
 import { DotSeparatorProps } from "./typings/DotSeparator";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 
 const styles = StyleSheet.create({
   container: {
