@@ -1,7 +1,8 @@
 import { TextProps } from "./Text";
+import { ReactChild } from "react";
 
 export interface DotSeparatorProps {
-  texts: TextProps["children"][];
+  texts: ReactChild[];
   dotColor?: string;
   color?: string;
   textProps?: TextProps;
