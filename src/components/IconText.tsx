@@ -27,10 +27,11 @@ const IconText: React.FunctionComponent<IconTextProps> = ({
   color,
   backgroundColor,
   label,
-  onPress
+  onPress,
+  ...otherProps
 }) => {
   return (
-    <Touchable onPress={onPress} disabled={!onPress}>
+    <Touchable onPress={onPress} disabled={!onPress} {...otherProps}>
       <View
         style={[
           iconTextStyles.container,

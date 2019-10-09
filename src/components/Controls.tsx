@@ -10,6 +10,7 @@ import { ControlsProps } from "./typings/Controls";
 import Text from "./Text";
 import Icon from "pebble-shared/native/Icon";
 import colors from "../theme/colors";
+import createTestProps from "../utils/createTestProps";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -70,7 +71,8 @@ export default class extends React.PureComponent<ControlsProps> {
         renderLabel={renderLabel}
       />
     ),
-    style: {}
+    style: {},
+    testIdPrefix: "controls"
   };
 
   private handlePress = id => {
@@ -110,7 +112,8 @@ export default class extends React.PureComponent<ControlsProps> {
       style,
       ripple,
       disabled,
-      renderLabel
+      renderLabel,
+      testIdPrefix
     } = this.props;
 
     const Touchable =
@@ -119,13 +122,14 @@ export default class extends React.PureComponent<ControlsProps> {
         : TouchableWithoutFeedback;
     return (
       <View style={[styles.wrapper, style.wrapper]}>
-        {data.map(item => {
+        {data.map((item, i) => {
           const key = keyExtractor(item);
           const _disabled = Array.isArray(disabled)
             ? disabled.includes(key)
             : disabled;
           return (
             <Touchable
+              {...createTestProps(`${testIdPrefix}-${i}`)}
               key={key}
               onPress={() => this.handlePress(key)}
               disabled={_disabled}

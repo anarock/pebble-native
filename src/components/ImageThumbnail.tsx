@@ -40,10 +40,11 @@ const ImageThumbnail: React.FunctionComponent<ImageThumbnailProps> = ({
   onPress,
   title,
   subText,
-  style = {}
+  style = {},
+  ...otherProps
 }) => {
   return (
-    <Touchable onPress={onPress}>
+    <Touchable onPress={onPress} {...otherProps}>
       <View style={[styles.container, style]}>
         <Image resizeMode="cover" source={image} style={styles.image} />
         <Text

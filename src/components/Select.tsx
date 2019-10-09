@@ -12,6 +12,7 @@ import colors from "../theme/colors";
 import Icon from "pebble-shared/native/Icon";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ActionModal from "./ActionModal";
+import createTestProps from "../utils/createTestProps";
 
 const styles = StyleSheet.create({
   optionSection: {
@@ -49,7 +50,8 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     keyExtractor: item => item.id,
     type: "radio",
     onClose: noop,
-    autoClose: true
+    autoClose: true,
+    testIdPrefix: "select"
   };
 
   state = {
@@ -122,13 +124,14 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       label,
       footer,
       showFooterButton,
-      autoClose,
+      testIdPrefix,
       ...rest
     } = this.props;
 
     return (
       <View>
         <TouchableWithoutFeedback
+          {...createTestProps(`${testIdPrefix}-label`)}
           onPress={
             disabled
               ? undefined
@@ -171,6 +174,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
         </TouchableWithoutFeedback>
 
         <ActionModal
+          {...createTestProps(`${testIdPrefix}-modal`)}
           title={placeholder}
           buttonLabel={"Done"}
           onButtonClick={() => {
@@ -184,6 +188,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
         >
           <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
             <Options
+              testIdPrefix={testIdPrefix}
               options={options}
               selected={
                 this.isRadio()

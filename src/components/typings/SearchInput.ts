@@ -21,4 +21,5 @@ export interface SearchInputProps {
   bottomSectionPlaceholder?: () => JSX.Element;
   loading?: boolean;
   beforeSelect: (item: any) => Promise<any>;
+  testIdPrefix?: string;
 }

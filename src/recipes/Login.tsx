@@ -7,6 +7,7 @@ import Countdown from "../components/shared/Countdown";
 import Text from "../components/Text";
 import { LoginProps, LoginState } from "./typings/Login";
 import OTPInput from "react-native-otp";
+import createTestProps from "../utils/createTestProps";
 
 const styles = StyleSheet.create({
   container: {
@@ -164,7 +165,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           >
             {`${country.country_code}-${loginUserValue}`}
           </Text>
-          <Touchable onPress={this.onEdit}>
+          <Touchable onPress={this.onEdit} {...createTestProps("edit-otp")}>
             <Text style={styles.textButton} color={colors.violet.base} bold>
               Edit
             </Text>
@@ -176,6 +177,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           </Text>
           <View style={styles.otpInputWrap}>
             <OTPInput
+              {...createTestProps("otp-input")}
               value={otpValue}
               onChange={onOtpChange}
               tintColor={colors.violet.base}
@@ -193,7 +195,10 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             />
             <View style={{ padding: 10 }}>
               {otpTimeout && (
-                <Touchable onPress={this.onResendOtp}>
+                <Touchable
+                  onPress={this.onResendOtp}
+                  {...createTestProps("resend-otp")}
+                >
                   <Text style={styles.resend}>Resend</Text>
                 </Touchable>
               )}
@@ -202,6 +207,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           </View>
         </View>
         <Text
+          {...createTestProps("support-link")}
           bold
           color={colors.violet.base}
           style={[styles.otpPageLoginHelp, styles.loginHelp]}
@@ -209,7 +215,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
         >
           Get support for login
         </Text>
-        <Button onPress={onSignIn} disabled={otpLength !== otpValue.length}>
+        <Button
+          onPress={onSignIn}
+          disabled={otpLength !== otpValue.length}
+          {...createTestProps("sign-in")}
+        >
           Sign in
         </Button>
       </>
@@ -281,6 +291,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             <>
               {!tenantConfigFetched && (
                 <Input
+                  {...createTestProps("company-input")}
                   readOnly={tenantConfigFetched}
                   value={tenant}
                   placeholder="Company code"
@@ -305,7 +316,10 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                         {tenant.toUpperCase()}
                       </Text>
                     </Text>
-                    <Touchable onPress={this.onTenantEdit}>
+                    <Touchable
+                      onPress={this.onTenantEdit}
+                      {...createTestProps("edit-company")}
+                    >
                       <Text
                         style={styles.textButton}
                         color={colors.violet.base}
@@ -318,6 +332,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   <View style={styles.loginUserInput}>
                     <View style={styles.countrySelect}>
                       <Select
+                        testIdPrefix="countries"
                         options={countriesList}
                         valueExtractor={item => item && item.country_code}
                         rowLabelExtractor={item =>
@@ -331,6 +346,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     </View>
                     <View style={styles.phoneInput}>
                       <Input
+                        {...createTestProps("phone-input")}
                         placeholder="Phone"
                         value={loginUserValue}
                         keyboardType="phone-pad"
@@ -364,6 +380,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 </Text>
               </View>
               <Button
+                {...createTestProps("submit-btn")}
                 onPress={
                   tenantConfigFetched ? this.onSendOtp : this.onTenantSubmit
                 }

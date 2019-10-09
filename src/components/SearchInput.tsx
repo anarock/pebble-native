@@ -3,6 +3,7 @@ import { View, Modal, TouchableWithoutFeedback } from "react-native";
 import Input from "./Input";
 import { SearchInputProps } from "./typings/SearchInput";
 import SearchBox from "./SearchBox";
+import createTestProps from "../utils/createTestProps";
 
 export default class extends React.PureComponent<SearchInputProps> {
   static defaultProps: Partial<SearchInputProps> = {
@@ -23,7 +24,8 @@ export default class extends React.PureComponent<SearchInputProps> {
         disabled={disabled}
       />
     ),
-    beforeSelect: () => Promise.resolve()
+    beforeSelect: () => Promise.resolve(),
+    testIdPrefix: "search-input"
   };
 
   state = {
@@ -55,11 +57,13 @@ export default class extends React.PureComponent<SearchInputProps> {
       noResultsElement,
       renderLabel,
       bottomSectionPlaceholder,
-      loading
+      loading,
+      testIdPrefix
     } = this.props;
     return (
       <React.Fragment>
         <TouchableWithoutFeedback
+          {...createTestProps(`${testIdPrefix}-label`)}
           onPress={
             !disabled
               ? () =>
@@ -78,6 +82,7 @@ export default class extends React.PureComponent<SearchInputProps> {
           animationType="slide"
         >
           <SearchBox
+            testIdPrefix={testIdPrefix}
             loading={loading}
             results={results}
             placeholder={searchBoxPlaceholder}
