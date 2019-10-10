@@ -32,8 +32,6 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     width: "60%",
-    height: 60,
-    position: "absolute",
     marginTop: 20
   },
   content: {
@@ -41,9 +39,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     zIndex: 1
   },
-  defaultContent: {
-    height: 80
-  },
+  defaultContent: {},
   row: { flexDirection: "row", justifyContent: "space-between" }
 });
 
