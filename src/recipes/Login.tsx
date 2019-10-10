@@ -276,7 +276,6 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     } = this.props;
 
     const isButtonDisabled = !loginUserValue || !isPhoneValid;
-    const extraProps = { autoFocus: true };
 
     return (
       <View style={styles.container}>
@@ -291,7 +290,6 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             <>
               {!tenantConfigFetched && (
                 <Input
-                  {...createTestProps("company-input")}
                   readOnly={tenantConfigFetched}
                   value={tenant}
                   placeholder="Company code"
@@ -299,7 +297,10 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   errorMessage={
                     !isTenantValid ? "Please check the company code" : ""
                   }
-                  inputProps={extraProps}
+                  inputProps={{
+                    autoFocus: true,
+                    ...createTestProps("company-input")
+                  }}
                   {...tenantInputProps}
                 />
               )}
@@ -346,13 +347,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     </View>
                     <View style={styles.phoneInput}>
                       <Input
-                        {...createTestProps("phone-input")}
                         placeholder="Phone"
                         value={loginUserValue}
                         keyboardType="phone-pad"
                         onChange={onLoginUserChange}
                         errorMessage={isPhoneValid ? "" : "Invalid Phone"}
-                        inputProps={extraProps}
+                        inputProps={{
+                          autoFocus: true,
+                          ...createTestProps("phone-input")
+                        }}
                         {...phoneInputProps}
                       />
                     </View>
