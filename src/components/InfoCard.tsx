@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     zIndex: 1
   },
-  defaultContent: {},
   row: { flexDirection: "row", justifyContent: "space-between" }
 });
 
