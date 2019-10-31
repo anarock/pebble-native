@@ -12,7 +12,6 @@ import colors from "../theme/colors";
 import Icon from "pebble-shared/native/Icon";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ActionModal from "./ActionModal";
-import createTestProps from "../utils/createTestProps";
 
 const styles = StyleSheet.create({
   optionSection: {
@@ -131,7 +130,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     return (
       <View>
         <TouchableWithoutFeedback
-          {...createTestProps(`${testIdPrefix}-label`)}
+          testID={`${testIdPrefix}-label`}
           onPress={
             disabled
               ? undefined
@@ -174,7 +173,6 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
         </TouchableWithoutFeedback>
 
         <ActionModal
-          {...createTestProps(`${testIdPrefix}-modal`)}
           title={placeholder}
           buttonLabel={"Done"}
           onButtonClick={() => {
@@ -186,7 +184,10 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
           onClose={this.onClose}
           footer={footer}
         >
-          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+          <KeyboardAwareScrollView
+            keyboardShouldPersistTaps="always"
+            testID={`${testIdPrefix}-modal`}
+          >
             <Options
               testIdPrefix={testIdPrefix}
               options={options}

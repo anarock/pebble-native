@@ -13,7 +13,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Text from "./Text";
 import { SearchBoxProps, SearchBoxState } from "./typings/SearchBox";
 import Touchable from "./shared/Touchable";
-import createTestProps from "../utils/createTestProps";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -132,7 +131,7 @@ export default class extends React.PureComponent<
         <View style={styles.textWrapper}>
           <TouchableWithoutFeedback
             onPress={onClose}
-            {...createTestProps(`${testIdPrefix}-close`)}
+            testID={`${testIdPrefix}-close`}
           >
             <Icon
               name="back"
@@ -150,7 +149,7 @@ export default class extends React.PureComponent<
             placeholderTextColor={colors.gray.light}
             autoFocus
             underlineColorAndroid={colors.white.base}
-            {...createTestProps(`${testIdPrefix}-search`)}
+            testID={`${testIdPrefix}-search`}
           />
 
           {loading && (
@@ -159,7 +158,7 @@ export default class extends React.PureComponent<
 
           {!!this.state.queryValue && (
             <Touchable
-              {...createTestProps(`${testIdPrefix}-clear`)}
+              testID={`${testIdPrefix}-clear`}
               onPress={() =>
                 this.setState({
                   queryValue: ""
@@ -185,7 +184,7 @@ export default class extends React.PureComponent<
           {results.map((result, i) => {
             return (
               <Touchable
-                {...createTestProps(`${testIdPrefix}-result-${i}`)}
+                testID={`${testIdPrefix}-result-${i}`}
                 key={keyExtractor(result)}
                 onPress={() => onSelect(result)}
               >

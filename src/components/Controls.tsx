@@ -10,7 +10,6 @@ import { ControlsProps } from "./typings/Controls";
 import Text from "./Text";
 import Icon from "pebble-shared/native/Icon";
 import colors from "../theme/colors";
-import createTestProps from "../utils/createTestProps";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -129,7 +128,7 @@ export default class extends React.PureComponent<ControlsProps> {
             : disabled;
           return (
             <Touchable
-              {...createTestProps(`${testIdPrefix}-${i}`)}
+              testID={`${testIdPrefix}-${i}`}
               key={key}
               onPress={() => this.handlePress(key)}
               disabled={_disabled}

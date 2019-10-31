@@ -3,7 +3,6 @@ import { View, Modal, TouchableWithoutFeedback } from "react-native";
 import Input from "./Input";
 import { SearchInputProps } from "./typings/SearchInput";
 import SearchBox from "./SearchBox";
-import createTestProps from "../utils/createTestProps";
 
 export default class extends React.PureComponent<SearchInputProps> {
   static defaultProps: Partial<SearchInputProps> = {
@@ -63,7 +62,7 @@ export default class extends React.PureComponent<SearchInputProps> {
     return (
       <React.Fragment>
         <TouchableWithoutFeedback
-          {...createTestProps(`${testIdPrefix}-label`)}
+          testID={`${testIdPrefix}-label`}
           onPress={
             !disabled
               ? () =>

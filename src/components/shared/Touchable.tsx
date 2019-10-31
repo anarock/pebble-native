@@ -7,7 +7,9 @@ import {
   TouchableHighlight
 } from "react-native";
 
-type TouchableProps = TouchableNativeFeedbackProps | TouchableHighlightProps;
+export type TouchableProps =
+  | TouchableNativeFeedbackProps
+  | TouchableHighlightProps;
 
 const Touchable: React.FunctionComponent<TouchableProps> = ({
   children,

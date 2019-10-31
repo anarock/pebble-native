@@ -7,7 +7,6 @@ import Countdown from "../components/shared/Countdown";
 import Text from "../components/Text";
 import { LoginProps, LoginState } from "./typings/Login";
 import OTPInput from "react-native-otp";
-import createTestProps from "../utils/createTestProps";
 
 const styles = StyleSheet.create({
   container: {
@@ -165,7 +164,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           >
             {`${country.country_code}-${loginUserValue}`}
           </Text>
-          <Touchable onPress={this.onEdit} {...createTestProps("edit-otp")}>
+          <Touchable onPress={this.onEdit} testID="edit-otp">
             <Text style={styles.textButton} color={colors.violet.base} bold>
               Edit
             </Text>
@@ -177,7 +176,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           </Text>
           <View style={styles.otpInputWrap}>
             <OTPInput
-              {...createTestProps("otp-input")}
+              testID="otp-input"
               value={otpValue}
               onChange={onOtpChange}
               tintColor={colors.violet.base}
@@ -195,10 +194,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             />
             <View style={{ padding: 10 }}>
               {otpTimeout && (
-                <Touchable
-                  onPress={this.onResendOtp}
-                  {...createTestProps("resend-otp")}
-                >
+                <Touchable onPress={this.onResendOtp} testID="resend-otp">
                   <Text style={styles.resend}>Resend</Text>
                 </Touchable>
               )}
@@ -207,7 +203,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           </View>
         </View>
         <Text
-          {...createTestProps("support-link")}
+          testID="support-link"
           bold
           color={colors.violet.base}
           style={[styles.otpPageLoginHelp, styles.loginHelp]}
@@ -218,7 +214,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
         <Button
           onPress={onSignIn}
           disabled={otpLength !== otpValue.length}
-          {...createTestProps("sign-in")}
+          testID="sign-in"
         >
           Sign in
         </Button>
@@ -299,7 +295,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   }
                   inputProps={{
                     autoFocus: true,
-                    ...createTestProps("company-input")
+                    testID: "company-input"
                   }}
                   {...tenantInputProps}
                 />
@@ -319,7 +315,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     </Text>
                     <Touchable
                       onPress={this.onTenantEdit}
-                      {...createTestProps("edit-company")}
+                      testID="edit-company"
                     >
                       <Text
                         style={styles.textButton}
@@ -354,7 +350,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                         errorMessage={isPhoneValid ? "" : "Invalid Phone"}
                         inputProps={{
                           autoFocus: true,
-                          ...createTestProps("phone-input")
+                          testID: "phone-input"
                         }}
                         {...phoneInputProps}
                       />
@@ -383,7 +379,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 </Text>
               </View>
               <Button
-                {...createTestProps("submit-btn")}
+                testID="submit-btn"
                 onPress={
                   tenantConfigFetched ? this.onSendOtp : this.onTenantSubmit
                 }

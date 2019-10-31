@@ -1,7 +1,8 @@
 import * as React from "react";
 import { GestureResponderEvent } from "react-native";
+import { TouchableProps } from "../shared/Touchable";
 
-export interface ButtonProps {
+interface ButtonBaseProps {
   onPress?: (e: GestureResponderEvent) => void;
   onLongPress?: (e: GestureResponderEvent) => void;
   disabled?: boolean;
@@ -12,6 +13,8 @@ export interface ButtonProps {
   transparent?: boolean;
   radius?: boolean;
 }
+
+export type ButtonProps = TouchableProps & ButtonBaseProps;
 
 export interface DoubleFooterButtonProps {
   leftButtonLabel: string;
