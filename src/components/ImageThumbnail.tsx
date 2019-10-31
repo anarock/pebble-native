@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, Image, ImageURISource } from "react-native";
 import { colors } from "../theme";
 import Text from "./Text";
-import Touchable from "./shared/Touchable";
+import Touchable, { TouchableProps } from "./shared/Touchable";
 
 const styles = StyleSheet.create({
   container: {
@@ -35,14 +35,9 @@ interface ImageThumbnailProps {
 }
 
 // @ts-ignore
-const ImageThumbnail: React.FunctionComponent<ImageThumbnailProps> = ({
-  image,
-  onPress,
-  title,
-  subText,
-  style = {},
-  ...otherProps
-}) => {
+const ImageThumbnail: React.FunctionComponent<
+  TouchableProps & ImageThumbnailProps
+> = ({ image, onPress, title, subText, style = {}, ...otherProps }) => {
   return (
     <Touchable onPress={onPress} {...otherProps}>
       <View style={[styles.container, style]}>

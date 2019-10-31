@@ -1,4 +1,6 @@
-export interface CircularButtonProps {
+import { ViewProps } from "react-native";
+
+export interface CircularButtonProps extends ViewProps {
   backgroundColor?: string;
   iconName?: string;
   color?: string;
