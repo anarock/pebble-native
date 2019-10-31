@@ -58,17 +58,13 @@ const disabledFontColor = {
   secondary: colors.gray.light
 };
 
-// @ts-ignore
-const FooterButton: React.FunctionComponent<Partial<ButtonProps>> = ({
-  onPress,
+const FooterButton: React.FunctionComponent<ButtonProps> = ({
   children,
   ...rest
 }) => {
   return (
     <View style={styles.buttonWrapper}>
-      <Button onPress={onPress} {...rest}>
-        {children}
-      </Button>
+      <Button {...rest}>{children}</Button>
     </View>
   );
 };
