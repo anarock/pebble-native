@@ -1,4 +1,4 @@
-import { GestureResponderEvent, ViewStyle } from "react-native";
+import { GestureResponderEvent, ModalProps, ViewStyle } from "react-native";
 
 export interface ActionModalStyles {
   children: ViewStyle;
@@ -10,7 +10,7 @@ export interface ActionModalStyles {
   wrapper: ViewStyle;
 }
 
-export interface ActionModalProps {
+export interface ActionModalProps extends ModalProps {
   onClose: (e?: GestureResponderEvent) => void;
   title?: string;
   buttonLabel?: string;

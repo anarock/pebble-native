@@ -13,6 +13,7 @@ export interface SearchBoxProps {
   onClose?: () => void;
   bottomSectionPlaceholder?: () => JSX.Element;
   loading?: boolean;
+  testIdPrefix?: string;
 }
 
 export interface SearchBoxState {

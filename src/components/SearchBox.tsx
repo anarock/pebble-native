@@ -84,7 +84,8 @@ export default class extends React.PureComponent<
           {props.rowLabelExtractor(item)}
         </Text>
       </View>
-    )
+    ),
+    testIdPrefix: "sb"
   };
 
   constructor(props) {
@@ -121,13 +122,17 @@ export default class extends React.PureComponent<
       renderElement,
       keyExtractor,
       onClose,
-      loading
+      loading,
+      testIdPrefix
     } = this.props;
 
     return (
       <View style={styles.wrapper}>
         <View style={styles.textWrapper}>
-          <TouchableWithoutFeedback onPress={onClose}>
+          <TouchableWithoutFeedback
+            onPress={onClose}
+            testID={`${testIdPrefix}-close`}
+          >
             <Icon
               name="back"
               color={colors.gray.darker}
@@ -144,6 +149,7 @@ export default class extends React.PureComponent<
             placeholderTextColor={colors.gray.light}
             autoFocus
             underlineColorAndroid={colors.white.base}
+            testID={`${testIdPrefix}-search`}
           />
 
           {loading && (
@@ -152,6 +158,7 @@ export default class extends React.PureComponent<
 
           {!!this.state.queryValue && (
             <Touchable
+              testID={`${testIdPrefix}-clear`}
               onPress={() =>
                 this.setState({
                   queryValue: ""
@@ -174,9 +181,10 @@ export default class extends React.PureComponent<
           keyboardShouldPersistTaps="always"
           contentContainerStyle={styles.optionContainer}
         >
-          {results.map(result => {
+          {results.map((result, i) => {
             return (
               <Touchable
+                testID={`${testIdPrefix}-result-${i}`}
                 key={keyExtractor(result)}
                 onPress={() => onSelect(result)}
               >

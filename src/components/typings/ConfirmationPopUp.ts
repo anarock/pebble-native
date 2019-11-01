@@ -1,4 +1,6 @@
-export interface ConfirmationPopUpProps {
+import { ActionModalProps } from "./ActionModal";
+
+export interface ConfirmationPopUpProps extends ActionModalProps {
   onConfirmPress: () => void;
   onRejectPress: () => void;
   confirmButtonText: string;

@@ -79,7 +79,8 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
   header,
   headerType,
   style = {},
-  footer
+  footer,
+  ...otherProps
 }) {
   const { light, icon, dark } = headerType
     ? headerTypeToColor[headerType]
@@ -95,6 +96,7 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
       visible={visible}
       transparent
       onRequestClose={onClose}
+      {...otherProps}
     >
       <View style={[styles.modalContent, style.modalContent]}>
         <Touchable style={[styles.overlay, style.overlay]} onPress={onClose}>

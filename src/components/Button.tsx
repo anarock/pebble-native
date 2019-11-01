@@ -58,17 +58,13 @@ const disabledFontColor = {
   secondary: colors.gray.light
 };
 
-// @ts-ignore
-const FooterButton: React.FunctionComponent<Partial<ButtonProps>> = ({
-  onPress,
+const FooterButton: React.FunctionComponent<ButtonProps> = ({
   children,
   ...rest
 }) => {
   return (
     <View style={styles.buttonWrapper}>
-      <Button onPress={onPress} {...rest}>
-        {children}
-      </Button>
+      <Button {...rest}>{children}</Button>
     </View>
   );
 };
@@ -125,7 +121,8 @@ class Button extends React.Component<ButtonProps> {
       style,
       onLongPress,
       transparent,
-      radius
+      radius,
+      ...otherProps
     } = this.props;
 
     const _disabled = disabled || loading;
@@ -141,6 +138,7 @@ class Button extends React.Component<ButtonProps> {
         onPress={_disabled ? undefined : onPress}
         disabled={_disabled}
         onLongPress={_disabled ? undefined : onLongPress}
+        {...otherProps}
       >
         <View
           style={[
