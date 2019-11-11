@@ -32,17 +32,12 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     width: "60%",
-    height: 60,
-    position: "absolute",
     marginTop: 20
   },
   content: {
     maxHeight: 190,
     overflow: "hidden",
     zIndex: 1
-  },
-  defaultContent: {
-    height: 80
   },
   row: { flexDirection: "row", justifyContent: "space-between" }
 });
