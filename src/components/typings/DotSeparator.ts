@@ -8,5 +8,5 @@ export interface DotSeparatorProps {
   color?: string;
   textProps?: TextProps;
   dotSize?: number;
-  style: ViewStyle;
+  style?: ViewStyle;
 }
