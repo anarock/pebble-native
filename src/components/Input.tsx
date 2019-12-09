@@ -179,8 +179,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
                 color: disabled ? colors.gray.base : colors.gray.darker
               },
               Platform.OS === "ios" && styles.iosStyles,
-              textInputStyles,
-              textArea && styles.textArea
+              textArea && styles.textArea,
+              textInputStyles
             ]}
             onChangeText={onChange}
             underlineColorAndroid={"transparent"}
