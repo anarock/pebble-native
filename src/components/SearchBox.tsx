@@ -123,7 +123,8 @@ export default class extends React.PureComponent<
       keyExtractor,
       onClose,
       loading,
-      testIdPrefix
+      testIdPrefix,
+      extraActionElement
     } = this.props;
 
     return (
@@ -193,9 +194,12 @@ export default class extends React.PureComponent<
             );
           })}
 
-          {!(results && results.length) &&
+          {!extraActionElement &&
+            !results.length &&
             this.renderNoResultState(this.state.queryValue)}
         </KeyboardAwareScrollView>
+
+        {extraActionElement && extraActionElement(this.state.queryValue)}
       </View>
     );
   }
