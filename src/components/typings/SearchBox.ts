@@ -14,6 +14,7 @@ export interface SearchBoxProps {
   bottomSectionPlaceholder?: () => JSX.Element;
   loading?: boolean;
   testIdPrefix?: string;
+  extraActionElement?: (query: string) => JSX.Element;
 }
 
 export interface SearchBoxState {

@@ -57,7 +57,8 @@ export default class extends React.PureComponent<SearchInputProps> {
       renderLabel,
       bottomSectionPlaceholder,
       loading,
-      testIdPrefix
+      testIdPrefix,
+      extraActionElement
     } = this.props;
     return (
       <React.Fragment>
@@ -95,6 +96,7 @@ export default class extends React.PureComponent<SearchInputProps> {
             noResultsElement={noResultsElement}
             bottomSectionPlaceholder={bottomSectionPlaceholder}
             onClose={this.closeModal}
+            extraActionElement={extraActionElement}
           />
         </Modal>
       </React.Fragment>

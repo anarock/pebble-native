@@ -22,4 +22,5 @@ export interface SearchInputProps {
   loading?: boolean;
   beforeSelect: (item: any) => Promise<any>;
   testIdPrefix?: string;
+  extraActionElement?: (query: string) => JSX.Element;
 }
