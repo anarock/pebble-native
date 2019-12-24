@@ -194,11 +194,12 @@ export default class extends React.PureComponent<
             );
           })}
 
-          {extraActionElement
-            ? extraActionElement(this.state.queryValue)
-            : !results.length &&
-              this.renderNoResultState(this.state.queryValue)}
+          {!extraActionElement &&
+            !results.length &&
+            this.renderNoResultState(this.state.queryValue)}
         </KeyboardAwareScrollView>
+
+        {extraActionElement && extraActionElement(this.state.queryValue)}
       </View>
     );
   }
