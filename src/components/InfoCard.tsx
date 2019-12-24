@@ -119,7 +119,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
               {_children}
             </View>
           ) : (
-            <View style={styles.defaultContent}>
+            <View>
               {!!image && (
                 <Image
                   style={[styles.imageWrapper as any, style.imageWrapper]}

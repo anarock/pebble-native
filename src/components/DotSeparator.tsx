@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
 });
 
 const DotSeparator: React.FunctionComponent<DotSeparatorProps> = ({
+  style = {},
   texts,
   dotColor = colors.gray.light,
   dotSize = 4,
@@ -27,7 +28,7 @@ const DotSeparator: React.FunctionComponent<DotSeparatorProps> = ({
   const _texts = texts.filter(Boolean);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <>
         {_texts.map((text, i) => (
           <Fragment key={i}>
