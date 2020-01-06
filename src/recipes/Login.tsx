@@ -131,6 +131,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       loginPage: LOGIN_PAGE.USER_PAGE,
       otpTimeout: false
     });
+
+    if (this.props.onEditPhone) {
+      this.props.onEditPhone();
+    }
+
     this.props.onOtpChange("");
   };
 
