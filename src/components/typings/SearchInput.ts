@@ -5,6 +5,7 @@ export interface SearchInputProps {
   errorMessage?: string;
   results: any[];
   searchBoxPlaceholder: string;
+  onClose?: () => void;
   onSelect: (item: any) => void;
   onQueryChange: (query: string) => void;
   renderElement?: (
