@@ -161,9 +161,12 @@ export default class extends React.PureComponent<
             <Touchable
               testID={`${testIdPrefix}-clear`}
               onPress={() =>
-                this.setState({
-                  queryValue: ""
-                })
+                this.setState(
+                  {
+                    queryValue: ""
+                  },
+                  () => this.debouncedChange("")
+                )
               }
             >
               <View style={styles.close}>
