@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: colors.white.base,
     fontSize: 15,
-    flexGrow: 1
+    flexGrow: 1,
+    flexShrink: 1
   },
   clearIcon: {
     backgroundColor: colors.gray.light,
