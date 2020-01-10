@@ -35,6 +35,10 @@ export default class extends React.PureComponent<SearchInputProps> {
     this.setState({
       showModal: false
     });
+
+    if (this.props.onClose) {
+      this.props.onClose();
+    }
   };
 
   private onSelect = item => {
