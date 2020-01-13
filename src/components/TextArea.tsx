@@ -12,28 +12,22 @@ const styles = StyleSheet.create({
   }
 });
 
-const TextArea: FC<TextAreaProps> = () => {
-  const {
-    inputProps,
-    style,
-    textArea,
-    textInputStyles,
-    ...passProps
-  } = this.props;
-
+const TextArea: FC<TextAreaProps> = ({
+  inputProps,
+  numberOfLines = 3,
+  style,
+  textInputStyles,
+  ...passProps
+}) => {
   return (
     <Input
       {...passProps}
-      style={[
-        textArea && {
-          height: "auto"
-        },
-        style
-      ]}
-      textInputStyles={[textArea && styles.textArea, textInputStyles]}
+      style={[style, { height: "auto" }]}
+      textInputStyles={[styles.textArea, textInputStyles]}
       inputProps={{
         ...inputProps,
-        multiline: true
+        multiline: true,
+        numberOfLines
       }}
     />
   );
