@@ -23,7 +23,8 @@ export default class extends React.PureComponent<SearchInputProps> {
         disabled={disabled}
       />
     ),
-    beforeSelect: () => Promise.resolve()
+    beforeSelect: () => Promise.resolve(),
+    testIdPrefix: "search-input"
   };
 
   state = {
@@ -34,6 +35,10 @@ export default class extends React.PureComponent<SearchInputProps> {
     this.setState({
       showModal: false
     });
+
+    if (this.props.onClose) {
+      this.props.onClose();
+    }
   };
 
   private onSelect = item => {
@@ -55,11 +60,14 @@ export default class extends React.PureComponent<SearchInputProps> {
       noResultsElement,
       renderLabel,
       bottomSectionPlaceholder,
-      loading
+      loading,
+      testIdPrefix,
+      extraActionElement
     } = this.props;
     return (
       <React.Fragment>
         <TouchableWithoutFeedback
+          testID={`${testIdPrefix}-label`}
           onPress={
             !disabled
               ? () =>
@@ -78,6 +86,7 @@ export default class extends React.PureComponent<SearchInputProps> {
           animationType="slide"
         >
           <SearchBox
+            testIdPrefix={testIdPrefix}
             loading={loading}
             results={results}
             placeholder={searchBoxPlaceholder}
@@ -91,6 +100,7 @@ export default class extends React.PureComponent<SearchInputProps> {
             noResultsElement={noResultsElement}
             bottomSectionPlaceholder={bottomSectionPlaceholder}
             onClose={this.closeModal}
+            extraActionElement={extraActionElement}
           />
         </Modal>
       </React.Fragment>

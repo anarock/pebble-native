@@ -14,4 +14,5 @@ export interface OptionsProps {
   keyExtractor?: (item: any) => number | string;
   type?: "radio" | "checkbox";
   rowLabelExtractor: (item: any) => JSX.Element | string | number;
+  testIdPrefix?: string;
 }

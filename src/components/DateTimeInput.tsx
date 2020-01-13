@@ -55,7 +55,8 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
       label,
       value,
       placeholder,
-      type
+      type,
+      ...otherProps
     } = this.props;
 
     let _value;
@@ -67,7 +68,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
     }
 
     return (
-      <TouchableWithoutFeedback onPress={this.open}>
+      <TouchableWithoutFeedback onPress={this.open} {...otherProps}>
         <View>
           <Input
             errorMessage={errorMessage}

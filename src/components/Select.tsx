@@ -49,7 +49,8 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     keyExtractor: item => item.id,
     type: "radio",
     onClose: noop,
-    autoClose: true
+    autoClose: true,
+    testIdPrefix: "select"
   };
 
   state = {
@@ -122,13 +123,14 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       label,
       footer,
       showFooterButton,
-      autoClose,
+      testIdPrefix,
       ...rest
     } = this.props;
 
     return (
       <View>
         <TouchableWithoutFeedback
+          testID={`${testIdPrefix}-label`}
           onPress={
             disabled
               ? undefined
@@ -182,8 +184,12 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
           onClose={this.onClose}
           footer={footer}
         >
-          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+          <KeyboardAwareScrollView
+            keyboardShouldPersistTaps="always"
+            testID={`${testIdPrefix}-modal`}
+          >
             <Options
+              testIdPrefix={testIdPrefix}
               options={options}
               selected={
                 this.isRadio()

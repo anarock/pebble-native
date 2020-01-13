@@ -30,7 +30,8 @@ export default function ConfirmationPopUp({
   confirmButtonText,
   rejectButtonText,
   visible,
-  onClose
+  onClose,
+  ...otherProps
 }: ConfirmationPopUpProps) {
   return (
     <ActionModal
@@ -38,6 +39,7 @@ export default function ConfirmationPopUp({
       title={title}
       visible={visible}
       onClose={onClose}
+      {...otherProps}
     >
       <>
         <Text size={15} lineHeight={22}>

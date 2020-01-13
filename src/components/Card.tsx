@@ -25,10 +25,11 @@ const Card: React.FunctionComponent<CardProps> = ({
   rightElement,
   description,
   onPress,
-  style = {}
+  style = {},
+  ...otherProps
 }) => {
   return (
-    <Touchable onPress={onPress} disabled={!onPress}>
+    <Touchable onPress={onPress} disabled={!onPress} {...otherProps}>
       <View style={[styles.container, style]}>
         <View>
           <ConditionalComponent conditional={title}>

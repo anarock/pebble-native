@@ -40,12 +40,6 @@ const styles = StyleSheet.create({
   iosStyles: {
     paddingTop: 10,
     paddingBottom: 5
-  },
-  textArea: {
-    marginTop: 30,
-    minHeight: 60,
-    lineHeight: 15,
-    textAlignVertical: "top"
   }
 });
 
