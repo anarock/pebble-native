@@ -15,6 +15,7 @@ export interface InputProps {
   errorMessage?: string;
   successMessage?: string;
   style?: any;
+  textInputStyles?: RN.StyleProp<RN.TextStyle>;
 }
 
 export interface InputState {

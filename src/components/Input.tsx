@@ -126,21 +126,12 @@ class Input extends React.PureComponent<InputProps, InputState> {
       keyboardType,
       disabled,
       inputProps,
-      textInputStyles,
-      textArea
+      textInputStyles
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
     return (
-      <View
-        style={[
-          styles.wrapper,
-          style,
-          textArea && {
-            height: "auto"
-          }
-        ]}
-      >
+      <View style={[styles.wrapper, style]}>
         <Text
           animated
           color={this.state.placeholderMarginTop.interpolate({
@@ -179,7 +170,6 @@ class Input extends React.PureComponent<InputProps, InputState> {
                 color: disabled ? colors.gray.base : colors.gray.darker
               },
               Platform.OS === "ios" && styles.iosStyles,
-              textArea && styles.textArea,
               textInputStyles
             ]}
             onChangeText={onChange}
@@ -191,7 +181,6 @@ class Input extends React.PureComponent<InputProps, InputState> {
             selectionColor={colors.violet.base}
             editable={!(readOnly || disabled)}
             keyboardType={keyboardType}
-            multiline={textArea || false}
             {...inputProps}
           />
         )}
