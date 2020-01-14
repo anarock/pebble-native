@@ -22,6 +22,7 @@ import ConfirmationPopUp from "./ConfirmationPopUp";
 import Message from "./Message";
 import DotSeparator from "./DotSeparator";
 import TimelineEvent from "./TimelineEvent";
+import TextArea from "./TextArea";
 
 export {
   Input,
@@ -47,5 +48,6 @@ export {
   ConfirmationPopUp,
   Message,
   DotSeparator,
-  TimelineEvent
+  TimelineEvent,
+  TextArea
 };
