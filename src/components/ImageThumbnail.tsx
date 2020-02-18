@@ -41,7 +41,12 @@ const ImageThumbnail: React.FunctionComponent<
   return (
     <Touchable onPress={onPress} {...otherProps}>
       <View style={[styles.container, style]}>
-        <Image resizeMode="cover" source={image} style={styles.image} />
+        <Image
+          resizeMode="cover"
+          resizeMethod="resize"
+          source={image}
+          style={styles.image}
+        />
         <Text
           lineHeight={24}
           numberOfLines={1}
