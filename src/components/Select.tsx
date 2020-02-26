@@ -176,7 +176,11 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
           title={placeholder}
           buttonLabel={"Done"}
           onButtonClick={() => {
-            this.props.onSelect(this.state.selectedCheckbox);
+            this.props.onSelect(
+              this.props.options.filter(option =>
+                this.state.selectedCheckbox.includes(keyExtractor(option))
+              )
+            );
             this.closeOptions();
           }}
           visible={this.state.showOptions}
@@ -191,11 +195,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
             <Options
               testIdPrefix={testIdPrefix}
               options={options}
-              selected={
-                this.isRadio()
-                  ? selected
-                  : this.state.selectedCheckbox.map(x => keyExtractor(x))
-              }
+              selected={this.isRadio() ? selected : this.state.selectedCheckbox}
               keyExtractor={keyExtractor}
               type={type}
               {...rest}
