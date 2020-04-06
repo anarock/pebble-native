@@ -56,11 +56,6 @@
   "jest": {
     "preset": "react-native"
   },
-  "rnpm": {
-    "assets": [
-      "./node_modules/pebble-shared/native/icons/"
-    ]
-  },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
