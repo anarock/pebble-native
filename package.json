@@ -1,6 +1,7 @@
 {
   "name": "pebble-native",
   "version": "0.41.0",
+  "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -17,41 +18,38 @@
     "date-fns": "^1.30.1",
     "just-debounce-it": "^1.1.0",
     "name-initials": "^0.1.3",
-    "react-native-keyboard-aware-scroll-view": "^0.8.0",
+    "react-native-keyboard-aware-scroll-view": "^0.9.1",
     "react-native-otp": "github:l3satwik/react-native-otp#cell-parent",
-    "react-spring": "^5.9.2",
-    "utility-types": "^3.6.1"
+    "utility-types": "^3.10.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "5.0.11",
-    "@storybook/addon-knobs": "^5.0.11",
-    "@storybook/addon-ondevice-knobs": "^4.1.18",
-    "@storybook/addon-ondevice-notes": "^4.1.18",
-    "@storybook/addons": "5.0.11",
-    "@storybook/react-native": "4.1.18",
-    "@types/expo": "^31.0.9",
-    "@types/jest": "^24.0.12",
-    "@types/node": "^11.13.9",
-    "@types/react": "^16.8.15",
-    "@types/react-native": "^0.57.51",
-    "@types/storybook__addon-knobs": "^5.0.0",
-    "@types/storybook__react-native": "^3.0.4",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "23.6.0",
-    "babel-loader": "^8.0.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-expo": "^5.0.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-runtime": "^6.26.0",
-    "expo": "^32.0.6",
-    "husky": "^1.3.1",
-    "jest": "23.6.0",
-    "prettier": "^1.17.0",
-    "pretty-quick": "^1.10.0",
-    "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-test-renderer": "16.8.6",
-    "typescript": "^3.4.5"
+    "@babel/core": "^7.9.0",
+    "@react-native-community/async-storage": "^1.9.0",
+    "@storybook/addon-actions": "5.3.18",
+    "@storybook/addon-knobs": "^5.3.18",
+    "@storybook/addon-ondevice-knobs": "^5.3.18",
+    "@storybook/addon-ondevice-notes": "^5.3.18",
+    "@storybook/addons": "5.3.18",
+    "@storybook/react-native": "5.3.18",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.11.1",
+    "@types/react": "^16.9.34",
+    "@types/react-native": "^0.62.2",
+    "@types/storybook__addon-knobs": "^5.2.1",
+    "@types/storybook__react-native": "^5.2.1",
+    "@use-expo/font": "^2.0.0",
+    "babel-loader": "^8.1.0",
+    "expo": "^37.0.7",
+    "husky": "^4.2.5",
+    "jest": "25.3.0",
+    "pebble-shared": "^2.0.1",
+    "prettier": "^2.0.4",
+    "pretty-quick": "^2.0.1",
+    "react": "16.9.0",
+    "react-native": "0.61.4",
+    "react-native-vector-icons": "^6.6.0",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1"
   },
   "jest": {
     "preset": "react-native"
@@ -62,6 +60,8 @@
     }
   },
   "peerDependencies": {
-    "pebble-shared": "^1.0.4"
+    "pebble-shared": "^2.0.1",
+    "react": ">=16.9.0",
+    "react-native": ">=0.61.4"
   }
 }
