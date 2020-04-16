@@ -1,4 +1,4 @@
-declare module "@anarock/pebble/native/Icon" {
+declare module "pebble-shared/native/Icon" {
   import * as React from "react";
 
   class Icon extends React.PureComponent<{

@@ -4,7 +4,7 @@ import colors from "../theme/colors";
 import Text from "./Text";
 import Button from "./Button";
 import { ActionModalProps, ActionModalStyles } from "./typings/ActionModal";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import Touchable from "./shared/Touchable";
 import ConditionalComponent from "./shared/ConditionalComponent";
 
@@ -79,7 +79,8 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
   header,
   headerType,
   style = {},
-  footer
+  footer,
+  ...otherProps
 }) {
   const { light, icon, dark } = headerType
     ? headerTypeToColor[headerType]
@@ -95,6 +96,7 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
       visible={visible}
       transparent
       onRequestClose={onClose}
+      {...otherProps}
     >
       <View style={[styles.modalContent, style.modalContent]}>
         <Touchable style={[styles.overlay, style.overlay]} onPress={onClose}>

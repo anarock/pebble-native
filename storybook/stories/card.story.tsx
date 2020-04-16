@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react-native";
 import CenterView from "./CenterView";
 import { Card, CircularButton, Text } from "../../src/components";
 import { View } from "react-native";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import { colors } from "../../src/theme";
 
 storiesOf("Card", module)

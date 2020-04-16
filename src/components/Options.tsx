@@ -4,7 +4,7 @@ import { OptionsProps } from "./typings/Options";
 import colors from "../theme/colors";
 import Controls from "./Controls";
 import Text from "./Text";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 
 const styles = StyleSheet.create({
   optionWrapper: {
@@ -58,7 +58,8 @@ export default class Options extends React.Component<OptionsProps> {
           />
         </View>
       );
-    }
+    },
+    testIdPrefix: "options"
   };
 
   onSelect = ({ selected }) => {
@@ -81,7 +82,8 @@ export default class Options extends React.Component<OptionsProps> {
       keyExtractor,
       rowRenderElement,
       width,
-      type
+      type,
+      testIdPrefix
     } = this.props;
     return (
       <View
@@ -93,6 +95,7 @@ export default class Options extends React.Component<OptionsProps> {
         ]}
       >
         <Controls
+          testIdPrefix={testIdPrefix}
           style={controlStyle}
           renderElement={args => rowRenderElement(args, this.props)}
           onChange={this.onSelect}

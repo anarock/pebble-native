@@ -9,7 +9,7 @@ import Input from "./Input";
 import Options from "./Options";
 import { SelectProps, SelectState } from "./typings/Select";
 import colors from "../theme/colors";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ActionModal from "./ActionModal";
 
@@ -49,7 +49,8 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     keyExtractor: item => item.id,
     type: "radio",
     onClose: noop,
-    autoClose: true
+    autoClose: true,
+    testIdPrefix: "select"
   };
 
   state = {
@@ -122,13 +123,14 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       label,
       footer,
       showFooterButton,
-      autoClose,
+      testIdPrefix,
       ...rest
     } = this.props;
 
     return (
       <View>
         <TouchableWithoutFeedback
+          testID={`${testIdPrefix}-label`}
           onPress={
             disabled
               ? undefined
@@ -174,7 +176,11 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
           title={placeholder}
           buttonLabel={"Done"}
           onButtonClick={() => {
-            this.props.onSelect(this.state.selectedCheckbox);
+            this.props.onSelect(
+              this.props.options.filter(option =>
+                this.state.selectedCheckbox.includes(keyExtractor(option))
+              )
+            );
             this.closeOptions();
           }}
           visible={this.state.showOptions}
@@ -182,14 +188,14 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
           onClose={this.onClose}
           footer={footer}
         >
-          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+          <KeyboardAwareScrollView
+            keyboardShouldPersistTaps="always"
+            testID={`${testIdPrefix}-modal`}
+          >
             <Options
+              testIdPrefix={testIdPrefix}
               options={options}
-              selected={
-                this.isRadio()
-                  ? selected
-                  : this.state.selectedCheckbox.map(x => keyExtractor(x))
-              }
+              selected={this.isRadio() ? selected : this.state.selectedCheckbox}
               keyExtractor={keyExtractor}
               type={type}
               {...rest}

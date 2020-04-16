@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { colors } from "../theme";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import { CircularButtonProps } from "./typings/CircularButton";
 import Text from "./Text";
 import ConditionalComponent from "./shared/ConditionalComponent";
@@ -35,20 +35,22 @@ const CircularButton: React.FunctionComponent<CircularButtonProps> = ({
   subBackgroundColor = colors.yellow.base,
   subLabel,
   subLabelColor = colors.white.base,
-  iconSize = 15
+  iconSize = 15,
+  ...otherProps
 }) => {
   const dimension = small ? 34 : 44;
   return (
     <View
       style={[
         styles.iconWrapper,
-        style,
         {
           width: dimension,
           height: dimension,
           backgroundColor
-        }
+        },
+        style
       ]}
+      {...otherProps}
     >
       {!!iconName && <Icon size={iconSize} name={iconName} color={color} />}
 

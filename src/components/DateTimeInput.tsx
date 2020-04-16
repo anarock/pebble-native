@@ -11,7 +11,7 @@ import { format, setMinutes, setHours, getTime } from "date-fns";
 
 class TimeInput extends React.PureComponent<DateTimeInputProps> {
   private open = async () => {
-    const { value, type } = this.props;
+    const { value, type, minDate, maxDate, mode } = this.props;
     const date = value ? new Date(this.props.value) : new Date();
 
     const timing = {
@@ -22,7 +22,10 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
     let selected;
     // @ts-ignore
     const { action, day, month, year } = await DatePickerAndroid.open({
-      date
+      date,
+      minDate,
+      maxDate,
+      mode
     });
 
     if (action === DatePickerAndroid.dismissedAction) return;
@@ -52,7 +55,8 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
       label,
       value,
       placeholder,
-      type
+      type,
+      ...otherProps
     } = this.props;
 
     let _value;
@@ -64,7 +68,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
     }
 
     return (
-      <TouchableWithoutFeedback onPress={this.open}>
+      <TouchableWithoutFeedback onPress={this.open} {...otherProps}>
         <View>
           <Input
             errorMessage={errorMessage}

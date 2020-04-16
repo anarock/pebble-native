@@ -164,7 +164,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           >
             {`${country.country_code}-${loginUserValue}`}
           </Text>
-          <Touchable onPress={this.onEdit}>
+          <Touchable onPress={this.onEdit} testID="edit-otp">
             <Text style={styles.textButton} color={colors.violet.base} bold>
               Edit
             </Text>
@@ -176,6 +176,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           </Text>
           <View style={styles.otpInputWrap}>
             <OTPInput
+              testID="otp-input"
               value={otpValue}
               onChange={onOtpChange}
               tintColor={colors.violet.base}
@@ -193,7 +194,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             />
             <View style={{ padding: 10 }}>
               {otpTimeout && (
-                <Touchable onPress={this.onResendOtp}>
+                <Touchable onPress={this.onResendOtp} testID="resend-otp">
                   <Text style={styles.resend}>Resend</Text>
                 </Touchable>
               )}
@@ -202,6 +203,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           </View>
         </View>
         <Text
+          testID="support-link"
           bold
           color={colors.violet.base}
           style={[styles.otpPageLoginHelp, styles.loginHelp]}
@@ -209,7 +211,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
         >
           Get support for login
         </Text>
-        <Button onPress={onSignIn} disabled={otpLength !== otpValue.length}>
+        <Button
+          onPress={onSignIn}
+          disabled={otpLength !== otpValue.length}
+          testID="sign-in"
+        >
           Sign in
         </Button>
       </>
@@ -266,7 +272,6 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     } = this.props;
 
     const isButtonDisabled = !loginUserValue || !isPhoneValid;
-    const extraProps = { autoFocus: true };
 
     return (
       <View style={styles.container}>
@@ -288,7 +293,10 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   errorMessage={
                     !isTenantValid ? "Please check the company code" : ""
                   }
-                  inputProps={extraProps}
+                  inputProps={{
+                    autoFocus: true,
+                    testID: "company-input"
+                  }}
                   {...tenantInputProps}
                 />
               )}
@@ -305,7 +313,10 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                         {tenant.toUpperCase()}
                       </Text>
                     </Text>
-                    <Touchable onPress={this.onTenantEdit}>
+                    <Touchable
+                      onPress={this.onTenantEdit}
+                      testID="edit-company"
+                    >
                       <Text
                         style={styles.textButton}
                         color={colors.violet.base}
@@ -318,6 +329,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   <View style={styles.loginUserInput}>
                     <View style={styles.countrySelect}>
                       <Select
+                        testIdPrefix="countries"
                         options={countriesList}
                         valueExtractor={item => item && item.country_code}
                         rowLabelExtractor={item =>
@@ -336,7 +348,10 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                         keyboardType="phone-pad"
                         onChange={onLoginUserChange}
                         errorMessage={isPhoneValid ? "" : "Invalid Phone"}
-                        inputProps={extraProps}
+                        inputProps={{
+                          autoFocus: true,
+                          testID: "phone-input"
+                        }}
                         {...phoneInputProps}
                       />
                     </View>
@@ -364,6 +379,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 </Text>
               </View>
               <Button
+                testID="submit-btn"
                 onPress={
                   tenantConfigFetched ? this.onSendOtp : this.onTenantSubmit
                 }

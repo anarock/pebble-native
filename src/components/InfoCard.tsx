@@ -2,7 +2,7 @@ import { Image, StyleSheet, View } from "react-native";
 import * as React from "react";
 import { colors } from "../theme";
 import Text from "./Text";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import { InfoCardProps, InfoCardState } from "./typings/InfoCard";
 import Touchable from "./shared/Touchable";
 
@@ -32,17 +32,12 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     width: "60%",
-    height: 60,
-    position: "absolute",
     marginTop: 20
   },
   content: {
     maxHeight: 190,
     overflow: "hidden",
     zIndex: 1
-  },
-  defaultContent: {
-    height: 80
   },
   row: { flexDirection: "row", justifyContent: "space-between" }
 });
@@ -124,7 +119,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
               {_children}
             </View>
           ) : (
-            <View style={styles.defaultContent}>
+            <View>
               {!!image && (
                 <Image
                   style={[styles.imageWrapper as any, style.imageWrapper]}

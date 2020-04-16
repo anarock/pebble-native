@@ -5,6 +5,7 @@ export interface SearchInputProps {
   errorMessage?: string;
   results: any[];
   searchBoxPlaceholder: string;
+  onClose?: () => void;
   onSelect: (item: any) => void;
   onQueryChange: (query: string) => void;
   renderElement?: (
@@ -21,4 +22,6 @@ export interface SearchInputProps {
   bottomSectionPlaceholder?: () => JSX.Element;
   loading?: boolean;
   beforeSelect: (item: any) => Promise<any>;
+  testIdPrefix?: string;
+  extraActionElement?: (query: string) => JSX.Element;
 }

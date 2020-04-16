@@ -7,7 +7,7 @@ import {
   Text
 } from "../components";
 import { colors } from "../theme";
-import Icon from "@anarock/pebble/native/Icon";
+import Icon from "pebble-shared/native/Icon";
 import Select from "../components/Select";
 import Button from "../components/Button";
 import nI from "name-initials";
