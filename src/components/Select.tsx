@@ -74,7 +74,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
   };
 
   private onSelect = option => {
-    const { onSelect, autoClose } = this.props;
+    const { keyExtractor, onSelect, autoClose } = this.props;
 
     InteractionManager.runAfterInteractions(() => {
       if (this.isRadio()) {
@@ -82,7 +82,7 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
         if (autoClose) this.closeOptions();
       } else {
         this.setState({
-          selectedCheckbox: option
+          selectedCheckbox: option.map(keyExtractor)
         });
       }
     });
