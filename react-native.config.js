@@ -1,3 +1,3 @@
 module.exports = {
-  assets: ["./node_modules/pebble-shared/native/icons/"]
+  assets: ["./node_modules/@anarock/pebble/native/icons/"]
 };

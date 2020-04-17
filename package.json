@@ -40,6 +40,7 @@
     "@use-expo/font": "^2.0.0",
     "babel-loader": "^8.1.0",
     "expo": "^37.0.7",
+    "expo-font": "^8.1.1",
     "husky": "^4.2.5",
     "jest": "25.3.0",
     "pebble-shared": "^2.0.1",
