@@ -1,30 +1,18 @@
 import * as React from "react";
-import { Component } from "react";
-import { Font } from "expo";
+import { AppLoading } from "expo";
+import { useFonts } from "@use-expo/font";
 import Main from "./storybook";
 
-interface AppState {
-  fontsLoaded: boolean;
-}
+export default props => {
+  let [fontsLoaded] = useFonts({
+    anarock_medium: require("./assets/fonts/anarock_medium.ttf"),
+    anarock_regular: require("./assets/fonts/anarock_regular.ttf"),
+    pebble: require("./node_modules/pebble-shared/native/icons/pebble.ttf")
+  });
 
-export default class App extends Component<{}, AppState> {
-  state = {
-    fontsLoaded: false
-  };
-
-  async componentDidMount() {
-    await Font.loadAsync({
-      anarock_medium: require("./assets/fonts/anarock_medium.ttf"),
-      anarock_regular: require("./assets/fonts/anarock_regular.ttf"),
-      pebble: require("./node_modules/pebble-shared/native/icons/pebble.ttf")
-    });
-
-    this.setState({
-      fontsLoaded: true
-    });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return <Main />;
   }
-
-  render() {
-    return this.state.fontsLoaded && <Main />;
-  }
-}
+};

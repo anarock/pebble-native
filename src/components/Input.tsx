@@ -86,7 +86,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
       () => {
         Animated.timing(this.state.placeholderMarginTop, {
           toValue: 0,
-          duration: 200
+          duration: 200,
+          useNativeDriver: false
         }).start();
       }
     );
@@ -101,7 +102,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
         if (!this.props.value)
           Animated.timing(this.state.placeholderMarginTop, {
             toValue: 20,
-            duration: 200
+            duration: 200,
+            useNativeDriver: false
           }).start();
       }
     );

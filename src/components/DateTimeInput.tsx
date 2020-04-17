@@ -1,54 +1,58 @@
 import * as React from "react";
-import {
-  TouchableWithoutFeedback,
-  TimePickerAndroid,
-  View,
-  DatePickerAndroid
-} from "react-native";
+import { TouchableWithoutFeedback, View, Platform } from "react-native";
+import RNDateTimePicker, {
+  BaseProps,
+  AndroidNativeProps,
+  IOSNativeProps
+} from "@react-native-community/datetimepicker";
+
 import { DateTimeInputProps } from "./typings/DateTimeInput";
 import Input from "./Input";
-import { format, setMinutes, setHours, getTime } from "date-fns";
+import { format } from "date-fns";
 
-class TimeInput extends React.PureComponent<DateTimeInputProps> {
+interface State {
+  tempValue: Date;
+  mode: AndroidNativeProps["mode"] | IOSNativeProps["mode"];
+}
+
+class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
+  state: Readonly<State> = {
+    tempValue: null,
+    mode: null
+  };
   private open = async () => {
-    const { value, type, minDate, maxDate, mode } = this.props;
-    const date = value ? new Date(this.props.value) : new Date();
-
-    const timing = {
-      hour: date.getHours(),
-      minute: date.getMinutes()
-    };
-
-    let selected;
-    // @ts-ignore
-    const { action, day, month, year } = await DatePickerAndroid.open({
-      date,
-      minDate,
-      maxDate,
-      mode
-    });
-
-    if (action === DatePickerAndroid.dismissedAction) return;
-
-    selected = new Date(year, month, day);
-
-    if (type === "datetime") {
-      // @ts-ignore
-      const { action, minute, hour } = await TimePickerAndroid.open({
-        ...timing,
-        is24Hour: true
+    if (Platform.OS === "ios") {
+      this.setState({
+        mode: "datetime"
       });
-
-      if (action === TimePickerAndroid.dismissedAction) return;
-      selected = setHours(selected, hour);
-      selected = setMinutes(selected, minute);
+    } else {
+      this.setState({
+        mode: "date"
+      });
     }
+    return;
+  };
 
-    this.props.onChange(getTime(selected));
+  private onChange: BaseProps["onChange"] = (_event, date) => {
+    if (date) {
+      this.props.onChange(date.getTime());
+    }
+    if (Platform.OS !== "ios" && this.state.mode === "date") {
+      this.setState({
+        mode: "time",
+        tempValue: date
+      });
+    } else {
+      this.setState({
+        mode: null,
+        tempValue: null
+      });
+    }
   };
 
   render() {
     const {
+      mode: propsMode,
       errorMessage,
       disabled,
       required,
@@ -56,8 +60,11 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
       value,
       placeholder,
       type,
+      minDate,
+      maxDate,
       ...otherProps
     } = this.props;
+    const { mode } = this.state;
 
     let _value;
     if (value) {
@@ -79,6 +86,17 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
             readOnly
             value={_value || placeholder}
           />
+          {mode && (
+            <RNDateTimePicker
+              mode={mode}
+              // TODO: Aziz accept display for Android
+              // display={propsMode}
+              value={this.state.tempValue || new Date(value)}
+              minimumDate={minDate ? new Date(minDate) : undefined}
+              maximumDate={maxDate ? new Date(maxDate) : undefined}
+              onChange={this.onChange}
+            />
+          )}
         </View>
       </TouchableWithoutFeedback>
     );
