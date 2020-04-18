@@ -100,24 +100,24 @@ enum LOGIN_PAGE {
 export default class Login extends React.PureComponent<LoginProps, LoginState> {
   state = {
     loginPage: LOGIN_PAGE.USER_PAGE,
-    sendingOTP: false,
     otpTimeout: false,
     tenant: "",
     isTenantValid: true,
     fetchingTenantConfig: false,
+    isSubmitButtonLoading: false,
     tenantConfigFetched: false
   };
 
   onOtpSuccess = () =>
     this.setState({
-      sendingOTP: false,
+      isSubmitButtonLoading: false,
       loginPage: LOGIN_PAGE.OTP_PAGE
     });
 
-  onOtpError = () => this.setState({ sendingOTP: false });
+  onOtpError = () => this.setState({ isSubmitButtonLoading: false });
 
   onSendOtp = () => {
-    this.setState({ sendingOTP: true });
+    this.setState({ isSubmitButtonLoading: true });
     this.props.onSendOtp(this.onOtpSuccess, this.onOtpError);
   };
 
@@ -136,18 +136,25 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onCountdownTimeUp = () => this.setState({ otpTimeout: true });
 
+  onSignIn = async () => {
+    this.setState({ isSubmitButtonLoading: true });
+    try {
+      await this.props.onSignIn();
+    } catch (e) {}
+    this.setState({ isSubmitButtonLoading: false });
+  };
+
   getOtpPage = () => {
     const {
       loginUserValue,
       otpValue,
       onOtpChange,
-      onSignIn,
       otpLength,
       countriesList,
       selectedCountry,
       onLoginHelp
     } = this.props;
-    const { otpTimeout } = this.state;
+    const { otpTimeout, isSubmitButtonLoading } = this.state;
 
     const country = countriesList.find(
       country => country.id === selectedCountry
@@ -212,7 +219,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           Get support for login
         </Text>
         <Button
-          onPress={onSignIn}
+          loading={isSubmitButtonLoading}
+          onPress={this.onSignIn}
           disabled={otpLength !== otpValue.length}
           testID="sign-in"
         >
@@ -230,14 +238,17 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   };
 
   onTenantSubmit = async () => {
-    this.setState({ fetchingTenantConfig: true });
+    this.setState({ isSubmitButtonLoading: true });
     try {
       await this.props.onTenantSubmit(this.state.tenant);
-      this.setState({ tenantConfigFetched: true, fetchingTenantConfig: false });
+      this.setState({
+        tenantConfigFetched: true,
+        isSubmitButtonLoading: false
+      });
     } catch {
       this.setState({
         isTenantValid: false,
-        fetchingTenantConfig: false
+        isSubmitButtonLoading: false
       });
     }
   };
@@ -251,10 +262,9 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   render() {
     const {
       loginPage,
-      sendingOTP,
       tenant,
       isTenantValid,
-      fetchingTenantConfig,
+      isSubmitButtonLoading,
       tenantConfigFetched
     } = this.state;
     const {
@@ -386,9 +396,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 disabled={
                   tenantConfigFetched ? isButtonDisabled : !isTenantValid
                 }
-                loading={
-                  tenantConfigFetched ? sendingOTP : fetchingTenantConfig
-                }
+                loading={isSubmitButtonLoading}
               >
                 {tenantConfigFetched ? "Send OTP" : "Submit"}
               </Button>
