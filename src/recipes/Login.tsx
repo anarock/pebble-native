@@ -6,7 +6,7 @@ import Touchable from "../components/shared/Touchable";
 import Countdown from "../components/shared/Countdown";
 import Text from "../components/Text";
 import { LoginProps, LoginState } from "./typings/Login";
-import OTPInput from "react-native-otp";
+import OTPInput from "../components/OTPInput";
 
 const styles = StyleSheet.create({
   container: {
@@ -185,7 +185,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             <OTPInput
               testID="otp-input"
               value={otpValue}
-              onChange={onOtpChange}
+              onChangeText={onOtpChange}
               tintColor={colors.violet.base}
               offTintColor={colors.gray.base}
               otpLength={otpLength}
