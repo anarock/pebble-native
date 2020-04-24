@@ -34,9 +34,6 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   };
 
   private onChange: BaseProps["onChange"] = (_event, date) => {
-    if (date) {
-      this.props.onChange(date.getTime());
-    }
     if (Platform.OS !== "ios" && this.state.mode === "date") {
       this.setState({
         mode: "time",
@@ -47,6 +44,10 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
         mode: null,
         tempValue: null
       });
+      const selected = date || this.state.tempValue;
+      if (selected) {
+        this.props.onChange(selected.getTime());
+      }
     }
   };
 
@@ -91,7 +92,9 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
               mode={mode}
               // TODO: Aziz accept display for Android
               // display={propsMode}
-              value={this.state.tempValue || new Date(value)}
+              value={
+                this.state.tempValue || (value ? new Date(value) : new Date())
+              }
               minimumDate={minDate ? new Date(minDate) : undefined}
               maximumDate={maxDate ? new Date(maxDate) : undefined}
               onChange={this.onChange}

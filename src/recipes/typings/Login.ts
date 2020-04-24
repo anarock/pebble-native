@@ -30,10 +30,9 @@ export interface LoginProps {
 
 export interface LoginState {
   loginPage: number;
-  sendingOTP: boolean;
   otpTimeout: boolean;
   tenant: string;
   isTenantValid: boolean;
-  fetchingTenantConfig: boolean;
+  isSubmitButtonLoading: boolean;
   tenantConfigFetched: boolean;
 }
