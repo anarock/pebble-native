@@ -162,7 +162,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             color={colors.gray.darker}
             style={styles.loginUserText}
           >
-            {`${country.country_code}-${loginUserValue}`}
+            {`${country?.country_code}-${loginUserValue}`}
           </Text>
           <Touchable onPress={this.onEdit} testID="edit-otp">
             <Text style={styles.textButton} color={colors.violet.base} bold>
@@ -222,7 +222,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     );
   };
 
-  onTenantChange = value => {
+  onTenantChange = (value: string) => {
     this.setState({
       isTenantValid: true,
       tenant: value

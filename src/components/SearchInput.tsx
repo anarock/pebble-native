@@ -3,6 +3,7 @@ import { View, Modal, TouchableWithoutFeedback } from "react-native";
 import Input from "./Input";
 import { SearchInputProps } from "./typings/SearchInput";
 import SearchBox from "./SearchBox";
+import { SearchBoxProps } from "./typings/SearchBox";
 
 export default class extends React.PureComponent<SearchInputProps> {
   static defaultProps: Partial<SearchInputProps> = {
@@ -41,7 +42,7 @@ export default class extends React.PureComponent<SearchInputProps> {
     }
   };
 
-  private onSelect = item => {
+  private onSelect: SearchBoxProps["onSelect"] = item => {
     this.props.beforeSelect(item).then(() => {
       this.closeModal();
       this.props.onSelect(item);

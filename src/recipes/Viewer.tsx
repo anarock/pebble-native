@@ -59,7 +59,7 @@ const viewerInfoCard = StyleSheet.create({
 export default class extends PureComponent<ViewerProps, ViewerState> {
   selectRef: React.RefObject<Select> = React.createRef();
 
-  state = {
+  state: Readonly<ViewerState> = {
     showUnfollowConfirmation: false,
     selectedAgentId: null,
     showTransferConfirmation: false,
@@ -149,11 +149,11 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                         leftButtonLabel={"Transfer & Follow"}
                         rightButtonLabel={"Transfer"}
                         onLeftButtonPress={() => {
-                          this.selectRef.current.toggle();
+                          this.selectRef.current?.toggle();
                           this.toggleTransferAndFollowConfigurationModal();
                         }}
                         onRightButtonPress={() => {
-                          this.selectRef.current.toggle();
+                          this.selectRef.current?.toggle();
                           this.toggleTransferConfirmationModal();
                         }}
                         leftDisabled={!selectedAgentId}
@@ -245,10 +245,13 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
           onRejectPress={this.toggleTransferConfirmationModal}
           onConfirmPress={() => {
             this.toggleTransferConfirmationModal();
-            return onTranferRequest({
-              agentId: selectedAgentId,
-              follow: false
-            });
+            return (
+              selectedAgentId &&
+              onTranferRequest({
+                agentId: selectedAgentId,
+                follow: false
+              })
+            );
           }}
           confirmButtonText={"Confirm"}
           rejectButtonText={"Cancel"}
@@ -262,10 +265,13 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
           onRejectPress={this.toggleTransferAndFollowConfigurationModal}
           onConfirmPress={() => {
             this.toggleTransferAndFollowConfigurationModal();
-            return onTranferRequest({
-              agentId: selectedAgentId,
-              follow: true
-            });
+            return (
+              selectedAgentId &&
+              onTranferRequest({
+                agentId: selectedAgentId,
+                follow: true
+              })
+            );
           }}
           confirmButtonText={"Confirm"}
           rejectButtonText={"Cancel"}

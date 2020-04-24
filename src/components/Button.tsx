@@ -35,19 +35,23 @@ const styles = StyleSheet.create({
   }
 });
 
-const buttonBackgroundColor = {
+type TypeColorMap = {
+  [type in NonNullable<ButtonProps["type"]>]: string;
+};
+
+const buttonBackgroundColor: TypeColorMap = {
   primary: colors.violet.base,
   secondary: colors.gray.lighter,
   link: "transparent"
 };
 
-const buttonBackgroundDisabledColor = {
+const buttonBackgroundDisabledColor: TypeColorMap = {
   primary: colors.violet.lighter,
   secondary: colors.gray.lightest,
   link: "transparent"
 };
 
-const fontColor = {
+const fontColor: TypeColorMap = {
   primary: colors.white.base,
   secondary: colors.gray.darker,
   link: colors.violet.base

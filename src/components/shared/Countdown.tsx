@@ -26,7 +26,7 @@ export default class Countdown extends React.PureComponent<
     timeRemaining: this.props.time
   };
 
-  timer: NodeJS.Timeout;
+  timer: NodeJS.Timeout | undefined;
 
   componentDidMount() {
     this.startCountdown();
@@ -41,14 +41,14 @@ export default class Countdown extends React.PureComponent<
       const timeRemaining = Math.max(time - elapsedSeconds, 0);
       this.setState({ timeRemaining });
       if (!timeRemaining) {
-        clearInterval(this.timer);
+        this.timer && clearInterval(this.timer);
         onFinish();
       }
     }, counter * 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    this.timer && clearInterval(this.timer);
   }
 
   render() {

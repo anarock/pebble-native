@@ -1997,6 +1997,11 @@
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
 
+"@types/just-debounce-it@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@types/just-debounce-it/-/just-debounce-it-1.1.0.tgz#9cc45455c1c1fd9da4c70ab36fb10b6e073436ad"
+  integrity sha512-TyGi8O02lh99xYXljp7GAMkyK7GOhA+OXQbmpEjZh/QKWA8JH5mow7t515VUYkpeaZR6uBmUGic3XUHs9Eq2Ug==
+
 "@types/lodash.zipobject@^4.1.4":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@types/lodash.zipobject/-/lodash.zipobject-4.1.4.tgz#ab8db347e4ae0991e92ca7e207314d9283fc9f93"

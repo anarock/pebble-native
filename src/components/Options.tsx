@@ -5,6 +5,7 @@ import colors from "../theme/colors";
 import Controls from "./Controls";
 import Text from "./Text";
 import Icon from "pebble-shared/native/Icon";
+import { ControlsProps } from "./typings/Controls";
 
 const styles = StyleSheet.create({
   optionWrapper: {
@@ -28,16 +29,28 @@ const controlStyle = StyleSheet.create({
   }
 });
 
-export default class Options extends React.Component<OptionsProps> {
-  static defaultProps: Partial<OptionsProps> = {
+interface FallbackOptionType {
+  id: string | number;
+  label?: string;
+  name?: string;
+}
+
+export default class Options<OptionType> extends React.Component<
+  OptionsProps<OptionType>
+> {
+  static defaultProps: Partial<OptionsProps<FallbackOptionType>> = {
     type: "radio",
     keyExtractor: item => item.id,
-    rowLabelExtractor: item => item.label || item.name,
+    rowLabelExtractor: item => item.label || item.name || "",
     rowRenderElement: ({ item, isSelected }, props) => {
-      const icon = {
-        radio: isSelected ? "radio-selected" : "radio",
-        checkbox: isSelected ? "checkbox-selected" : "checkbox-unselected"
-      };
+      const icon =
+        props.type === "radio"
+          ? isSelected
+            ? "radio-selected"
+            : "radio"
+          : isSelected
+          ? "checkbox-selected"
+          : "checkbox-unselected";
 
       return (
         <View style={styles.row}>
@@ -52,7 +65,7 @@ export default class Options extends React.Component<OptionsProps> {
           </Text>
 
           <Icon
-            name={icon[props.type]}
+            name={icon}
             size={20}
             color={isSelected ? colors.violet.base : colors.gray.light}
           />
@@ -62,7 +75,7 @@ export default class Options extends React.Component<OptionsProps> {
     testIdPrefix: "options"
   };
 
-  onSelect = ({ selected }) => {
+  onSelect: ControlsProps["onChange"] = ({ selected }) => {
     const { onSelect, options, keyExtractor, type } = this.props;
     onSelect(
       type === "radio"

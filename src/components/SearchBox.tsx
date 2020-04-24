@@ -88,7 +88,7 @@ export default class extends React.PureComponent<
     testIdPrefix: "sb"
   };
 
-  constructor(props) {
+  constructor(props: SearchBoxProps) {
     super(props);
 
     this.state = {
@@ -98,7 +98,7 @@ export default class extends React.PureComponent<
     this.debouncedChange = debounce(this.props.onQueryChange, 500);
   }
 
-  private onChange = text => {
+  private onChange = (text: string) => {
     this.setState(
       {
         queryValue: text
@@ -107,7 +107,7 @@ export default class extends React.PureComponent<
     );
   };
 
-  renderNoResultState = query => {
+  renderNoResultState = (query: string) => {
     const {
       noResultsElement = noop,
       bottomSectionPlaceholder = noop

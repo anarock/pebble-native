@@ -18,7 +18,7 @@ export interface ViewerProps {
 
 export interface ViewerState {
   showUnfollowConfirmation: boolean;
-  selectedAgentId: boolean;
+  selectedAgentId: number | null;
   showTransferConfirmation: boolean;
   showTransferAndFollowConfiguration: boolean;
 }

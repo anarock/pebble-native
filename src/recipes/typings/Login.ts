@@ -24,7 +24,7 @@ export interface LoginProps {
   phoneInputProps?: Partial<InputProps>;
   isPhoneValid: boolean;
   tenantInputProps?: Partial<InputProps>;
-  onTenantSubmit: (string) => Promise<void>;
+  onTenantSubmit: (tenant: string) => Promise<void>;
   helpText?: React.ReactText | JSX.Element;
 }
 

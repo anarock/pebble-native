@@ -12,6 +12,7 @@ import colors from "../theme/colors";
 import Icon from "pebble-shared/native/Icon";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ActionModal from "./ActionModal";
+import { ActionModalProps } from "./typings/ActionModal";
 
 const styles = StyleSheet.create({
   optionSection: {
@@ -43,10 +44,20 @@ const styles = StyleSheet.create({
 
 function noop() {}
 
-export default class Select extends PureComponent<SelectProps, SelectState> {
-  static defaultProps: Partial<SelectProps> = {
-    valueExtractor: item => item && (item.label || item.name),
-    keyExtractor: item => item.id,
+interface FallbackOptionType {
+  label: string;
+  name: string;
+  id: string | number;
+}
+
+export default class Select<OptionType> extends PureComponent<
+  SelectProps<OptionType>,
+  SelectState
+> {
+  static defaultProps = {
+    valueExtractor: (item: FallbackOptionType) =>
+      item && (item.label || item.name),
+    keyExtractor: (item: FallbackOptionType) => item.id,
     type: "radio",
     onClose: noop,
     autoClose: true,
@@ -68,12 +79,12 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
       showOptions: false
     });
 
-  private onClose = e => {
+  private onClose: ActionModalProps["onClose"] = e => {
     this.closeOptions();
-    this.props.onClose(e);
+    this.props.onClose && this.props.onClose(e);
   };
 
-  private onSelect = option => {
+  private onSelect = (option: OptionType[]) => {
     const { keyExtractor, onSelect, autoClose } = this.props;
 
     InteractionManager.runAfterInteractions(() => {
@@ -92,15 +103,17 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
     const { selected, options, keyExtractor, valueExtractor } = this.props;
     let selectedLabel;
     if (selected) {
-      selectedLabel = this.isRadio()
-        ? valueExtractor(options.find(x => selected === keyExtractor(x)))
-        : valueExtractor(
-            options.filter(
-              x =>
-                Array.isArray(selected) &&
-                selected.indexOf(keyExtractor(x)) >= 0
-            )
-          );
+      if (this.isRadio()) {
+        const selectedOption = options.find(x => selected === keyExtractor(x));
+        selectedLabel = selected ? valueExtractor(selectedOption) : "";
+      } else {
+        selectedLabel = valueExtractor(
+          options.filter(
+            x =>
+              Array.isArray(selected) && selected.indexOf(keyExtractor(x)) >= 0
+          )
+        );
+      }
     }
     return selectedLabel;
   };
@@ -143,14 +156,14 @@ export default class Select extends PureComponent<SelectProps, SelectState> {
           <View>
             {label ? (
               label({
-                value: this.getValue(),
+                value: this.getValue() || "",
                 props: this.props,
                 toggle: this.toggle
               })
             ) : (
               <Input
                 fixLabelAtTop
-                placeholder={placeholder}
+                placeholder={placeholder || ""}
                 value={this.getValue()}
                 onChange={noop}
                 required={required}

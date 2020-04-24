@@ -1,18 +1,18 @@
-export interface OptionsProps {
-  options: any[];
-  onSelect: (suggestion: any) => void;
+export interface OptionsProps<OptionType> {
+  options: OptionType[];
+  onSelect: (suggestion: OptionType[]) => void;
   rowRenderElement?: (
     args: {
-      item: any;
+      item: OptionType;
       isSelected: boolean;
     },
-    props: OptionsProps
+    props: OptionsProps<OptionType>
   ) => JSX.Element | string;
   dropdownStyle?: any;
   width?: number | string;
-  selected?: any;
-  keyExtractor?: (item: any) => number | string;
+  selected?: OptionType;
+  keyExtractor: (item: OptionType) => number | string;
   type?: "radio" | "checkbox";
-  rowLabelExtractor: (item: any) => JSX.Element | string | number;
+  rowLabelExtractor: (item: OptionType) => JSX.Element | string | number;
   testIdPrefix?: string;
 }
