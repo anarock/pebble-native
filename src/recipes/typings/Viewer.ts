@@ -1,7 +1,7 @@
-interface Agent {
+export interface Agent {
   id: number;
   name: string;
-  subText: JSX.Element;
+  subText: React.ReactNode;
   phone: string;
   color: string;
 }
@@ -18,7 +18,7 @@ export interface ViewerProps {
 
 export interface ViewerState {
   showUnfollowConfirmation: boolean;
-  selectedAgentId: number | null;
+  selectedAgentId?: number;
   showTransferConfirmation: boolean;
   showTransferAndFollowConfiguration: boolean;
 }

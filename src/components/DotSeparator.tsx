@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import Text from "./Text";
 import colors from "../theme/colors";
@@ -31,7 +31,7 @@ const DotSeparator: React.FunctionComponent<DotSeparatorProps> = ({
     <View style={[styles.container, style]}>
       <>
         {_texts.map((text, i) => (
-          <Fragment key={i}>
+          <React.Fragment key={i}>
             <Text color={color} {...textProps}>
               {text}
             </Text>
@@ -40,7 +40,7 @@ const DotSeparator: React.FunctionComponent<DotSeparatorProps> = ({
                 <Icon size={dotSize} color={dotColor} name="dot" />
               </View>
             )}
-          </Fragment>
+          </React.Fragment>
         ))}
       </>
     </View>

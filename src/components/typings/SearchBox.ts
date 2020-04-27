@@ -1,22 +1,28 @@
 import * as React from "react";
 
-export interface SearchBoxProps {
+export interface FallbackOptionType {
+  id: string | number;
+  label?: string;
+  name?: string;
+}
+
+export interface SearchBoxProps<OptionType = FallbackOptionType> {
   onQueryChange: (query: string) => void;
-  results: any[];
+  results: OptionType[];
   renderElement: (
-    args: { item: any },
-    props: SearchBoxProps
+    args: { item: OptionType },
+    props: SearchBoxProps<OptionType>
   ) => React.ReactNode;
   placeholder: string;
-  keyExtractor: (item: any) => string | number;
-  onSelect: (item: any) => void;
-  rowLabelExtractor: (item: any) => string | number;
-  noResultsElement?: (queryValue: string) => any;
+  keyExtractor: (item: OptionType) => string | number;
+  onSelect: (item: OptionType) => void;
+  rowLabelExtractor: (item: OptionType) => string | number;
+  noResultsElement?: (queryValue: string) => React.ReactNode;
   onClose?: () => void;
-  bottomSectionPlaceholder?: () => JSX.Element;
+  bottomSectionPlaceholder?: () => React.ReactNode;
   loading?: boolean;
   testIdPrefix?: string;
-  extraActionElement?: (query: string) => JSX.Element;
+  extraActionElement?: (query: string) => React.ReactNode;
 }
 
 export interface SearchBoxState {

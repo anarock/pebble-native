@@ -11,14 +11,14 @@ import Input from "./Input";
 import { format } from "date-fns";
 
 interface State {
-  tempValue: Date;
-  mode: AndroidNativeProps["mode"] | IOSNativeProps["mode"];
+  tempValue?: Date;
+  mode?: AndroidNativeProps["mode"] | IOSNativeProps["mode"];
 }
 
 class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   state: Readonly<State> = {
-    tempValue: null,
-    mode: null
+    tempValue: undefined,
+    mode: undefined
   };
   private open = async () => {
     if (Platform.OS === "ios") {
@@ -41,8 +41,8 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
       });
     } else {
       this.setState({
-        mode: null,
-        tempValue: null
+        mode: undefined,
+        tempValue: undefined
       });
       const selected = date || this.state.tempValue;
       if (selected) {

@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import * as React from "react";
 import {
   View,
   StyleSheet,
@@ -50,7 +50,7 @@ interface FallbackOptionType {
   id: string | number;
 }
 
-export default class Select<OptionType> extends PureComponent<
+export default class Select<OptionType> extends React.PureComponent<
   SelectProps<OptionType>,
   SelectState
 > {
@@ -84,35 +84,45 @@ export default class Select<OptionType> extends PureComponent<
     this.props.onClose && this.props.onClose(e);
   };
 
-  private onSelect = (option: OptionType[]) => {
-    const { keyExtractor, onSelect, autoClose } = this.props;
-
+  private onSingleSelecct = (option: OptionType) => {
+    const props = this.props;
+    const { autoClose } = this.props;
     InteractionManager.runAfterInteractions(() => {
-      if (this.isRadio()) {
-        onSelect(option);
+      if (props.type !== "checkbox") {
+        props.onSelect(option);
         if (autoClose) this.closeOptions();
-      } else {
-        this.setState({
-          selectedCheckbox: option.map(keyExtractor)
-        });
       }
     });
   };
 
+  private onMultiSelect = (option: OptionType[]) => {
+    const { keyExtractor } = this.props;
+
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({
+        selectedCheckbox: option.map(keyExtractor)
+      });
+    });
+  };
+
   private getValue = () => {
-    const { selected, options, keyExtractor, valueExtractor } = this.props;
-    let selectedLabel;
+    const { selected, options, keyExtractor } = this.props;
+    let selectedLabel = "";
+    const props = this.props;
     if (selected) {
-      if (this.isRadio()) {
-        const selectedOption = options.find(x => selected === keyExtractor(x));
-        selectedLabel = selected ? valueExtractor(selectedOption) : "";
-      } else {
-        selectedLabel = valueExtractor(
+      if (props.type === "checkbox") {
+        selectedLabel = props.valueExtractor(
           options.filter(
             x =>
-              Array.isArray(selected) && selected.indexOf(keyExtractor(x)) >= 0
+              Array.isArray(props.selected) &&
+              props.selected.indexOf(keyExtractor(x)) >= 0
           )
         );
+      } else {
+        const selectedOption = options.find(x => selected === keyExtractor(x));
+        selectedLabel = selectedOption
+          ? props.valueExtractor(selectedOption)
+          : "";
       }
     }
     return selectedLabel;
@@ -139,6 +149,7 @@ export default class Select<OptionType> extends PureComponent<
       testIdPrefix,
       ...rest
     } = this.props;
+    const props = this.props;
 
     return (
       <View>
@@ -156,7 +167,7 @@ export default class Select<OptionType> extends PureComponent<
           <View>
             {label ? (
               label({
-                value: this.getValue() || "",
+                value: this.getValue(),
                 props: this.props,
                 toggle: this.toggle
               })
@@ -189,11 +200,13 @@ export default class Select<OptionType> extends PureComponent<
           title={placeholder}
           buttonLabel={"Done"}
           onButtonClick={() => {
-            this.props.onSelect(
-              this.props.options.filter(option =>
-                this.state.selectedCheckbox.includes(keyExtractor(option))
-              )
-            );
+            if (props.type === "checkbox") {
+              props.onSelect(
+                this.props.options.filter(option =>
+                  this.state.selectedCheckbox.includes(keyExtractor(option))
+                )
+              );
+            }
             this.closeOptions();
           }}
           visible={this.state.showOptions}
@@ -205,15 +218,27 @@ export default class Select<OptionType> extends PureComponent<
             keyboardShouldPersistTaps="always"
             testID={`${testIdPrefix}-modal`}
           >
-            <Options
-              testIdPrefix={testIdPrefix}
-              options={options}
-              selected={this.isRadio() ? selected : this.state.selectedCheckbox}
-              keyExtractor={keyExtractor}
-              type={type}
-              {...rest}
-              onSelect={this.onSelect}
-            />
+            {props.type === "checkbox" ? (
+              <Options<OptionType>
+                type="checkbox"
+                selected={this.state.selectedCheckbox}
+                testIdPrefix={testIdPrefix}
+                options={options}
+                keyExtractor={keyExtractor}
+                {...rest}
+                onSelect={this.onMultiSelect}
+              />
+            ) : (
+              <Options<OptionType>
+                type="radio"
+                selected={props.selected}
+                testIdPrefix={testIdPrefix}
+                options={options}
+                keyExtractor={keyExtractor}
+                {...rest}
+                onSelect={this.onSingleSelecct}
+              />
+            )}
           </KeyboardAwareScrollView>
         </ActionModal>
       </View>

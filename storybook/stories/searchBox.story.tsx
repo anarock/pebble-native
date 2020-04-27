@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { storiesOf } from "@storybook/react-native";
 import SearchBox from "../../src/components/SearchBox";
 import CenterView from "./CenterView";

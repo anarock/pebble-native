@@ -18,7 +18,7 @@
     "preserveConstEnums": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "outDir": "dist",
     "isolatedModules": false,
     "pretty": true,

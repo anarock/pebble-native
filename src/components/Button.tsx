@@ -4,6 +4,7 @@ import Text from "./Text";
 import colors from "../theme/colors";
 import { ButtonProps, DoubleFooterButtonProps } from "./typings/Button";
 import Touchable from "./shared/Touchable";
+import { SetRequired } from "type-fest";
 
 const styles = StyleSheet.create({
   buttonStyle: {
@@ -106,7 +107,9 @@ const DoubleFooterButton: React.FunctionComponent<DoubleFooterButtonProps> = ({
   );
 };
 
-class Button extends React.Component<ButtonProps> {
+class Button extends React.Component<
+  SetRequired<ButtonProps, keyof typeof Button.defaultProps>
+> {
   static FooterButton = FooterButton;
 
   static DoubleFooterButton = DoubleFooterButton;

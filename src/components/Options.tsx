@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet, View } from "react-native";
-import { OptionsProps } from "./typings/Options";
+import { OptionsProps, FallbackOptionType } from "./typings/Options";
 import colors from "../theme/colors";
 import Controls from "./Controls";
 import Text from "./Text";
@@ -29,75 +29,98 @@ const controlStyle = StyleSheet.create({
   }
 });
 
-interface FallbackOptionType {
-  id: string | number;
-  label?: string;
-  name?: string;
-}
+const rowLabelExtractor = (item: FallbackOptionType) =>
+  item.label || item.name || "";
+
+const rowRenderElement = (
+  { item, isSelected }: { item: FallbackOptionType; isSelected: boolean },
+  props: OptionsProps<FallbackOptionType>
+) => {
+  const icon =
+    props.type === "radio"
+      ? isSelected
+        ? "radio-selected"
+        : "radio"
+      : isSelected
+      ? "checkbox-selected"
+      : "checkbox-unselected";
+
+  return (
+    <View style={styles.row}>
+      <Text
+        numberOfLines={1}
+        ellipsizeMode="tail"
+        style={{ flex: 1, paddingRight: 20 }}
+        size={15}
+        color={colors.gray.darker}
+      >
+        {(props.rowLabelExtractor || rowLabelExtractor)(item)}
+      </Text>
+
+      <Icon
+        name={icon}
+        size={20}
+        color={isSelected ? colors.violet.base : colors.gray.light}
+      />
+    </View>
+  );
+};
 
 export default class Options<OptionType> extends React.Component<
   OptionsProps<OptionType>
 > {
-  static defaultProps: Partial<OptionsProps<FallbackOptionType>> = {
+  static defaultProps = {
     type: "radio",
-    keyExtractor: item => item.id,
-    rowLabelExtractor: item => item.label || item.name || "",
-    rowRenderElement: ({ item, isSelected }, props) => {
-      const icon =
-        props.type === "radio"
-          ? isSelected
-            ? "radio-selected"
-            : "radio"
-          : isSelected
-          ? "checkbox-selected"
-          : "checkbox-unselected";
-
-      return (
-        <View style={styles.row}>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={{ flex: 1, paddingRight: 20 }}
-            size={15}
-            color={colors.gray.darker}
-          >
-            {props.rowLabelExtractor(item)}
-          </Text>
-
-          <Icon
-            name={icon}
-            size={20}
-            color={isSelected ? colors.violet.base : colors.gray.light}
-          />
-        </View>
-      );
-    },
+    keyExtractor: (item: FallbackOptionType) => item.id,
     testIdPrefix: "options"
   };
 
-  onSelect: ControlsProps["onChange"] = ({ selected }) => {
-    const { onSelect, options, keyExtractor, type } = this.props;
-    onSelect(
-      type === "radio"
-        ? options.find(option => keyExtractor(option) === selected)
-        : options.filter(
-            option =>
-              Array.isArray(selected) &&
-              selected.indexOf(keyExtractor(option)) >= 0
-          )
-    );
+  private onRadioSelect = ({ selected }: { selected?: string | number }) => {
+    const { options, keyExtractor } = this.props;
+    const props = this.props;
+    if (props.type !== "checkbox") {
+      const selectedOption = options.find(
+        option => keyExtractor(option) === selected
+      );
+      selectedOption && props.onSelect(selectedOption);
+    }
+  };
+
+  private onCheckboxSelect = ({
+    selected
+  }: {
+    selected: (string | number)[];
+  }) => {
+    const { options, keyExtractor } = this.props;
+    const props = this.props;
+    if (props.type === "checkbox") {
+      const selectedOptions = options.filter(
+        option =>
+          Array.isArray(selected) && selected.indexOf(keyExtractor(option)) >= 0
+      );
+      props.onSelect(selectedOptions);
+    }
+  };
+
+  private renderElement: ControlsProps<OptionType>["renderElement"] = args => {
+    // @ts-ignore
+    const renderElement: OptionsProps<OptionType>["rowRenderElement"] =
+      this.props.rowRenderElement || rowRenderElement;
+
+    return renderElement && renderElement(args, this.props);
   };
 
   render() {
-    const {
-      options,
-      selected,
+    const { options, keyExtractor, width, testIdPrefix } = this.props;
+    const props = this.props;
+    const commonProps = {
+      testIdPrefix,
+      style: controlStyle,
+      renderElement: this.renderElement,
+      data: options,
       keyExtractor,
-      rowRenderElement,
-      width,
-      type,
-      testIdPrefix
-    } = this.props;
+      ripple: true
+    };
     return (
       <View
         style={[
@@ -107,17 +130,21 @@ export default class Options<OptionType> extends React.Component<
           }
         ]}
       >
-        <Controls
-          testIdPrefix={testIdPrefix}
-          style={controlStyle}
-          renderElement={args => rowRenderElement(args, this.props)}
-          onChange={this.onSelect}
-          data={options}
-          keyExtractor={keyExtractor}
-          ripple
-          selected={selected}
-          type={type}
-        />
+        {props.type === "checkbox" ? (
+          <Controls<OptionType>
+            type="checkbox"
+            selected={props.selected}
+            onChange={this.onCheckboxSelect}
+            {...commonProps}
+          />
+        ) : (
+          <Controls<OptionType>
+            type="radio"
+            selected={props.selected}
+            onChange={this.onRadioSelect}
+            {...commonProps}
+          />
+        )}
       </View>
     );
   }

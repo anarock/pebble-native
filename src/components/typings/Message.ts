@@ -1,7 +1,7 @@
 export interface MessageProps {
   backgroundColor: string;
-  title?: string | JSX.Element;
-  description: string | JSX.Element;
+  title?: React.ReactNode;
+  description: React.ReactNode;
   linkText?: string;
   onPress?: () => void;
 }

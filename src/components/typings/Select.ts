@@ -1,23 +1,43 @@
 import { GestureResponderEvent } from "react-native";
-import { OptionsProps } from "./Options";
+import {
+  CommonOptionProps,
+  RadioOptionProps,
+  CheckboxOptionProps
+} from "./Options";
 
-export interface SelectProps<OptionType> extends OptionsProps<OptionType> {
+export interface CommonSelectProps<OptionType>
+  extends CommonOptionProps<OptionType> {
   placeholder?: string;
   required?: boolean;
   errorMessage?: string;
-  valueExtractor: (item: OptionType) => string;
   disabled?: boolean;
-  label: (args: {
+  title?: string;
+  onClose?: (e?: GestureResponderEvent) => void;
+  label?: (args: {
     value: string;
     props: SelectProps<OptionType>;
     toggle: () => void;
-  }) => JSX.Element;
-  title?: string;
-  onClose?: (e?: GestureResponderEvent) => void;
+  }) => React.ReactNode;
   showFooterButton?: boolean;
   autoClose?: boolean;
-  footer?: JSX.Element;
+  footer?: React.ReactNode;
 }
+
+export interface RadioSelectProps<OptionType>
+  extends RadioOptionProps<OptionType>,
+    CommonSelectProps<OptionType> {
+  valueExtractor: (item: OptionType) => string;
+}
+
+export interface CheckboxSelectProps<OptionType>
+  extends CheckboxOptionProps<OptionType>,
+    CommonSelectProps<OptionType> {
+  valueExtractor: (items: OptionType[]) => string;
+}
+
+export type SelectProps<OptionType> =
+  | RadioSelectProps<OptionType>
+  | CheckboxSelectProps<OptionType>;
 
 export interface SelectState {
   showOptions: boolean;

@@ -4,8 +4,11 @@ import Input from "./Input";
 import { SearchInputProps } from "./typings/SearchInput";
 import SearchBox from "./SearchBox";
 import { SearchBoxProps } from "./typings/SearchBox";
+import { SetRequired } from "type-fest";
 
-export default class extends React.PureComponent<SearchInputProps> {
+export default class SearchInput extends React.PureComponent<
+  SetRequired<SearchInputProps, keyof typeof SearchInput.defaultProps>
+> {
   static defaultProps: Partial<SearchInputProps> = {
     renderLabel: ({
       required,

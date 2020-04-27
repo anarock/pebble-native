@@ -1,4 +1,4 @@
-import { PureComponent, default as React } from "react";
+import * as React from "react";
 import { StyleSheet, View } from "react-native";
 import {
   CircularButton,
@@ -11,7 +11,7 @@ import Icon from "pebble-shared/native/Icon";
 import Select from "../components/Select";
 import Button from "../components/Button";
 import nI from "name-initials";
-import { ViewerProps, ViewerState } from "./typings/Viewer";
+import { ViewerProps, ViewerState, Agent } from "./typings/Viewer";
 
 const styles = StyleSheet.create({
   circButton: {
@@ -56,12 +56,12 @@ const viewerInfoCard = StyleSheet.create({
   }
 });
 
-export default class extends PureComponent<ViewerProps, ViewerState> {
-  selectRef: React.RefObject<Select> = React.createRef();
+export default class extends React.PureComponent<ViewerProps, ViewerState> {
+  selectRef: React.RefObject<Select<Agent>> = React.createRef();
 
   state: Readonly<ViewerState> = {
     showUnfollowConfirmation: false,
-    selectedAgentId: null,
+    selectedAgentId: undefined,
     showTransferConfirmation: false,
     showTransferAndFollowConfiguration: false
   };
@@ -120,7 +120,8 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
               </View>
 
               {this.isUser(owner.id) ? (
-                <Select
+                <Select<Agent>
+                  type="radio"
                   options={viewers}
                   disabled={disabled}
                   ref={this.selectRef}

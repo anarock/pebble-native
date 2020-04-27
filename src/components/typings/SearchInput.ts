@@ -13,15 +13,15 @@ export interface SearchInputProps {
       item: any;
     },
     props: SearchInputProps
-  ) => JSX.Element | string | number;
+  ) => React.ReactNode;
   keyExtractor: (item: any) => number | string;
   value?: string;
   rowLabelExtractor?: (item: any) => string | number;
-  noResultsElement?: (queryValue: string) => JSX.Element;
-  renderLabel: (props: SearchInputProps) => JSX.Element;
-  bottomSectionPlaceholder?: () => JSX.Element;
+  noResultsElement?: (queryValue: string) => React.ReactNode;
+  renderLabel?: (props: SearchInputProps) => React.ReactNode;
+  bottomSectionPlaceholder?: () => React.ReactNode;
   loading?: boolean;
-  beforeSelect: (item: any) => Promise<any>;
+  beforeSelect?: (item: any) => Promise<any>;
   testIdPrefix?: string;
-  extraActionElement?: (query: string) => JSX.Element;
+  extraActionElement?: (query: string) => React.ReactNode;
 }

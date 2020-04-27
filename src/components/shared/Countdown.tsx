@@ -2,10 +2,11 @@ import * as React from "react";
 import Text from "../Text";
 import { TextProps } from "../typings/Text";
 import { Omit } from "utility-types";
+import { SetRequired } from "type-fest";
 
 interface CountdownProps extends Omit<TextProps, "children"> {
-  time: number; // in seconds
-  counter: number; // in seconds
+  time?: number; // in seconds
+  counter?: number; // in seconds
   onFinish: () => void;
 }
 
@@ -14,7 +15,7 @@ interface CountdownState {
 }
 
 export default class Countdown extends React.PureComponent<
-  CountdownProps,
+  SetRequired<CountdownProps, keyof typeof Countdown.defaultProps>,
   CountdownState
 > {
   static defaultProps = {

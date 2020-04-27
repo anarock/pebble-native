@@ -1,6 +1,6 @@
 import { InputProps } from "../../components/typings/Input";
 
-interface OperationalCountry {
+export interface OperationalCountry {
   id: number;
   name: string;
   url_name: string;
@@ -18,14 +18,14 @@ export interface LoginProps {
   countriesList: OperationalCountry[];
   onCountryChange: (country: OperationalCountry) => void;
   selectedCountry: number;
-  footer?: React.ReactText | JSX.Element;
+  footer?: React.ReactNode;
   onLoginHelp: () => void;
   otpLength: number;
   phoneInputProps?: Partial<InputProps>;
   isPhoneValid: boolean;
   tenantInputProps?: Partial<InputProps>;
   onTenantSubmit: (tenant: string) => Promise<void>;
-  helpText?: React.ReactText | JSX.Element;
+  helpText?: React.ReactNode;
 }
 
 export interface LoginState {

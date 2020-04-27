@@ -5,7 +5,7 @@ import { colors } from "../theme";
 import Touchable from "../components/shared/Touchable";
 import Countdown from "../components/shared/Countdown";
 import Text from "../components/Text";
-import { LoginProps, LoginState } from "./typings/Login";
+import { LoginProps, LoginState, OperationalCountry } from "./typings/Login";
 import OTPInput from "../components/OTPInput";
 
 const styles = StyleSheet.create({
@@ -338,7 +338,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   </View>
                   <View style={styles.loginUserInput}>
                     <View style={styles.countrySelect}>
-                      <Select
+                      <Select<OperationalCountry>
+                        type="radio"
                         testIdPrefix="countries"
                         options={countriesList}
                         valueExtractor={item => item && item.country_code}

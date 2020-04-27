@@ -1,14 +1,14 @@
-import { PureComponent } from "react";
+import * as React from "react";
 
 interface ContainerProps {
   children: (args: {
     store: any;
     setState: (args: any) => void;
-  }) => JSX.Element;
+  }) => React.ReactNode;
   initialState: any;
 }
 
-export default class extends PureComponent<ContainerProps> {
+export default class extends React.PureComponent<ContainerProps> {
   state = this.props.initialState;
 
   private set = (x: any) => {
