@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TouchableWithoutFeedback, View, Platform } from "react-native";
-import RNDateTimePicker, {
+import _RNDateTimePicker, {
   BaseProps,
   AndroidNativeProps,
   IOSNativeProps
@@ -9,6 +9,8 @@ import RNDateTimePicker, {
 import { DateTimeInputProps } from "./typings/DateTimeInput";
 import Input from "./Input";
 import { format } from "date-fns";
+
+const RNDateTimePicker = React.memo(_RNDateTimePicker);
 
 interface State {
   tempValue?: Date;
