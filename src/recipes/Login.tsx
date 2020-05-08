@@ -273,7 +273,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       countriesList,
       onCountryChange,
       selectedCountry,
-      footer,
+      getFooter,
       onLoginHelp,
       phoneInputProps,
       isPhoneValid,
@@ -404,7 +404,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           )}
           {loginPage === LOGIN_PAGE.OTP_PAGE && this.getOtpPage()}
         </View>
-        {footer}
+
+        {getFooter(this.state)}
       </View>
     );
   }

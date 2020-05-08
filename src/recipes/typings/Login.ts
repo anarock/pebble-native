@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { InputProps } from "../../components/typings/Input";
 
 interface OperationalCountry {
@@ -18,7 +19,7 @@ export interface LoginProps {
   countriesList: OperationalCountry[];
   onCountryChange: (country: OperationalCountry) => void;
   selectedCountry: number;
-  footer?: React.ReactText | JSX.Element;
+  getFooter?: FC<LoginState>;
   onLoginHelp: () => void;
   otpLength: number;
   phoneInputProps?: Partial<InputProps>;
