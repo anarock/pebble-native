@@ -9,7 +9,7 @@ export interface DateTimeInputProps
     TouchableWithoutFeedbackProps {
   onChange: (timestamp: number) => void;
   value?: Date | number;
-  type: "date" | "datetime";
+  type: "date" | "time" | "datetime";
   errorMessage?: string;
   required?: boolean;
   disabled?: boolean;

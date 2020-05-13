@@ -23,42 +23,42 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
     mode: undefined
   };
   private open = async () => {
+    const { type } = this.props;
+
     if (Platform.OS === "ios") {
       this.setState({
-        mode: "datetime"
+        mode: type
       });
     } else {
       this.setState({
-        mode: "date"
+        mode: type === "time" ? "time" : "date"
       });
     }
     return;
   };
 
   private onChange: BaseProps["onChange"] = (_event, date) => {
-    if (Platform.OS !== "ios" && this.state.mode === "date") {
-      if (!date) {
-        // When the user clicks cancel and does not select a date.
-        this.setState({
-          mode: undefined,
-          tempValue: undefined
-        });
-        return;
-      }
-
+    if (
+      Platform.OS === "android" &&
+      this.props.type === "datetime" &&
+      this.state.mode === "date" &&
+      !!date
+    ) {
       this.setState({
         mode: "time",
         tempValue: date
       });
-    } else {
-      this.setState({
-        mode: undefined,
-        tempValue: undefined
-      });
-      const selected = date || this.state.tempValue;
-      if (selected) {
-        this.props.onChange(selected.getTime());
-      }
+
+      return;
+    }
+
+    this.setState({
+      mode: undefined,
+      tempValue: undefined
+    });
+    const selected = date || this.state.tempValue;
+    if (selected) {
+      this.props.onChange(selected.getTime());
     }
   };
 
