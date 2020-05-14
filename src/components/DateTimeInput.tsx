@@ -12,6 +12,12 @@ import { format } from "date-fns";
 
 const RNDateTimePicker = React.memo(_RNDateTimePicker);
 
+const valueFormats = {
+  date: "ddd, Do MMM YYYY",
+  time: "hh:mm A",
+  datetime: "ddd, Do MMM YYYY, hh:mm A"
+};
+
 interface State {
   tempValue?: Date;
   mode?: AndroidNativeProps["mode"] | IOSNativeProps["mode"];
@@ -80,10 +86,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
 
     let _value;
     if (value) {
-      _value =
-        type === "datetime"
-          ? format(value, "ddd, Do MMM YYYY, hh:mm A")
-          : format(value, "ddd, Do MMM YYYY");
+      _value = format(value, valueFormats[type]);
     }
 
     return (
