@@ -31,7 +31,7 @@ export default class extends React.PureComponent<SearchInputProps> {
     showModal: false
   };
 
-  private closeModal = () => {
+  public closeModal = () => {
     this.setState({
       showModal: false
     });

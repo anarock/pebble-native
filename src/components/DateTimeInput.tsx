@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TouchableWithoutFeedback, View, Platform } from "react-native";
-import RNDateTimePicker, {
+import _RNDateTimePicker, {
   BaseProps,
   AndroidNativeProps,
   IOSNativeProps
@@ -10,44 +10,60 @@ import { DateTimeInputProps } from "./typings/DateTimeInput";
 import Input from "./Input";
 import { format } from "date-fns";
 
+const RNDateTimePicker = React.memo(_RNDateTimePicker);
+
+const valueFormats = {
+  date: "ddd, Do MMM YYYY",
+  time: "hh:mm A",
+  datetime: "ddd, Do MMM YYYY, hh:mm A"
+};
+
 interface State {
-  tempValue: Date;
-  mode: AndroidNativeProps["mode"] | IOSNativeProps["mode"];
+  tempValue?: Date;
+  mode?: AndroidNativeProps["mode"] | IOSNativeProps["mode"];
 }
 
 class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   state: Readonly<State> = {
-    tempValue: null,
-    mode: null
+    tempValue: undefined,
+    mode: undefined
   };
   private open = async () => {
+    const { type } = this.props;
+
     if (Platform.OS === "ios") {
       this.setState({
-        mode: "datetime"
+        mode: type
       });
     } else {
       this.setState({
-        mode: "date"
+        mode: type === "time" ? "time" : "date"
       });
     }
     return;
   };
 
   private onChange: BaseProps["onChange"] = (_event, date) => {
-    if (Platform.OS !== "ios" && this.state.mode === "date") {
+    if (
+      Platform.OS === "android" &&
+      this.props.type === "datetime" &&
+      this.state.mode === "date" &&
+      !!date
+    ) {
       this.setState({
         mode: "time",
         tempValue: date
       });
-    } else {
-      this.setState({
-        mode: null,
-        tempValue: null
-      });
-      const selected = date || this.state.tempValue;
-      if (selected) {
-        this.props.onChange(selected.getTime());
-      }
+      return;
+    }
+
+    this.setState({
+      mode: undefined,
+      tempValue: undefined
+    });
+    const selected = date || this.state.tempValue;
+    if (selected) {
+      this.props.onChange(selected.getTime());
     }
   };
 
@@ -69,10 +85,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
 
     let _value;
     if (value) {
-      _value =
-        type === "datetime"
-          ? format(value, "ddd, Do MMM YYYY, hh:mm A")
-          : format(value, "ddd, Do MMM YYYY");
+      _value = format(value, valueFormats[type]);
     }
 
     return (
