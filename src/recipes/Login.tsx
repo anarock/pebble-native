@@ -273,7 +273,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       countriesList,
       onCountryChange,
       selectedCountry,
-      getFooter,
+      getFooter = () => undefined,
       onLoginHelp,
       phoneInputProps,
       isPhoneValid,
