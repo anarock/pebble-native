@@ -40,7 +40,7 @@ export default class Options extends React.Component<OptionsProps> {
       };
 
       return (
-        <View style={styles.row}>
+        <View style={[styles.row, (props.styles || {}).row]}>
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
@@ -83,12 +83,14 @@ export default class Options extends React.Component<OptionsProps> {
       rowRenderElement,
       width,
       type,
-      testIdPrefix
+      testIdPrefix,
+      styles: _styles = {}
     } = this.props;
     return (
       <View
         style={[
           styles.optionWrapper,
+          _styles.optionWrapper,
           {
             width
           }

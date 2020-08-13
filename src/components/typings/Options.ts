@@ -1,3 +1,5 @@
+import { StyleProp, ViewStyle } from "react-native";
+
 export interface OptionsProps {
   options: any[];
   onSelect: (suggestion: any) => void;
@@ -8,11 +10,14 @@ export interface OptionsProps {
     },
     props: OptionsProps
   ) => JSX.Element | string;
-  dropdownStyle?: any;
   width?: number | string;
   selected?: any;
   keyExtractor?: (item: any) => number | string;
   type?: "radio" | "checkbox";
   rowLabelExtractor: (item: any) => JSX.Element | string | number;
   testIdPrefix?: string;
+  styles?: Partial<{
+    optionWrapper: StyleProp<ViewStyle>;
+    row: StyleProp<ViewStyle>;
+  }>;
 }
