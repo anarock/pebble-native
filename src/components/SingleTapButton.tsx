@@ -10,6 +10,7 @@ export interface SingleTapButtonState {
 
 export interface SingleTapButtonProps extends Omit<ButtonProps, "onPress"> {
   onPress: (e: GestureResponderEvent) => Promise<any>;
+  wait?: number;
 }
 
 export default class SingleTapButton extends React.PureComponent<
@@ -27,7 +28,7 @@ export default class SingleTapButton extends React.PureComponent<
         this.setState({ loading: false });
       });
     },
-    2000,
+    this.props.wait || 2000,
     true
   );
   render() {
