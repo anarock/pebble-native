@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { InputProps } from "../../components/typings/Input";
 
-interface OperationalCountry {
+export interface OperationalCountry {
   id: number;
   name: string;
   url_name: string;
@@ -25,8 +25,8 @@ export interface LoginProps {
   phoneInputProps?: Partial<InputProps>;
   isPhoneValid: boolean;
   tenantInputProps?: Partial<InputProps>;
-  onTenantSubmit: (string) => Promise<void>;
-  helpText?: React.ReactText | JSX.Element;
+  onTenantSubmit: (tenant: string) => Promise<void>;
+  helpText?: React.ReactNode;
 }
 
 export interface LoginState {

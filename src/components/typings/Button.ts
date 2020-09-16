@@ -6,7 +6,7 @@ interface ButtonBaseProps {
   onPress?: (e: GestureResponderEvent) => void;
   onLongPress?: (e: GestureResponderEvent) => void;
   disabled?: boolean;
-  children: React.ReactText | JSX.Element;
+  children: React.ReactNode;
   type?: "primary" | "secondary" | "link";
   loading?: boolean;
   style?: any;

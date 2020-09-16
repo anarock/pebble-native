@@ -2,10 +2,11 @@ import * as React from "react";
 import Text from "../Text";
 import { TextProps } from "../typings/Text";
 import { Omit } from "utility-types";
+import { SetRequired } from "type-fest";
 
 interface CountdownProps extends Omit<TextProps, "children"> {
-  time: number; // in seconds
-  counter: number; // in seconds
+  time?: number; // in seconds
+  counter?: number; // in seconds
   onFinish: () => void;
 }
 
@@ -14,7 +15,7 @@ interface CountdownState {
 }
 
 export default class Countdown extends React.PureComponent<
-  CountdownProps,
+  SetRequired<CountdownProps, keyof typeof Countdown.defaultProps>,
   CountdownState
 > {
   static defaultProps = {
@@ -26,7 +27,7 @@ export default class Countdown extends React.PureComponent<
     timeRemaining: this.props.time
   };
 
-  timer: NodeJS.Timeout;
+  timer: NodeJS.Timeout | undefined;
 
   componentDidMount() {
     this.startCountdown();
@@ -41,14 +42,14 @@ export default class Countdown extends React.PureComponent<
       const timeRemaining = Math.max(time - elapsedSeconds, 0);
       this.setState({ timeRemaining });
       if (!timeRemaining) {
-        clearInterval(this.timer);
+        this.timer && clearInterval(this.timer);
         onFinish();
       }
     }, counter * 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    this.timer && clearInterval(this.timer);
   }
 
   render() {

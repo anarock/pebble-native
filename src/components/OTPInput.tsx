@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from "react";
 import {
   View,
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   ViewStyle,
   TextInputProps
 } from "react-native";
+import { SetRequired } from "type-fest";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,42 +32,44 @@ export interface OTPInputProps extends TextInputProps {
   cellStyle?: ViewStyle;
   tintColor?: string;
   offTintColor?: string;
-  otpLength: number;
+  otpLength?: number;
   value: string;
   cellParentStyle: ViewStyle;
   showCellParentBorderColor: boolean;
 }
 
-export default class OTPInput extends Component<OTPInputProps> {
+export default class OTPInput extends React.Component<
+  SetRequired<OTPInputProps, keyof typeof OTPInput.defaultProps>
+> {
   static defaultProps = {
     otpLength: 6,
     tintColor: "#FB6C6A",
     offTintColor: "#BBBCBE"
   };
 
-  textInput = null;
+  textInput = React.createRef<TextInput>();
 
   componentDidMount() {
     this.focus();
   }
 
   // public methods
-  inputRef() {
-    return this.textInput;
+  public inputRef() {
+    return this.textInput.current;
   }
 
-  focus() {
+  public focus() {
     if (this.props.editable !== false) {
-      this.inputRef().focus();
+      this.inputRef()?.focus();
     }
   }
 
-  blur() {
-    this.inputRef().blur();
+  public blur() {
+    this.inputRef()?.blur();
   }
 
-  isFocused() {
-    return this.inputRef().isFocused();
+  public isFocused() {
+    return this.inputRef()?.isFocused();
   }
 
   render() {
@@ -85,7 +88,7 @@ export default class OTPInput extends Component<OTPInputProps> {
     return (
       <View>
         <TextInput
-          ref={input => (this.textInput = input)}
+          ref={this.textInput}
           style={{ width: 0, height: 0 }}
           value={value}
           maxLength={otpLength}
@@ -120,7 +123,7 @@ export default class OTPInput extends Component<OTPInputProps> {
                           : offTintColor
                     }
                   ]}
-                  onPress={() => this.textInput.focus()}
+                  onPress={() => this.textInput.current?.focus()}
                 >
                   {value && value.length > index ? value[index] : " "}
                 </Text>

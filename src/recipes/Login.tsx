@@ -5,7 +5,7 @@ import { colors } from "../theme";
 import Touchable from "../components/shared/Touchable";
 import Countdown from "../components/shared/Countdown";
 import Text from "../components/Text";
-import { LoginProps, LoginState } from "./typings/Login";
+import { LoginProps, LoginState, OperationalCountry } from "./typings/Login";
 import OTPInput from "../components/OTPInput";
 
 const styles = StyleSheet.create({
@@ -169,7 +169,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             color={colors.gray.darker}
             style={styles.loginUserText}
           >
-            {`${country.country_code}-${loginUserValue}`}
+            {`${country?.country_code}-${loginUserValue}`}
           </Text>
           <Touchable onPress={this.onEdit} testID="edit-otp">
             <Text style={styles.textButton} color={colors.violet.base} bold>
@@ -230,7 +230,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     );
   };
 
-  onTenantChange = value => {
+  onTenantChange = (value: string) => {
     this.setState({
       isTenantValid: true,
       tenant: value
@@ -273,7 +273,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       countriesList,
       onCountryChange,
       selectedCountry,
-      getFooter,
+      getFooter = () => undefined,
       onLoginHelp,
       phoneInputProps,
       isPhoneValid,
@@ -338,7 +338,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   </View>
                   <View style={styles.loginUserInput}>
                     <View style={styles.countrySelect}>
-                      <Select
+                      <Select<OperationalCountry>
+                        type="radio"
                         testIdPrefix="countries"
                         options={countriesList}
                         valueExtractor={item => item && item.country_code}

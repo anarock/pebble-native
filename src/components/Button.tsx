@@ -4,6 +4,7 @@ import Text from "./Text";
 import colors from "../theme/colors";
 import { ButtonProps, DoubleFooterButtonProps } from "./typings/Button";
 import Touchable from "./shared/Touchable";
+import { SetRequired } from "type-fest";
 
 const styles = StyleSheet.create({
   buttonStyle: {
@@ -35,19 +36,23 @@ const styles = StyleSheet.create({
   }
 });
 
-const buttonBackgroundColor = {
+type TypeColorMap = {
+  [type in NonNullable<ButtonProps["type"]>]: string;
+};
+
+const buttonBackgroundColor: TypeColorMap = {
   primary: colors.violet.base,
   secondary: colors.gray.lighter,
   link: "transparent"
 };
 
-const buttonBackgroundDisabledColor = {
+const buttonBackgroundDisabledColor: TypeColorMap = {
   primary: colors.violet.lighter,
   secondary: colors.gray.lightest,
   link: "transparent"
 };
 
-const fontColor = {
+const fontColor: TypeColorMap = {
   primary: colors.white.base,
   secondary: colors.gray.darker,
   link: colors.violet.base
@@ -102,7 +107,9 @@ const DoubleFooterButton: React.FunctionComponent<DoubleFooterButtonProps> = ({
   );
 };
 
-class Button extends React.Component<ButtonProps> {
+class Button extends React.Component<
+  SetRequired<ButtonProps, keyof typeof Button.defaultProps>
+> {
   static FooterButton = FooterButton;
 
   static DoubleFooterButton = DoubleFooterButton;

@@ -54,7 +54,6 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
         mode: "time",
         tempValue: date
       });
-
       return;
     }
 

@@ -17,8 +17,8 @@ export interface ActionModalProps extends ModalProps {
   onButtonClick?: (e: GestureResponderEvent) => void;
   showFooterButton?: boolean;
   visible: boolean;
-  header?: string | JSX.Element;
+  header?: React.ReactNode;
   headerType?: "success" | "error" | "warning";
   style?: Partial<ActionModalStyles>;
-  footer?: JSX.Element;
+  footer?: React.ReactNode;
 }

@@ -9,8 +9,8 @@ export interface InfoCardProps {
   /**
    * @deprecated Use children instead of content.
    */
-  content?: JSX.Element;
-  topRightElement?: JSX.Element;
+  content?: React.ReactNode;
+  topRightElement?: React.ReactNode;
   expandable?: boolean;
   style?: {
     container?: any;

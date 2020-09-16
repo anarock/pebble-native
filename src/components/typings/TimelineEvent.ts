@@ -1,10 +1,10 @@
-import { ReactText } from "react";
+import * as React from "react";
 import { ViewStyle } from "react-native";
 
 export interface HeaderProps {
   title: string;
-  subText: ReactText | JSX.Element;
-  headerRight?: ReactText | JSX.Element;
+  subText: React.ReactNode;
+  headerRight?: React.ReactNode;
   titleColor?: string;
 }
 
@@ -13,10 +13,10 @@ export interface TimeLineEventProps extends HeaderProps {
   backgroundColor?: string;
   iconName?: string;
   iconBackgroundColor?: string;
-  subText: ReactText;
+  subText: React.ReactText;
   onPress?: () => void;
   position?: "start" | "between" | "end";
-  description?: ReactText | JSX.Element;
+  description?: React.ReactNode;
   iconColor?: string;
   circularButtonStyle?: any;
   descriptionColor?: string;
