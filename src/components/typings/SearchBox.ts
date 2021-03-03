@@ -6,17 +6,17 @@ export interface FallbackOptionType {
   name?: string;
 }
 
-export interface SearchBoxProps<OptionType = FallbackOptionType> {
+export interface SearchBoxProps<OptionType> {
   onQueryChange: (query: string) => void;
   results: OptionType[];
-  renderElement: (
+  renderElement?: (
     args: { item: OptionType },
     props: SearchBoxProps<OptionType>
   ) => React.ReactNode;
   placeholder: string;
-  keyExtractor: (item: OptionType) => string | number;
+  keyExtractor?: (item: OptionType) => string | number;
   onSelect: (item: OptionType) => void;
-  rowLabelExtractor: (item: OptionType) => string | number;
+  rowLabelExtractor?: (item: OptionType) => string | number;
   noResultsElement?: (queryValue: string) => React.ReactNode;
   onClose?: () => void;
   bottomSectionPlaceholder?: () => React.ReactNode;
