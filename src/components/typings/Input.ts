@@ -5,7 +5,6 @@ export interface InputProps {
   required?: boolean;
   placeholder: string;
   onChange: (text: string) => void;
-  className?: string;
   inputProps?: RN.TextInputProps;
   fixLabelAtTop?: boolean;
   value?: string | number;
