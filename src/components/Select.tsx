@@ -229,7 +229,7 @@ export default class Select<OptionType> extends React.PureComponent<
                 onSelect={this.onMultiSelect}
               />
             ) : (
-              <Options<OptionType>
+              <Options
                 type="radio"
                 selected={props.selected}
                 testIdPrefix={testIdPrefix}
