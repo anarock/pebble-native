@@ -1,10 +1,11 @@
 import * as React from "react";
 import { StyleProp, ViewStyle } from "react-native";
+import { Key } from "./common";
 
-type Selected = string | number;
+type Selected = Key;
 
 export interface FallbackOptionType {
-  id: string | number;
+  id: Key;
   label?: string;
   name?: string;
 }
@@ -16,12 +17,11 @@ export interface CommonControlsProps<OptionType> {
     wrapper: StyleProp<ViewStyle>;
     itemWrapper: StyleProp<ViewStyle>;
   }>;
-  name?: React.ReactText;
   ripple?: boolean;
   testIdPrefix?: string;
-  keyExtractor?: (item: OptionType) => string | number;
+  keyExtractor?: (item: OptionType) => Key;
   renderLabel?: (args: { item: OptionType }) => React.ReactNode;
-  disabled?: boolean | (string | number)[];
+  disabled?: boolean | Key[];
   renderElement?: (
     args: {
       item: OptionType;
