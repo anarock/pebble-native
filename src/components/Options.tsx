@@ -131,14 +131,14 @@ export default class Options<OptionType> extends React.Component<
         ]}
       >
         {props.type === "checkbox" ? (
-          <Controls<OptionType>
+          <Controls
             type="checkbox"
             selected={props.selected}
             onChange={this.onCheckboxSelect}
             {...commonProps}
           />
         ) : (
-          <Controls<OptionType>
+          <Controls
             type="radio"
             selected={props.selected}
             onChange={this.onRadioSelect}

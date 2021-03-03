@@ -1,18 +1,19 @@
 import * as React from "react";
+import { Key } from "./common";
 
 export interface FallbackOptionType {
-  id: string | number;
+  id: Key;
   label?: string;
   name?: string;
 }
 
-type Selected = string | number;
+type Selected = Key;
 
 export interface CommonOptionProps<OptionType> {
   options: OptionType[];
   width?: string | number;
   testIdPrefix?: string;
-  keyExtractor: (item: OptionType) => number | string;
+  keyExtractor: (item: OptionType) => Key;
   rowLabelExtractor?: (item: OptionType) => React.ReactNode;
   rowRenderElement?: (
     args: {
