@@ -1,27 +1,25 @@
-export interface SearchInputProps {
+export interface SearchInputProps<OptionType> {
   required?: boolean;
   disabled?: boolean;
   placeholder: string;
   errorMessage?: string;
-  results: any[];
+  results: OptionType[];
   searchBoxPlaceholder: string;
   onClose?: () => void;
-  onSelect: (item: any) => void;
+  onSelect: (item: OptionType) => void;
   onQueryChange: (query: string) => void;
   renderElement?: (
-    args: {
-      item: any;
-    },
-    props: SearchInputProps
+    args: { item: OptionType },
+    props: SearchInputProps<OptionType>
   ) => React.ReactNode;
-  keyExtractor: (item: any) => number | string;
+  keyExtractor: (item: OptionType) => number | string;
   value?: string;
-  rowLabelExtractor?: (item: any) => string | number;
+  rowLabelExtractor?: (item: OptionType) => string | number;
   noResultsElement?: (queryValue: string) => React.ReactNode;
-  renderLabel?: (props: SearchInputProps) => React.ReactNode;
+  renderLabel?: (props: SearchInputProps<OptionType>) => React.ReactNode;
   bottomSectionPlaceholder?: () => React.ReactNode;
   loading?: boolean;
-  beforeSelect?: (item: any) => Promise<any>;
+  beforeSelect?: (item: OptionType) => Promise<OptionType>;
   testIdPrefix?: string;
   extraActionElement?: (query: string) => React.ReactNode;
 }
