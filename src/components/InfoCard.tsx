@@ -122,7 +122,7 @@ class InfoCard extends React.Component<InfoCardProps, InfoCardState> {
             <View>
               {!!image && (
                 <Image
-                  style={[styles.imageWrapper as any, style.imageWrapper]}
+                  style={[styles.imageWrapper, style.imageWrapper]}
                   source={image}
                   resizeMode="contain"
                 />

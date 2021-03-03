@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ViewStyle } from "react-native";
+import { CircularButtonProps } from "./CircularButton";
 
 export interface HeaderProps {
   title: string;
@@ -18,6 +19,6 @@ export interface TimeLineEventProps extends HeaderProps {
   position?: "start" | "between" | "end";
   description?: React.ReactNode;
   iconColor?: string;
-  circularButtonStyle?: any;
+  circularButtonStyle?: CircularButtonProps["style"];
   descriptionColor?: string;
 }

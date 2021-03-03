@@ -1,4 +1,5 @@
 import * as React from "react";
+import { StyleProp, ViewStyle } from "react-native";
 
 type Selected = string | number;
 
@@ -11,7 +12,10 @@ export interface FallbackOptionType {
 export interface CommonControlsProps<OptionType> {
   data: OptionType[];
   allowToggle?: boolean;
-  style?: any;
+  style?: Partial<{
+    wrapper: StyleProp<ViewStyle>;
+    itemWrapper: StyleProp<ViewStyle>;
+  }>;
   name?: React.ReactText;
   ripple?: boolean;
   testIdPrefix?: string;
