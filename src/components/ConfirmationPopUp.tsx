@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import ActionModal from "./ActionModal";
 import { StyleSheet, View } from "react-native";
 import Button from "./Button";

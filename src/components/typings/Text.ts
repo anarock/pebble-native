@@ -6,5 +6,5 @@ export interface TextProps extends RN.TextProps {
   color?: string;
   style?: RN.StyleProp<RN.TextStyle>;
   animated?: boolean;
-  lineHeight?: number | string;
+  lineHeight?: number;
 }

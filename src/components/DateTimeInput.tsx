@@ -1,54 +1,75 @@
 import * as React from "react";
-import {
-  TouchableWithoutFeedback,
-  TimePickerAndroid,
-  View,
-  DatePickerAndroid
-} from "react-native";
+import { TouchableWithoutFeedback, View, Platform } from "react-native";
+import _RNDateTimePicker, {
+  BaseProps,
+  AndroidNativeProps,
+  IOSNativeProps
+} from "@react-native-community/datetimepicker";
+
 import { DateTimeInputProps } from "./typings/DateTimeInput";
 import Input from "./Input";
-import { format, setMinutes, setHours, getTime } from "date-fns";
+import { format } from "date-fns";
 
-class TimeInput extends React.PureComponent<DateTimeInputProps> {
+const RNDateTimePicker = React.memo(_RNDateTimePicker);
+
+const valueFormats = {
+  date: "ddd, Do MMM YYYY",
+  time: "hh:mm A",
+  datetime: "ddd, Do MMM YYYY, hh:mm A"
+};
+
+interface State {
+  tempValue?: Date;
+  mode?: AndroidNativeProps["mode"] | IOSNativeProps["mode"];
+}
+
+class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
+  state: Readonly<State> = {
+    tempValue: undefined,
+    mode: undefined
+  };
   private open = async () => {
-    const { value, type, minDate, maxDate, mode } = this.props;
-    const date = value ? new Date(this.props.value) : new Date();
+    const { type } = this.props;
 
-    const timing = {
-      hour: date.getHours(),
-      minute: date.getMinutes()
-    };
-
-    let selected;
-    // @ts-ignore
-    const { action, day, month, year } = await DatePickerAndroid.open({
-      date,
-      minDate,
-      maxDate,
-      mode
-    });
-
-    if (action === DatePickerAndroid.dismissedAction) return;
-
-    selected = new Date(year, month, day);
-
-    if (type === "datetime") {
-      // @ts-ignore
-      const { action, minute, hour } = await TimePickerAndroid.open({
-        ...timing,
-        is24Hour: true
+    if (Platform.OS === "ios") {
+      this.setState({
+        mode: type
       });
+    } else {
+      this.setState({
+        mode: type === "time" ? "time" : "date"
+      });
+    }
+    return;
+  };
 
-      if (action === TimePickerAndroid.dismissedAction) return;
-      selected = setHours(selected, hour);
-      selected = setMinutes(selected, minute);
+  private onChange: BaseProps["onChange"] = (_event, date) => {
+    if (
+      Platform.OS === "android" &&
+      this.props.type === "datetime" &&
+      this.state.mode === "date" &&
+      !!date
+    ) {
+      this.setState({
+        mode: "time",
+        tempValue: date
+      });
+      return;
     }
 
-    this.props.onChange(getTime(selected));
+    this.setState({
+      mode: undefined,
+      tempValue: undefined
+    });
+    const selected = date || this.state.tempValue;
+    if (selected) {
+      this.props.onChange(selected.getTime());
+    }
   };
 
   render() {
     const {
+      mode: propsMode,
       errorMessage,
       disabled,
       required,
@@ -56,15 +77,15 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
       value,
       placeholder,
       type,
+      minDate,
+      maxDate,
       ...otherProps
     } = this.props;
+    const { mode } = this.state;
 
     let _value;
     if (value) {
-      _value =
-        type === "datetime"
-          ? format(value, "ddd, Do MMM YYYY, hh:mm A")
-          : format(value, "ddd, Do MMM YYYY");
+      _value = format(value, valueFormats[type]);
     }
 
     return (
@@ -79,6 +100,19 @@ class TimeInput extends React.PureComponent<DateTimeInputProps> {
             readOnly
             value={_value || placeholder}
           />
+          {mode && (
+            <RNDateTimePicker
+              mode={mode}
+              // TODO: Aziz accept display for Android
+              // display={propsMode}
+              value={
+                this.state.tempValue || (value ? new Date(value) : new Date())
+              }
+              minimumDate={minDate ? new Date(minDate) : undefined}
+              maximumDate={maxDate ? new Date(maxDate) : undefined}
+              onChange={this.onChange}
+            />
+          )}
         </View>
       </TouchableWithoutFeedback>
     );

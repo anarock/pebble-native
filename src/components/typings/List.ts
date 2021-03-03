@@ -4,9 +4,9 @@ export interface ListProps {
   iconName?: string;
   iconColor?: string;
   iconBackgroundColor?: string;
-  title: React.ReactText | JSX.Element;
-  description: JSX.Element | React.ReactText;
-  topRightElement?: JSX.Element | React.ReactText;
+  title: React.ReactNode;
+  description: React.ReactNode;
+  topRightElement?: React.ReactNode;
   style?: any;
   subLabel?: string;
   subBackgroundColor?: string;

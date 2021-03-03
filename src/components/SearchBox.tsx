@@ -6,12 +6,17 @@ import {
   TouchableWithoutFeedback,
   ActivityIndicator
 } from "react-native";
+import { SetRequired } from "type-fest";
 import colors from "../theme/colors";
 import Icon from "pebble-shared/native/Icon";
 import debounce from "just-debounce-it";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Text from "./Text";
-import { SearchBoxProps, SearchBoxState } from "./typings/SearchBox";
+import {
+  SearchBoxProps,
+  SearchBoxState,
+  FallbackOptionType
+} from "./typings/SearchBox";
 import Touchable from "./shared/Touchable";
 
 const styles = StyleSheet.create({
@@ -63,16 +68,19 @@ const styles = StyleSheet.create({
 
 function noop() {}
 
-export default class extends React.PureComponent<
-  SearchBoxProps,
+export default class SearchBox<
+  OptionType = FallbackOptionType
+> extends React.PureComponent<
+  SetRequired<SearchBoxProps<OptionType>, keyof typeof SearchBox.defaultProps>,
   SearchBoxState
 > {
-  debouncedChange: any;
-
-  static defaultProps: Partial<SearchBoxProps> = {
-    keyExtractor: item => item.id,
-    rowLabelExtractor: item => item.label || item.name,
-    renderElement: ({ item }, props) => (
+  static defaultProps = {
+    keyExtractor: (item: FallbackOptionType) => item.id,
+    rowLabelExtractor: (item: FallbackOptionType) => item.label || item.name,
+    renderElement: (
+      { item }: { item: FallbackOptionType },
+      props: SearchBoxProps
+    ) => (
       <View style={styles.row}>
         <Text
           color={colors.gray.darker}
@@ -88,17 +96,13 @@ export default class extends React.PureComponent<
     testIdPrefix: "sb"
   };
 
-  constructor(props) {
-    super(props);
+  state = {
+    queryValue: ""
+  };
 
-    this.state = {
-      queryValue: ""
-    };
+  private debouncedChange = debounce(this.props.onQueryChange, 500);
 
-    this.debouncedChange = debounce(this.props.onQueryChange, 500);
-  }
-
-  private onChange = text => {
+  private onChange = (text: string) => {
     this.setState(
       {
         queryValue: text
@@ -107,13 +111,14 @@ export default class extends React.PureComponent<
     );
   };
 
-  renderNoResultState = query => {
+  private renderNoResultState(query: string) {
     const {
       noResultsElement = noop,
       bottomSectionPlaceholder = noop
     } = this.props;
     return !query ? bottomSectionPlaceholder() : noResultsElement(query);
-  };
+  }
+
   render() {
     const {
       placeholder,

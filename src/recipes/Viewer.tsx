@@ -1,4 +1,4 @@
-import { PureComponent, default as React } from "react";
+import * as React from "react";
 import { StyleSheet, View } from "react-native";
 import {
   CircularButton,
@@ -11,7 +11,7 @@ import Icon from "pebble-shared/native/Icon";
 import Select from "../components/Select";
 import Button from "../components/Button";
 import nI from "name-initials";
-import { ViewerProps, ViewerState } from "./typings/Viewer";
+import { ViewerProps, ViewerState, Agent } from "./typings/Viewer";
 
 const styles = StyleSheet.create({
   circButton: {
@@ -56,12 +56,12 @@ const viewerInfoCard = StyleSheet.create({
   }
 });
 
-export default class extends PureComponent<ViewerProps, ViewerState> {
-  selectRef: React.RefObject<Select> = React.createRef();
+export default class extends React.PureComponent<ViewerProps, ViewerState> {
+  selectRef: React.RefObject<Select<Agent>> = React.createRef();
 
-  state = {
+  state: Readonly<ViewerState> = {
     showUnfollowConfirmation: false,
-    selectedAgentId: null,
+    selectedAgentId: undefined,
     showTransferConfirmation: false,
     showTransferAndFollowConfiguration: false
   };
@@ -120,7 +120,8 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
               </View>
 
               {this.isUser(owner.id) ? (
-                <Select
+                <Select<Agent>
+                  type="radio"
                   options={viewers}
                   disabled={disabled}
                   ref={this.selectRef}
@@ -149,11 +150,11 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
                         leftButtonLabel={"Transfer & Follow"}
                         rightButtonLabel={"Transfer"}
                         onLeftButtonPress={() => {
-                          this.selectRef.current.toggle();
+                          this.selectRef.current?.toggle();
                           this.toggleTransferAndFollowConfigurationModal();
                         }}
                         onRightButtonPress={() => {
-                          this.selectRef.current.toggle();
+                          this.selectRef.current?.toggle();
                           this.toggleTransferConfirmationModal();
                         }}
                         leftDisabled={!selectedAgentId}
@@ -245,10 +246,13 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
           onRejectPress={this.toggleTransferConfirmationModal}
           onConfirmPress={() => {
             this.toggleTransferConfirmationModal();
-            return onTranferRequest({
-              agentId: selectedAgentId,
-              follow: false
-            });
+            return (
+              selectedAgentId &&
+              onTranferRequest({
+                agentId: selectedAgentId,
+                follow: false
+              })
+            );
           }}
           confirmButtonText={"Confirm"}
           rejectButtonText={"Cancel"}
@@ -262,10 +266,13 @@ export default class extends PureComponent<ViewerProps, ViewerState> {
           onRejectPress={this.toggleTransferAndFollowConfigurationModal}
           onConfirmPress={() => {
             this.toggleTransferAndFollowConfigurationModal();
-            return onTranferRequest({
-              agentId: selectedAgentId,
-              follow: true
-            });
+            return (
+              selectedAgentId &&
+              onTranferRequest({
+                agentId: selectedAgentId,
+                follow: true
+              })
+            );
           }}
           confirmButtonText={"Confirm"}
           rejectButtonText={"Cancel"}

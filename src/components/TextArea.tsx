@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import * as React from "react";
 import { StyleSheet } from "react-native";
 import Input from "./Input";
 import { TextAreaProps } from "./typings/TextArea";
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const TextArea: FC<TextAreaProps> = ({
+const TextArea: React.FC<TextAreaProps> = ({
   inputProps,
   numberOfLines = 3,
   style,

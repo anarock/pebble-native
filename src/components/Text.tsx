@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, Animated } from "react-native";
+import RN, { Text, Animated } from "react-native";
 import { TextProps } from "./typings/Text";
 
 const GText: React.SFC<TextProps> = ({
@@ -12,7 +12,10 @@ const GText: React.SFC<TextProps> = ({
   lineHeight,
   ...props
 }) => {
-  const Text_ = animated ? Animated.Text : Text;
+  // @ts-ignore
+  const Text_: React.ComponentType<RN.TextProps> = animated
+    ? Animated.Text
+    : Text;
 
   return (
     <Text_
