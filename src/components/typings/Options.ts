@@ -1,4 +1,5 @@
 import * as React from "react";
+import { StyleProp, ViewStyle } from "react-native";
 
 export interface FallbackOptionType {
   id: string | number;
@@ -21,6 +22,10 @@ export interface CommonOptionProps<OptionType> {
     },
     props: OptionsProps<OptionType>
   ) => React.ReactNode;
+  styles?: Partial<{
+    optionWrapper: StyleProp<ViewStyle>;
+    row: StyleProp<ViewStyle>;
+  }>;
 }
 
 export interface RadioOptionProps<OptionType>

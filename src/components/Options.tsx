@@ -46,7 +46,7 @@ const rowRenderElement = (
       : "checkbox-unselected";
 
   return (
-    <View style={styles.row}>
+    <View style={[styles.row, (props.styles || {}).row]}>
       <Text
         numberOfLines={1}
         ellipsizeMode="tail"
@@ -111,7 +111,13 @@ export default class Options<OptionType> extends React.Component<
   };
 
   render() {
-    const { options, keyExtractor, width, testIdPrefix } = this.props;
+    const {
+      options,
+      keyExtractor,
+      width,
+      testIdPrefix,
+      styles: _styles = {}
+    } = this.props;
     const props = this.props;
     const commonProps = {
       testIdPrefix,
@@ -125,6 +131,7 @@ export default class Options<OptionType> extends React.Component<
       <View
         style={[
           styles.optionWrapper,
+          _styles.optionWrapper,
           {
             width
           }
