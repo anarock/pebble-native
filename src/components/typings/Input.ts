@@ -5,7 +5,6 @@ export interface InputProps {
   required?: boolean;
   placeholder: string;
   onChange: (text: string) => void;
-  className?: string;
   inputProps?: RN.TextInputProps;
   fixLabelAtTop?: boolean;
   value?: string | number;
@@ -14,11 +13,11 @@ export interface InputProps {
   message?: string;
   errorMessage?: string;
   successMessage?: string;
-  style?: any;
+  style?: RN.StyleProp<RN.ViewStyle>;
   textInputStyles?: RN.StyleProp<RN.TextStyle>;
 }
 
 export interface InputState {
-  placeholderMarginTop: any;
+  placeholderMarginTop: RN.Animated.Value;
   isFocused: boolean;
 }

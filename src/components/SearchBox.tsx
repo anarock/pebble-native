@@ -68,9 +68,7 @@ const styles = StyleSheet.create({
 
 function noop() {}
 
-export default class SearchBox<
-  OptionType = FallbackOptionType
-> extends React.PureComponent<
+export default class SearchBox<OptionType> extends React.PureComponent<
   SetRequired<SearchBoxProps<OptionType>, keyof typeof SearchBox.defaultProps>,
   SearchBoxState
 > {
@@ -79,7 +77,7 @@ export default class SearchBox<
     rowLabelExtractor: (item: FallbackOptionType) => item.label || item.name,
     renderElement: (
       { item }: { item: FallbackOptionType },
-      props: SearchBoxProps
+      props: SearchBoxProps<FallbackOptionType>
     ) => (
       <View style={styles.row}>
         <Text

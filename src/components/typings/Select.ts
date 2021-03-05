@@ -1,4 +1,5 @@
 import { GestureResponderEvent } from "react-native";
+import { Key } from "./common";
 import {
   CommonOptionProps,
   RadioOptionProps,
@@ -11,7 +12,6 @@ export interface CommonSelectProps<OptionType>
   required?: boolean;
   errorMessage?: string;
   disabled?: boolean;
-  title?: string;
   onClose?: (e?: GestureResponderEvent) => void;
   label?: (args: {
     value: string;
@@ -41,5 +41,5 @@ export type SelectProps<OptionType> =
 
 export interface SelectState {
   showOptions: boolean;
-  selectedCheckbox: (string | number)[];
+  selectedCheckbox: Key[];
 }

@@ -1,5 +1,12 @@
 import * as React from "react";
-import { View, StyleSheet, Image, ImageURISource } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  ImageURISource,
+  ViewStyle,
+  StyleProp
+} from "react-native";
 import { colors } from "../theme";
 import Text from "./Text";
 import Touchable, { TouchableProps } from "./shared/Touchable";
@@ -31,7 +38,7 @@ interface ImageThumbnailProps {
   onPress?: () => void;
   title: string;
   subText: string;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
 }
 
 // @ts-ignore

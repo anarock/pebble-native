@@ -1,4 +1,5 @@
 import * as React from "react";
+import { StyleProp, ViewStyle } from "react-native";
 
 export interface ListProps {
   iconName?: string;
@@ -7,7 +8,7 @@ export interface ListProps {
   title: React.ReactNode;
   description: React.ReactNode;
   topRightElement?: React.ReactNode;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
   subLabel?: string;
   subBackgroundColor?: string;
   subLabelColor?: string;

@@ -1,4 +1,9 @@
-import { ImageSourcePropType } from "react-native";
+import {
+  ImageSourcePropType,
+  ImageStyle,
+  StyleProp,
+  ViewStyle
+} from "react-native";
 
 export interface InfoCardProps {
   title: string;
@@ -13,10 +18,10 @@ export interface InfoCardProps {
   topRightElement?: React.ReactNode;
   expandable?: boolean;
   style?: {
-    container?: any;
-    topSection?: any;
-    heading?: any;
-    imageWrapper?: any;
+    container?: StyleProp<ViewStyle>;
+    topSection?: StyleProp<ViewStyle>;
+    heading?: StyleProp<ViewStyle>;
+    imageWrapper?: StyleProp<ImageStyle>;
   };
   disabled?: boolean;
 }

@@ -1,5 +1,13 @@
 import * as React from "react";
-import { View, StyleSheet, ImageURISource, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ImageURISource,
+  Image,
+  StyleProp,
+  ImageStyle,
+  ViewStyle
+} from "react-native";
 import Text from "./Text";
 import { colors } from "../theme";
 import Button from "./Button";
@@ -39,8 +47,8 @@ interface BannerProps {
   description: string;
   image: ImageURISource;
   buttonText: string;
-  imageStyle?: any;
-  style?: any;
+  imageStyle?: StyleProp<ImageStyle>;
+  style?: StyleProp<ViewStyle>;
   onPress?: () => void;
 }
 

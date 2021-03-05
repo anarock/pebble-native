@@ -71,7 +71,33 @@ function ControlView({
   );
 }
 
-type RequiredKeys = keyof typeof Controls.defaultProps;
+const defaultProps = {
+  keyExtractor: (item: FallbackOptionType) => item.id,
+  type: "radio",
+  renderElement: (
+    {
+      item,
+      isSelected,
+      renderLabel
+    }: {
+      item: FallbackOptionType;
+      isSelected: boolean;
+      renderLabel: CommonControlsProps<FallbackOptionType>["renderLabel"];
+    },
+    props: ControlsProps<FallbackOptionType>
+  ) => (
+    <ControlView
+      item={item}
+      isSelected={isSelected}
+      type={props.type}
+      renderLabel={renderLabel}
+    />
+  ),
+  style: {},
+  testIdPrefix: "controls"
+};
+
+type RequiredKeys = keyof typeof defaultProps;
 
 export default class Controls<OptionType> extends React.PureComponent<
   | SetRequired<CheckboxControlsProps<OptionType>, RequiredKeys>
@@ -79,31 +105,7 @@ export default class Controls<OptionType> extends React.PureComponent<
 > {
   static ControlView = ControlView;
 
-  static defaultProps = {
-    keyExtractor: (item: FallbackOptionType) => item.id,
-    type: "radio",
-    renderElement: (
-      {
-        item,
-        isSelected,
-        renderLabel
-      }: {
-        item: FallbackOptionType;
-        isSelected: boolean;
-        renderLabel: CommonControlsProps<FallbackOptionType>["renderLabel"];
-      },
-      props: ControlsProps<FallbackOptionType>
-    ) => (
-      <ControlView
-        item={item}
-        isSelected={isSelected}
-        type={props.type}
-        renderLabel={renderLabel}
-      />
-    ),
-    style: {},
-    testIdPrefix: "controls"
-  };
+  static defaultProps = defaultProps;
 
   private handlePress = (id: string | number) => {
     const props = this.props;
