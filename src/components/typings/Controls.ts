@@ -1,31 +1,61 @@
 import * as React from "react";
+import { StyleProp, ViewStyle } from "react-native";
+import { Key } from "./common";
 
-type Selected = string | number | (string | number)[];
+type Selected = Key;
 
-export interface ControlsProps {
-  type?: "radio" | "checkbox";
-  selected?: Selected;
-  data: any[];
-  keyExtractor?: (item: any) => string | number;
+export interface FallbackOptionType {
+  id: Key;
+  label?: string;
+  name?: string;
+}
+
+export interface CommonControlsProps<OptionType> {
+  data: OptionType[];
+  allowToggle?: boolean;
+  style?: Partial<{
+    wrapper: StyleProp<ViewStyle>;
+    itemWrapper: StyleProp<ViewStyle>;
+  }>;
+  ripple?: boolean;
+  testIdPrefix?: string;
+  keyExtractor?: (item: OptionType) => Key;
+  renderLabel?: (args: { item: OptionType }) => React.ReactNode;
+  disabled?: boolean | Key[];
   renderElement?: (
     args: {
-      item: any;
+      item: OptionType;
       isSelected: boolean;
-      renderLabel: (args: { item: any }) => JSX.Element;
+      renderLabel?: (args: { item: OptionType }) => React.ReactNode;
     },
-    props: ControlsProps
-  ) => JSX.Element | number | string;
-  allowToggle?: boolean;
+    props: ControlsProps<OptionType>
+  ) => React.ReactNode;
+}
+
+export interface RadioControlsProps<OptionType>
+  extends CommonControlsProps<OptionType> {
+  type?: "radio";
+  selected?: Selected;
   onChange: (
     args: {
-      selected: Selected;
+      selected?: Selected;
     },
-    props: ControlsProps
+    props: RadioControlsProps<OptionType>
   ) => void;
-  style?: any;
-  ripple?: boolean;
-  disabled?: boolean | (string | number)[];
-  renderLabel?: (args: { item: any }) => JSX.Element;
-  name?: React.ReactText;
-  testIdPrefix?: string;
 }
+
+export interface CheckboxControlsProps<OptionType>
+  extends CommonControlsProps<OptionType> {
+  type: "checkbox";
+  selected?: Selected[];
+  onChange: (
+    args: {
+      selected: Selected[];
+    },
+    props: CheckboxControlsProps<OptionType>
+  ) => void;
+}
+
+export type ControlsProps<OptionType> =
+  | RadioControlsProps<OptionType>
+  | CheckboxControlsProps<OptionType>;

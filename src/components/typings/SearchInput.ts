@@ -1,27 +1,25 @@
-export interface SearchInputProps {
+export interface SearchInputProps<OptionType> {
   required?: boolean;
   disabled?: boolean;
   placeholder: string;
   errorMessage?: string;
-  results: any[];
+  results: OptionType[];
   searchBoxPlaceholder: string;
   onClose?: () => void;
-  onSelect: (item: any) => void;
+  onSelect: (item: OptionType) => void;
   onQueryChange: (query: string) => void;
   renderElement?: (
-    args: {
-      item: any;
-    },
-    props: SearchInputProps
-  ) => JSX.Element | string | number;
-  keyExtractor: (item: any) => number | string;
+    args: { item: OptionType },
+    props: SearchInputProps<OptionType>
+  ) => React.ReactNode;
+  keyExtractor: (item: OptionType) => number | string;
   value?: string;
-  rowLabelExtractor?: (item: any) => string | number;
-  noResultsElement?: (queryValue: string) => JSX.Element;
-  renderLabel?: (props: SearchInputProps) => JSX.Element;
-  bottomSectionPlaceholder?: () => JSX.Element;
+  rowLabelExtractor?: (item: OptionType) => string | number;
+  noResultsElement?: (queryValue: string) => React.ReactNode;
+  renderLabel?: (props: SearchInputProps<OptionType>) => React.ReactNode;
+  bottomSectionPlaceholder?: () => React.ReactNode;
   loading?: boolean;
-  beforeSelect: (item: any) => Promise<any>;
+  beforeSelect?: (item: OptionType) => Promise<OptionType>;
   testIdPrefix?: string;
-  extraActionElement?: (query: string) => JSX.Element;
+  extraActionElement?: (query: string) => React.ReactNode;
 }

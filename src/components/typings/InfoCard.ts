@@ -1,4 +1,9 @@
-import { ImageSourcePropType } from "react-native";
+import {
+  ImageSourcePropType,
+  ImageStyle,
+  StyleProp,
+  ViewStyle
+} from "react-native";
 
 export interface InfoCardProps {
   title: string;
@@ -9,14 +14,14 @@ export interface InfoCardProps {
   /**
    * @deprecated Use children instead of content.
    */
-  content?: JSX.Element;
-  topRightElement?: JSX.Element;
+  content?: React.ReactNode;
+  topRightElement?: React.ReactNode;
   expandable?: boolean;
   style?: {
-    container?: any;
-    topSection?: any;
-    heading?: any;
-    imageWrapper?: any;
+    container?: StyleProp<ViewStyle>;
+    topSection?: StyleProp<ViewStyle>;
+    heading?: StyleProp<ViewStyle>;
+    imageWrapper?: StyleProp<ImageStyle>;
   };
   disabled?: boolean;
 }

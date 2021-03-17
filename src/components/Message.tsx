@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { View, StyleSheet, TouchableNativeFeedback } from "react-native";
 import colors from "../theme/colors";
 import Text from "./Text";

@@ -6,10 +6,17 @@ import {
   TouchableNativeFeedback,
   Platform
 } from "react-native";
-import { ControlsProps } from "./typings/Controls";
+import {
+  ControlsProps,
+  FallbackOptionType,
+  CommonControlsProps,
+  RadioControlsProps,
+  CheckboxControlsProps
+} from "./typings/Controls";
 import Text from "./Text";
 import Icon from "pebble-shared/native/Icon";
 import colors from "../theme/colors";
+import { SetRequired } from "type-fest";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -27,75 +34,101 @@ const styles = StyleSheet.create({
   }
 });
 
-const defaultLabelRenderer = item => (
+const defaultLabelRenderer = ({ item }: { item: FallbackOptionType }) => (
   <Text color={colors.gray.darker} size={15} style={styles.defaulLabel}>
     {item.label || item.name}
   </Text>
 );
 
-const ControlView = ({
+function ControlView({
   item,
   isSelected,
   type,
   renderLabel = defaultLabelRenderer
-}) => {
-  const icon = {
-    radio: isSelected ? "radio-selected" : "radio",
-    checkbox: isSelected ? "checkbox-selected" : "checkbox-unselected"
-  };
-
+}: {
+  item: FallbackOptionType;
+  isSelected: boolean;
+  type?: "radio" | "checkbox";
+  renderLabel?: CommonControlsProps<FallbackOptionType>["renderLabel"];
+}) {
+  const icon =
+    type === "checkbox"
+      ? isSelected
+        ? "radio-selected"
+        : "radio"
+      : isSelected
+      ? "checkbox-selected"
+      : "checkbox-unselected";
   return (
     <React.Fragment>
       <Icon
         color={isSelected ? colors.violet.base : colors.gray.light}
         size={18}
-        name={icon[type]}
+        name={icon}
       />
-      {renderLabel(item)}
+      {renderLabel({ item })}
     </React.Fragment>
   );
+}
+
+const defaultProps = {
+  keyExtractor: (item: FallbackOptionType) => item.id,
+  type: "radio",
+  renderElement: (
+    {
+      item,
+      isSelected,
+      renderLabel
+    }: {
+      item: FallbackOptionType;
+      isSelected: boolean;
+      renderLabel: CommonControlsProps<FallbackOptionType>["renderLabel"];
+    },
+    props: ControlsProps<FallbackOptionType>
+  ) => (
+    <ControlView
+      item={item}
+      isSelected={isSelected}
+      type={props.type}
+      renderLabel={renderLabel}
+    />
+  ),
+  style: {},
+  testIdPrefix: "controls"
 };
 
-export default class extends React.PureComponent<ControlsProps> {
+type RequiredKeys = keyof typeof defaultProps;
+
+export default class Controls<OptionType> extends React.PureComponent<
+  | SetRequired<CheckboxControlsProps<OptionType>, RequiredKeys>
+  | SetRequired<RadioControlsProps<OptionType>, RequiredKeys>
+> {
   static ControlView = ControlView;
 
-  static defaultProps: Partial<ControlsProps> = {
-    keyExtractor: item => item.id,
-    type: "radio",
-    renderElement: ({ item, isSelected, renderLabel }, props) => (
-      <ControlView
-        item={item}
-        isSelected={isSelected}
-        type={props.type}
-        renderLabel={renderLabel}
-      />
-    ),
-    style: {},
-    testIdPrefix: "controls"
-  };
+  static defaultProps = defaultProps;
 
-  private handlePress = id => {
-    const { type, onChange, selected, allowToggle } = this.props;
-    if (type === "radio") {
-      onChange(
-        { selected: allowToggle && selected === id ? undefined : id },
-        this.props
-      );
-    } else {
-      if (selected && !Array.isArray(selected)) return;
-      // @ts-ignore
-      const set = new Set(selected);
+  private handlePress = (id: string | number) => {
+    const props = this.props;
+    const { allowToggle } = this.props;
+    if (props.type === "checkbox") {
+      if (props.selected && !Array.isArray(props.selected)) return;
+      const set = new Set(props.selected);
       if (set.has(id)) {
         set.delete(id);
       } else {
         set.add(id);
       }
 
-      onChange({ selected: [...set] }, this.props);
+      props.onChange({ selected: [...set] }, props);
+    } else {
+      props.onChange(
+        { selected: allowToggle && props.selected === id ? undefined : id },
+        props
+      );
     }
   };
 
-  private isSelected = item => {
+  private isSelected = (item: OptionType) => {
     const { keyExtractor, type, selected } = this.props;
     const key = keyExtractor(item);
     return type === "radio"

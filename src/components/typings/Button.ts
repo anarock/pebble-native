@@ -1,15 +1,15 @@
 import * as React from "react";
-import { GestureResponderEvent } from "react-native";
+import { GestureResponderEvent, StyleProp, ViewStyle } from "react-native";
 import { TouchableProps } from "../shared/Touchable";
 
 interface ButtonBaseProps {
   onPress?: (e: GestureResponderEvent) => void;
   onLongPress?: (e: GestureResponderEvent) => void;
   disabled?: boolean;
-  children: React.ReactText | JSX.Element;
+  children: React.ReactNode;
   type?: "primary" | "secondary" | "link";
   loading?: boolean;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
   transparent?: boolean;
   radius?: boolean;
 }

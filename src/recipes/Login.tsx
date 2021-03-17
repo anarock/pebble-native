@@ -5,8 +5,8 @@ import { colors } from "../theme";
 import Touchable from "../components/shared/Touchable";
 import Countdown from "../components/shared/Countdown";
 import Text from "../components/Text";
-import { LoginProps, LoginState } from "./typings/Login";
-import OTPInput from "react-native-otp";
+import { LoginProps, LoginState, OperationalCountry } from "./typings/Login";
+import OTPInput from "../components/OTPInput";
 
 const styles = StyleSheet.create({
   container: {
@@ -100,24 +100,24 @@ enum LOGIN_PAGE {
 export default class Login extends React.PureComponent<LoginProps, LoginState> {
   state = {
     loginPage: LOGIN_PAGE.USER_PAGE,
-    sendingOTP: false,
     otpTimeout: false,
     tenant: "",
     isTenantValid: true,
     fetchingTenantConfig: false,
+    isSubmitButtonLoading: false,
     tenantConfigFetched: false
   };
 
   onOtpSuccess = () =>
     this.setState({
-      sendingOTP: false,
+      isSubmitButtonLoading: false,
       loginPage: LOGIN_PAGE.OTP_PAGE
     });
 
-  onOtpError = () => this.setState({ sendingOTP: false });
+  onOtpError = () => this.setState({ isSubmitButtonLoading: false });
 
   onSendOtp = () => {
-    this.setState({ sendingOTP: true });
+    this.setState({ isSubmitButtonLoading: true });
     this.props.onSendOtp(this.onOtpSuccess, this.onOtpError);
   };
 
@@ -136,18 +136,25 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onCountdownTimeUp = () => this.setState({ otpTimeout: true });
 
+  onSignIn = async () => {
+    this.setState({ isSubmitButtonLoading: true });
+    try {
+      await this.props.onSignIn();
+    } catch (e) {}
+    this.setState({ isSubmitButtonLoading: false });
+  };
+
   getOtpPage = () => {
     const {
       loginUserValue,
       otpValue,
       onOtpChange,
-      onSignIn,
       otpLength,
       countriesList,
       selectedCountry,
       onLoginHelp
     } = this.props;
-    const { otpTimeout } = this.state;
+    const { otpTimeout, isSubmitButtonLoading } = this.state;
 
     const country = countriesList.find(
       country => country.id === selectedCountry
@@ -162,7 +169,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             color={colors.gray.darker}
             style={styles.loginUserText}
           >
-            {`${country.country_code}-${loginUserValue}`}
+            {`${country?.country_code}-${loginUserValue}`}
           </Text>
           <Touchable onPress={this.onEdit} testID="edit-otp">
             <Text style={styles.textButton} color={colors.violet.base} bold>
@@ -178,7 +185,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             <OTPInput
               testID="otp-input"
               value={otpValue}
-              onChange={onOtpChange}
+              onChangeText={onOtpChange}
               tintColor={colors.violet.base}
               offTintColor={colors.gray.base}
               otpLength={otpLength}
@@ -212,7 +219,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           Get support for login
         </Text>
         <Button
-          onPress={onSignIn}
+          loading={isSubmitButtonLoading}
+          onPress={this.onSignIn}
           disabled={otpLength !== otpValue.length}
           testID="sign-in"
         >
@@ -222,7 +230,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     );
   };
 
-  onTenantChange = value => {
+  onTenantChange = (value: string) => {
     this.setState({
       isTenantValid: true,
       tenant: value
@@ -230,14 +238,17 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   };
 
   onTenantSubmit = async () => {
-    this.setState({ fetchingTenantConfig: true });
+    this.setState({ isSubmitButtonLoading: true });
     try {
       await this.props.onTenantSubmit(this.state.tenant);
-      this.setState({ tenantConfigFetched: true, fetchingTenantConfig: false });
+      this.setState({
+        tenantConfigFetched: true,
+        isSubmitButtonLoading: false
+      });
     } catch {
       this.setState({
         isTenantValid: false,
-        fetchingTenantConfig: false
+        isSubmitButtonLoading: false
       });
     }
   };
@@ -251,10 +262,9 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   render() {
     const {
       loginPage,
-      sendingOTP,
       tenant,
       isTenantValid,
-      fetchingTenantConfig,
+      isSubmitButtonLoading,
       tenantConfigFetched
     } = this.state;
     const {
@@ -263,7 +273,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       countriesList,
       onCountryChange,
       selectedCountry,
-      footer,
+      getFooter = () => undefined,
       onLoginHelp,
       phoneInputProps,
       isPhoneValid,
@@ -328,7 +338,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   </View>
                   <View style={styles.loginUserInput}>
                     <View style={styles.countrySelect}>
-                      <Select
+                      <Select<OperationalCountry>
+                        type="radio"
                         testIdPrefix="countries"
                         options={countriesList}
                         valueExtractor={item => item && item.country_code}
@@ -386,9 +397,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 disabled={
                   tenantConfigFetched ? isButtonDisabled : !isTenantValid
                 }
-                loading={
-                  tenantConfigFetched ? sendingOTP : fetchingTenantConfig
-                }
+                loading={isSubmitButtonLoading}
               >
                 {tenantConfigFetched ? "Send OTP" : "Submit"}
               </Button>
@@ -396,7 +405,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           )}
           {loginPage === LOGIN_PAGE.OTP_PAGE && this.getOtpPage()}
         </View>
-        {footer}
+
+        {getFooter(this.state)}
       </View>
     );
   }

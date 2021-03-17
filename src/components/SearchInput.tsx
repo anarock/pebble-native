@@ -3,16 +3,23 @@ import { View, Modal, TouchableWithoutFeedback } from "react-native";
 import Input from "./Input";
 import { SearchInputProps } from "./typings/SearchInput";
 import SearchBox from "./SearchBox";
+import { FallbackOptionType, SearchBoxProps } from "./typings/SearchBox";
+import { SetRequired } from "type-fest";
 
-export default class extends React.PureComponent<SearchInputProps> {
-  static defaultProps: Partial<SearchInputProps> = {
+export default class SearchInput<OptionType> extends React.PureComponent<
+  SetRequired<
+    SearchInputProps<OptionType>,
+    keyof typeof SearchInput.defaultProps
+  >
+> {
+  static defaultProps = {
     renderLabel: ({
       required,
       errorMessage,
       placeholder,
       value,
       disabled
-    }: SearchInputProps) => (
+    }: SearchInputProps<FallbackOptionType>) => (
       <Input
         required={required}
         errorMessage={errorMessage}
@@ -31,7 +38,7 @@ export default class extends React.PureComponent<SearchInputProps> {
     showModal: false
   };
 
-  private closeModal = () => {
+  public closeModal = () => {
     this.setState({
       showModal: false
     });
@@ -41,7 +48,7 @@ export default class extends React.PureComponent<SearchInputProps> {
     }
   };
 
-  private onSelect = item => {
+  private onSelect: SearchBoxProps<OptionType>["onSelect"] = item => {
     this.props.beforeSelect(item).then(() => {
       this.closeModal();
       this.props.onSelect(item);
@@ -95,7 +102,9 @@ export default class extends React.PureComponent<SearchInputProps> {
             keyExtractor={keyExtractor}
             rowLabelExtractor={rowLabelExtractor}
             renderElement={
-              renderElement && (args => renderElement(args, this.props))
+              renderElement
+                ? args => renderElement(args, this.props)
+                : undefined
             }
             noResultsElement={noResultsElement}
             bottomSectionPlaceholder={bottomSectionPlaceholder}

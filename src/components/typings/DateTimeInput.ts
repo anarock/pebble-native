@@ -8,8 +8,8 @@ export interface DateTimeInputProps
   extends Omit<DatePickerAndroidOpenOptions, "date">,
     TouchableWithoutFeedbackProps {
   onChange: (timestamp: number) => void;
-  value: Date | number;
-  type: "date" | "datetime";
+  value?: Date | number;
+  type: "date" | "time" | "datetime";
   errorMessage?: string;
   required?: boolean;
   disabled?: boolean;

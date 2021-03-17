@@ -2,9 +2,9 @@
   "expo": {
     "name": "pebble-native",
     "description": "A set of components developed for React Native.",
-    "slug": "typescript",
+    "slug": "pebble-native",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "37.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,6 +20,10 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.anarock.pebble_native",
+      "versionCode": 1
     },
     "entryPoint": "./node_modules/expo/AppEntry"
   }
