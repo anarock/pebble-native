@@ -87,7 +87,7 @@ export default class SearchBox<OptionType> extends React.PureComponent<
           numberOfLines={3}
           ellipsizeMode="tail"
         >
-          {props.rowLabelExtractor(item)}
+          {props.rowLabelExtractor?.(item)}
         </Text>
       </View>
     ),
