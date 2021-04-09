@@ -52,7 +52,7 @@ function ControlView({
   renderLabel?: CommonControlsProps<FallbackOptionType>["renderLabel"];
 }) {
   const icon =
-    type === "checkbox"
+    type === "radio"
       ? isSelected
         ? "radio-selected"
         : "radio"
