@@ -98,14 +98,15 @@ enum LOGIN_PAGE {
 }
 
 export default class Login extends React.PureComponent<LoginProps, LoginState> {
-  state = {
+  state: Readonly<LoginState> = {
     loginPage: LOGIN_PAGE.USER_PAGE,
     otpTimeout: false,
     tenant: "",
     isTenantValid: true,
     fetchingTenantConfig: false,
     isSubmitButtonLoading: false,
-    tenantConfigFetched: false
+    tenantConfigFetched: false,
+    otpResendAttempts: 0
   };
 
   onOtpSuccess = () =>
@@ -122,14 +123,20 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   };
 
   onResendOtp = () => {
-    this.setState({ otpTimeout: false });
-    this.props.onResendOtp();
+    const { onResendOtp, onCallOtp, smsOtpRetriesAllowed = 1 } = this.props;
+    const { otpResendAttempts } = this.state;
+    otpResendAttempts >= smsOtpRetriesAllowed ? onCallOtp() : onResendOtp();
+    this.setState({
+      otpTimeout: false,
+      otpResendAttempts: this.state.otpResendAttempts + 1
+    });
   };
 
   onEdit = () => {
     this.setState({
       loginPage: LOGIN_PAGE.USER_PAGE,
-      otpTimeout: false
+      otpTimeout: false,
+      otpResendAttempts: 0
     });
     this.props.onOtpChange("");
   };
@@ -152,9 +159,10 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       otpLength,
       countriesList,
       selectedCountry,
-      onLoginHelp
+      onLoginHelp,
+      smsOtpRetriesAllowed = 1
     } = this.props;
-    const { otpTimeout, isSubmitButtonLoading } = this.state;
+    const { otpTimeout, isSubmitButtonLoading, otpResendAttempts } = this.state;
 
     const country = countriesList.find(
       country => country.id === selectedCountry
@@ -202,7 +210,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             <View style={{ padding: 10 }}>
               {otpTimeout && (
                 <Touchable onPress={this.onResendOtp} testID="resend-otp">
-                  <Text style={styles.resend}>Resend</Text>
+                  <Text style={styles.resend}>
+                    {otpResendAttempts >= smsOtpRetriesAllowed
+                      ? "Resend via call"
+                      : "Resend"}
+                  </Text>
                 </Touchable>
               )}
               {!otpTimeout && <Countdown onFinish={this.onCountdownTimeUp} />}
