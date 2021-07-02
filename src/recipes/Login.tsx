@@ -73,10 +73,6 @@ const styles = StyleSheet.create({
     fontSize: 1,
     color: "transparent"
   },
-  resend: {
-    color: colors.violet.base,
-    fontWeight: "bold"
-  },
   loginHelp: {
     marginBottom: 22,
     padding: 3,
@@ -214,7 +210,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             <View style={{ padding: 10 }}>
               {otpTimeout && (
                 <Touchable onPress={this.onResendOtp} testID="resend-otp">
-                  <Text style={styles.resend}>
+                  <Text color={colors.violet.base} bold>
                     {otpResendAttempts >= smsOtpRetriesAllowed
                       ? "Resend via call"
                       : "Resend"}
