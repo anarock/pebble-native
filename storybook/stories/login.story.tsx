@@ -32,7 +32,7 @@ const COUNTRIES = [
   }
 ];
 
-const FOOTER = (
+const FOOTER = () => (
   <View style={{ marginTop: 20 }}>
     <Text>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -47,7 +47,7 @@ storiesOf("Login", module).add("Default", () => (
   >
     {({ setState, store }) => (
       <Login
-        onTenantSubmit={value => Promise.resolve(value)}
+        onTenantSubmit={value => Promise.resolve()}
         countriesList={COUNTRIES}
         selectedCountry={store.selectedCountry}
         onCountryChange={country => setState({ selectedCountry: country.id })}
@@ -64,7 +64,7 @@ storiesOf("Login", module).add("Default", () => (
           setState({ otp: "" });
         }}
         onSignIn={() => {}}
-        footer={FOOTER}
+        getFooter={FOOTER}
         otpLength={4}
         onLoginHelp={() => {}}
         isPhoneValid={boolean("isPhoneValid", true)}
@@ -77,6 +77,10 @@ storiesOf("Login", module).add("Default", () => (
           textInputStyles: {
             paddingTop: 7
           }
+        }}
+        smsOtpRetriesAllowed={1}
+        onCallOtp={() => {
+          setState({ otp: "" });
         }}
       />
     )}

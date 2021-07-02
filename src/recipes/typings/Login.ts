@@ -9,31 +9,35 @@ export interface OperationalCountry {
 }
 
 export interface LoginProps {
+  countriesList: OperationalCountry[];
+  getFooter?: FC<LoginState>;
+  helpText?: React.ReactNode;
+  isPhoneValid: boolean;
   loginUserValue: string;
+  onCallOtp: () => void;
+  onCountryChange: (country: OperationalCountry) => void;
+  onLoginHelp: () => void;
   onLoginUserChange: (value: string) => void;
-  onSendOtp: (onSuccess: () => void, onError: () => void) => void;
-  otpValue: string;
   onOtpChange: (value: string) => void;
   onResendOtp: () => void;
+  onSendOtp: (onSuccess: () => void, onError: () => void) => void;
   onSignIn: () => void;
-  countriesList: OperationalCountry[];
-  onCountryChange: (country: OperationalCountry) => void;
-  selectedCountry: number;
-  getFooter?: FC<LoginState>;
-  onLoginHelp: () => void;
-  otpLength: number;
-  phoneInputProps?: Partial<InputProps>;
-  isPhoneValid: boolean;
-  tenantInputProps?: Partial<InputProps>;
   onTenantSubmit: (tenant: string) => Promise<void>;
-  helpText?: React.ReactNode;
+  otpLength: number;
+  otpValue: string;
+  phoneInputProps?: Partial<InputProps>;
+  selectedCountry: number;
+  smsOtpRetriesAllowed?: number;
+  tenantInputProps?: Partial<InputProps>;
 }
 
 export interface LoginState {
+  fetchingTenantConfig: boolean;
+  isSubmitButtonLoading: boolean;
+  isTenantValid: boolean;
   loginPage: number;
+  otpResendAttempts: number;
   otpTimeout: boolean;
   tenant: string;
-  isTenantValid: boolean;
-  isSubmitButtonLoading: boolean;
   tenantConfigFetched: boolean;
 }
