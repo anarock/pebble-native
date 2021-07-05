@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
     color: "transparent"
   },
   otpResend: {
-    flexDirection: "row"
+    flexDirection: "row",
+    marginTop: 5
   },
   loginHelp: {
     marginBottom: 22,
