@@ -48,10 +48,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   otpInputWrap: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    position: "relative"
+    alignItems: "flex-start"
   },
   cellStyle: {
     borderWidth: 0,
@@ -64,6 +61,9 @@ const styles = StyleSheet.create({
     marginRight: 20,
     paddingBottom: 5
   },
+  otpInputContainer: {
+    height: 50
+  },
   otpInput: {
     top: 0,
     position: "absolute",
@@ -72,6 +72,10 @@ const styles = StyleSheet.create({
     zIndex: 2,
     fontSize: 1,
     color: "transparent"
+  },
+  otpResend: {
+    flexDirection: "row",
+    marginTop: 5
   },
   loginHelp: {
     marginBottom: 22,
@@ -96,7 +100,7 @@ enum LOGIN_PAGE {
 export default class Login extends React.PureComponent<LoginProps, LoginState> {
   state: Readonly<LoginState> = {
     loginPage: LOGIN_PAGE.USER_PAGE,
-    otpTimeout: false,
+    otpTimeout: true,
     tenant: "",
     isTenantValid: true,
     fetchingTenantConfig: false,
@@ -200,6 +204,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               cellStyle={styles.cellStyle}
               cellParentStyle={styles.cellParentStyle}
               showCellParentBorderColor={true}
+              containerStyle={styles.otpInputContainer}
               style={styles.otpInput}
               selectionColor="transparent"
               secureTextEntry={true}
@@ -207,7 +212,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
               caretHidden={!!otpValue}
               textContentType="oneTimeCode"
             />
-            <View style={{ padding: 10 }}>
+            <View style={styles.otpResend}>
+              <Text>Didn't receive code? </Text>
               {otpTimeout && (
                 <Touchable onPress={this.onResendOtp} testID="resend-otp">
                   <Text color={colors.violet.base} bold>
