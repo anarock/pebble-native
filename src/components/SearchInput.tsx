@@ -38,6 +38,12 @@ export default class SearchInput<OptionType> extends React.PureComponent<
     showModal: false
   };
 
+  public openModal = () => {
+    this.setState({
+      showModal: true
+    });
+  };
+
   public closeModal = () => {
     this.setState({
       showModal: false
@@ -75,14 +81,7 @@ export default class SearchInput<OptionType> extends React.PureComponent<
       <React.Fragment>
         <TouchableWithoutFeedback
           testID={`${testIdPrefix}-label`}
-          onPress={
-            !disabled
-              ? () =>
-                  this.setState({
-                    showModal: true
-                  })
-              : undefined
-          }
+          onPress={disabled ? undefined : this.openModal}
         >
           <View>{renderLabel(this.props)}</View>
         </TouchableWithoutFeedback>
