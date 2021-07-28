@@ -5,7 +5,6 @@ import { TextAreaProps } from "./typings/TextArea";
 
 const styles = StyleSheet.create({
   textArea: {
-    marginTop: 30,
     minHeight: 60,
     lineHeight: 15,
     textAlignVertical: "top"
