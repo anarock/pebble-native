@@ -122,7 +122,8 @@ class Input extends React.PureComponent<InputProps, InputState> {
       keyboardType,
       disabled,
       inputProps,
-      textInputStyles
+      textInputStyles,
+      readOnlyTextStyle
     } = this.props;
 
     const _message = errorMessage || successMessage || message;
@@ -152,7 +153,7 @@ class Input extends React.PureComponent<InputProps, InputState> {
           <Text
             color={colors.gray.darker}
             size={15}
-            style={[styles.readOnly, !value ? { marginBottom: 15 } : undefined]}
+            style={[styles.readOnly, readOnlyTextStyle]}
             numberOfLines={1}
             ellipsizeMode="tail"
           >
