@@ -46,7 +46,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
     this.setState({ visible: false });
   };
 
-  private onChange = date => {
+  private onChange = (date: Date) => {
     this.close();
 
     if (Platform.OS === "ios") {
@@ -54,6 +54,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
         mode: undefined,
         tempValue: date
       });
+      return;
     }
 
     if (
@@ -118,7 +119,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
             // TODO: Aziz accept display for Android
             // display={propsMode}
             isVisible={visible}
-            value={
+            date={
               this.state.tempValue || (value ? new Date(value) : new Date())
             }
             onCancel={this.close}
