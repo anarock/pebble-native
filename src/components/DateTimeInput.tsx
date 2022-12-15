@@ -1,16 +1,11 @@
 import * as React from "react";
 import { TouchableWithoutFeedback, View, Platform } from "react-native";
-import _RNDateTimePicker, {
-  BaseProps,
-  AndroidNativeProps,
-  IOSNativeProps
-} from "@react-native-community/datetimepicker";
-
+import DateTimePickerModal, {
+  DateTimePickerProps
+} from "react-native-modal-datetime-picker";
 import { DateTimeInputProps } from "./typings/DateTimeInput";
 import Input from "./Input";
 import { format } from "date-fns";
-
-const RNDateTimePicker = React.memo(_RNDateTimePicker);
 
 const valueFormats = {
   date: "ddd, Do MMM YYYY",
@@ -20,30 +15,47 @@ const valueFormats = {
 
 interface State {
   tempValue?: Date;
-  mode?: AndroidNativeProps["mode"] | IOSNativeProps["mode"];
+  mode?: DateTimePickerProps["mode"];
+  visible: boolean;
 }
 
 class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   state: Readonly<State> = {
     tempValue: undefined,
-    mode: undefined
+    mode: undefined,
+    visible: false
   };
   private open = async () => {
     const { type } = this.props;
 
     if (Platform.OS === "ios") {
       this.setState({
-        mode: type
+        mode: type,
+        visible: true
       });
     } else {
       this.setState({
-        mode: type === "time" ? "time" : "date"
+        mode: type === "time" ? "time" : "date",
+        visible: true
       });
     }
     return;
   };
 
-  private onChange: BaseProps["onChange"] = (_event, date) => {
+  private close = () => {
+    this.setState({ visible: false });
+  };
+
+  private onChange = date => {
+    this.close();
+
+    if (Platform.OS === "ios") {
+      this.setState({
+        mode: undefined,
+        tempValue: date
+      });
+    }
+
     if (
       Platform.OS === "android" &&
       this.props.type === "datetime" &&
@@ -52,7 +64,8 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
     ) {
       this.setState({
         mode: "time",
-        tempValue: date
+        tempValue: date,
+        visible: true
       });
       return;
     }
@@ -81,7 +94,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
       maxDate,
       ...otherProps
     } = this.props;
-    const { mode } = this.state;
+    const { mode, visible } = this.state;
 
     let _value;
     if (value) {
@@ -100,19 +113,19 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
             readOnly
             value={_value || placeholder}
           />
-          {mode && (
-            <RNDateTimePicker
-              mode={mode}
-              // TODO: Aziz accept display for Android
-              // display={propsMode}
-              value={
-                this.state.tempValue || (value ? new Date(value) : new Date())
-              }
-              minimumDate={minDate ? new Date(minDate) : undefined}
-              maximumDate={maxDate ? new Date(maxDate) : undefined}
-              onChange={this.onChange}
-            />
-          )}
+          <DateTimePickerModal
+            mode={mode}
+            // TODO: Aziz accept display for Android
+            // display={propsMode}
+            isVisible={visible}
+            value={
+              this.state.tempValue || (value ? new Date(value) : new Date())
+            }
+            onCancel={this.close}
+            minimumDate={minDate ? new Date(minDate) : undefined}
+            maximumDate={maxDate ? new Date(maxDate) : undefined}
+            onConfirm={this.onChange}
+          />
         </View>
       </TouchableWithoutFeedback>
     );
