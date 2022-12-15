@@ -28,17 +28,10 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   private open = async () => {
     const { type } = this.props;
 
-    if (Platform.OS === "ios") {
-      this.setState({
-        mode: type,
-        visible: true
-      });
-    } else {
-      this.setState({
-        mode: type === "time" ? "time" : "date",
-        visible: true
-      });
-    }
+    this.setState({
+      mode: type === "time" ? "time" : "date",
+      visible: true
+    });
     return;
   };
 
@@ -49,16 +42,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   private onChange = (date: Date) => {
     this.close();
 
-    if (Platform.OS === "ios") {
-      this.setState({
-        mode: undefined,
-        tempValue: date
-      });
-      return;
-    }
-
     if (
-      Platform.OS === "android" &&
       this.props.type === "datetime" &&
       this.state.mode === "date" &&
       !!date
