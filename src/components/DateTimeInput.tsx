@@ -103,6 +103,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
             // TODO: Aziz accept display for Android
             // display={propsMode}
             isVisible={visible}
+            display="spinner"
             date={
               this.state.tempValue || (value ? new Date(value) : new Date())
             }
