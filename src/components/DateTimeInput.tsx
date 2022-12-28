@@ -1,8 +1,6 @@
 import * as React from "react";
 import { TouchableWithoutFeedback, View, Platform } from "react-native";
-import DateTimePickerModal, {
-  DateTimePickerProps
-} from "react-native-modal-datetime-picker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { DateTimeInputProps } from "./typings/DateTimeInput";
 import Input from "./Input";
 import { format } from "date-fns";
@@ -13,24 +11,27 @@ const valueFormats = {
   datetime: "ddd, Do MMM YYYY, hh:mm A"
 };
 
+type Mode = "date" | "time";
+
 interface State {
-  tempValue?: Date;
-  mode?: DateTimePickerProps["mode"];
   visible: boolean;
+  tempValue?: Date;
+  mode?: Mode;
 }
 
 class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   state: Readonly<State> = {
+    visible: false,
     tempValue: undefined,
-    mode: undefined,
-    visible: false
+    mode: undefined
   };
+
   private open = async () => {
     const { type } = this.props;
 
     this.setState({
-      mode: type === "time" ? "time" : "date",
-      visible: true
+      visible: true,
+      mode: type === "time" ? "time" : "date"
     });
     return;
   };
@@ -99,18 +100,15 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
             value={_value || placeholder}
           />
           <DateTimePickerModal
-            mode={mode}
-            // TODO: Aziz accept display for Android
-            // display={propsMode}
             isVisible={visible}
-            display="spinner"
+            mode={mode}
             date={
               this.state.tempValue || (value ? new Date(value) : new Date())
             }
-            onCancel={this.close}
             minimumDate={minDate ? new Date(minDate) : undefined}
             maximumDate={maxDate ? new Date(maxDate) : undefined}
             onConfirm={this.onChange}
+            onCancel={this.close}
           />
         </View>
       </TouchableWithoutFeedback>
