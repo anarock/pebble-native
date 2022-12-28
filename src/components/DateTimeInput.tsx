@@ -18,33 +18,33 @@ type IosDisplay =
   | "spinner"; // mode: time
 
 interface State {
-  visible: boolean;
   tempValue?: Date;
   mode?: Mode;
+  visible: boolean;
 }
 
 class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   state: Readonly<State> = {
-    visible: false,
     tempValue: undefined,
-    mode: undefined
+    mode: undefined,
+    visible: false
   };
 
   private open = async () => {
     const { type } = this.props;
 
     this.setState({
-      visible: true,
-      mode: type === "time" ? "time" : "date"
+      mode: type === "time" ? "time" : "date",
+      visible: true
     });
     return;
   };
 
   private close = () => {
     this.setState({
-      visible: false,
       mode: undefined,
-      tempValue: undefined
+      tempValue: undefined,
+      visible: false
     });
   };
 
