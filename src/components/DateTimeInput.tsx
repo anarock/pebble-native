@@ -13,6 +13,10 @@ const valueFormats = {
 
 type Mode = "date" | "time";
 
+type IosDisplay =
+  | "inline" // mode: date
+  | "spinner"; // mode: time
+
 interface State {
   visible: boolean;
   tempValue?: Date;
@@ -81,6 +85,12 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
     } = this.props;
     const { mode, visible } = this.state;
 
+    const display =
+      mode &&
+      Platform.select<IosDisplay>({
+        ios: mode === "date" ? "inline" : "spinner"
+      });
+
     let _value;
     if (value) {
       _value = format(value, valueFormats[type]);
@@ -101,6 +111,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
           <DateTimePickerModal
             isVisible={visible}
             mode={mode}
+            display={display}
             date={
               this.state.tempValue || (value ? new Date(value) : new Date())
             }
