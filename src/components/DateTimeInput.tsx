@@ -37,12 +37,14 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   };
 
   private close = () => {
-    this.setState({ visible: false });
+    this.setState({
+      visible: false,
+      mode: undefined,
+      tempValue: undefined
+    });
   };
 
   private onChange = (date: Date) => {
-    this.close();
-
     if (
       this.props.type === "datetime" &&
       this.state.mode === "date" &&
@@ -50,16 +52,13 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
     ) {
       this.setState({
         mode: "time",
-        tempValue: date,
-        visible: true
+        tempValue: date
       });
       return;
     }
 
-    this.setState({
-      mode: undefined,
-      tempValue: undefined
-    });
+    this.close();
+
     const selected = date || this.state.tempValue;
     if (selected) {
       this.props.onChange(selected.getTime());
