@@ -1,8 +1,6 @@
 import * as React from "react";
 import { TouchableWithoutFeedback, View, Platform } from "react-native";
-import DateTimePickerModal, {
-  DateTimePickerProps
-} from "react-native-modal-datetime-picker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { DateTimeInputProps } from "./typings/DateTimeInput";
 import Input from "./Input";
 import { format } from "date-fns";
@@ -13,9 +11,15 @@ const valueFormats = {
   datetime: "ddd, Do MMM YYYY, hh:mm A"
 };
 
+type Mode = "date" | "time";
+
+type IosDisplay =
+  | "inline" // mode: date
+  | "spinner"; // mode: time
+
 interface State {
   tempValue?: Date;
-  mode?: DateTimePickerProps["mode"];
+  mode?: Mode;
   visible: boolean;
 }
 
@@ -25,6 +29,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
     mode: undefined,
     visible: false
   };
+
   private open = async () => {
     const { type } = this.props;
 
@@ -36,12 +41,14 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   };
 
   private close = () => {
-    this.setState({ visible: false });
+    this.setState({
+      mode: undefined,
+      tempValue: undefined,
+      visible: false
+    });
   };
 
   private onChange = (date: Date) => {
-    this.close();
-
     if (
       this.props.type === "datetime" &&
       this.state.mode === "date" &&
@@ -49,16 +56,13 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
     ) {
       this.setState({
         mode: "time",
-        tempValue: date,
-        visible: true
+        tempValue: date
       });
       return;
     }
 
-    this.setState({
-      mode: undefined,
-      tempValue: undefined
-    });
+    this.close();
+
     const selected = date || this.state.tempValue;
     if (selected) {
       this.props.onChange(selected.getTime());
@@ -81,6 +85,12 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
     } = this.props;
     const { mode, visible } = this.state;
 
+    const display =
+      mode &&
+      Platform.select<IosDisplay>({
+        ios: mode === "date" ? "inline" : "spinner"
+      });
+
     let _value;
     if (value) {
       _value = format(value, valueFormats[type]);
@@ -99,17 +109,16 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
             value={_value || placeholder}
           />
           <DateTimePickerModal
-            mode={mode}
-            // TODO: Aziz accept display for Android
-            // display={propsMode}
             isVisible={visible}
+            mode={mode}
+            display={display}
             date={
               this.state.tempValue || (value ? new Date(value) : new Date())
             }
-            onCancel={this.close}
             minimumDate={minDate ? new Date(minDate) : undefined}
             maximumDate={maxDate ? new Date(maxDate) : undefined}
             onConfirm={this.onChange}
+            onCancel={this.close}
           />
         </View>
       </TouchableWithoutFeedback>
