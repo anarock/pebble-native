@@ -9,13 +9,24 @@ import { LoginProps, LoginState, OperationalCountry } from "./typings/Login";
 import OTPInput from "../components/OTPInput";
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    justifyContent: "space-between"
+  },
   container: {
     flex: 1,
     justifyContent: "center",
     padding: 25
   },
+  header: {
+    justifyContent: "flex-end",
+    flexDirection: "row",
+    marginTop: 25,
+    marginRight: 25
+  },
   loginSubHeader: {
-    marginTop: 15
+    marginTop: 15,
+    lineHeight: 18
   },
   formContainer: {
     marginTop: 30,
@@ -78,18 +89,29 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   loginHelp: {
-    marginBottom: 22,
+    marginBottom: 20,
     padding: 3,
     flexDirection: "row",
     justifyContent: "space-between"
   },
   loginSupport: {
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
+    marginTop: 20
   },
   loginHelpText: {
     alignSelf: "flex-start"
   },
-  otpPageLoginHelp: { marginTop: 35 }
+  otpPageLoginHelp: { marginTop: 35 },
+  separatorContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 20
+  },
+  separator: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.gray.light
+  }
 });
 
 enum LOGIN_PAGE {
@@ -106,7 +128,9 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     fetchingTenantConfig: false,
     isSubmitButtonLoading: false,
     tenantConfigFetched: false,
-    otpResendAttempts: 0
+    otpResendAttempts: 0,
+    withoutCode: false,
+    signin: false
   };
 
   onOtpSuccess = () =>
@@ -118,8 +142,9 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
   onOtpError = () => this.setState({ isSubmitButtonLoading: false });
 
   onSendOtp = () => {
+    const { signin } = this.state;
     this.setState({ isSubmitButtonLoading: true });
-    this.props.onSendOtp(this.onOtpSuccess, this.onOtpError);
+    this.props.onSendOtp(this.onOtpSuccess, this.onOtpError, signin);
   };
 
   onResendOtp = () => {
@@ -241,6 +266,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           onPress={this.onSignIn}
           disabled={otpLength !== otpValue.length}
           testID="sign-in"
+          style={{ marginTop: 20 }}
         >
           Sign in
         </Button>
@@ -261,7 +287,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       await this.props.onTenantSubmit(this.state.tenant);
       this.setState({
         tenantConfigFetched: true,
-        isSubmitButtonLoading: false
+        isSubmitButtonLoading: false,
+        withoutCode: true
       });
     } catch {
       this.setState({
@@ -273,8 +300,17 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onTenantEdit = () => {
     this.setState({
-      tenantConfigFetched: false
+      tenantConfigFetched: false,
+      withoutCode: false
     });
+  };
+
+  getText = () => {
+    const { signin } = this.state;
+    const { newflow } = this.props;
+    return signin || !newflow
+      ? "Sign in to continue"
+      : "Enter your details to finish signing up";
   };
 
   render() {
@@ -282,8 +318,9 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       loginPage,
       tenant,
       isTenantValid,
-      isSubmitButtonLoading,
-      tenantConfigFetched
+      tenantConfigFetched,
+      withoutCode,
+      signin
     } = this.state;
     const {
       onLoginUserChange,
@@ -296,135 +333,235 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       phoneInputProps,
       isPhoneValid,
       tenantInputProps,
-      helpText
+      helpText,
+      onNameChange,
+      onEmailChange,
+      name,
+      email,
+      isEmailValid,
+      isNameValid,
+      newflow
     } = this.props;
 
     const isButtonDisabled = !loginUserValue || !isPhoneValid;
 
     return (
-      <View style={styles.container}>
-        <Text bold size={27} color={colors.gray.darker}>
-          Glad to see you!
-        </Text>
-        <Text size={15} color={colors.gray.dark} style={styles.loginSubHeader}>
-          Sign in to continue
-        </Text>
-        <View style={styles.formContainer}>
-          {loginPage === LOGIN_PAGE.USER_PAGE && (
-            <>
-              {!tenantConfigFetched && (
-                <Input
-                  readOnly={tenantConfigFetched}
-                  value={tenant}
-                  placeholder="Company code"
-                  onChange={this.onTenantChange}
-                  errorMessage={
-                    !isTenantValid ? "Please check the company code" : ""
+      <View style={styles.wrapper}>
+        {loginPage === LOGIN_PAGE.USER_PAGE && newflow && (
+          <Touchable
+            onPress={() =>
+              this.setState({
+                signin: !signin,
+                tenantConfigFetched: false,
+                withoutCode: false
+              })
+            }
+            style={styles.header}
+          >
+            <Text color={colors.violet.base}>
+              {!signin ? "Login" : "Create new account"}
+            </Text>
+          </Touchable>
+        )}
+        <View style={styles.container}>
+          <Text bold size={27} color={colors.gray.darker}>
+            {signin || !newflow ? "Glad to see you" : "Create an account"}
+          </Text>
+          <Text
+            size={15}
+            color={colors.gray.dark}
+            style={styles.loginSubHeader}
+          >
+            {this.getText()}
+          </Text>
+          <View style={styles.formContainer}>
+            {loginPage === LOGIN_PAGE.USER_PAGE && (
+              <>
+                {!tenantConfigFetched && !withoutCode && (
+                  <Input
+                    readOnly={tenantConfigFetched}
+                    value={tenant}
+                    placeholder="Company code"
+                    onChange={this.onTenantChange}
+                    errorMessage={
+                      !isTenantValid ? "Please check the company code" : ""
+                    }
+                    inputProps={{
+                      autoFocus: true,
+                      testID: "company-input"
+                    }}
+                    {...tenantInputProps}
+                  />
+                )}
+                {(tenantConfigFetched || withoutCode) && (
+                  <>
+                    {tenantConfigFetched && (
+                      <View style={styles.companyInfo}>
+                        <Text size={15}>
+                          <Text color={colors.gray.dark}>Company Code: </Text>
+                          <Text
+                            bold
+                            color={colors.gray.darker}
+                            style={styles.loginUserText}
+                          >
+                            {tenant.toUpperCase()}
+                          </Text>
+                        </Text>
+                        <Touchable
+                          onPress={this.onTenantEdit}
+                          testID="edit-company"
+                        >
+                          <Text
+                            style={styles.textButton}
+                            color={colors.violet.base}
+                            bold
+                          >
+                            Edit
+                          </Text>
+                        </Touchable>
+                      </View>
+                    )}
+                    {newflow &&
+                      (withoutCode || tenantConfigFetched) &&
+                      !signin && (
+                        <View style={{ flex: 1 }}>
+                          <Input
+                            readOnly={!withoutCode}
+                            value={name}
+                            placeholder="Full Name"
+                            onChange={onNameChange}
+                            errorMessage={
+                              !isNameValid ? "Please enter your name" : ""
+                            }
+                            inputProps={{
+                              autoFocus: true,
+                              testID: "full-name"
+                            }}
+                          />
+                          <Input
+                            readOnly={!withoutCode}
+                            value={email}
+                            placeholder="Email"
+                            onChange={onEmailChange}
+                            errorMessage={
+                              !isEmailValid
+                                ? "Please enter a valid email address"
+                                : ""
+                            }
+                            inputProps={{
+                              autoFocus: true,
+                              testID: "email"
+                            }}
+                          />
+                        </View>
+                      )}
+                    <View style={styles.loginUserInput}>
+                      <View style={styles.countrySelect}>
+                        <Select<OperationalCountry>
+                          type="radio"
+                          testIdPrefix="countries"
+                          options={countriesList}
+                          valueExtractor={item => item && item.country_code}
+                          rowLabelExtractor={item =>
+                            `${item.name} (${item.country_code})`
+                          }
+                          keyExtractor={item => item.id}
+                          placeholder="ISD Code"
+                          onSelect={onCountryChange}
+                          selected={selectedCountry}
+                        />
+                      </View>
+                      <View style={styles.phoneInput}>
+                        <Input
+                          placeholder="Phone"
+                          value={loginUserValue}
+                          keyboardType="phone-pad"
+                          onChange={onLoginUserChange}
+                          errorMessage={isPhoneValid ? "" : "Invalid Phone"}
+                          inputProps={{
+                            autoFocus: true,
+                            testID: "phone-input"
+                          }}
+                          {...phoneInputProps}
+                        />
+                      </View>
+                    </View>
+                  </>
+                )}
+                <Button
+                  testID="submit-btn"
+                  onPress={() =>
+                    tenantConfigFetched || withoutCode
+                      ? this.onSendOtp()
+                      : this.onTenantSubmit()
                   }
-                  inputProps={{
-                    autoFocus: true,
-                    testID: "company-input"
-                  }}
-                  {...tenantInputProps}
-                />
-              )}
-              {tenantConfigFetched && (
-                <>
-                  <View style={styles.companyInfo}>
-                    <Text size={15}>
-                      <Text color={colors.gray.dark}>Company Code: </Text>
-                      <Text
-                        bold
-                        color={colors.gray.darker}
-                        style={styles.loginUserText}
-                      >
-                        {tenant.toUpperCase()}
-                      </Text>
-                    </Text>
-                    <Touchable
-                      onPress={this.onTenantEdit}
-                      testID="edit-company"
+                  disabled={
+                    tenantConfigFetched || withoutCode
+                      ? isButtonDisabled
+                      : !isTenantValid
+                  }
+                >
+                  {tenantConfigFetched || withoutCode
+                    ? "Verify Details"
+                    : "Next"}
+                </Button>
+                {newflow &&
+                  loginPage === LOGIN_PAGE.USER_PAGE &&
+                  !(signin && withoutCode) &&
+                  !tenantConfigFetched && (
+                    <View style={styles.separatorContainer}>
+                      <View style={styles.separator} />
+                      <Text style={{ paddingHorizontal: 10 }}>or</Text>
+                      <View style={styles.separator} />
+                    </View>
+                  )}
+                {newflow &&
+                  loginPage === LOGIN_PAGE.USER_PAGE &&
+                  !(signin && withoutCode) &&
+                  !tenantConfigFetched && (
+                    <Button
+                      type="secondary"
+                      onPress={() =>
+                        this.setState({
+                          withoutCode: !withoutCode,
+                          tenantConfigFetched: false
+                        })
+                      }
                     >
-                      <Text
-                        style={styles.textButton}
-                        color={colors.violet.base}
-                        bold
-                      >
-                        Edit
-                      </Text>
-                    </Touchable>
-                  </View>
-                  <View style={styles.loginUserInput}>
-                    <View style={styles.countrySelect}>
-                      <Select<OperationalCountry>
-                        type="radio"
-                        testIdPrefix="countries"
-                        options={countriesList}
-                        valueExtractor={item => item && item.country_code}
-                        rowLabelExtractor={item =>
-                          `${item.name} (${item.country_code})`
-                        }
-                        keyExtractor={item => item.id}
-                        placeholder="ISD Code"
-                        onSelect={onCountryChange}
-                        selected={selectedCountry}
-                      />
-                    </View>
-                    <View style={styles.phoneInput}>
-                      <Input
-                        placeholder="Phone"
-                        value={loginUserValue}
-                        keyboardType="phone-pad"
-                        onChange={onLoginUserChange}
-                        errorMessage={isPhoneValid ? "" : "Invalid Phone"}
-                        inputProps={{
-                          autoFocus: true,
-                          testID: "phone-input"
-                        }}
-                        {...phoneInputProps}
-                      />
-                    </View>
-                  </View>
-                </>
-              )}
-              <View style={styles.loginHelp}>
-                {helpText && (
+                      {signin
+                        ? "Login without company code"
+                        : `Sign-up ${
+                            withoutCode ? "with" : "without"
+                          } company code`}
+                    </Button>
+                  )}
+                <View style={styles.loginHelp}>
+                  {helpText && (
+                    <Text
+                      color={colors.gray.base}
+                      bold
+                      style={styles.loginHelpText}
+                      onPress={onLoginHelp}
+                    >
+                      {helpText}
+                    </Text>
+                  )}
                   <Text
-                    color={colors.gray.base}
+                    color={colors.violet.base}
                     bold
-                    style={styles.loginHelpText}
+                    style={styles.loginSupport}
                     onPress={onLoginHelp}
                   >
-                    {helpText}
+                    Need Support?
                   </Text>
-                )}
-                <Text
-                  color={colors.violet.base}
-                  bold
-                  style={styles.loginSupport}
-                  onPress={onLoginHelp}
-                >
-                  Get support for login
-                </Text>
-              </View>
-              <Button
-                testID="submit-btn"
-                onPress={
-                  tenantConfigFetched ? this.onSendOtp : this.onTenantSubmit
-                }
-                disabled={
-                  tenantConfigFetched ? isButtonDisabled : !isTenantValid
-                }
-                loading={isSubmitButtonLoading}
-              >
-                {tenantConfigFetched ? "Send OTP" : "Submit"}
-              </Button>
-            </>
-          )}
-          {loginPage === LOGIN_PAGE.OTP_PAGE && this.getOtpPage()}
-        </View>
+                </View>
+              </>
+            )}
+            {loginPage === LOGIN_PAGE.OTP_PAGE && this.getOtpPage()}
+          </View>
 
-        {getFooter(this.state)}
+          {getFooter(this.state)}
+        </View>
       </View>
     );
   }
