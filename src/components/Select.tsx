@@ -147,6 +147,7 @@ export default class Select<OptionType> extends React.PureComponent<
       footer,
       showFooterButton,
       testIdPrefix,
+      showToast,
       ...rest
     } = this.props;
     const props = this.props;
@@ -157,7 +158,9 @@ export default class Select<OptionType> extends React.PureComponent<
           testID={`${testIdPrefix}-label`}
           onPress={
             disabled
-              ? undefined
+              ? showToast
+                ? () => showToast()
+                : undefined
               : () =>
                   this.setState({
                     showOptions: true

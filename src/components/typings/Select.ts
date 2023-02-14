@@ -21,6 +21,7 @@ export interface CommonSelectProps<OptionType>
   showFooterButton?: boolean;
   autoClose?: boolean;
   footer?: React.ReactNode;
+  showToast?: () => void;
 }
 
 export interface RadioSelectProps<OptionType>
