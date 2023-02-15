@@ -14,8 +14,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   container: {
-    flex: 1,
-    justifyContent: "center",
     padding: 25
   },
   header: {
@@ -507,7 +505,6 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                 </Button>
                 {newflow &&
                   loginPage === LOGIN_PAGE.USER_PAGE &&
-                  !(signin && withoutCode) &&
                   !tenantConfigFetched && (
                     <View style={styles.separatorContainer}>
                       <View style={styles.separator} />
@@ -517,7 +514,6 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   )}
                 {newflow &&
                   loginPage === LOGIN_PAGE.USER_PAGE &&
-                  !(signin && withoutCode) &&
                   !tenantConfigFetched && (
                     <Button
                       type="secondary"
@@ -528,11 +524,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                         })
                       }
                     >
-                      {signin
-                        ? "Login without company code"
-                        : `Sign-up ${
-                            withoutCode ? "with" : "without"
-                          } company code`}
+                      {signin ? "Login " : "Sign-up "}
+                      {withoutCode ? "with" : "without"} company code
                     </Button>
                   )}
                 <View style={styles.loginHelp}>
@@ -559,9 +552,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             )}
             {loginPage === LOGIN_PAGE.OTP_PAGE && this.getOtpPage()}
           </View>
-
-          {getFooter(this.state)}
         </View>
+        {getFooter(this.state)}
       </View>
     );
   }
