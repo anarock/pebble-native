@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   container: {
+    flex: 1,
+    justifyContent: "center",
     padding: 25
   },
   header: {
@@ -128,7 +130,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     tenantConfigFetched: false,
     otpResendAttempts: 0,
     withoutCode: false,
-    signin: false
+    signin: true
   };
 
   onOtpSuccess = () =>
@@ -349,9 +351,9 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
           <Touchable
             onPress={() =>
               this.setState({
+                withoutCode: signin ? true : false,
                 signin: !signin,
-                tenantConfigFetched: false,
-                withoutCode: false
+                tenantConfigFetched: false
               })
             }
             style={styles.header}
@@ -504,6 +506,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     : "Next"}
                 </Button>
                 {newflow &&
+                  !(!signin && withoutCode) &&
                   loginPage === LOGIN_PAGE.USER_PAGE &&
                   !tenantConfigFetched && (
                     <View style={styles.separatorContainer}>
@@ -513,6 +516,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     </View>
                   )}
                 {newflow &&
+                  !(!signin && withoutCode) &&
                   loginPage === LOGIN_PAGE.USER_PAGE &&
                   !tenantConfigFetched && (
                     <Button
@@ -524,8 +528,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                         })
                       }
                     >
-                      {signin ? "Login " : "Sign-up "}
-                      {withoutCode ? "with" : "without"} company code
+                      Login {withoutCode ? " with" : " without"} company code
                     </Button>
                   )}
                 <View style={styles.loginHelp}>
