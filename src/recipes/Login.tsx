@@ -421,40 +421,37 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                         </Touchable>
                       </View>
                     )}
-                    {newflow &&
-                      (withoutCode || tenantConfigFetched) &&
-                      !signin && (
-                        <View style={{ flex: 1 }}>
-                          <Input
-                            readOnly={!withoutCode}
-                            value={name}
-                            placeholder="Full Name"
-                            onChange={onNameChange}
-                            errorMessage={
-                              !isNameValid ? "Please enter your name" : ""
-                            }
-                            inputProps={{
-                              autoFocus: true,
-                              testID: "full-name"
-                            }}
-                          />
-                          <Input
-                            readOnly={!withoutCode}
-                            value={email}
-                            placeholder="Email"
-                            onChange={onEmailChange}
-                            errorMessage={
-                              !isEmailValid
-                                ? "Please enter a valid email address"
-                                : ""
-                            }
-                            inputProps={{
-                              autoFocus: true,
-                              testID: "email"
-                            }}
-                          />
-                        </View>
-                      )}
+                    {newflow && !tenantConfigFetched && !signin && (
+                      <View style={{ flex: 1 }}>
+                        <Input
+                          readOnly={!withoutCode}
+                          value={name}
+                          placeholder="Full Name"
+                          onChange={onNameChange}
+                          errorMessage={
+                            !isNameValid ? "Please enter your name" : ""
+                          }
+                          inputProps={{
+                            autoFocus: true,
+                            testID: "full-name"
+                          }}
+                        />
+                        <Input
+                          readOnly={!withoutCode}
+                          value={email}
+                          placeholder="Email"
+                          onChange={onEmailChange}
+                          errorMessage={
+                            !isEmailValid
+                              ? "Please enter a valid email address"
+                              : ""
+                          }
+                          inputProps={{
+                            testID: "email"
+                          }}
+                        />
+                      </View>
+                    )}
                     <View style={styles.loginUserInput}>
                       <View style={styles.countrySelect}>
                         <Select<OperationalCountry>
@@ -479,7 +476,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                           onChange={onLoginUserChange}
                           errorMessage={isPhoneValid ? "" : "Invalid Phone"}
                           inputProps={{
-                            autoFocus: true,
+                            autoFocus: signin,
                             testID: "phone-input"
                           }}
                           {...phoneInputProps}
@@ -506,7 +503,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     : "Next"}
                 </Button>
                 {newflow &&
-                  !(!signin && withoutCode) &&
+                  signin &&
                   loginPage === LOGIN_PAGE.USER_PAGE &&
                   !tenantConfigFetched && (
                     <View style={styles.separatorContainer}>
@@ -516,7 +513,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                     </View>
                   )}
                 {newflow &&
-                  !(!signin && withoutCode) &&
+                  signin &&
                   loginPage === LOGIN_PAGE.USER_PAGE &&
                   !tenantConfigFetched && (
                     <Button
