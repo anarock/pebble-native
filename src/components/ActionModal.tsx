@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Dimensions, StyleSheet, View, Modal } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  View,
+  Modal,
+  SafeAreaView,
+  KeyboardAvoidingView
+} from "react-native";
 import colors from "../theme/colors";
 import Text from "./Text";
 import Button from "./Button";
@@ -68,7 +75,7 @@ const headerTypeToColor = {
 };
 
 // @ts-ignore
-const ActionModal: React.FunctionComponent<ActionModalProps> = function({
+const ActionModal: React.FunctionComponent<ActionModalProps> = function ({
   onClose,
   title,
   children,
@@ -98,48 +105,57 @@ const ActionModal: React.FunctionComponent<ActionModalProps> = function({
       onRequestClose={onClose}
       {...otherProps}
     >
-      <View style={[styles.modalContent, style.modalContent]}>
-        <Touchable style={[styles.overlay, style.overlay]} onPress={onClose}>
-          <View style={[styles.overlay, style.overlay]} />
-        </Touchable>
+      <SafeAreaView style={{ flex: 1 }}>
+        <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+          <View style={[styles.modalContent, style.modalContent]}>
+            <Touchable
+              style={[styles.overlay, style.overlay]}
+              onPress={onClose}
+            >
+              <View style={[styles.overlay, style.overlay]} />
+            </Touchable>
 
-        <View />
+            <View />
 
-        <View style={[styles.wrapper, style.wrapper]}>
-          <ConditionalComponent conditional={header}>
-            {_header => (
-              <View
-                style={[
-                  styles.header,
-                  { backgroundColor: light },
-                  style.header
-                ]}
-              >
-                {icon && <Icon name={icon} color={dark} size={14} />}
-                <Text color={dark} size={15}>
-                  {" " + _header}
-                </Text>
+            <View style={[styles.wrapper, style.wrapper]}>
+              <ConditionalComponent conditional={header}>
+                {_header => (
+                  <View
+                    style={[
+                      styles.header,
+                      { backgroundColor: light },
+                      style.header
+                    ]}
+                  >
+                    {icon && <Icon name={icon} color={dark} size={14} />}
+                    <Text color={dark} size={15}>
+                      {" " + _header}
+                    </Text>
+                  </View>
+                )}
+              </ConditionalComponent>
+              <View style={[styles.container, style.container]}>
+                {!!title && (
+                  <View style={[styles.titleWrapper, style.container]}>
+                    <Text size={15} color={colors.gray.dark}>
+                      {title}
+                    </Text>
+                  </View>
+                )}
+                <View style={[styles.children, style.children]}>
+                  {children}
+                </View>
               </View>
-            )}
-          </ConditionalComponent>
-          <View style={[styles.container, style.container]}>
-            {!!title && (
-              <View style={[styles.titleWrapper, style.container]}>
-                <Text size={15} color={colors.gray.dark}>
-                  {title}
-                </Text>
-              </View>
-            )}
-            <View style={[styles.children, style.children]}>{children}</View>
+              {showFooterButton &&
+                (footer || (
+                  <Button.FooterButton onPress={onButtonClick}>
+                    {buttonLabel}
+                  </Button.FooterButton>
+                ))}
+            </View>
           </View>
-          {showFooterButton &&
-            (footer || (
-              <Button.FooterButton onPress={onButtonClick}>
-                {buttonLabel}
-              </Button.FooterButton>
-            ))}
-        </View>
-      </View>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     </Modal>
   );
 };

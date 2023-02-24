@@ -27,6 +27,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       inputProps={{
         ...inputProps,
         multiline: true,
+        scrollEnabled: false,
         numberOfLines
       }}
     />

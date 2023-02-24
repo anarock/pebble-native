@@ -1,5 +1,10 @@
 import * as React from "react";
-import { View, Modal, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  Modal,
+  TouchableWithoutFeedback,
+  SafeAreaView
+} from "react-native";
 import Input from "./Input";
 import { SearchInputProps } from "./typings/SearchInput";
 import SearchBox from "./SearchBox";
@@ -91,25 +96,27 @@ export default class SearchInput<OptionType> extends React.PureComponent<
           visible={this.state.showModal}
           animationType="slide"
         >
-          <SearchBox
-            testIdPrefix={testIdPrefix}
-            loading={loading}
-            results={results}
-            placeholder={searchBoxPlaceholder}
-            onSelect={this.onSelect}
-            onQueryChange={onQueryChange}
-            keyExtractor={keyExtractor}
-            rowLabelExtractor={rowLabelExtractor}
-            renderElement={
-              renderElement
-                ? args => renderElement(args, this.props)
-                : undefined
-            }
-            noResultsElement={noResultsElement}
-            bottomSectionPlaceholder={bottomSectionPlaceholder}
-            onClose={this.closeModal}
-            extraActionElement={extraActionElement}
-          />
+          <SafeAreaView style={{ flex: 1 }}>
+            <SearchBox
+              testIdPrefix={testIdPrefix}
+              loading={loading}
+              results={results}
+              placeholder={searchBoxPlaceholder}
+              onSelect={this.onSelect}
+              onQueryChange={onQueryChange}
+              keyExtractor={keyExtractor}
+              rowLabelExtractor={rowLabelExtractor}
+              renderElement={
+                renderElement
+                  ? args => renderElement(args, this.props)
+                  : undefined
+              }
+              noResultsElement={noResultsElement}
+              bottomSectionPlaceholder={bottomSectionPlaceholder}
+              onClose={this.closeModal}
+              extraActionElement={extraActionElement}
+            />
+          </SafeAreaView>
         </Modal>
       </React.Fragment>
     );
