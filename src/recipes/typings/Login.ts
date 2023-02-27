@@ -20,7 +20,11 @@ export interface LoginProps {
   onLoginUserChange: (value: string) => void;
   onOtpChange: (value: string) => void;
   onResendOtp: () => void;
-  onSendOtp: (onSuccess: () => void, onError: () => void) => void;
+  onSendOtp: (
+    onSuccess: () => void,
+    onError: () => void,
+    signin: boolean
+  ) => void;
   onSignIn: () => void;
   onTenantSubmit: (tenant: string) => Promise<void>;
   otpLength: number;
@@ -29,6 +33,13 @@ export interface LoginProps {
   selectedCountry: number;
   smsOtpRetriesAllowed?: number;
   tenantInputProps?: Partial<InputProps>;
+  newflow?: boolean;
+  onNameChange: (value: string) => void;
+  onEmailChange: (value: string) => void;
+  isEmailValid: boolean;
+  isNameValid: boolean;
+  name: string;
+  email: string;
 }
 
 export interface LoginState {
@@ -40,4 +51,6 @@ export interface LoginState {
   otpTimeout: boolean;
   tenant: string;
   tenantConfigFetched: boolean;
+  withoutCode: boolean;
+  signin: boolean;
 }
