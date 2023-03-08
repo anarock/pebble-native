@@ -340,7 +340,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       email,
       isEmailValid,
       isNameValid,
-      newflow
+      newflow,
+      onTenantSubmit
     } = this.props;
 
     const isButtonDisabled = !loginUserValue || !isPhoneValid;
@@ -349,13 +350,14 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       <View style={styles.wrapper}>
         {loginPage === LOGIN_PAGE.USER_PAGE && newflow && (
           <Touchable
-            onPress={() =>
+            onPress={async () => {
               this.setState({
                 withoutCode: signin ? true : false,
                 signin: !signin,
                 tenantConfigFetched: false
-              })
-            }
+              });
+              await onTenantSubmit("");
+            }}
             style={styles.header}
           >
             <Text color={colors.violet.base}>
@@ -518,14 +520,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                   !tenantConfigFetched && (
                     <Button
                       type="secondary"
-                      onPress={() =>
+                      onPress={async () => {
                         this.setState({
                           withoutCode: !withoutCode,
                           tenantConfigFetched: false
-                        })
-                      }
+                        });
+                        await onTenantSubmit("");
+                      }}
                     >
-                      Login {withoutCode ? " with" : " without"} company code
+                      Login {withoutCode ? "with" : "without"} company code
                     </Button>
                   )}
                 <View style={styles.loginHelp}>
