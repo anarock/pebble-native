@@ -40,6 +40,7 @@ export interface LoginProps {
   isNameValid: boolean;
   name: string;
   email: string;
+  onTenantSubmitWithoutCode: () => void;
 }
 
 export interface LoginState {
