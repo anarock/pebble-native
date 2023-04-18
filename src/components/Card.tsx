@@ -31,7 +31,7 @@ const Card: React.FunctionComponent<CardProps> = ({
   return (
     <Touchable onPress={onPress} disabled={!onPress} {...otherProps}>
       <View style={[styles.container, style]}>
-        <View>
+        <View style={{ flexBasis: "50%" }}>
           <ConditionalComponent conditional={title}>
             {_title => (
               <Text style={styles.title} size={13} color={colors.gray.dark}>
