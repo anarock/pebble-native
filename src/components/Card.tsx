@@ -16,7 +16,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10
   },
-  title: { marginBottom: 6 }
+  title: { marginBottom: 6 },
+  subContainer: {
+    flexShrink: 1,
+    marginRight: 20
+  }
 });
 
 // @ts-ignore
@@ -31,7 +35,7 @@ const Card: React.FunctionComponent<CardProps> = ({
   return (
     <Touchable onPress={onPress} disabled={!onPress} {...otherProps}>
       <View style={[styles.container, style]}>
-        <View>
+        <View style={styles.subContainer}>
           <ConditionalComponent conditional={title}>
             {_title => (
               <Text style={styles.title} size={13} color={colors.gray.dark}>
