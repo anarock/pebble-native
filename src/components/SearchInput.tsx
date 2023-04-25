@@ -95,6 +95,7 @@ export default class SearchInput<OptionType> extends React.PureComponent<
           onRequestClose={this.closeModal}
           visible={this.state.showModal}
           animationType="slide"
+          presentationStyle="overFullScreen"
         >
           <SafeAreaView style={{ flex: 1 }}>
             <SearchBox
