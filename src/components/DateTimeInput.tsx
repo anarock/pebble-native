@@ -49,18 +49,6 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
   };
 
   private onChange = (date: Date) => {
-    if (
-      this.props.type === "datetime" &&
-      this.state.mode === "date" &&
-      !!date
-    ) {
-      this.setState({
-        mode: "time",
-        tempValue: date
-      });
-      return;
-    }
-
     this.close();
 
     const selected = date || this.state.tempValue;
@@ -110,7 +98,7 @@ class TimeInput extends React.PureComponent<DateTimeInputProps, State> {
           />
           <DateTimePickerModal
             isVisible={visible}
-            mode={mode}
+            mode={type}
             display={display}
             date={
               this.state.tempValue || (value ? new Date(value) : new Date())
