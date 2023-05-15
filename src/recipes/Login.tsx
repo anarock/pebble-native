@@ -320,7 +320,8 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
       isTenantValid,
       tenantConfigFetched,
       withoutCode,
-      signin
+      signin,
+      isSubmitButtonLoading
     } = this.state;
     const {
       onLoginUserChange,
@@ -499,6 +500,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
                       ? isButtonDisabled
                       : !isTenantValid
                   }
+                  loading={isSubmitButtonLoading}
                 >
                   {tenantConfigFetched || withoutCode
                     ? "Verify Details"
