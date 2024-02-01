@@ -170,6 +170,15 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     this.props.onOtpChange("");
   };
 
+  onOtpChange = (val: string) => {
+    const { onOtpChange, otpLength } = this.props;
+    onOtpChange(val)
+
+    if (val.length === otpLength) {
+      this.onSignIn();
+    }
+  }
+  
   onCountdownTimeUp = () => this.setState({ otpTimeout: true });
 
   onSignIn = async () => {
@@ -184,7 +193,6 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     const {
       loginUserValue,
       otpValue,
-      onOtpChange,
       otpLength,
       countriesList,
       selectedCountry,
@@ -222,7 +230,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             <OTPInput
               testID="otp-input"
               value={otpValue}
-              onChangeText={onOtpChange}
+              onChangeText={this.onOtpChange}
               tintColor={colors.violet.base}
               offTintColor={colors.gray.base}
               otpLength={otpLength}
