@@ -133,6 +133,12 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     signin: true
   };
 
+  componentDidUpdate(prevProps: LoginProps) {
+    if (prevProps.otpValue !== this.props.otpValue && this.props.otpValue.length === this.props.otpLength) {
+      this.onSignIn();
+    }
+  }
+
   onOtpSuccess = () =>
     this.setState({
       isSubmitButtonLoading: false,
