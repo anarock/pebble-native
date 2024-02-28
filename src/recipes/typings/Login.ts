@@ -25,7 +25,7 @@ export interface LoginProps {
     onError: () => void,
     signin: boolean
   ) => void;
-  onSignIn: () => void;
+  onSignIn: (value: string) => void;
   onTenantSubmit: (tenant: string) => Promise<void>;
   otpLength: number;
   otpValue: string;
