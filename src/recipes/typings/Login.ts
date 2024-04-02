@@ -14,12 +14,12 @@ export interface LoginProps {
   helpText?: React.ReactNode;
   isPhoneValid: boolean;
   loginUserValue: string;
-  onCallOtp: () => void;
+  onCallOtp: (signin?: boolean) => void;
   onCountryChange: (country: OperationalCountry) => void;
   onLoginHelp: () => void;
   onLoginUserChange: (value: string) => void;
   onOtpChange: (value: string) => void;
-  onResendOtp: () => void;
+  onResendOtp: (signin?: boolean) => void;
   onSendOtp: (
     onSuccess: () => void,
     onError: () => void,

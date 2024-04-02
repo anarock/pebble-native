@@ -149,11 +149,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onResendOtp = () => {
     const { onResendOtp, onCallOtp, smsOtpRetriesAllowed = 1 } = this.props;
-    const { otpResendAttempts } = this.state;
+    const { otpResendAttempts, signin } = this.state;
     if (otpResendAttempts >= smsOtpRetriesAllowed) {
-      onCallOtp();
+      onCallOtp(signin);
     } else {
-      onResendOtp();
+      onResendOtp(signin);
     }
     this.setState({
       otpTimeout: false,
