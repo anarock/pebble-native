@@ -149,11 +149,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onResendOtp = () => {
     const { onResendOtp, onCallOtp, smsOtpRetriesAllowed = 1 } = this.props;
-    const { otpResendAttempts } = this.state;
+    const { otpResendAttempts, signin } = this.state;
     if (otpResendAttempts >= smsOtpRetriesAllowed) {
-      onCallOtp();
+      onCallOtp(signin);
     } else {
-      onResendOtp();
+      onResendOtp(signin);
     }
     this.setState({
       otpTimeout: false,
@@ -169,7 +169,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
     });
     this.props.onOtpChange("");
   };
-  
+
   onCountdownTimeUp = () => this.setState({ otpTimeout: true });
 
   onSignIn = async (val: string) => {
@@ -182,13 +182,13 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onOtpChange = (val: string) => {
     const { onOtpChange, otpLength } = this.props;
-    onOtpChange(val)
+    onOtpChange(val);
 
     if (val.length === otpLength) {
-      this.onSignIn(val)
+      this.onSignIn(val);
     }
-   }
-  
+  };
+
   getOtpPage = () => {
     const {
       loginUserValue,
