@@ -149,11 +149,11 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onResendOtp = () => {
     const { onResendOtp, onCallOtp, smsOtpRetriesAllowed = 1 } = this.props;
-    const { otpResendAttempts } = this.state;
+    const { otpResendAttempts, signin } = this.state;
     if (otpResendAttempts >= smsOtpRetriesAllowed) {
-      onCallOtp();
+      onCallOtp(signin);
     } else {
-      onResendOtp();
+      onResendOtp(signin);
     }
     this.setState({
       otpTimeout: false,
@@ -172,19 +172,27 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
 
   onCountdownTimeUp = () => this.setState({ otpTimeout: true });
 
-  onSignIn = async () => {
+  onSignIn = async (val: string) => {
     this.setState({ isSubmitButtonLoading: true });
     try {
-      await this.props.onSignIn();
+      await this.props.onSignIn(val);
     } catch (e) {}
     this.setState({ isSubmitButtonLoading: false });
+  };
+
+  onOtpChange = (val: string) => {
+    const { onOtpChange, otpLength } = this.props;
+    onOtpChange(val);
+
+    if (val.length === otpLength) {
+      this.onSignIn(val);
+    }
   };
 
   getOtpPage = () => {
     const {
       loginUserValue,
       otpValue,
-      onOtpChange,
       otpLength,
       countriesList,
       selectedCountry,
@@ -222,7 +230,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
             <OTPInput
               testID="otp-input"
               value={otpValue}
-              onChangeText={onOtpChange}
+              onChangeText={this.onOtpChange}
               tintColor={colors.violet.base}
               offTintColor={colors.gray.base}
               otpLength={otpLength}
@@ -263,7 +271,7 @@ export default class Login extends React.PureComponent<LoginProps, LoginState> {
         </Text>
         <Button
           loading={isSubmitButtonLoading}
-          onPress={this.onSignIn}
+          onPress={() => this.onSignIn(otpValue)}
           disabled={otpLength !== otpValue.length}
           testID="sign-in"
           style={{ marginTop: 20 }}
