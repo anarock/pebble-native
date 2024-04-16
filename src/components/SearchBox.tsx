@@ -201,7 +201,7 @@ export default class SearchBox<OptionType> extends React.PureComponent<
           })}
 
           {!extraActionElement &&
-            !results.length &&
+            (!results.length || !results[0]) &&
             this.renderNoResultState(this.state.queryValue)}
         </KeyboardAwareScrollView>
 
