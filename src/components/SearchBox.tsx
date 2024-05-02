@@ -98,6 +98,8 @@ export default class SearchBox<OptionType> extends React.PureComponent<
     queryValue: ""
   };
 
+  inputRef = React.createRef<TextInput>();
+
   private debouncedChange = debounce(this.props.onQueryChange, 500);
 
   private onChange = (text: string) => {
@@ -108,6 +110,10 @@ export default class SearchBox<OptionType> extends React.PureComponent<
       () => this.debouncedChange(text)
     );
   };
+
+  componentDidMount() {
+    setTimeout(() => this.inputRef.current?.focus(), 100);
+  }
 
   private renderNoResultState(query: string) {
     const {
@@ -145,13 +151,13 @@ export default class SearchBox<OptionType> extends React.PureComponent<
             />
           </TouchableWithoutFeedback>
           <TextInput
+            ref={this.inputRef}
             style={styles.textInput}
             selectionColor={colors.violet.base}
             onChangeText={this.onChange}
             value={this.state.queryValue}
             placeholder={placeholder}
             placeholderTextColor={colors.gray.light}
-            autoFocus
             underlineColorAndroid={colors.white.base}
             testID={`${testIdPrefix}-search`}
           />
