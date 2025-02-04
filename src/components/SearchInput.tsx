@@ -81,19 +81,13 @@ export default class SearchInput<OptionType> extends React.PureComponent<
       loading,
       testIdPrefix,
       extraActionElement,
-      showCustomModal
+      openModal
     } = this.props;
     return (
       <React.Fragment>
         <TouchableWithoutFeedback
           testID={`${testIdPrefix}-label`}
-          onPress={
-            disabled
-              ? undefined
-              : showCustomModal
-              ? showCustomModal
-              : this.openModal
-          }
+          onPress={disabled ? undefined : openModal || this.openModal}
         >
           <View>{renderLabel(this.props)}</View>
         </TouchableWithoutFeedback>
