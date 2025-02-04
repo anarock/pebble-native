@@ -22,4 +22,5 @@ export interface SearchInputProps<OptionType> {
   beforeSelect?: (item: OptionType) => Promise<OptionType>;
   testIdPrefix?: string;
   extraActionElement?: (query: string) => React.ReactNode;
+  showCustomModal?: () => void;
 }
