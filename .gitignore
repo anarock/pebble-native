@@ -66,3 +66,7 @@ assets/fonts
 build
 .expo
 dist
+# HQ context — generated indices and per-developer overrides
+.hq/
+AGENTS.local.md
+CLAUDE.local.md
